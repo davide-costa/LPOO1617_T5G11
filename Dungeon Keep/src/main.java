@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public class main
 {
@@ -34,21 +36,16 @@ public class main
 	private static int guard_y_pos = 1;
 	private static int guard_movement_step = 0;
 	
+	private static int ogre_x_pos = 4;
+	private static int ogre_y_pos = 1;
+	private static char ogre_char = 'O'; //BY DEFAULT ITS AN 'O'
+	
+	
 	private static int dst_x = 1;
 	private static int dst_y = 1;
 	
 	public static void main(String[] args) 
 	{
-		for(int i = 0; i < 9; i++)
-		{
-		for(int j = 0; j < 9; j++)
-			{
-			System.out.print(map2[i][j]);
-			System.out.print(" ");
-			}
-		System.out.println();
-		}
-		
 		char user_input;
 		int make_play_value;
 		while(true)
@@ -183,6 +180,38 @@ public class main
 			guard_y_pos++;
 		
 		map1[guard_y_pos][guard_x_pos] = 'G';
+	}
+	
+	public static void Move_Ogre() 
+	{
+		//reset to empty the cell in which the ogre was
+		map2[ogre_y_pos][ogre_x_pos] = 0;
+		
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		
+		if(randomNum == 1)
+			ogre_x_pos++; //ogre moves to right
+		else if(randomNum == 2)
+			ogre_x_pos--; //ogre moves to left
+		else if(randomNum == 3)
+			ogre_y_pos--; //ogre moves up
+		else if(randomNum == 4)
+			ogre_y_pos--; //ogre moves to down
+		
+		
+		//Changes ogre char if he is in the key position
+		if(map2[ogre_y_pos][ogre_x_pos] == 'k') 
+			ogre_char = '$';
+		else
+			ogre_char = 'O';
+			
+		
+		//Puts the new ogre cell with the char representing it
+		map2[ogre_y_pos][ogre_x_pos] = ogre_char;
 	}
 	
 	public static void DrawBoard() 
