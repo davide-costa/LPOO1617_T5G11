@@ -2,7 +2,19 @@ import java.util.Scanner;
 
 public class main
 {
-	private static char board[][] = {
+	private static char map2[][] = {
+			{'X','X','X','X','X','X','X','X','X'}, 
+			{'I',0,0,0,'O',0,0,'k','X'},
+			{'X',0,0,0,0,0,0,0,'X'},
+			{'X',0,0,0,0,0,0,0,'X'},
+			{'X',0,0,0,0,0,0,0,'X'},
+			{'X',0,0,0,0,0,0,0,'X'},
+			{'X',0,0,0,0,0,0,0,'X'}, 
+			{'X','H',0,0,0,0,0,0,'X'}, 
+			{'X','X','X','X','X','X','X','X','X'}
+			};
+	
+	private static char map1[][] = {
 			{'X','X','X','X','X','X','X','X','X','X'}, 
 			{'X','H',0,0,'I',0,'X',0,'G','X'},
 			{'X','X','X',0,'X','X','X',0,0,'X'}, 
@@ -27,6 +39,16 @@ public class main
 	
 	public static void main(String[] args) 
 	{
+		for(int i = 0; i < 9; i++)
+		{
+		for(int j = 0; j < 9; j++)
+			{
+			System.out.print(map2[i][j]);
+			System.out.print(" ");
+			}
+		System.out.println();
+		}
+		
 		char user_input;
 		int make_play_value;
 		while(true)
@@ -57,6 +79,7 @@ public class main
 					return;
 				}
 				Move_guard();
+				guard_movement_step++;
 			}
 			
 			
@@ -68,6 +91,8 @@ public class main
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
 		char ch = input.charAt(0);
+		
+		scan.close();
 		return ch;
 	}
 	
@@ -88,7 +113,7 @@ public class main
 	
 	public static boolean IsDestinationValid()
 	{
-		if(board[dst_y][dst_x] == 'X' || board[dst_y][dst_x] == 'I')
+		if(map1[dst_y][dst_x] == 'X' || map1[dst_y][dst_x] == 'I')
 			return false;
 		else
 			return true;
@@ -96,13 +121,13 @@ public class main
 	
 	public static int MakePlay()
 	{
-		board[player_y_pos][player_x_pos] = 0;
+		map1[player_y_pos][player_x_pos] = 0;
 		
 		player_x_pos = dst_x;
 		player_y_pos = dst_y;
 		
-		char last_state = board[player_y_pos][player_x_pos];
-		board[player_y_pos][player_x_pos] = 'H';
+		char last_state = map1[player_y_pos][player_x_pos];
+		map1[player_y_pos][player_x_pos] = 'H';
 
 		if(WasCaugthByGuard())
 			return -1;
@@ -113,7 +138,7 @@ public class main
 			OpenDoors();
 			return 0;
 			}
-		else if(board[player_y_pos][player_x_pos] == 'S')
+		else if(map1[player_y_pos][player_x_pos] == 'S')
 			return 1;	
 		
 		return 0;
@@ -122,8 +147,8 @@ public class main
 	
 	public static void OpenDoors()
 	{
-		board[5][0] = 'S';
-		board[6][0] = 'S';
+		map1[5][0] = 'S';
+		map1[6][0] = 'S';
 	}
 	
 	public static boolean WasCaugthByGuard()
@@ -143,12 +168,21 @@ public class main
 	
 	public static void Move_guard() 
 	{
-		if(guard_movement_step == 0 || guard_movement_step == 5 || guard_movement_step == 6 || guard_movement_step == 7
-				|| guard_movement_step == 8 || guard_movement_step == 9 || guard_movement_step == 10 || guard_movement_step == 11)
+		map1[guard_y_pos][guard_x_pos] = 0;
+		
+		if(guard_movement_step == 24)
+			guard_movement_step = 0;
+		
+		if(guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step <= 11)) //for left moves
 			guard_x_pos--;
-		if(guard_movement_step == 0 || guard_movement_step == 5 || guard_movement_step == 6 || guard_movement_step == 7
-				|| guard_movement_step == 8 || guard_movement_step == 9 || guard_movement_step == 10 || guard_movement_step == 11)
-			guard_x_pos--;
+		else if(guard_movement_step >= 12 && guard_movement_step <= 18) //for right moves
+			guard_x_pos++;
+		else if(guard_movement_step >= 19 && guard_movement_step <= 23) //for up moves
+			guard_y_pos--;
+		else if( (guard_movement_step >= 1 && guard_movement_step <= 4) || guard_movement_step == 11) //for down moves
+			guard_y_pos++;
+		
+		map1[guard_y_pos][guard_x_pos] = 'G';
 	}
 	
 	public static void DrawBoard() 
@@ -157,7 +191,7 @@ public class main
 		{
 		for(int j = 0; j < 10; j++)
 			{
-			System.out.print(board[i][j]);
+			System.out.print(map1[i][j]);
 			System.out.print(" ");
 			}
 		System.out.println();
@@ -170,26 +204,26 @@ public class main
 	
 //		for(int i = 0; i < 10; i++)
 //		{
-//			board[i][0] = 'X';
-//			board[i][9] = 'X';
+//			map1[i][0] = 'X';
+//			map1[i][9] = 'X';
 //		}
 //		
 //		for(int j = 1; j < 9; j++)
 //		{
-//		board[0][j] = 'X';
-//		board[9][j] = 'X';
+//		map1[0][j] = 'X';
+//		map1[9][j] = 'X';
 //		}
 //		
 //		
 //		
 //		
-//		board[1][4] = 'I';
-//		board[3][2] = 'I';
-//		board[3][4] = 'I';
-//		board[5][0] = 'I';
-//		board[6][0] = 'I';
-//		board[8][2] = 'I';
-//		board[8][4] = 'I';
+//		map1[1][4] = 'I';
+//		map1[3][2] = 'I';
+//		map1[3][4] = 'I';
+//		map1[5][0] = 'I';
+//		map1[6][0] = 'I';
+//		map1[8][2] = 'I';
+//		map1[8][4] = 'I';
 //		
 
 	}
