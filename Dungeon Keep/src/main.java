@@ -169,7 +169,7 @@ public class main
 		if(guard_movement_step == 24)
 			guard_movement_step = 0;
 		
-		if(guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step <= 11)) //for left moves
+		if(guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step < 11)) //for left moves
 			guard_x_pos--;
 		else if(guard_movement_step >= 12 && guard_movement_step <= 18) //for right moves
 			guard_x_pos++;
