@@ -56,6 +56,7 @@ public class main
 			
 			if(IsDestinationValid())
 			{
+				Move_guard();
 				make_play_value = MakePlay();
 				//System.out.println(make_play_value);
 				
@@ -75,7 +76,6 @@ public class main
 					System.out.println();
 					return;
 				}
-				Move_guard();
 				guard_movement_step++;
 			}
 			
@@ -89,7 +89,6 @@ public class main
 		String input = scan.nextLine();
 		char ch = input.charAt(0);
 		
-		scan.close();
 		return ch;
 	}
 	
