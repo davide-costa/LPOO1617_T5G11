@@ -56,8 +56,9 @@ public class main
 			
 			if(IsDestinationValid())
 			{
+				Move_guard();
 				make_play_value = MakePlay();
-				//System.out.println(make_play_value);
+				System.out.println(make_play_value);
 				
 				if ( make_play_value == 1)
 				{
@@ -75,11 +76,8 @@ public class main
 					System.out.println();
 					return;
 				}
-				Move_guard();
 				guard_movement_step++;
 			}
-			
-			
 		}
 	}
 	
@@ -89,7 +87,6 @@ public class main
 		String input = scan.nextLine();
 		char ch = input.charAt(0);
 		
-		scan.close();
 		return ch;
 	}
 	
@@ -135,7 +132,7 @@ public class main
 			OpenDoors();
 			return 0;
 			}
-		else if(map1[player_y_pos][player_x_pos] == 'S')
+		else if(last_state == 'S') 
 			return 1;	
 		
 		return 0;
@@ -170,7 +167,7 @@ public class main
 		if(guard_movement_step == 24)
 			guard_movement_step = 0;
 		
-		if(guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step <= 11)) //for left moves
+		if(guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step < 11)) //for left moves
 			guard_x_pos--;
 		else if(guard_movement_step >= 12 && guard_movement_step <= 18) //for right moves
 			guard_x_pos++;
