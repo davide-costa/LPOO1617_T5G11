@@ -95,7 +95,6 @@ public class main
 					System.out.println();
 					return;
 				}
-				//guard_movement_step++;
 			}
 		}
 	}
@@ -275,34 +274,5 @@ public class main
 			}
 			System.out.println();
 		}
-
-
-
-
-		//		for(int i = 0; i < 10; i++)
-		//		{
-		//			curr_map[i][0] = 'X';
-		//			curr_map[i][9] = 'X';
-		//		}
-		//		
-		//		for(int j = 1; j < 9; j++)
-		//		{
-		//		curr_map[0][j] = 'X';
-		//		curr_map[9][j] = 'X';
-		//		}
-		//		
-		//		
-		//		
-		//		
-		//		curr_map[1][4] = 'I';
-		//		curr_map[3][2] = 'I';
-		//		curr_map[3][4] = 'I';
-		//		curr_map[5][0] = 'I';
-		//		curr_map[6][0] = 'I';
-		//		curr_map[8][2] = 'I';
-		//		curr_map[8][4] = 'I';
-		//		
-
-
 	}
 }
