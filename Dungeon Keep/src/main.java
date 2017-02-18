@@ -4,71 +4,90 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class main
 {
-	private static char map2[][] = {
-			{'X','X','X','X','X','X','X','X','X'}, 
-			{'I',0,0,0,'O',0,0,'k','X'},
-			{'X',0,0,0,0,0,0,0,'X'},
-			{'X',0,0,0,0,0,0,0,'X'},
-			{'X',0,0,0,0,0,0,0,'X'},
-			{'X',0,0,0,0,0,0,0,'X'},
-			{'X',0,0,0,0,0,0,0,'X'}, 
-			{'X','H',0,0,0,0,0,0,'X'}, 
-			{'X','X','X','X','X','X','X','X','X'}
-			};
-	
 	private static char map1[][] = {
-			{'X','X','X','X','X','X','X','X','X','X'}, 
-			{'X','H',0,0,'I',0,'X',0,'G','X'},
-			{'X','X','X',0,'X','X','X',0,0,'X'}, 
-			{'X',0,'I',0,'I',0,'X',0,0,'X'}, 
-			{'X','X','X',0,'X','X','X',0,0,'X'}, 
-			{'I',0,0,0,0,0,0,0,0,'X'},
-			{'I',0,0,0,0,0,0,0,0,'X'},
-			{'X','X','X',0,'X','X','X','X',0,'X'}, 
-			{'X',0,'I',0,'I',0,'X','k',0,'X'}, 
-			{'X','X','X','X','X','X','X','X','X','X'}
-			};
-	
-	private static int player_x_pos = 1 ;
+		{ 'X','X','X','X','X','X','X','X','X','X' },
+		{ 'X','H',0,0,'I',0,'X',0,'G','X' },
+		{ 'X','X','X',0,'X','X','X',0,0,'X' },
+		{ 'X',0,'I',0,'I',0,'X',0,0,'X' },
+		{ 'X','X','X',0,'X','X','X',0,0,'X' },
+		{ 'I',0,0,0,0,0,0,0,0,'X' },
+		{ 'I',0,0,0,0,0,0,0,0,'X' },
+		{ 'X','X','X',0,'X','X','X','X',0,'X' },
+		{ 'X',0,'I',0,'I',0,'X','k',0,'X' },
+		{ 'X','X','X','X','X','X','X','X','X','X' }
+	};
+
+	private static char map2[][] = {
+		{ 'X','X','X','X','X','X','X','X','X' },
+		{ 'I',0,0,0,'O',0,0,'k','X' },
+		{ 'X',0,0,0,0,0,0,0,'X' },
+		{ 'X',0,0,0,0,0,0,0,'X' },
+		{ 'X',0,0,0,0,0,0,0,'X' },
+		{ 'X',0,0,0,0,0,0,0,'X' },
+		{ 'X',0,0,0,0,0,0,0,'X' },
+		{ 'X','H',0,0,0,0,0,0,'X' },
+		{ 'X','X','X','X','X','X','X','X','X' }
+	};
+
+
+	private static char curr_map[][] = map1;
+	private static int curr_map_size = 10;
+
+	private static int player_x_pos = 1;
 	private static int player_y_pos = 1;
-	
-	private static int guard_x_pos = 8;
-	private static int guard_y_pos = 1;
+	private static char player_char = 'H'; //BY DEFAULT ITS AN 'H'
+
+	private static int mob_x_pos = 8;
+	private static int mob_y_pos = 1;
+
 	private static int guard_movement_step = 0;
-	
-	private static int ogre_x_pos = 4;
-	private static int ogre_y_pos = 1;
+
 	private static char ogre_char = 'O'; //BY DEFAULT ITS AN 'O'
-	
-	
+
+
 	private static int dst_x = 1;
 	private static int dst_y = 1;
-	
-	public static void main(String[] args) 
+
+	public static void main(String[] args)
 	{
 		char user_input;
 		int make_play_value;
-		while(true)
+		while (true)
 		{
 			DrawBoard();
 			user_input = WaitForPlay();
 			ComputeDestination(user_input);
 			
-			if(IsDestinationValid())
+			if(IsEndOfGame())
 			{
-				Move_guard();
+				System.out.println();
+				System.out.println("END OF GAME");
+				System.out.println("YOU WIN");
+				System.out.println();
+				return;
+			}
+
+			if (IsDestinationValid())
+			{
+				if (curr_map_size == 10)
+					Move_guard();
+				else
+					Move_Ogre();
 				make_play_value = MakePlay();
-				System.out.println(make_play_value);
-				
-				if ( make_play_value == 1)
+
+				if (make_play_value == 1)
 				{
 					System.out.println();
-					System.out.println("END OF GAME");
-					System.out.println("YOU WIN");
+					System.out.println("NEXT LEVEL");
 					System.out.println();
-					return;
+					curr_map = map2;
+					curr_map_size = 9;
+					mob_x_pos = 4;
+					mob_y_pos = 1;
+					player_x_pos = 1;
+					player_y_pos = 7;
 				}
-				else if(make_play_value == -1)
+				else if (make_play_value == -1)
 				{
 					System.out.println();
 					System.out.println("END OF GAME");
@@ -76,180 +95,214 @@ public class main
 					System.out.println();
 					return;
 				}
-				guard_movement_step++;
+				//guard_movement_step++;
 			}
 		}
 	}
-	
+
 	public static char WaitForPlay()
 	{
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
+		while (input.length() == 0)
+			input = scan.nextLine();
 		char ch = input.charAt(0);
-		
+
 		return ch;
 	}
-	
+
 	public static void ComputeDestination(char input)
 	{
 		dst_x = player_x_pos;
 		dst_y = player_y_pos;
-		
-		if(input == 'w' || input == 'W')
+
+		if (input == 'w' || input == 'W')
 			dst_y--;
-		else if(input == 'a' || input == 'A')
+		else if (input == 'a' || input == 'A')
 			dst_x--;
-		else if(input == 's' || input == 'S')
+		else if (input == 's' || input == 'S')
 			dst_y++;
-		else if(input == 'd' || input == 'D')
+		else if (input == 'd' || input == 'D')
 			dst_x++;
 	}
 	
+	public static boolean IsEndOfGame()
+	{
+		if(dst_x == -1)
+			return true;
+		else 
+			return false;
+	}
+
 	public static boolean IsDestinationValid()
 	{
-		if(map1[dst_y][dst_x] == 'X' || map1[dst_y][dst_x] == 'I')
+		if (curr_map[dst_y][dst_x] == 'X' || (curr_map[dst_y][dst_x] == 'I' && player_char != 'K'))
 			return false;
 		else
 			return true;
 	}
-	
+
 	public static int MakePlay()
 	{
-		map1[player_y_pos][player_x_pos] = 0;
-		
+		curr_map[player_y_pos][player_x_pos] = 0;
+
 		player_x_pos = dst_x;
 		player_y_pos = dst_y;
-		
-		char last_state = map1[player_y_pos][player_x_pos];
-		map1[player_y_pos][player_x_pos] = 'H';
 
-		if(WasCaugthByGuard())
+		char last_state = curr_map[player_y_pos][player_x_pos];
+		curr_map[player_y_pos][player_x_pos] = player_char;
+
+		if (WasCaugth())
 			return -1;
-		else if(last_state == 0)
+		else if (last_state == 0)
 			return 0;
-		else if(last_state == 'k')
+		else if (last_state == 'k')
+		{
+			if (curr_map_size == 10)
+				OpenDoors();
+			else
 			{
-			OpenDoors();
-			return 0;
+				player_char = 'K';
+				curr_map[player_y_pos][player_x_pos] = player_char;
 			}
-		else if(last_state == 'S') 
-			return 1;	
-		
+			return 0;
+		}
+		else if (last_state == 'S')
+			return 1; //nivel 2
+
 		return 0;
 	}
-	
-	
+
+
 	public static void OpenDoors()
 	{
-		map1[5][0] = 'S';
-		map1[6][0] = 'S';
+		curr_map[5][0] = 'S';
+		curr_map[6][0] = 'S';
 	}
-	
-	public static boolean WasCaugthByGuard()
+
+	public static boolean WasCaugth()
 	{
-		if (player_x_pos == (guard_x_pos - 1) && player_y_pos == guard_y_pos)
+		if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
 			return true;
-		else if (player_x_pos == (guard_x_pos + 1) && player_y_pos == guard_y_pos)
+		else if (player_x_pos == (mob_x_pos + 1) && player_y_pos == mob_y_pos)
 			return true;
-		else if (player_x_pos == guard_x_pos && player_y_pos == (guard_y_pos - 1))
+		else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos - 1))
 			return true;
-		else if (player_x_pos == guard_x_pos && player_y_pos == (guard_y_pos + 1))
+		else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos + 1))
 			return true;
 		else
 			return false;
-		
+
 	}
-	
-	public static void Move_guard() 
+
+	public static void Move_guard()
 	{
-		map1[guard_y_pos][guard_x_pos] = 0;
-		
-		if(guard_movement_step == 24)
+		curr_map[mob_y_pos][mob_x_pos] = 0;
+
+		if (guard_movement_step == 24)
 			guard_movement_step = 0;
-		
-		if(guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step < 11)) //for left moves
-			guard_x_pos--;
-		else if(guard_movement_step >= 12 && guard_movement_step <= 18) //for right moves
-			guard_x_pos++;
-		else if(guard_movement_step >= 19 && guard_movement_step <= 23) //for up moves
-			guard_y_pos--;
-		else if( (guard_movement_step >= 1 && guard_movement_step <= 4) || guard_movement_step == 11) //for down moves
-			guard_y_pos++;
-		
-		map1[guard_y_pos][guard_x_pos] = 'G';
+
+		if (guard_movement_step == 0 || (guard_movement_step >= 5 && guard_movement_step < 11)) //for left moves
+			mob_x_pos--;
+		else if (guard_movement_step >= 12 && guard_movement_step <= 18) //for right moves
+			mob_x_pos++;
+		else if (guard_movement_step >= 19 && guard_movement_step <= 23) //for up moves
+			mob_y_pos--;
+		else if ((guard_movement_step >= 1 && guard_movement_step <= 4) || guard_movement_step == 11) //for down moves
+			mob_y_pos++;
+
+		curr_map[mob_y_pos][mob_x_pos] = 'G';
+		guard_movement_step++;
 	}
-	
-	public static void Move_Ogre() 
+
+	public static boolean ValidateAndGenerateOgreNextPos()
 	{
-		//reset to empty the cell in which the ogre was
-		map2[ogre_y_pos][ogre_x_pos] = 0;
-		
 		//nextInt is normally exclusive of the top value,
 		//so add 1 to make it inclusive
 		int min = 1;
 		int max = 4;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		
-		if(randomNum == 1)
-			ogre_x_pos++; //ogre moves to right
-		else if(randomNum == 2)
-			ogre_x_pos--; //ogre moves to left
-		else if(randomNum == 3)
-			ogre_y_pos--; //ogre moves up
-		else if(randomNum == 4)
-			ogre_y_pos--; //ogre moves to down
-		
-		
+		int temp_x_pos = mob_x_pos;
+		int temp_y_pos = mob_y_pos;
+
+		if (randomNum == 1)
+			mob_x_pos++; //ogre moves to right
+		else if (randomNum == 2)
+			mob_x_pos--; //ogre moves to left
+		else if (randomNum == 3)
+			mob_y_pos++; //ogre moves up
+		else if (randomNum == 4)
+			mob_y_pos--; //ogre moves to down
+
+		if (map2[mob_y_pos][mob_x_pos] == 'X' || map2[mob_y_pos][mob_x_pos] == 'I')
+		{
+			mob_x_pos = temp_x_pos;
+			mob_y_pos = temp_y_pos;
+			return false;
+		}
+
+		return true;
+	}
+
+	public static void Move_Ogre()
+	{
+		//reset to empty the cell in which the ogre was
+		if (curr_map[mob_y_pos][mob_x_pos] == '$')
+			curr_map[mob_y_pos][mob_x_pos] = 'k';
+		else
+			curr_map[mob_y_pos][mob_x_pos] = 0;
+
+		while (!ValidateAndGenerateOgreNextPos());
+
 		//Changes ogre char if he is in the key position
-		if(map2[ogre_y_pos][ogre_x_pos] == 'k') 
+		if (curr_map[mob_y_pos][mob_x_pos] == 'k')
 			ogre_char = '$';
 		else
 			ogre_char = 'O';
-			
-		
+
 		//Puts the new ogre cell with the char representing it
-		map2[ogre_y_pos][ogre_x_pos] = ogre_char;
+		curr_map[mob_y_pos][mob_x_pos] = ogre_char;
 	}
-	
-	public static void DrawBoard() 
+
+	public static void DrawBoard()
 	{
-		for(int i = 0; i < 10; i++)
+		for (int i = 0; i < curr_map_size; i++)
 		{
-		for(int j = 0; j < 10; j++)
+			for (int j = 0; j < curr_map_size; j++)
 			{
-			System.out.print(map1[i][j]);
-			System.out.print(" ");
+				System.out.print(curr_map[i][j]);
+				System.out.print(" ");
 			}
-		System.out.println();
+			System.out.println();
 		}
+
+
+
+
+		//		for(int i = 0; i < 10; i++)
+		//		{
+		//			curr_map[i][0] = 'X';
+		//			curr_map[i][9] = 'X';
+		//		}
+		//		
+		//		for(int j = 1; j < 9; j++)
+		//		{
+		//		curr_map[0][j] = 'X';
+		//		curr_map[9][j] = 'X';
+		//		}
+		//		
+		//		
+		//		
+		//		
+		//		curr_map[1][4] = 'I';
+		//		curr_map[3][2] = 'I';
+		//		curr_map[3][4] = 'I';
+		//		curr_map[5][0] = 'I';
+		//		curr_map[6][0] = 'I';
+		//		curr_map[8][2] = 'I';
+		//		curr_map[8][4] = 'I';
+		//		
+
+
 	}
-
-
-	
-	
-	
-//		for(int i = 0; i < 10; i++)
-//		{
-//			map1[i][0] = 'X';
-//			map1[i][9] = 'X';
-//		}
-//		
-//		for(int j = 1; j < 9; j++)
-//		{
-//		map1[0][j] = 'X';
-//		map1[9][j] = 'X';
-//		}
-//		
-//		
-//		
-//		
-//		map1[1][4] = 'I';
-//		map1[3][2] = 'I';
-//		map1[3][4] = 'I';
-//		map1[5][0] = 'I';
-//		map1[6][0] = 'I';
-//		map1[8][2] = 'I';
-//		map1[8][4] = 'I';
-//		
-
-	}
+}
