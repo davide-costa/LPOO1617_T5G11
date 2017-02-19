@@ -19,7 +19,7 @@ public class main
 
 	private static char map2[][] = {
 		{ 'X','X','X','X','X','X','X','X','X' },
-		{ 'I',0,0,0,'O',0,0,'k','X' },
+		{ 'I',0,0,0,'O','*',0,'k','X' },
 		{ 'X',0,0,0,0,0,0,0,'X' },
 		{ 'X',0,0,0,0,0,0,0,'X' },
 		{ 'X',0,0,0,0,0,0,0,'X' },
@@ -39,6 +39,10 @@ public class main
 
 	private static int mob_x_pos = 8;
 	private static int mob_y_pos = 1;
+	
+	private static int club_x_pos = 5;
+	private static int club_y_pos = 1;
+	private static char club_char = '*'; //BY DEFAULT ITS AN '*'
 
 	private static int guard_movement_step = 0;
 
@@ -52,6 +56,7 @@ public class main
 	{
 		char user_input;
 		int make_play_value;
+		
 		while (true)
 		{
 			DrawBoard();
@@ -72,7 +77,7 @@ public class main
 				if (curr_map_size == 10)
 					Move_guard();
 				else
-					Move_Ogre();
+					MoveOgreAndClub();
 				make_play_value = MakePlay();
 
 				if (make_play_value == 1)
@@ -86,6 +91,7 @@ public class main
 					mob_y_pos = 1;
 					player_x_pos = 1;
 					player_y_pos = 7;
+					while (!TryClubNextPos());
 				}
 				else if (make_play_value == -1)
 				{
@@ -214,7 +220,7 @@ public class main
 		guard_movement_step++;
 	}
 
-	public static boolean ValidateAndGenerateOgreNextPos()
+	public static boolean TryOgreNextPos()
 	{
 		//nextInt is normally exclusive of the top value,
 		//so add 1 to make it inclusive
@@ -242,25 +248,68 @@ public class main
 
 		return true;
 	}
+	
+	public static boolean TryClubNextPos()
+	{
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		club_x_pos = mob_x_pos;
+		club_y_pos = mob_y_pos;
 
-	public static void Move_Ogre()
+		if (randomNum == 1)
+			club_x_pos++; //club moves to right
+		else if (randomNum == 2)
+			club_x_pos--; //club moves to left
+		else if (randomNum == 3)
+			club_y_pos++; //club moves up
+		else if (randomNum == 4)
+			club_y_pos--; //club moves to down
+
+		if (map2[club_y_pos][club_x_pos] == 'X' || map2[club_y_pos][club_x_pos] == 'I')
+		{
+			club_x_pos = mob_x_pos;
+			club_y_pos = mob_y_pos;
+			return false;
+		}
+
+		return true;
+	}
+
+	public static void MoveOgreAndClub()
 	{
 		//reset to empty the cell in which the ogre was
 		if (curr_map[mob_y_pos][mob_x_pos] == '$')
 			curr_map[mob_y_pos][mob_x_pos] = 'k';
 		else
 			curr_map[mob_y_pos][mob_x_pos] = 0;
+		
+		//reset to empty the cell in which the club was
+		if (curr_map[club_y_pos][club_x_pos] == '$')
+			curr_map[club_y_pos][club_x_pos] = 'k';
+		else
+			curr_map[club_y_pos][club_x_pos] = 0;
 
-		while (!ValidateAndGenerateOgreNextPos());
+		while (!TryOgreNextPos());
+		while (!TryClubNextPos());
 
 		//Changes ogre char if he is in the key position
 		if (curr_map[mob_y_pos][mob_x_pos] == 'k')
 			ogre_char = '$';
 		else
 			ogre_char = 'O';
+		
+		//Changes club char if he is in the key position
+		if (curr_map[club_y_pos][club_x_pos] == 'k')
+			club_char = '$';
+		else
+			club_char = '*';
 
 		//Puts the new ogre cell with the char representing it
 		curr_map[mob_y_pos][mob_x_pos] = ogre_char;
+		curr_map[club_y_pos][club_x_pos] = club_char;
 	}
 
 	public static void DrawBoard()
