@@ -56,4 +56,9 @@ public class KeepMap implements GameMap
 	{
 		map[y][x] = symbol;
 	}
+	
+	public char GetCellAt(int x, int y)
+	{
+		return map[y][x];
+	}
 }
