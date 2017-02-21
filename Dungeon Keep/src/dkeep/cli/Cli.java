@@ -1,6 +1,7 @@
 package dkeep.cli;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import dkeep.logic.*;
 
 
 public class Cli
@@ -28,11 +29,16 @@ public class Cli
 	{
 		char user_input;
 		int make_play_value;
+		Game game = new Game();
+		game.SetGameMap(new DungeonMap());
 		
 		while (true)
 		{
-			DrawBoard();
+			GameMap curr_map = game.GetGameMap();
+			DrawBoard(curr_map);
 			user_input = WaitForPlay();
+			
+			
 			ComputeDestination(user_input);
 			
 			if(IsEndOfGame())
@@ -284,11 +290,14 @@ public class Cli
 		curr_map[club_y_pos][club_x_pos] = club_char;
 	}
 
-	public static void DrawBoard()
+	public static void DrawBoard(GameMap map)
 	{
-		for (int i = 0; i < curr_map_size; i++)
+		char curr_map[][] = map.GetMap();
+		int map_x_size = map.GetXSize();
+		int map_y_size = map.GetYSize();
+		for (int i = 0; i < map_y_size; i++)
 		{
-			for (int j = 0; j < curr_map_size; j++)
+			for (int j = 0; j < map_x_size; j++)
 			{
 				System.out.print(curr_map[i][j]);
 				System.out.print(" ");
