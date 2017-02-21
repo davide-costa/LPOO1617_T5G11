@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-public class KeepMap
+public class KeepMap implements GameMaps
 {
 	private char map[][] = {
 			{ 'X','X','X','X','X','X','X','X','X' },
