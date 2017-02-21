@@ -2,11 +2,27 @@ package dkeep.logic;
 
 public class Ogre extends GameCreature
 {
-	private int club_x_pos = 5;
-	private int club_y_pos = 1;
+	private int club_x = 5;
+	private int club_y = 1;
 	private char club_symbol = '*';
 	public Ogre(int x, int y, char symbol)
 	{
 		super(x, y, 'O');
+	}
+	public int GetClubX()
+	{
+		return club_x;
+	}
+	public void SetClubX(int club_x)
+	{
+		this.club_x = club_x;
+	}
+	public int GetClubY()
+	{
+		return club_y;
+	}
+	public void SetClubY(int club_y)
+	{
+		this.club_y = club_y;
 	}
 }
