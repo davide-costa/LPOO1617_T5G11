@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-public class GameMap
+public interface GameMap
 {
-
+	
 }
