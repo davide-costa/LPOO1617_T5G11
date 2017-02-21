@@ -7,24 +7,6 @@ import dkeep.logic.*;
 public class Cli
 {
 	private Game game;
-	private static int player_x_pos = 1;
-	private static int player_y_pos = 1;
-	private static char player_char = 'H'; //BY DEFAULT ITS AN 'H'
-
-	private static int mob_x_pos = 8;
-	private static int mob_y_pos = 1;
-	
-	private static int club_x_pos = 5;
-	private static int club_y_pos = 1;
-	private static char club_char = '*'; //BY DEFAULT ITS AN '*'
-
-	private static int guard_movement_step = 0;
-
-	private static char ogre_char = 'O'; //BY DEFAULT ITS AN 'O'
-
-
-	private static int dst_x = 1;
-	private static int dst_y = 1;
 
 	public void main(String[] args)
 	{
@@ -41,16 +23,15 @@ public class Cli
 		
 			user_input = WaitForPlay();
 			
-			
 			ComputeDestination(user_input);
 			
-			game.MoveTo(dst_x, dst_y);
+			game.MoveHero(dst_x, dst_y);
 			//TODO isto devia estar antes maybe
 
 
 			if (IsDestinationValid())
 			{
-				if (curr_map_size == 10)
+				if (level == 10)
 					Move_guard();
 				else
 					MoveOgreAndClub();
@@ -232,35 +213,6 @@ public class Cli
 		return true;
 	}
 	
-	public static boolean TryClubNextPos()
-	{
-		//nextInt is normally exclusive of the top value,
-		//so add 1 to make it inclusive
-		int min = 1;
-		int max = 4;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		club_x_pos = mob_x_pos;
-		club_y_pos = mob_y_pos;
-
-		if (randomNum == 1)
-			club_x_pos++; //club moves to right
-		else if (randomNum == 2)
-			club_x_pos--; //club moves to left
-		else if (randomNum == 3)
-			club_y_pos++; //club moves up
-		else if (randomNum == 4)
-			club_y_pos--; //club moves to down
-
-		if (map2[club_y_pos][club_x_pos] == 'X' || map2[club_y_pos][club_x_pos] == 'I')
-		{
-			club_x_pos = mob_x_pos;
-			club_y_pos = mob_y_pos;
-			return false;
-		}
-
-		return true;
-	}
-
 	public static void MoveOgreAndClub()
 	{
 		//reset to empty the cell in which the ogre was

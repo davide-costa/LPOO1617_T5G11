@@ -7,4 +7,5 @@ public interface GameMap
 	public int GetMapXSize();
 	public int GetMapYSize();
 	public GameMap NextMap();
+	public void SetCellAt(int x, int y, char symbol);
 }

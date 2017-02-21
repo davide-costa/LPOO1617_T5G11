@@ -52,4 +52,9 @@ public class DungeonMap implements GameMap
 		return new KeepMap();
 	}
 	
+	public void SetCellAt(int x, int y, char symbol)
+	{
+		map[y][x] = symbol;
+	}
+	
 }

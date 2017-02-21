@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Ogre extends GameCreature
 {
 	private int club_x = 5;
@@ -25,4 +27,5 @@ public class Ogre extends GameCreature
 	{
 		this.club_y = club_y;
 	}
+	
 }
