@@ -5,35 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Cli
 {
-	private static char map1[][] = {
-		{ 'X','X','X','X','X','X','X','X','X','X' },
-		{ 'X','H',0,0,'I',0,'X',0,'G','X' },
-		{ 'X','X','X',0,'X','X','X',0,0,'X' },
-		{ 'X',0,'I',0,'I',0,'X',0,0,'X' },
-		{ 'X','X','X',0,'X','X','X',0,0,'X' },
-		{ 'I',0,0,0,0,0,0,0,0,'X' },
-		{ 'I',0,0,0,0,0,0,0,0,'X' },
-		{ 'X','X','X',0,'X','X','X','X',0,'X' },
-		{ 'X',0,'I',0,'I',0,'X','k',0,'X' },
-		{ 'X','X','X','X','X','X','X','X','X','X' }
-	};
-
-	private static char map2[][] = {
-		{ 'X','X','X','X','X','X','X','X','X' },
-		{ 'I',0,0,0,'O','*',0,'k','X' },
-		{ 'X',0,0,0,0,0,0,0,'X' },
-		{ 'X',0,0,0,0,0,0,0,'X' },
-		{ 'X',0,0,0,0,0,0,0,'X' },
-		{ 'X',0,0,0,0,0,0,0,'X' },
-		{ 'X',0,0,0,0,0,0,0,'X' },
-		{ 'X','H',0,0,0,0,0,0,'X' },
-		{ 'X','X','X','X','X','X','X','X','X' }
-	};
-
-
-	private static char curr_map[][] = map1;
-	private static int curr_map_size = 10;
-
 	private static int player_x_pos = 1;
 	private static int player_y_pos = 1;
 	private static char player_char = 'H'; //BY DEFAULT ITS AN 'H'
