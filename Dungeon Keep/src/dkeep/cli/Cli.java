@@ -6,6 +6,7 @@ import dkeep.logic.*;
 
 public class Cli
 {
+	private Game game;
 	private static int player_x_pos = 1;
 	private static int player_y_pos = 1;
 	private static char player_char = 'H'; //BY DEFAULT ITS AN 'H'
@@ -25,30 +26,27 @@ public class Cli
 	private static int dst_x = 1;
 	private static int dst_y = 1;
 
-	public static void main(String[] args)
+	public void main(String[] args)
 	{
 		char user_input;
 		int make_play_value;
-		Game game = new Game();
+		game = new Game();
 		game.SetGameMap(new DungeonMap());
+		GameMap curr_map = game.GetGameMap();
+		DrawBoard(curr_map);
 		
-		while (true)
+		while (!game.IsEndOfGame())
 		{
-			GameMap curr_map = game.GetGameMap();
-			DrawBoard(curr_map);
+			curr_map = game.GetGameMap();
+		
 			user_input = WaitForPlay();
 			
 			
 			ComputeDestination(user_input);
 			
-			if(IsEndOfGame())
-			{
-				System.out.println();
-				System.out.println("END OF GAME");
-				System.out.println("YOU WIN");
-				System.out.println();
-				return;
-			}
+			game.MoveTo(dst_x, dst_y);
+			//TODO isto devia estar antes maybe
+
 
 			if (IsDestinationValid())
 			{
@@ -80,7 +78,14 @@ public class Cli
 					return;
 				}
 			}
+			
+			DrawBoard(curr_map);
 		}
+		
+		System.out.println();
+		System.out.println("END OF GAME");
+		System.out.println("YOU WIN");
+		System.out.println();
 	}
 
 	public static char WaitForPlay()
@@ -94,10 +99,10 @@ public class Cli
 		return ch;
 	}
 
-	public static void ComputeDestination(char input)
+	public void ComputeDestination(char input)
 	{
-		dst_x = player_x_pos;
-		dst_y = player_y_pos;
+		dst_x = game.GetHeroXPos();
+		dst_y = game.GetHeroYPos();
 
 		if (input == 'w' || input == 'W')
 			dst_y--;
