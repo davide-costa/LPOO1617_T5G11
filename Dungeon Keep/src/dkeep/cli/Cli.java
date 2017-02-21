@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class main
+public class Cli
 {
 	private static char map1[][] = {
 		{ 'X','X','X','X','X','X','X','X','X','X' },
