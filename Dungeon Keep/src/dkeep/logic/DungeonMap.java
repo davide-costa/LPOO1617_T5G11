@@ -15,6 +15,9 @@ public class DungeonMap implements GameMap
 			{ 'X','X','X','X','X','X','X','X','X','X'}
 			};
 	
+	private int map_x_size = 10;
+	private int map_y_size = 10;
+	
 	public boolean MoveTo(int x, int y)
 	{
 		if( x > 9 || x < 0 )
@@ -34,7 +37,19 @@ public class DungeonMap implements GameMap
 		return map;
 	}
 	
+	public int GetMapXSize()
+	{
+		return map_x_size;
+	}
+	
+	public int GetMapYSize()
+	{
+		return map_y_size;
+	}
+	
 	public GameMap NextMap()
 	{
 		return new KeepMap();
 	}
+	
+}

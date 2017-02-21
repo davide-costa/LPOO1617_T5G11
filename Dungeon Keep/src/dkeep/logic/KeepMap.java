@@ -14,6 +14,9 @@ public class KeepMap implements GameMap
 			{ 'X','X','X','X','X','X','X','X','X' }
 		};
 	
+	private int map_x_size = 10;
+	private int map_y_size = 10;
+	
 	public boolean MoveTo(int x, int y)
 	{
 		if (x > 8 || x < 0) //Out of range of the map in x
@@ -32,6 +35,17 @@ public class KeepMap implements GameMap
 	{
 		return map;
 	}
+	
+	public int GetMapXSize()
+	{
+		return map_x_size;
+	}
+	
+	public int GetMapYSize()
+	{
+		return map_y_size;
+	}
+	
 	
 	public GameMap NextMap()
 	{

@@ -4,5 +4,7 @@ public interface GameMap
 {
 	public boolean MoveTo(int x, int y);
 	public char[][] GetMap();
+	public int GetMapXSize();
+	public int GetMapYSize();
 	public GameMap NextMap();
 }
