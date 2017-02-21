@@ -6,10 +6,11 @@ public class GameCreature
 	protected int y;
 	protected char symbol;
 	
-	public GameCreature(int x, int y)
+	public GameCreature(int x, int y, char symbol)
 	{
 		this.x = x;
 		this.y = y;
+		this.symbol = symbol;
 	}
 	
 	public int GetX() 
