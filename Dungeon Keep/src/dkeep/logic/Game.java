@@ -82,8 +82,8 @@ public class Game
 		hero.SetX(x);
 		hero.SetY(y);
 		
-		char dst_state = 
-		
+		char dst_state = map.GetCellAt(x,y);
+		map.SetCellAt(hero.GetX(), hero.GetY(), hero.GetSymbol());
 	}
 	
 	public boolean TryClubNextPos()
