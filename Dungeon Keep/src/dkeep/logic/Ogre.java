@@ -28,7 +28,7 @@ public class Ogre extends GameCreature
 		return club_y;
 	}
 	
-	public void SetClubY(char club_symbol)
+	public void SetClubY(int club_y)
 	{
 		this.club_y = club_y;
 	}

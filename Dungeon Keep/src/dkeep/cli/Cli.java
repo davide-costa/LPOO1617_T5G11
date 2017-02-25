@@ -11,6 +11,8 @@ public class Cli
 	public void main(String[] args)
 	{
 		char user_input;
+		int dst_x = 0;
+		int dst_y = 0;
 		int make_play_value;
 		game = new Game();
 		game.SetGameMap(new DungeonMap());
@@ -23,32 +25,18 @@ public class Cli
 		
 			user_input = WaitForPlay();
 			
-			ComputeDestination(user_input);
+			ComputeDestination(user_input, dst_x, dst_y);
 			
 			game.MoveHero(dst_x, dst_y);
 			//TODO isto devia estar antes maybe
 
-
-			if (IsDestinationValid())
-			{
-				if (level == 10)
-					Move_guard();
-				else
-					MoveOgreAndClub();
-				make_play_value = MakePlay();
+				make_play_value = game.MakePlay(dst_x, dst_y);
 
 				if (make_play_value == 1)
 				{
 					System.out.println();
 					System.out.println("NEXT LEVEL");
 					System.out.println();
-					curr_map = map2;
-					curr_map_size = 9;
-					mob_x_pos = 4;
-					mob_y_pos = 1;
-					player_x_pos = 1;
-					player_y_pos = 7;
-					while (!TryClubNextPos());
 				}
 				else if (make_play_value == -1)
 				{
@@ -61,7 +49,6 @@ public class Cli
 			}
 			
 			DrawBoard(curr_map);
-		}
 		
 		System.out.println();
 		System.out.println("END OF GAME");
@@ -80,10 +67,11 @@ public class Cli
 		return ch;
 	}
 
-	public void ComputeDestination(char input)
+	public void ComputeDestination(char input, int dst_x, int dst_y)
 	{
-		dst_x = game.GetHeroXPos();
-		dst_y = game.GetHeroYPos();
+		Hero hero = game.GetHero();
+		dst_x = hero.GetX();
+		dst_y = hero.GetY();
 
 		if (input == 'w' || input == 'W')
 			dst_y--;
@@ -99,8 +87,8 @@ public class Cli
 	public static void DrawBoard(GameMap map)
 	{
 		char curr_map[][] = map.GetMap();
-		int map_x_size = map.GetXSize();
-		int map_y_size = map.GetYSize();
+		int map_x_size = map.GetMapXSize();
+		int map_y_size = map.GetMapXSize();
 		for (int i = 0; i < map_y_size; i++)
 		{
 			for (int j = 0; j < map_x_size; j++)

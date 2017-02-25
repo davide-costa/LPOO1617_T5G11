@@ -26,6 +26,11 @@ public class Game
 		return map;
 	}
 	
+	public Hero GetHero()
+	{
+		return hero;
+	}
+	
 	public void SetGameMap(GameMap map)
 	{
 		this.map = map;
