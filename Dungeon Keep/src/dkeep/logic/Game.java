@@ -6,6 +6,7 @@ public class Game
 {
 	private GameMap map;
 	private int level;
+	private GameCreature curr_mob;
 	private Hero hero;
 	private Guard guard;
 	private Ogre ogre;
@@ -17,6 +18,7 @@ public class Game
 		hero = new Hero(1,1);
 		guard = new Guard(8,1,'G');
 		ogre = new Ogre(4,1, 'O');
+		curr_mob = guard;
 	}
 	
 	public GameMap GetGameMap()
@@ -52,6 +54,7 @@ public class Game
 			switch(level)
 			{
 			case 2:
+				curr_mob = ogre;
 				ogre.SetX(4);
 				ogre.SetY(1);
 				ogre.SetClubX(4);
@@ -67,7 +70,9 @@ public class Game
 	
 	public void MoveGuard()
 	{
-		
+		map.SetCellAt(guard.GetX(), guard.GetY(), (char)0);
+		guard.Move();
+		map.SetCellAt(guard.GetX(), guard.GetY(), 'G');
 	}
 	
 	public void MoveOgreAndClub()
@@ -75,7 +80,7 @@ public class Game
 		while (!TryClubNextPos());
 	}
 	
-	public void MakePlay(int x, int y)
+	public int MakePlay(int x, int y)
 	{
 		map.SetCellAt(hero.GetX(), hero.GetY(), (char)0);
 		
@@ -83,9 +88,65 @@ public class Game
 		hero.SetY(y);
 		
 		char dst_state = map.GetCellAt(x,y);
-		map.SetCellAt(hero.GetX(), hero.GetY(), hero.GetSymbol());
+		map.SetCellAt(x, y, hero.GetSymbol());
+		
+		//TODO: meter isto numa funçao??
+		switch(level)
+		{
+		case 1:
+			OpenDoors();
+			break;
+		}
+		
+		if (WasCaugth(curr_mob))
+			return -1;
+		else if (dst_state == 0)
+			return 0;
+		else if (dst_state == 'k')
+		{
+			switch(level)
+			{
+			case 1:
+				OpenDoors();
+				break;
+			case 2:
+				hero.SetSymbol('K');
+				map.SetCellAt(x, y, 'K');
+				break;
+			}
+			return 0;
+		}
+		else if (dst_state == 'S')
+			return 1; //nivel 2
+
+		return 0;
 	}
 	
+	public void OpenDoors()
+	{
+		map.SetCellAt(0, 5, 'S');
+		map.SetCellAt(0, 6, 'S');
+	}
+
+	public boolean WasCaugth(GameCreature mob)
+	{
+		int player_x_pos = hero.GetX();
+		int player_y_pos = hero.GetY();
+		int mob_x_pos = mob.GetX();
+		int mob_y_pos = mob.GetY();
+		
+		if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
+			return true;
+		else if (player_x_pos == (mob_x_pos + 1) && player_y_pos == mob_y_pos)
+			return true;
+		else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos - 1))
+			return true;
+		else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos + 1))
+			return true;
+		else
+			return false;
+	}
+	//TODO colocar no ogre
 	public boolean TryClubNextPos()
 	{
 		//nextInt is normally exclusive of the top value,
@@ -106,6 +167,11 @@ public class Game
 			temp_y--; //club moves to down
 
 		return map.MoveTo(temp_x, temp_y);
+	}
+	
+	public bolean IsEndOfGame()
+	{
+		return map == null;
 	}
 
 }
