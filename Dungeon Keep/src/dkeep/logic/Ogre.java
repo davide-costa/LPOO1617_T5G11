@@ -33,7 +33,7 @@ public class Ogre extends GameCreature
 		this.club_y = club_y;
 	}
 	
-	public int GetClubSymbol()
+	public char GetClubSymbol()
 	{
 		return club_symbol;
 	}

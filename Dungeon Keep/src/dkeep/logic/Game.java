@@ -77,7 +77,98 @@ public class Game
 	
 	public void MoveOgreAndClub()
 	{
+		int ogre_x_pos = ogre.GetX();
+		int ogre_y_pos = ogre.GetY();
+		int club_x_pos = ogre.GetClubX();
+		int club_y_pos = ogre.GetClubY();
+		
+		
+		//reset to empty the cell in which the ogre was
+		if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == '$')
+			map.SetCellAt(ogre_x_pos, ogre_y_pos, 'k');
+		else
+			map.SetCellAt(ogre_x_pos, ogre_y_pos, (char)0);
+		
+		//reset to empty the cell in which the club was
+		if (map.GetCellAt(club_x_pos, club_y_pos) == '$')
+			map.SetCellAt(club_x_pos, club_y_pos, 'k');
+		else
+			map.SetCellAt(club_x_pos, club_y_pos, (char)0);
+
+		while (!TryOgreNextPos());
 		while (!TryClubNextPos());
+
+		//Changes ogre char if he is in the key position
+		if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == 'k')
+			ogre.SetSymbol('$');
+		else
+			ogre.SetSymbol('O');
+		//Changes club char if he is in the key position
+		if (map.GetCellAt(club_x_pos, club_y_pos) == 'k')
+			ogre.SetClubSymbol('$');
+		else
+			ogre.SetClubSymbol('$');
+
+		//Puts the new ogre cell with the char representing it
+		map.SetCellAt(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
+		map.SetCellAt(club_x_pos, club_y_pos, ogre.GetClubSymbol());
+	}
+	
+	public boolean TryOgreNextPos()
+	{
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		int temp_x = ogre.GetX();
+		int temp_y = ogre.GetY();
+
+		if (randomNum == 1)
+			temp_x++; //ogre moves to right
+		else if (randomNum == 2)
+			temp_x--; //ogre moves to left
+		else if (randomNum == 3)
+			temp_y++; //ogre moves up
+		else if (randomNum == 4)
+			temp_y--; //ogre moves to down
+
+		if (!map.MoveTo(temp_x, temp_y))
+			return false;
+
+		ogre.SetX(temp_x);
+		ogre.SetY(temp_y);
+		
+		return true;
+	}
+	
+	//TODO colocar no ogre
+	public boolean TryClubNextPos()
+	{
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		temp_x = ogre.GetClubX();
+		temp_y = ogre.GetClubY();
+		
+		if (randomNum == 1)
+			temp_x++; //club moves to right
+		else if (randomNum == 2)
+			temp_x--; //club moves to left
+		else if (randomNum == 3)
+			temp_y++; //club moves up
+		else if (randomNum == 4)
+			temp_y--; //club moves to down
+
+		if (!map.MoveTo(temp_x, temp_y))
+			return false;
+		
+		ogre.SetClubX(temp_x);
+		ogre.SetClubY(temp_y);
+		
+		return true;
 	}
 	
 	public int MakePlay(int x, int y)
@@ -146,30 +237,9 @@ public class Game
 		else
 			return false;
 	}
-	//TODO colocar no ogre
-	public boolean TryClubNextPos()
-	{
-		//nextInt is normally exclusive of the top value,
-		//so add 1 to make it inclusive
-		int min = 1;
-		int max = 4;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		temp_x = ogre.GetClubX();
-		temp_y = ogre.GetClubY();
-		
-		if (randomNum == 1)
-			temp_x++; //club moves to right
-		else if (randomNum == 2)
-			temp_x--; //club moves to left
-		else if (randomNum == 3)
-			temp_y++; //club moves up
-		else if (randomNum == 4)
-			temp_y--; //club moves to down
 
-		return map.MoveTo(temp_x, temp_y);
-	}
 	
-	public bolean IsEndOfGame()
+	public boolean IsEndOfGame()
 	{
 		return map == null;
 	}
