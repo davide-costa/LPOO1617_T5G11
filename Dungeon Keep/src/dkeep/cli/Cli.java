@@ -8,7 +8,7 @@ public class Cli
 {
 	private Game game;
 
-	public void main(String[] args)
+	public void main()
 	{
 		char user_input;
 		int dst_x = 0;
