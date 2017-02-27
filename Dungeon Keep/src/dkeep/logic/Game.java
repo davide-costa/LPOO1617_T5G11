@@ -18,7 +18,16 @@ public class Game
 		hero = new Hero(1,1);
 		guard = new Guard(8,1,'G');
 		ogre = new Ogre(4,1, 'O');
+		level = 2;
 		curr_mob = guard;
+		SetGameMap(new KeepMap());
+		curr_mob = ogre;
+		ogre.SetX(4);
+		ogre.SetY(1);
+		ogre.SetClubX(5);
+		ogre.SetClubY(1);
+		hero.SetX(1);
+		hero.SetY(7);
 	}
 	
 	public GameMap GetGameMap()
@@ -103,6 +112,11 @@ public class Game
 		while (!TryOgreNextPos());
 		while (!TryClubNextPos());
 
+		ogre_x_pos = ogre.GetX();
+		ogre_y_pos = ogre.GetY();
+		club_x_pos = ogre.GetClubX();
+		club_y_pos = ogre.GetClubY();
+		
 		//Changes ogre char if he is in the key position
 		if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == 'k')
 			ogre.SetSymbol('$');
@@ -112,7 +126,7 @@ public class Game
 		if (map.GetCellAt(club_x_pos, club_y_pos) == 'k')
 			ogre.SetClubSymbol('$');
 		else
-			ogre.SetClubSymbol('$');
+			ogre.SetClubSymbol('*');
 
 		//Puts the new ogre cell with the char representing it
 		map.SetCellAt(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
@@ -155,8 +169,8 @@ public class Game
 		int min = 1;
 		int max = 4;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		temp_x = ogre.GetClubX();
-		temp_y = ogre.GetClubY();
+		temp_x = ogre.GetX();
+		temp_y = ogre.GetY();
 		
 		if (randomNum == 1)
 			temp_x++; //club moves to right
@@ -185,14 +199,6 @@ public class Game
 		
 		char dst_state = map.GetCellAt(x,y);
 		map.SetCellAt(x, y, hero.GetSymbol());
-		
-		//TODO: meter isto numa funçao??
-		switch(level)
-		{
-		case 1:
-			OpenDoors();
-			break;
-		}
 		
 		if (WasCaugth(curr_mob))
 			return -1;

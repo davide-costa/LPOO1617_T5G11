@@ -7,49 +7,46 @@ import dkeep.logic.*;
 public class Cli
 {
 	private Game game;
+	private int dst_x = 0;
+	private int dst_y = 0;
 
 	public void main()
 	{
 		char user_input;
-		int dst_x = 0;
-		int dst_y = 0;
 		int make_play_value;
 		game = new Game();
-		game.SetGameMap(new DungeonMap());
 		GameMap curr_map = game.GetGameMap();
 		DrawBoard(curr_map);
-		
+
 		while (!game.IsEndOfGame())
 		{
-			curr_map = game.GetGameMap();
-		
+
 			user_input = WaitForPlay();
-			
-			ComputeDestination(user_input, dst_x, dst_y);
-			
-			game.MoveHero(dst_x, dst_y);
-			//TODO isto devia estar antes maybe
 
-				make_play_value = game.MakePlay(dst_x, dst_y);
+			ComputeDestination(user_input);
 
-				if (make_play_value == 1)
-				{
-					System.out.println();
-					System.out.println("NEXT LEVEL");
-					System.out.println();
-				}
-				else if (make_play_value == -1)
-				{
-					System.out.println();
-					System.out.println("END OF GAME");
-					System.out.println("YOU LOSE");
-					System.out.println();
-					return;
-				}
+			make_play_value = game.MoveHero(dst_x, dst_y);
+
+			if (make_play_value == 1)
+			{
+				System.out.println();
+				System.out.println("NEXT LEVEL");
+				System.out.println();
 			}
-			
+			else if (make_play_value == -1)
+			{
+				System.out.println();
+				System.out.println("END OF GAME");
+				System.out.println("YOU LOSE");
+				System.out.println();
+				return;
+			}
+
+			curr_map = game.GetGameMap();
 			DrawBoard(curr_map);
-		
+		}
+
+
 		System.out.println();
 		System.out.println("END OF GAME");
 		System.out.println("YOU WIN");
@@ -67,7 +64,7 @@ public class Cli
 		return ch;
 	}
 
-	public void ComputeDestination(char input, int dst_x, int dst_y)
+	public void ComputeDestination(char input)
 	{
 		Hero hero = game.GetHero();
 		dst_x = hero.GetX();
@@ -81,7 +78,7 @@ public class Cli
 			dst_y++;
 		else if (input == 'd' || input == 'D')
 			dst_x++;
-	}	
+	}
 
 
 	public static void DrawBoard(GameMap map)
