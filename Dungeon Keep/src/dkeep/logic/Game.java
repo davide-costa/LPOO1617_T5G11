@@ -16,7 +16,19 @@ public class Game
 	public Game()
 	{
 		hero = new Hero(1,1);
-		guard = new Guard(8,1,'G');
+		
+		//Generate the type of guard for this game
+		int min = 1;
+		int max = 3;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		if(randomNum == 1)
+			guard = new Rookie(8,1,'G');
+		else if(randomNum == 1)
+			guard = new Drunken(8,1,'G');
+		else
+			guard = new Suspicious(8,1,'G');
+		
+		
 		ogre = new Ogre(4,1, 'O');
 		level = 2;
 		curr_mob = guard;
