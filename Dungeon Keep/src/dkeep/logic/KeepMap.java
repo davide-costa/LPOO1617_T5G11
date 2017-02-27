@@ -14,8 +14,8 @@ public class KeepMap implements GameMap
 			{ 'X','X','X','X','X','X','X','X','X' }
 		};
 	
-	private int map_x_size = 10;
-	private int map_y_size = 10;
+	private int map_x_size = 9;
+	private int map_y_size = 9;
 	
 	public boolean MoveTo(int x, int y)
 	{
