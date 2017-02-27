@@ -47,6 +47,12 @@ public class Game
 	
 	public int MoveHero(int x, int y)
 	{
+		if (x == -1 && y == 1 && level == 2)
+		{
+			SetGameMap(map.NextMap());
+			return 0;
+		}
+		
 		if(!map.MoveTo(x, y))
 			return 0;
 		

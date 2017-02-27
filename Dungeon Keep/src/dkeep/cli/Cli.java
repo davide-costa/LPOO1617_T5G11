@@ -13,27 +13,27 @@ public class Cli
 	public void main()
 	{
 		char user_input;
-		int make_play_value;
+		int move_hero_value;
 		game = new Game();
 		GameMap curr_map = game.GetGameMap();
 		DrawBoard(curr_map);
 
-		while (!game.IsEndOfGame())
+		while (true)
 		{
 
 			user_input = WaitForPlay();
 
 			ComputeDestination(user_input);
 
-			make_play_value = game.MoveHero(dst_x, dst_y);
+			move_hero_value = game.MoveHero(dst_x, dst_y);
 
-			if (make_play_value == 1)
+			if (move_hero_value == 1)
 			{
 				System.out.println();
 				System.out.println("NEXT LEVEL");
 				System.out.println();
 			}
-			else if (make_play_value == -1)
+			else if (move_hero_value == -1)
 			{
 				System.out.println();
 				System.out.println("END OF GAME");
@@ -42,6 +42,9 @@ public class Cli
 				return;
 			}
 
+			if (game.IsEndOfGame())
+				break;
+			
 			curr_map = game.GetGameMap();
 			DrawBoard(curr_map);
 		}

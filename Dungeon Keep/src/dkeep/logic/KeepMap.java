@@ -25,7 +25,7 @@ public class KeepMap implements GameMap
 		if (y > 8 || y < 0) //Out of range of the map in y
 			return false;
 		
-		if (map[y][x] == 'X' || map[y][x] == 'I')
+		if (map[y][x] == 'X' || (map[y][x] == 'I' && map[y][x+1] != 'K'))
 			return false;
 		
 		return true;
