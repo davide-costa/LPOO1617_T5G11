@@ -21,25 +21,20 @@ public class Game
 		int min = 1;
 		int max = 3;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		randomNum = 1;
 		if(randomNum == 1)
 			guard = new Rookie(8,1,'G');
-		else if(randomNum == 1)
+		else if(randomNum == 2)
 			guard = new Drunken(8,1,'G');
 		else
 			guard = new Suspicious(8,1,'G');
 		
+		System.out.println(randomNum);
 		
 		ogre = new Ogre(4,1, 'O');
-		level = 2;
+		level = 1;
 		curr_mob = guard;
-		SetGameMap(new KeepMap());
-		curr_mob = ogre;
-		ogre.SetX(4);
-		ogre.SetY(1);
-		ogre.SetClubX(5);
-		ogre.SetClubY(1);
-		hero.SetX(1);
-		hero.SetY(7);
+		SetGameMap(new DungeonMap());
 	}
 	
 	public GameMap GetGameMap()
@@ -218,7 +213,7 @@ public class Game
 		char dst_state = map.GetCellAt(x,y);
 		map.SetCellAt(x, y, hero.GetSymbol());
 		
-		if (WasCaugth(curr_mob))
+		if (WasCaught(curr_mob))
 			return -1;
 		else if (dst_state == 0)
 			return 0;
@@ -248,12 +243,15 @@ public class Game
 		map.SetCellAt(0, 6, 'S');
 	}
 
-	public boolean WasCaugth(GameCreature mob)
+	public boolean WasCaught(GameCreature mob)
 	{
 		int player_x_pos = hero.GetX();
 		int player_y_pos = hero.GetY();
 		int mob_x_pos = mob.GetX();
 		int mob_y_pos = mob.GetY();
+		
+		if (mob.GetSymbol() == 'g')
+			return false;
 		
 		if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
 			return true;

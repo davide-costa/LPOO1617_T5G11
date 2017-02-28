@@ -12,15 +12,9 @@ public class Rookie extends Guard
 		if (movement_step == 24)
 			movement_step = 0;
 
-		if (movement_step == 0 || (movement_step >= 5 && movement_step < 11)) //for left moves
-			x--;
-		else if (movement_step >= 12 && movement_step <= 18) //for right moves
-			x++;
-		else if (movement_step >= 19 && movement_step <= 23) //for up moves
-			y--;
-		else if ((movement_step >= 1 && movement_step <= 4) || movement_step == 11) //for down moves
-			y++;
-
+		x = x_path[movement_step];
+		y = y_path[movement_step];
+		
 		movement_step++;
 	}
 }
