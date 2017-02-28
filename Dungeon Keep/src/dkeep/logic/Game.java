@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Game
@@ -9,6 +11,7 @@ public class Game
 	private GameCreature curr_mob;
 	private Hero hero;
 	private Guard guard;
+	List<Ogre> ogres = new ArrayList<Ogre>();
 	private Ogre ogre;
 	private int temp_x;
 	private int temp_y;
@@ -16,7 +19,12 @@ public class Game
 	public Game()
 	{
 		hero = new Hero(1,1);
-		
+		InitLevel1();
+	}
+	
+	public void InitLevel1()
+	{
+		level = 1;
 		//Generate the type of guard for this game
 		int min = 1;
 		int max = 3;
@@ -27,13 +35,15 @@ public class Game
 			guard = new Drunken(8,1,'G');
 		else
 			guard = new Suspicious(8,1,'G');
-				
-		ogre = new Ogre(4,1, 'O');
-		level = 1;
-		curr_mob = guard;
-		SetGameMap(new DungeonMap());
 		
-		//Debugging
+		SetGameMap(new DungeonMap());
+		curr_mob = guard;
+	}
+	
+	public void InitLevel2()
+	{
+		ogre = new Ogre(4,1, 'O');
+
 		curr_mob = ogre;
 		level = 2;
 		ogre.SetX(4);
@@ -42,7 +52,6 @@ public class Game
 		ogre.SetClubY(2);
 		hero.SetX(1);
 		hero.SetY(7);
-		SetGameMap(new KeepMap());
 	}
 	
 	public GameMap GetGameMap()
@@ -89,13 +98,7 @@ public class Game
 			switch(level)
 			{
 			case 2:
-				curr_mob = ogre;
-				ogre.SetX(4);
-				ogre.SetY(1);
-				ogre.SetClubX(4);
-				ogre.SetClubY(2);
-				hero.SetX(1);
-				hero.SetY(7);
+				InitLevel2();
 				break;
 			}
 		}
