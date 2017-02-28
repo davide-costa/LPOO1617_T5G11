@@ -19,8 +19,10 @@ public class Game
 	{
 		hero = new Hero(1,1);
 		InitLevel1();
-		InitLevel2();
+		
+		//debugging
 		SetGameMap(map.NextMap());
+		InitLevel2();
 	}
 	
 	public void InitLevel1()
@@ -53,9 +55,11 @@ public class Game
 		
 		ogres = new ArrayList<Ogre>();
 		Ogre curr_ogre;
-		for (int i = 0; i < randomNum; i ++)
+		for (int i = 0; i < randomNum; i++)
 		{
 			curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
+			map.SetCellAt(ogre_spawn_x[i], ogre_spawn_y[i], 'O');
+			map.SetCellAt(club_spawn_x[i], club_spawn_y[i], '*');
 			ogres.add(curr_ogre);
 		}
 		level = 2;
