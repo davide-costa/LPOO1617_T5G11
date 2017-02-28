@@ -21,7 +21,6 @@ public class Game
 		int min = 1;
 		int max = 3;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		randomNum = 1;
 		if(randomNum == 1)
 			guard = new Rookie(8,1,'G');
 		else if(randomNum == 2)
@@ -35,6 +34,8 @@ public class Game
 		level = 1;
 		curr_mob = guard;
 		SetGameMap(new DungeonMap());
+		
+		
 	}
 	
 	public GameMap GetGameMap()
@@ -99,7 +100,7 @@ public class Game
 	{
 		map.SetCellAt(guard.GetX(), guard.GetY(), (char)0);
 		guard.Move();
-		map.SetCellAt(guard.GetX(), guard.GetY(), 'G');
+		map.SetCellAt(guard.GetX(), guard.GetY(), guard.GetSymbol());
 	}
 	
 	public void MoveOgreAndClub()
