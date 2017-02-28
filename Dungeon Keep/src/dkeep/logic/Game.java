@@ -11,8 +11,7 @@ public class Game
 	private GameCreature curr_mob;
 	private Hero hero;
 	private Guard guard;
-	List<Ogre> ogres = new ArrayList<Ogre>();
-	private Ogre ogre;
+	List<Ogre> ogres;
 	private int temp_x;
 	private int temp_y;
 	
@@ -20,6 +19,8 @@ public class Game
 	{
 		hero = new Hero(1,1);
 		InitLevel1();
+		InitLevel2();
+		SetGameMap(map.NextMap());
 	}
 	
 	public void InitLevel1()
@@ -42,14 +43,22 @@ public class Game
 	
 	public void InitLevel2()
 	{
-		ogre = new Ogre(4,1, 'O');
-
-		curr_mob = ogre;
+		int ogre_spawn_x[] = {2, 3, 4};
+		int ogre_spawn_y[] = {1, 1, 1};
+		int club_spawn_x[] = {2, 3, 4};
+		int club_spawn_y[] = {2, 2, 2};
+		
+		
+		int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+		
+		ogres = new ArrayList<Ogre>();
+		Ogre curr_ogre;
+		for (int i = 0; i < randomNum; i ++)
+		{
+			curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
+			ogres.add(curr_ogre);
+		}
 		level = 2;
-		ogre.SetX(4);
-		ogre.SetY(1);
-		ogre.SetClubX(4);
-		ogre.SetClubY(2);
 		hero.SetX(1);
 		hero.SetY(7);
 	}
@@ -86,7 +95,7 @@ public class Game
 			MoveGuard();
 			break;
 		case 2:
-			MoveOgreAndClub();
+			MoveOgresAndClubs();
 			break;
 		}
 
@@ -113,51 +122,57 @@ public class Game
 		map.SetCellAt(guard.GetX(), guard.GetY(), guard.GetSymbol());
 	}
 	
-	public void MoveOgreAndClub()
+	public void MoveOgresAndClubs()
 	{
-		int ogre_x_pos = ogre.GetX();
-		int ogre_y_pos = ogre.GetY();
-		int club_x_pos = ogre.GetClubX();
-		int club_y_pos = ogre.GetClubY();
+		for (Ogre ogre : ogres)
+		{
+			int ogre_x_pos = ogre.GetX();
+			int ogre_y_pos = ogre.GetY();
+			int club_x_pos = ogre.GetClubX();
+			int club_y_pos = ogre.GetClubY();
+			
+			
+			//reset to empty the cell in which the ogre was
+			if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == '$')
+				map.SetCellAt(ogre_x_pos, ogre_y_pos, 'k');
+			else
+				map.SetCellAt(ogre_x_pos, ogre_y_pos, (char)0);
+			
+			//reset to empty the cell in which the club was
+			if (map.GetCellAt(club_x_pos, club_y_pos) == '$')
+				map.SetCellAt(club_x_pos, club_y_pos, 'k');
+			else
+				map.SetCellAt(club_x_pos, club_y_pos, (char)0);
+	
 		
+			while (!TryOgreNextPos(ogre));
+			while (!TryClubNextPos(ogre));
+			
+	
+			ogre_x_pos = ogre.GetX();
+			ogre_y_pos = ogre.GetY();
+			club_x_pos = ogre.GetClubX();
+			club_y_pos = ogre.GetClubY();
+			
+			//Changes ogre char if he is in the key position
+			if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == 'k')
+				ogre.SetSymbol('$');
+			else
+				ogre.SetSymbol('O');
+			//Changes club char if he is in the key position
+			if (map.GetCellAt(club_x_pos, club_y_pos) == 'k')
+				ogre.SetClubSymbol('$');
+			else
+				ogre.SetClubSymbol('*');
+	
+			//Puts the new ogre cell with the char representing it
+			map.SetCellAt(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
+			map.SetCellAt(club_x_pos, club_y_pos, ogre.GetClubSymbol());
+		}
 		
-		//reset to empty the cell in which the ogre was
-		if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == '$')
-			map.SetCellAt(ogre_x_pos, ogre_y_pos, 'k');
-		else
-			map.SetCellAt(ogre_x_pos, ogre_y_pos, (char)0);
-		
-		//reset to empty the cell in which the club was
-		if (map.GetCellAt(club_x_pos, club_y_pos) == '$')
-			map.SetCellAt(club_x_pos, club_y_pos, 'k');
-		else
-			map.SetCellAt(club_x_pos, club_y_pos, (char)0);
-
-		while (!TryOgreNextPos());
-		while (!TryClubNextPos());
-
-		ogre_x_pos = ogre.GetX();
-		ogre_y_pos = ogre.GetY();
-		club_x_pos = ogre.GetClubX();
-		club_y_pos = ogre.GetClubY();
-		
-		//Changes ogre char if he is in the key position
-		if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == 'k')
-			ogre.SetSymbol('$');
-		else
-			ogre.SetSymbol('O');
-		//Changes club char if he is in the key position
-		if (map.GetCellAt(club_x_pos, club_y_pos) == 'k')
-			ogre.SetClubSymbol('$');
-		else
-			ogre.SetClubSymbol('*');
-
-		//Puts the new ogre cell with the char representing it
-		map.SetCellAt(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
-		map.SetCellAt(club_x_pos, club_y_pos, ogre.GetClubSymbol());
 	}
 	
-	public boolean TryOgreNextPos()
+	public boolean TryOgreNextPos(Ogre ogre)
 	{
 		//nextInt is normally exclusive of the top value,
 		//so add 1 to make it inclusive
@@ -186,7 +201,7 @@ public class Game
 	}
 	
 	//TODO colocar no ogre
-	public boolean TryClubNextPos()
+	public boolean TryClubNextPos(Ogre ogre)
 	{
 		//nextInt is normally exclusive of the top value,
 		//so add 1 to make it inclusive
@@ -224,7 +239,7 @@ public class Game
 		char dst_state = map.GetCellAt(x,y);
 		map.SetCellAt(x, y, hero.GetSymbol());
 		
-		if (WasCaught(curr_mob))
+		if (WasCaught())
 			return -1;
 		else if (dst_state == 0)
 			return 0;
@@ -254,7 +269,25 @@ public class Game
 		map.SetCellAt(0, 6, 'S');
 	}
 
-	public boolean WasCaught(GameCreature mob)
+	public boolean WasCaught()
+	{
+		switch (level)
+		{
+		case 1:
+			return WasCaughtByMob(guard);
+		case 2:
+			for (Ogre ogre : ogres)
+			{
+				if (WasCaughtByMob(ogre) || WasCaughtByClub(ogre))
+					return true;
+			}
+			return false;
+		}
+		
+		return false;
+	}
+	
+	public boolean WasCaughtByMob(GameCreature mob)
 	{
 		int player_x_pos = hero.GetX();
 		int player_y_pos = hero.GetY();
@@ -275,7 +308,25 @@ public class Game
 		else
 			return false;
 	}
-
+	
+	public boolean WasCaughtByClub(Ogre ogre)
+	{
+		int player_x_pos = hero.GetX();
+		int player_y_pos = hero.GetY();
+		int club_x_pos = ogre.GetClubX();
+		int club_y_pos = ogre.GetClubY();
+		
+		if (player_x_pos == (club_x_pos - 1) && player_y_pos == club_y_pos)
+			return true;
+		else if (player_x_pos == (club_x_pos + 1) && player_y_pos == club_y_pos)
+			return true;
+		else if (player_x_pos == club_x_pos && player_y_pos == (club_y_pos - 1))
+			return true;
+		else if (player_x_pos == club_x_pos && player_y_pos == (club_y_pos + 1))
+			return true;
+		else
+			return false;
+	}
 	
 	public boolean IsEndOfGame()
 	{

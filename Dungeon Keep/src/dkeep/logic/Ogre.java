@@ -4,13 +4,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Ogre extends GameCreature
 {
-	private int club_x = 5;
-	private int club_y = 1;
+	private int club_x;
+	private int club_y;
 	private char club_symbol = '*';
 	
-	public Ogre(int x, int y, char symbol)
+	public Ogre(int x, int y, int club_x, int club_y)
 	{
 		super(x, y, 'O');
+		this.club_x = club_x;
+		this.club_y = club_y;
 	}
 	
 	public int GetClubX()
