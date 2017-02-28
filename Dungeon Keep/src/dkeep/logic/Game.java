@@ -27,15 +27,22 @@ public class Game
 			guard = new Drunken(8,1,'G');
 		else
 			guard = new Suspicious(8,1,'G');
-		
-		System.out.println(randomNum);
-		
+				
 		ogre = new Ogre(4,1, 'O');
 		level = 1;
 		curr_mob = guard;
 		SetGameMap(new DungeonMap());
 		
-		
+		//Debugging
+		curr_mob = ogre;
+		level = 2;
+		ogre.SetX(4);
+		ogre.SetY(1);
+		ogre.SetClubX(4);
+		ogre.SetClubY(2);
+		hero.SetX(1);
+		hero.SetY(7);
+		SetGameMap(new KeepMap());
 	}
 	
 	public GameMap GetGameMap()
