@@ -148,8 +148,9 @@ public class Game
 			else
 				map.SetCellAt(club_x_pos, club_y_pos, (char)0);
 	
-		
-			while (!TryOgreNextPos(ogre));
+			ogre.RefreshStun();
+			if(ogre.GetSymbol() == 'O')
+				while (!TryOgreNextPos(ogre));
 			while (!TryClubNextPos(ogre));
 			
 	
@@ -243,6 +244,8 @@ public class Game
 		char dst_state = map.GetCellAt(x,y);
 		map.SetCellAt(x, y, hero.GetSymbol());
 		
+		TryStunOgres();
+		
 		if (WasCaught())
 			return -1;
 		else if (dst_state == 0)
@@ -267,6 +270,30 @@ public class Game
 		return 0;
 	}
 	
+	public void TryStunOgres() 
+	{
+		int player_x_pos = hero.GetX();
+		int player_y_pos = hero.GetY();
+		int mob_x_pos;
+		int mob_y_pos;
+		
+		for(Ogre ogre: ogres)
+		{
+			mob_x_pos = ogre.GetX();
+			mob_y_pos = ogre.GetY();
+			
+			if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
+				ogre.Stun();
+			else if (player_x_pos == (mob_x_pos + 1) && player_y_pos == mob_y_pos)
+				ogre.Stun();
+			else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos - 1))
+				ogre.Stun();
+			else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos + 1))
+				ogre.Stun();
+		}
+		
+	}
+
 	public void OpenDoors()
 	{
 		map.SetCellAt(0, 5, 'S');
@@ -298,7 +325,7 @@ public class Game
 		int mob_x_pos = mob.GetX();
 		int mob_y_pos = mob.GetY();
 		
-		if (mob.GetSymbol() == 'g')
+		if (mob.GetSymbol() == 'g' || mob.GetSymbol() == '8')
 			return false;
 		
 		if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
@@ -320,7 +347,9 @@ public class Game
 		int club_x_pos = ogre.GetClubX();
 		int club_y_pos = ogre.GetClubY();
 		
-		if (player_x_pos == (club_x_pos - 1) && player_y_pos == club_y_pos)
+		if (player_x_pos == club_x_pos && player_y_pos == club_y_pos)
+			return true;
+		else if (player_x_pos == (club_x_pos - 1) && player_y_pos == club_y_pos)
 			return true;
 		else if (player_x_pos == (club_x_pos + 1) && player_y_pos == club_y_pos)
 			return true;
