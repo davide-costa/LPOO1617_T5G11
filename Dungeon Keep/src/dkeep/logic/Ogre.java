@@ -4,6 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Ogre extends GameCreature
 {
+	private char curr_symbol;
 	private int club_x;
 	private int club_y;
 	private char club_symbol = '*';
@@ -54,11 +55,12 @@ public class Ogre extends GameCreature
 	
 	public void RefreshStun()
 	{
-		if(symbol != '8')
+		if(symbol == 'O')
 			return;
 
-		this.stun_count++;
 		if(stun_count == 2)
 			symbol = 'O';
+		
+		this.stun_count++;
 	}
 }

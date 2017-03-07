@@ -51,9 +51,8 @@ public class Game
 		case 2:
 			for (Ogre ogre : ogres)
 			{
-				map_matrix[ogre.GetY()][ogre.GetX()] = ogre.GetSymbol();
 				map_matrix[ogre.GetClubY()][ogre.GetClubX()] = ogre.GetClubSymbol();
-				
+				map_matrix[ogre.GetY()][ogre.GetX()] = ogre.GetSymbol();
 			}
 		}
 	}
@@ -183,7 +182,7 @@ public class Game
 //				SetCellState(club_x_pos, club_y_pos, (char)0);
 	
 			ogre.RefreshStun();
-			if(ogre.GetSymbol() == 'O')
+			if(ogre.GetSymbol() != '8')
 				while (!TryOgreNextPos(ogre));
 			while (!TryClubNextPos(ogre));
 			
