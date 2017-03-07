@@ -91,8 +91,6 @@ public class Game
 		for (int i = 0; i < randomNum; i++)
 		{
 			curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
-			//SetCellState(ogre_spawn_x[i], ogre_spawn_y[i], 'O');
-			//SetCellState(club_spawn_x[i], club_spawn_y[i], '*');
 			ogres.add(curr_ogre);
 		}
 		level = 2;
@@ -151,6 +149,7 @@ public class Game
 			}
 		}
 		
+		RefreshMap();
 		return make_play_value;
 	}
 	
@@ -170,18 +169,18 @@ public class Game
 			int club_x_pos = ogre.GetClubX();
 			int club_y_pos = ogre.GetClubY();
 			
-			
-			//reset to empty the cell in which the ogre was
-			if (GetCellState(ogre_x_pos, ogre_y_pos) == '$')
-				SetCellState(ogre_x_pos, ogre_y_pos, 'k');
-			else
-				SetCellState(ogre_x_pos, ogre_y_pos, (char)0);
-			
-			//reset to empty the cell in which the club was
-			if (GetCellState(club_x_pos, club_y_pos) == '$')
-				SetCellState(club_x_pos, club_y_pos, 'k');
-			else
-				SetCellState(club_x_pos, club_y_pos, (char)0);
+			//TODO: remove this
+//			//reset to empty the cell in which the ogre was
+//			if (GetCellState(ogre_x_pos, ogre_y_pos) == '$')
+//				SetCellState(ogre_x_pos, ogre_y_pos, 'k');
+//			else
+//				SetCellState(ogre_x_pos, ogre_y_pos, (char)0);
+//			
+//			//reset to empty the cell in which the club was
+//			if (GetCellState(club_x_pos, club_y_pos) == '$')
+//				SetCellState(club_x_pos, club_y_pos, 'k');
+//			else
+//				SetCellState(club_x_pos, club_y_pos, (char)0);
 	
 			ogre.RefreshStun();
 			if(ogre.GetSymbol() == 'O')
@@ -194,20 +193,21 @@ public class Game
 			club_x_pos = ogre.GetClubX();
 			club_y_pos = ogre.GetClubY();
 			
-			//Changes ogre char if he is in the key position
-			if (GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
+			//TODO: remove this
+//			//Changes ogre char if he is in the key position
+			if (map.GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
 				ogre.SetSymbol('$');
 			else
 				ogre.SetSymbol('O');
-			//Changes club char if he is in the key position
-			if (GetCellState(club_x_pos, club_y_pos) == 'k')
+//			//Changes club char if he is in the key position
+			if (map.GetCellState(club_x_pos, club_y_pos) == 'k')
 				ogre.SetClubSymbol('$');
 			else
 				ogre.SetClubSymbol('*');
 	
 			//Puts the new ogre cell with the char representing it
-			SetCellState(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
-			SetCellState(club_x_pos, club_y_pos, ogre.GetClubSymbol());
+//			SetCellState(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
+//			SetCellState(club_x_pos, club_y_pos, ogre.GetClubSymbol());
 		}
 		
 	}
@@ -277,7 +277,7 @@ public class Game
 		hero.SetY(y);
 		
 		char dst_state = GetCellState(x,y);
-		SetCellState(x, y, hero.GetSymbol());
+		//SetCellState(x, y, hero.GetSymbol());
 		
 		TryStunOgres();
 		
@@ -294,7 +294,7 @@ public class Game
 				break;
 			case 2:
 				hero.SetSymbol('K');
-				SetCellState(x, y, 'K');
+				map.SetCellState(x, y, (char)0);
 				break;
 			}
 			return 0;
@@ -331,8 +331,8 @@ public class Game
 
 	public void OpenDoors()
 	{
-		SetCellState(0, 5, 'S');
-		SetCellState(0, 6, 'S');
+		map.SetCellState(0, 5, 'S');
+		map.SetCellState(0, 6, 'S');
 	}
 
 	public boolean WasCaught()

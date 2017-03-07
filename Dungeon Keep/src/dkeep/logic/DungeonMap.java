@@ -54,12 +54,12 @@ public class DungeonMap implements GameMap
 		return new KeepMap();
 	}
 	
-	public void SetCellAt(int x, int y, char symbol)
+	public void SetCellState(int x, int y, char symbol)
 	{
 		map[y][x] = symbol;
 	}
 	
-	public char GetCellAt(int x, int y)
+	public char GetCellState(int x, int y)
 	{
 		return map[y][x];
 	}
