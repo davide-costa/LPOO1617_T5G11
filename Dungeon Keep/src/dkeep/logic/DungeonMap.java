@@ -6,7 +6,7 @@ public class DungeonMap implements GameMap
 {
 	private char[][] map =  {
 			{ 'X','X','X','X','X','X','X','X','X','X' },
-			{ 'X','H',0,0,'I',0,'X',0,'G','X' },
+			{ 'X',0,0,0,'I',0,'X',0,'G','X' },
 			{ 'X','X','X',0,'X','X','X',0,0,'X' },
 			{ 'X',0,'I',0,'I',0,'X',0,0,'X' },
 			{ 'X','X','X',0,'X','X','X',0,0,'X' },

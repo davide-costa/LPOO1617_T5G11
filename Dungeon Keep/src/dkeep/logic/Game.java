@@ -69,8 +69,8 @@ public class Game
 		for (int i = 0; i < randomNum; i++)
 		{
 			curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
-			map.SetCellAt(ogre_spawn_x[i], ogre_spawn_y[i], 'O');
-			map.SetCellAt(club_spawn_x[i], club_spawn_y[i], '*');
+			SetCellState(ogre_spawn_x[i], ogre_spawn_y[i], 'O');
+			SetCellState(club_spawn_x[i], club_spawn_y[i], '*');
 			ogres.add(curr_ogre);
 		}
 		level = 2;
@@ -78,9 +78,9 @@ public class Game
 		hero.SetY(7);
 	}
 	
-	public GameMap GetGameMap()
+	public char[][] GetGameMap()
 	{
-		return map;
+		return map_matrix;
 	}
 	
 	public Hero GetHero()
@@ -133,9 +133,9 @@ public class Game
 	
 	public void MoveGuard()
 	{
-		map.SetCellAt(guard.GetX(), guard.GetY(), (char)0);
+		SetCellState(guard.GetX(), guard.GetY(), (char)0);
 		guard.Move();
-		map.SetCellAt(guard.GetX(), guard.GetY(), guard.GetSymbol());
+		SetCellState(guard.GetX(), guard.GetY(), guard.GetSymbol());
 	}
 	
 	public void MoveOgresAndClubs()
@@ -149,16 +149,16 @@ public class Game
 			
 			
 			//reset to empty the cell in which the ogre was
-			if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == '$')
-				map.SetCellAt(ogre_x_pos, ogre_y_pos, 'k');
+			if (GetCellState(ogre_x_pos, ogre_y_pos) == '$')
+				SetCellState(ogre_x_pos, ogre_y_pos, 'k');
 			else
-				map.SetCellAt(ogre_x_pos, ogre_y_pos, (char)0);
+				SetCellState(ogre_x_pos, ogre_y_pos, (char)0);
 			
 			//reset to empty the cell in which the club was
-			if (map.GetCellAt(club_x_pos, club_y_pos) == '$')
-				map.SetCellAt(club_x_pos, club_y_pos, 'k');
+			if (GetCellState(club_x_pos, club_y_pos) == '$')
+				SetCellState(club_x_pos, club_y_pos, 'k');
 			else
-				map.SetCellAt(club_x_pos, club_y_pos, (char)0);
+				SetCellState(club_x_pos, club_y_pos, (char)0);
 	
 			ogre.RefreshStun();
 			if(ogre.GetSymbol() == 'O')
@@ -172,19 +172,19 @@ public class Game
 			club_y_pos = ogre.GetClubY();
 			
 			//Changes ogre char if he is in the key position
-			if (map.GetCellAt(ogre_x_pos, ogre_y_pos) == 'k')
+			if (GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
 				ogre.SetSymbol('$');
 			else
 				ogre.SetSymbol('O');
 			//Changes club char if he is in the key position
-			if (map.GetCellAt(club_x_pos, club_y_pos) == 'k')
+			if (GetCellState(club_x_pos, club_y_pos) == 'k')
 				ogre.SetClubSymbol('$');
 			else
 				ogre.SetClubSymbol('*');
 	
 			//Puts the new ogre cell with the char representing it
-			map.SetCellAt(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
-			map.SetCellAt(club_x_pos, club_y_pos, ogre.GetClubSymbol());
+			SetCellState(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
+			SetCellState(club_x_pos, club_y_pos, ogre.GetClubSymbol());
 		}
 		
 	}
@@ -248,13 +248,13 @@ public class Game
 	
 	public int MakePlay(int x, int y)
 	{
-		map.SetCellAt(hero.GetX(), hero.GetY(), (char)0);
+		SetCellState(hero.GetX(), hero.GetY(), (char)0);
 		
 		hero.SetX(x);
 		hero.SetY(y);
 		
-		char dst_state = map.GetCellAt(x,y);
-		map.SetCellAt(x, y, hero.GetSymbol());
+		char dst_state = GetCellState(x,y);
+		SetCellState(x, y, hero.GetSymbol());
 		
 		TryStunOgres();
 		
@@ -271,7 +271,7 @@ public class Game
 				break;
 			case 2:
 				hero.SetSymbol('K');
-				map.SetCellAt(x, y, 'K');
+				SetCellState(x, y, 'K');
 				break;
 			}
 			return 0;
@@ -308,8 +308,8 @@ public class Game
 
 	public void OpenDoors()
 	{
-		map.SetCellAt(0, 5, 'S');
-		map.SetCellAt(0, 6, 'S');
+		SetCellState(0, 5, 'S');
+		SetCellState(0, 6, 'S');
 	}
 
 	public boolean WasCaught()

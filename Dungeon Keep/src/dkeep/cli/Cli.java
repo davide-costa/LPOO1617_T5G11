@@ -15,7 +15,7 @@ public class Cli
 		char user_input;
 		int move_hero_value;
 		game = new Game();
-		GameMap curr_map = game.GetGameMap();
+		char curr_map[][] = game.GetGameMap();
 		DrawBoard(curr_map);
 
 		while (true)
@@ -85,11 +85,10 @@ public class Cli
 	}
 
 
-	public static void DrawBoard(GameMap map)
+	public static void DrawBoard(char curr_map[][])
 	{
-		char curr_map[][] = map.GetMap();
-		int map_x_size = map.GetMapXSize();
-		int map_y_size = map.GetMapXSize();
+		int map_x_size = curr_map[0].length;
+		int map_y_size = curr_map.length;
 		for (int i = 0; i < map_y_size; i++)
 		{
 			for (int j = 0; j < map_x_size; j++)
