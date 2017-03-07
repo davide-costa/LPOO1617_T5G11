@@ -2,6 +2,7 @@ package dkeep.logic;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Game
@@ -34,6 +35,27 @@ public class Game
 	public void SetCellState(int x, int y, char symbol)
 	{
 		map_matrix[y][x] = symbol;
+	}
+	
+	public void RefreshMap()
+	{
+		map_matrix = map.GetMapCopy();
+		map_matrix[hero.GetY()][hero.GetX()] = hero.GetSymbol();
+		
+		switch (level)
+		{
+		case 1:
+			map_matrix[guard.GetY()][guard.GetX()] = guard.GetSymbol();
+			break;
+			
+		case 2:
+			for (Ogre ogre : ogres)
+			{
+				map_matrix[ogre.GetY()][ogre.GetX()] = ogre.GetSymbol();
+				map_matrix[ogre.GetClubY()][ogre.GetClubX()] = ogre.GetClubSymbol();
+				
+			}
+		}
 	}
 	
 	public void InitLevel1()
@@ -69,13 +91,14 @@ public class Game
 		for (int i = 0; i < randomNum; i++)
 		{
 			curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
-			SetCellState(ogre_spawn_x[i], ogre_spawn_y[i], 'O');
-			SetCellState(club_spawn_x[i], club_spawn_y[i], '*');
+			//SetCellState(ogre_spawn_x[i], ogre_spawn_y[i], 'O');
+			//SetCellState(club_spawn_x[i], club_spawn_y[i], '*');
 			ogres.add(curr_ogre);
 		}
 		level = 2;
 		hero.SetX(1);
 		hero.SetY(7);
+		RefreshMap();
 	}
 	
 	public char[][] GetGameMap()
@@ -91,7 +114,7 @@ public class Game
 	public void SetGameMap(GameMap map)
 	{
 		this.map = map;
-		map_matrix = map.MakeMapCopy();
+		map_matrix = map.GetMapCopy();
 	}
 	
 	public int MoveHero(int x, int y)

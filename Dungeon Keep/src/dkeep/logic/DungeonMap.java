@@ -64,7 +64,7 @@ public class DungeonMap implements GameMap
 		return map[y][x];
 	}
 	
-	public char[][] MakeMapCopy()
+	public char[][] GetMapCopy()
 	{
 		char map_copy[][] = new char[map_y_size][map_x_size];
 		
