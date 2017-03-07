@@ -9,4 +9,5 @@ public interface GameMap
 	public GameMap NextMap();
 	public void SetCellAt(int x, int y, char symbol);
 	public char GetCellAt(int x, int y);
+	public char[][] MakeMapCopy();
 }

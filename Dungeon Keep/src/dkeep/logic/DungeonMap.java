@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.Arrays;
+
 public class DungeonMap implements GameMap
 {
 	private char[][] map =  {
@@ -60,5 +62,15 @@ public class DungeonMap implements GameMap
 	public char GetCellAt(int x, int y)
 	{
 		return map[y][x];
+	}
+	
+	public char[][] MakeMapCopy()
+	{
+		char map_copy[][] = new char[map_y_size][map_x_size];
+		
+		for (int y = 0; y < map_y_size; y++)
+			map_copy[y] = Arrays.copyOf(map[y], map_x_size);
+		
+		return map_copy;
 	}
 }

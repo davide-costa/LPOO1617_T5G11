@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Game
 {
+	private char map_matrix[][];
 	private GameMap map;
 	private int level;
 	private GameCreature curr_mob;
@@ -23,6 +24,16 @@ public class Game
 		//debugging
 		SetGameMap(map.NextMap());
 		InitLevel2();
+	}
+	
+	public char GetCellState(int x, int y)
+	{
+		return map_matrix[y][x];
+	}
+	
+	public void SetCellState(int x, int y, char symbol)
+	{
+		map_matrix[y][x] = symbol;
 	}
 	
 	public void InitLevel1()
@@ -80,6 +91,7 @@ public class Game
 	public void SetGameMap(GameMap map)
 	{
 		this.map = map;
+		map_matrix = map.MakeMapCopy();
 	}
 	
 	public int MoveHero(int x, int y)
