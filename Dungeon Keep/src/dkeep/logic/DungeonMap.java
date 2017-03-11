@@ -6,7 +6,7 @@ public class DungeonMap implements GameMap
 {
 	private char[][] map =  {
 			{ 'X','X','X','X','X','X','X','X','X','X' },
-			{ 'X',0,0,0,'I',0,'X',0,'G','X' },
+			{ 'X',0,0,0,'I',0,'X',0,0,'X' },
 			{ 'X','X','X',0,'X','X','X',0,0,'X' },
 			{ 'X',0,'I',0,'I',0,'X',0,0,'X' },
 			{ 'X','X','X',0,'X','X','X',0,0,'X' },
@@ -72,5 +72,11 @@ public class DungeonMap implements GameMap
 			map_copy[y] = Arrays.copyOf(map[y], map_x_size);
 		
 		return map_copy;
+	}
+	
+	@Override
+	public void PickUpKey()
+	{
+		map[8][7] = (char)0;
 	}
 }

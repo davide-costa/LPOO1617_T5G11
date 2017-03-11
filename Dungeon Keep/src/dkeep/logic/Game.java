@@ -23,8 +23,8 @@ public class Game
 		InitLevel1();
 		
 		//debugging
-		SetGameMap(map.NextMap());
-		InitLevel2();
+//		SetGameMap(map.NextMap());
+//		InitLevel2();
 	}
 	
 	public char GetCellState(int x, int y)
@@ -73,6 +73,7 @@ public class Game
 		
 		SetGameMap(new DungeonMap());
 		curr_mob = guard;
+		RefreshMap();
 	}
 	
 	public void InitLevel2()
@@ -270,7 +271,7 @@ public class Game
 	
 	public int MakePlay(int x, int y)
 	{
-		SetCellState(hero.GetX(), hero.GetY(), (char)0);
+		//SetCellState(hero.GetX(), hero.GetY(), (char)0);
 		
 		hero.SetX(x);
 		hero.SetY(y);
@@ -278,7 +279,8 @@ public class Game
 		char dst_state = GetCellState(x,y);
 		//SetCellState(x, y, hero.GetSymbol());
 		
-		TryStunOgres();
+		if (level == 2)
+			TryStunOgres();
 		
 		if (WasCaught())
 			return -1;
@@ -286,6 +288,7 @@ public class Game
 			return 0;
 		else if (dst_state == 'k')
 		{
+			map.PickUpKey();
 			switch(level)
 			{
 			case 1:

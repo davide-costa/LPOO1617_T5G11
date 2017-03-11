@@ -10,4 +10,5 @@ public interface GameMap
 	public void SetCellState(int x, int y, char symbol);
 	public char GetCellState(int x, int y);
 	public char[][] GetMapCopy();
+	public void PickUpKey();
 }

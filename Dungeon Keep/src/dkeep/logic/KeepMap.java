@@ -74,4 +74,10 @@ public class KeepMap implements GameMap
 		
 		return map_copy;
 	}
+
+	@Override
+	public void PickUpKey()
+	{
+		map[1][7] = (char)0;
+	}
 }
