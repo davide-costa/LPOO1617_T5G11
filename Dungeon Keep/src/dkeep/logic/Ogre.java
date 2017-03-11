@@ -4,17 +4,21 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Ogre extends GameCreature
 {
-	private char curr_symbol;
+	private static char default_symbol = 'O';
+	private static char stunned_symbol = '8';
+	private static char owns_key_symbol = '$';
 	private int club_x;
 	private int club_y;
 	private char club_symbol = '*';
 	private int stun_count;
+	private boolean is_stunned;
 	
 	public Ogre(int x, int y, int club_x, int club_y)
 	{
-		super(x, y, 'O');
+		super(x, y, default_symbol);
 		this.club_x = club_x;
 		this.club_y = club_y;
+		is_stunned = false;
 	}
 	
 	public int GetClubX()
@@ -49,18 +53,37 @@ public class Ogre extends GameCreature
 	
 	public void Stun()
 	{
-		this.symbol = '8';
+		this.is_stunned = true;
+		this.symbol = stunned_symbol;
 		this.stun_count = 0;
 	}
 	
 	public void RefreshStun()
 	{
-		if(symbol == 'O')
+		if(!is_stunned)
 			return;
 
 		if(stun_count == 2)
-			symbol = 'O';
+		{
+			is_stunned = false;
+			symbol = default_symbol;
+		}
 		
 		this.stun_count++;
 	}
+	
+	public void SetOwnsKey()
+	{
+		symbol = owns_key_symbol;
+	}
+	
+	public void SetNotOwnsKey()
+	{
+		if (is_stunned)
+			symbol = stunned_symbol;
+		else
+			symbol = default_symbol;
+	}
+	
+	
 }

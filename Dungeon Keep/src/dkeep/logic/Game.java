@@ -195,9 +195,9 @@ public class Game
 			//TODO: remove this
 //			//Changes ogre char if he is in the key position
 			if (map.GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
-				ogre.SetSymbol('$');
+				ogre.SetOwnsKey();
 			else
-				ogre.SetSymbol('O');
+				ogre.SetNotOwnsKey();
 //			//Changes club char if he is in the key position
 			if (map.GetCellState(club_x_pos, club_y_pos) == 'k')
 				ogre.SetClubSymbol('$');
