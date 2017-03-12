@@ -1,4 +1,6 @@
-package dkeep.logic;
+package dkeep.test;
+
+import dkeep.logic.Guard;
 
 public class TestGuard extends Guard
 {

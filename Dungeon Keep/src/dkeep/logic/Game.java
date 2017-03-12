@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
+import dkeep.test.TestGuard;
+
 public class Game
 {
 	private char map_matrix[][];
