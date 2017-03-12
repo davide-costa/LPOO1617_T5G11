@@ -10,7 +10,6 @@ public class Game
 	private char map_matrix[][];
 	private GameMap map;
 	private int level;
-	private GameCreature curr_mob;
 	private Hero hero;
 	private Guard guard;
 	List<Ogre> ogres;
@@ -27,13 +26,20 @@ public class Game
 //		InitLevel2();
 	}
 	
-	public Game(GameMap map)
+	public Game(GameMap map, int level)
 	{
-		hero = new Hero(1,1);
-		guard = new TestGuard(3,1,'G');
 		SetGameMap(map);
-		curr_mob = guard;
-		level = 1;
+		hero = new Hero(1,1);
+		this.level = level;
+		switch (level)
+		{
+		case 1:
+			guard = new TestGuard(3,1,'G');
+			break;
+		case 2:
+			ogres.add(new Ogre(3,1,4,1));
+			break;
+		}
 		RefreshMap();
 	}
 	
@@ -88,7 +94,6 @@ public class Game
 			guard = new Suspicious(8,1,'G');
 		
 		SetGameMap(new DungeonMap());
-		curr_mob = guard;
 		RefreshMap();
 	}
 	

@@ -5,15 +5,15 @@ import java.util.Arrays;
 import dkeep.logic.GameMap;
 import dkeep.logic.KeepMap;
 
-public class DungeonMapTests implements GameMap
+public class KeepMapTests implements GameMap
 {
 	private int map_x_size = 5;
 	private int map_y_size = 5;
 	char[][] map = {
 			{ 'X', 'X', 'X', 'X', 'X'},
-			{ 'X', 0,  0, 0, 'X'},
-			{ 'I', 0, 0, 0, 'X'},
-			{ 'I', 'k', 0, 0, 'X'},
+			{ 'I', 0,  0, 0, 'X'},
+			{ 'X', 0, 0, 0, 'X'},
+			{ 'X', 'k', 0, 0, 'X'},
 			{ 'X', 'X', 'X', 'X', 'X'}
 			};
 
@@ -81,8 +81,7 @@ public class DungeonMapTests implements GameMap
 	@Override
 	public void OpenDoors()
 	{
-		map[2][0] = 'S';
-		map[3][0] = 'S';
+		return;
 	}
 
 }
