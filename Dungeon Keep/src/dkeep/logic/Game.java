@@ -23,8 +23,8 @@ public class Game
 		InitLevel1();
 		
 		//debugging
-//		SetGameMap(map.NextMap());
-//		InitLevel2();
+		SetGameMap(map.NextMap());
+		InitLevel2();
 	}
 	
 	public char GetCellState(int x, int y)
@@ -112,16 +112,25 @@ public class Game
 	public void SetGameMap(GameMap map)
 	{
 		this.map = map;
-		map_matrix = map.GetMapCopy();
+//		map_matrix = map.GetMapCopy();
 	}
 	
 	public int MoveHero(int x, int y)
 	{
+		int make_play_value;
 		if (x == -1 && y == 1 && level == 2)
 		{
 			SetGameMap(map.NextMap());
 			return 0;
 		}
+		
+		if (x == 0 && y == 1 && hero.GetSymbol() == 'K')
+		{
+			make_play_value = MakePlay(x, y);
+			RefreshMap();
+			return make_play_value;
+		}
+			
 		
 		if(!map.MoveTo(x, y))
 			return 0;
@@ -136,7 +145,7 @@ public class Game
 			break;
 		}
 
-		int make_play_value = MakePlay(x,y);
+		make_play_value = MakePlay(x,y);
 		if (make_play_value == 1)
 		{
 			SetGameMap(map.NextMap());

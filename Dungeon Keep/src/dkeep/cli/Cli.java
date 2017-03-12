@@ -35,6 +35,7 @@ public class Cli
 			}
 			else if (move_hero_value == -1)
 			{
+				curr_map = game.GetGameMap();
 				DrawBoard(curr_map);
 				System.out.println();
 				System.out.println("END OF GAME");
