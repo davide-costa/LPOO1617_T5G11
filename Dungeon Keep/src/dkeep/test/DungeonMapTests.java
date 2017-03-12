@@ -5,13 +5,13 @@ import java.util.Arrays;
 import dkeep.logic.GameMap;
 import dkeep.logic.KeepMap;
 
-public class GameMapTests implements GameMap
+public class DungeonMapTests implements GameMap
 {
 	private int map_x_size = 5;
 	private int map_y_size = 5;
 	char[][] map;
 
-	public GameMapTests(char[][] map)
+	public DungeonMapTests(char[][] map)
 	{
 		this.map = map;
 	}

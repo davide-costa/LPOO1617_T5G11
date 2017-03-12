@@ -3,7 +3,6 @@ package dkeep.test;
 import static org.junit.Assert.*; 
 import org.junit.Test;
 
-import dkeep.logic.DungeonMap;
 import dkeep.logic.Game;
 import dkeep.logic.GameMap;
 
@@ -19,7 +18,7 @@ public class TestDungeonGameLogic
 
 	@Test
 	public void testMoveHeroIntoToFreeCell() {
-		GameMap gameMap = new GameMapTests(map);
+		GameMap gameMap = new DungeonMapTests(map);
 		Game game = new Game(gameMap);
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(1, game.GetHero().GetY());
@@ -30,7 +29,7 @@ public class TestDungeonGameLogic
 	
 	@Test
 	public void testMoveHeroIntoAWall() {
-		GameMap gameMap = new GameMapTests(map);
+		GameMap gameMap = new DungeonMapTests(map);
 		Game game = new Game(gameMap);
 		game.MoveHero(0,1); // move hero right.
 		assertEquals(1, game.GetHero().GetX());
@@ -40,14 +39,14 @@ public class TestDungeonGameLogic
 	@Test
     public void testHeroIsCapturedByGuard()
 	{ 
-        GameMap gameMap = new GameMapTests(map); 
+        GameMap gameMap = new DungeonMapTests(map); 
         Game game = new Game(gameMap); 
         assertEquals(-1, game.MoveHero(2,1));
     }
 	
 	@Test
 	public void testMoveHeroIntoAClosedDoor() {
-		GameMap gameMap = new GameMapTests(map);
+		GameMap gameMap = new DungeonMapTests(map);
 		Game game = new Game(gameMap);
 		game.MoveHero(1,2); // move hero down.
 		game.MoveHero(0,2); // move hero left.
@@ -57,7 +56,7 @@ public class TestDungeonGameLogic
 	
 	@Test
 	public void testMoveHeroAndOpenDoors() {
-		GameMap gameMap = new GameMapTests(map);
+		GameMap gameMap = new DungeonMapTests(map);
 		Game game = new Game(gameMap);
 		game.MoveHero(1,2); // move hero down.
 		game.MoveHero(1,3); // move hero down.
@@ -67,7 +66,7 @@ public class TestDungeonGameLogic
 
 	@Test
 	public void testMoveHeroAndGoToLevelKeep() {
-		GameMap gameMap = new GameMapTests(map);
+		GameMap gameMap = new DungeonMapTests(map);
 		Game game = new Game(gameMap);
 		game.MoveHero(1,2); // move hero down.
 		game.MoveHero(1,3); // move hero down.
