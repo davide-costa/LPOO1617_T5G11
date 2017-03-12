@@ -2,10 +2,10 @@ package dkeep.logic;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 import dkeep.test.TestGuard;
+import dkeep.test.TestOgre;
 
 public class Game
 {
@@ -40,7 +40,7 @@ public class Game
 			break;
 		case 2:
 			ogres = new ArrayList<Ogre>();
-			ogres.add(new Ogre(3,1,3,2));
+			ogres.add(new TestOgre(3,1,3,2));
 			break;
 		}
 		RefreshMap();
