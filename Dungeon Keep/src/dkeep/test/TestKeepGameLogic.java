@@ -38,7 +38,7 @@ public class TestKeepGameLogic
 	}
 	
 	@Test
-	public void testMoveHeroIntoKeyCell()
+	public void testMoveHeroIntoAWall()
 	{
 		GameMap gameMap = new KeepMapTests();
 		Game game = new Game(gameMap, 2);
