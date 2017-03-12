@@ -47,6 +47,11 @@ public class Game
 		map_matrix[y][x] = symbol;
 	}
 	
+	public int GetLevel()
+	{
+		return level;
+	}
+	
 	public void RefreshMap()
 	{
 		map_matrix = map.GetMapCopy();
