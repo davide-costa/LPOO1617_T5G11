@@ -10,6 +10,22 @@ import dkeep.logic.GameMap;
 public class TestKeepGameLogic
 {
 	@Test
+    public void testHeroIsCapturedByOgre()
+	{ 
+		GameMap gameMap = new KeepMapTests();
+        Game game = new Game(gameMap, 2);// move hero right. 
+        assertEquals(-1, game.MoveHero(2,1));
+    }
+	
+	@Test
+    public void testHeroCantOpen()
+	{ 
+		GameMap gameMap = new KeepMapTests();
+        Game game = new Game(gameMap, 2);// move hero right. 
+        assertEquals(-1, game.MoveHero(2,1));
+    }
+	
+	@Test
 	public void testMoveHeroIntoToFreeCell()
 	{
 		GameMap gameMap = new KeepMapTests();
@@ -30,14 +46,6 @@ public class TestKeepGameLogic
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(1, game.GetHero().GetY());
 	}
-	
-	@Test
-    public void testHeroIsCapturedByGuard()
-	{ 
-		GameMap gameMap = new KeepMapTests();
-        Game game = new Game(gameMap, 2); 
-        assertEquals(-1, game.MoveHero(2,1));
-    }
 	
 	@Test
 	public void testMoveHeroIntoAClosedDoor()
