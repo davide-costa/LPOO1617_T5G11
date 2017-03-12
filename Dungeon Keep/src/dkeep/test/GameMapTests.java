@@ -3,6 +3,7 @@ package dkeep.test;
 import java.util.Arrays;
 
 import dkeep.logic.GameMap;
+import dkeep.logic.KeepMap;
 
 public class GameMapTests implements GameMap
 {
@@ -45,10 +46,9 @@ public class GameMapTests implements GameMap
 		return map_y_size;
 	}
 	
-	
 	public GameMap NextMap()
 	{
-		return null;
+		return new KeepMap();
 	}
 	
 	public void SetCellState(int x, int y, char symbol)
@@ -60,7 +60,6 @@ public class GameMapTests implements GameMap
 	{
 		return map[y][x];
 	}
-	
 	
 	public char[][] GetMapCopy()
 	{
