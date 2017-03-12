@@ -75,7 +75,7 @@ public class GameMapTests implements GameMap
 	@Override
 	public void PickUpKey()
 	{
-		map[1][7] = (char)0;
+		map[3][1] = (char)0;
 	}
 
 }
