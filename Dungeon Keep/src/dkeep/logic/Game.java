@@ -33,6 +33,7 @@ public class Game
 		guard = new TestGuard(3,1,'G');
 		SetGameMap(map);
 		curr_mob = guard;
+		level = 1;
 		RefreshMap();
 	}
 	

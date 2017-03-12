@@ -50,7 +50,7 @@ public class TestDungeonGameLogic
 		GameMap gameMap = new GameMapTests(map);
 		Game game = new Game(gameMap);
 		game.MoveHero(1,2); // move hero down.
-		game.MoveHero(0,2); // move hero right.
+		game.MoveHero(0,2); // move hero left.
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(2, game.GetHero().GetY());
 	}
