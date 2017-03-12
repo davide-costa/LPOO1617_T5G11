@@ -86,4 +86,13 @@ public class DungeonMap implements GameMap
 		map[5][0] = 'S';
 		map[6][0] = 'S';
 	}
+
+	@Override
+	public boolean IsDoorOpen() 
+	{
+		if(map[5][0] == 'S' || map[6][0] == 'S')
+			return true;
+		else
+			return false;
+	}
 }

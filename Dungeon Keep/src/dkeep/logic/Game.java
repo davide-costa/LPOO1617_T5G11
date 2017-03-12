@@ -128,6 +128,11 @@ public class Game
 		return map_matrix;
 	}
 	
+	public GameMap GetMap()
+	{
+		return map;
+	}
+	
 	public Hero GetHero()
 	{
 		return hero;

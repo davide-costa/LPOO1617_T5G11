@@ -9,6 +9,7 @@ public class KeepMapTests implements GameMap
 {
 	private int map_x_size = 5;
 	private int map_y_size = 5;
+	private boolean door_open = false;
 	char[][] map = {
 			{ 'X', 'X', 'X', 'X', 'X'},
 			{ 'I', 0,  0, 0, 'X'},
@@ -84,4 +85,9 @@ public class KeepMapTests implements GameMap
 		return;
 	}
 
+	@Override
+	public boolean IsDoorOpen() 
+	{
+		return door_open;
+	}
 }

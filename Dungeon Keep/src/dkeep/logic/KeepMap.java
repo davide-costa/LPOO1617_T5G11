@@ -18,6 +18,7 @@ public class KeepMap implements GameMap
 	
 	private int map_x_size = 9;
 	private int map_y_size = 9;
+	private boolean door_open = false;
 	
 	public boolean MoveTo(int x, int y)
 	{
@@ -84,6 +85,13 @@ public class KeepMap implements GameMap
 	@Override
 	public void OpenDoors()
 	{
+		door_open = true;
 		return;
+	}
+
+	@Override
+	public boolean IsDoorOpen() 
+	{
+		return door_open;
 	}
 }

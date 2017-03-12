@@ -12,4 +12,5 @@ public interface GameMap
 	public char[][] GetMapCopy();
 	public void PickUpKey();
 	public void OpenDoors();
+	public boolean IsDoorOpen();
 }

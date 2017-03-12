@@ -24,8 +24,7 @@ public class TestKeepGameLogic
         Game game = new Game(gameMap, 2);
         assertEquals(0, game.MoveHero(1,2)); // move hero down.
         assertEquals(0, game.MoveHero(1,3)); // move hero down to the key cell
-        assertEquals('K', game.GetHero().GetSymbol());
-        
+        assertEquals('K', game.GetHero().GetSymbol());   
     }
 	
 	@Test
@@ -42,6 +41,9 @@ public class TestKeepGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, 2);
+        game.MoveHero(1,2);//moves down
+        game.MoveHero(1,3);//moves down
+        assertTrue(game.GetMap().IsDoorOpen());
     }
 	
 	@Test
