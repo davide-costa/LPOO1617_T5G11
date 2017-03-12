@@ -30,7 +30,7 @@ public class Game
 	public Game(GameMap map)
 	{
 		hero = new Hero(1,1);
-		guard = new Rookie(3,1,'G');
+		guard = new TestGuard(3,1,'G');
 		SetGameMap(map);
 		curr_mob = guard;
 		RefreshMap();
