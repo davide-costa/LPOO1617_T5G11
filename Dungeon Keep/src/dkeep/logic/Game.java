@@ -39,7 +39,8 @@ public class Game
 			guard = new TestGuard(3,1,'G');
 			break;
 		case 2:
-			ogres.add(new Ogre(3,1,4,1));
+			ogres = new ArrayList<Ogre>();
+			ogres.add(new Ogre(3,1,3,2));
 			break;
 		}
 		RefreshMap();

@@ -11,7 +11,7 @@ public class TestKeepGameLogic
 {
 	@Test
     public void testHeroIsCapturedByOgre()
-	{ 
+	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, 2);// move hero right. 
         assertEquals(-1, game.MoveHero(2,1));
@@ -19,7 +19,7 @@ public class TestKeepGameLogic
 	
 	@Test
     public void testHeroCantOpen()
-	{ 
+	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, 2);// move hero right. 
         assertEquals(-1, game.MoveHero(2,1));
