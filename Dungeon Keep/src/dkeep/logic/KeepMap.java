@@ -80,4 +80,10 @@ public class KeepMap implements GameMap
 	{
 		map[1][7] = (char)0;
 	}
+
+	@Override
+	public void OpenDoors()
+	{
+		return;
+	}
 }

@@ -11,4 +11,5 @@ public interface GameMap
 	public char GetCellState(int x, int y);
 	public char[][] GetMapCopy();
 	public void PickUpKey();
+	public void OpenDoors();
 }

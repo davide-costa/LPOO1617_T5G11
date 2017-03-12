@@ -296,7 +296,7 @@ public class Game
 			switch(level)
 			{
 			case 1:
-				OpenDoors();
+				map.OpenDoors();
 				break;
 			case 2:
 				hero.SetSymbol('K');
@@ -333,12 +333,6 @@ public class Game
 				ogre.Stun();
 		}
 		
-	}
-
-	public void OpenDoors()
-	{
-		map.SetCellState(0, 5, 'S');
-		map.SetCellState(0, 6, 'S');
 	}
 
 	public boolean WasCaught()

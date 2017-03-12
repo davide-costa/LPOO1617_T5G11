@@ -79,4 +79,11 @@ public class DungeonMap implements GameMap
 	{
 		map[8][7] = (char)0;
 	}
+
+	@Override
+	public void OpenDoors()
+	{
+		map[5][0] = 'S';
+		map[6][0] = 'S';
+	}
 }

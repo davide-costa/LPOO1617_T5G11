@@ -78,4 +78,11 @@ public class GameMapTests implements GameMap
 		map[3][1] = (char)0;
 	}
 
+	@Override
+	public void OpenDoors()
+	{
+		map[2][0] = 'S';
+		map[3][0] = 'S';
+	}
+
 }
