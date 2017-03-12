@@ -16,4 +16,9 @@ public class TestOgre extends Ogre
 	{
 		return;
 	}
+	
+	public void Stun()
+	{
+		return;
+	}
 }
