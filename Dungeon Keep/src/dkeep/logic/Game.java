@@ -241,7 +241,6 @@ public class Game
 				break;
 			case 2:
 				hero.SetSymbol('K');
-				map.SetCellState(x, y, (char)0);
 				break;
 			}
 			return 0;
