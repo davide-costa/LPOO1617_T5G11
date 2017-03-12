@@ -23,8 +23,8 @@ public class Game
 		InitLevel1();
 		
 		//debugging
-		SetGameMap(map.NextMap());
-		InitLevel2();
+//		SetGameMap(map.NextMap());
+//		InitLevel2();
 	}
 	
 	public char GetCellState(int x, int y)
@@ -112,7 +112,6 @@ public class Game
 	public void SetGameMap(GameMap map)
 	{
 		this.map = map;
-//		map_matrix = map.GetMapCopy();
 	}
 	
 	public int MoveHero(int x, int y)
@@ -178,19 +177,6 @@ public class Game
 			int club_x_pos = ogre.GetClubX();
 			int club_y_pos = ogre.GetClubY();
 			
-			//TODO: remove this
-//			//reset to empty the cell in which the ogre was
-//			if (GetCellState(ogre_x_pos, ogre_y_pos) == '$')
-//				SetCellState(ogre_x_pos, ogre_y_pos, 'k');
-//			else
-//				SetCellState(ogre_x_pos, ogre_y_pos, (char)0);
-//			
-//			//reset to empty the cell in which the club was
-//			if (GetCellState(club_x_pos, club_y_pos) == '$')
-//				SetCellState(club_x_pos, club_y_pos, 'k');
-//			else
-//				SetCellState(club_x_pos, club_y_pos, (char)0);
-	
 			ogre.RefreshStun();
 			if(ogre.GetSymbol() != '8')
 				while (!TryOgreNextPos(ogre));
@@ -202,21 +188,17 @@ public class Game
 			club_x_pos = ogre.GetClubX();
 			club_y_pos = ogre.GetClubY();
 			
-			//TODO: remove this
-//			//Changes ogre char if he is in the key position
+			
+			//Changes ogre char if he is in the key position
 			if (map.GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
 				ogre.SetOwnsKey();
 			else
 				ogre.SetNotOwnsKey();
-//			//Changes club char if he is in the key position
+			//Changes club char if he is in the key position
 			if (map.GetCellState(club_x_pos, club_y_pos) == 'k')
 				ogre.SetClubSymbol('$');
 			else
 				ogre.SetClubSymbol('*');
-	
-			//Puts the new ogre cell with the char representing it
-//			SetCellState(ogre_x_pos, ogre_y_pos, ogre.GetSymbol());
-//			SetCellState(club_x_pos, club_y_pos, ogre.GetClubSymbol());
 		}
 		
 	}
@@ -280,13 +262,10 @@ public class Game
 	
 	public int MakePlay(int x, int y)
 	{
-		//SetCellState(hero.GetX(), hero.GetY(), (char)0);
-		
 		hero.SetX(x);
 		hero.SetY(y);
 		
 		char dst_state = GetCellState(x,y);
-		//SetCellState(x, y, hero.GetSymbol());
 		
 		if (level == 2)
 			TryStunOgres();
