@@ -22,8 +22,8 @@ public class Game
 		InitLevel1();
 		
 		//debugging
-//		SetGameMap(map.NextMap());
-//		InitLevel2();
+		SetGameMap(map.NextMap());
+		InitLevel2();
 	}
 	
 	public Game(GameMap map, int level)
@@ -198,17 +198,7 @@ public class Game
 			int club_x_pos = ogre.GetClubX();
 			int club_y_pos = ogre.GetClubY();
 			
-			ogre.RefreshStun();
-			if(ogre.GetSymbol() != '8')
-				while (!TryOgreNextPos(ogre));
-			while (!TryClubNextPos(ogre));
-			
-	
-			ogre_x_pos = ogre.GetX();
-			ogre_y_pos = ogre.GetY();
-			club_x_pos = ogre.GetClubX();
-			club_y_pos = ogre.GetClubY();
-			
+			ogre.Move(map);
 			
 			//Changes ogre char if he is in the key position
 			if (map.GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
@@ -222,63 +212,6 @@ public class Game
 				ogre.SetClubSymbol('*');
 		}
 		
-	}
-	
-	public boolean TryOgreNextPos(Ogre ogre)
-	{
-		//nextInt is normally exclusive of the top value,
-		//so add 1 to make it inclusive
-		int min = 1;
-		int max = 4;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = ogre.GetX();
-		int temp_y = ogre.GetY();
-
-		if (randomNum == 1)
-			temp_x++; //ogre moves to right
-		else if (randomNum == 2)
-			temp_x--; //ogre moves to left
-		else if (randomNum == 3)
-			temp_y++; //ogre moves up
-		else if (randomNum == 4)
-			temp_y--; //ogre moves to down
-
-		if (!map.MoveTo(temp_x, temp_y))
-			return false;
-
-		ogre.SetX(temp_x);
-		ogre.SetY(temp_y);
-		
-		return true;
-	}
-	
-	//TODO colocar no ogre
-	public boolean TryClubNextPos(Ogre ogre)
-	{
-		//nextInt is normally exclusive of the top value,
-		//so add 1 to make it inclusive
-		int min = 1;
-		int max = 4;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		temp_x = ogre.GetX();
-		temp_y = ogre.GetY();
-		
-		if (randomNum == 1)
-			temp_x++; //club moves to right
-		else if (randomNum == 2)
-			temp_x--; //club moves to left
-		else if (randomNum == 3)
-			temp_y++; //club moves up
-		else if (randomNum == 4)
-			temp_y--; //club moves to down
-
-		if (!map.MoveTo(temp_x, temp_y))
-			return false;
-		
-		ogre.SetClubX(temp_x);
-		ogre.SetClubY(temp_y);
-		
-		return true;
 	}
 	
 	public int MakePlay(int x, int y)

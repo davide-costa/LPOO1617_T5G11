@@ -51,6 +51,72 @@ public class Ogre extends GameCreature
 		this.club_symbol = club_symbol;
 	}
 	
+	public void Move(GameMap map)
+	{		
+		RefreshStun();
+		if(GetSymbol() != '8')
+			while (!TryOgreNextPos(map));
+		while (!TryClubNextPos(map));
+	}
+	
+
+	public boolean TryOgreNextPos(GameMap map)
+	{
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		int temp_x = x;
+		int temp_y = y;
+
+		if (randomNum == 1)
+			temp_x++; //ogre moves to right
+		else if (randomNum == 2)
+			temp_x--; //ogre moves to left
+		else if (randomNum == 3)
+			temp_y++; //ogre moves up
+		else if (randomNum == 4)
+			temp_y--; //ogre moves to down
+
+		if (!map.MoveTo(temp_x, temp_y))
+			return false;
+
+		SetX(temp_x);
+		SetY(temp_y);
+		
+		return true;
+	}
+	
+	//TODO colocar no ogre
+	public boolean TryClubNextPos(GameMap map)
+	{
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		int temp_x = x;
+		int temp_y = y;
+		
+		if (randomNum == 1)
+			temp_x++; //club moves to right
+		else if (randomNum == 2)
+			temp_x--; //club moves to left
+		else if (randomNum == 3)
+			temp_y++; //club moves up
+		else if (randomNum == 4)
+			temp_y--; //club moves to down
+
+		if (!map.MoveTo(temp_x, temp_y))
+			return false;
+		
+		SetClubX(temp_x);
+		SetClubY(temp_y);
+		
+		return true;
+	}
+		
 	public void Stun()
 	{
 		this.is_stunned = true;
