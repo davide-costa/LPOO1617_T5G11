@@ -21,6 +21,9 @@ public class KeepMapTests implements GameMap
 	@Override
 	public boolean MoveTo(int x, int y)
 	{
+		if (x == 0 && y == 1 && door_open)
+			return true;
+		
 		if( x > map_x_size || x < 0 )
 			return false;
 		

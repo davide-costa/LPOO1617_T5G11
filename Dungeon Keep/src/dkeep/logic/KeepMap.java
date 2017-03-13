@@ -22,6 +22,9 @@ public class KeepMap implements GameMap
 	
 	public boolean MoveTo(int x, int y)
 	{
+		if (x == 0 && y == 1 && door_open)
+			return true;
+		
 		if (x > 8 || x < 0) //Out of range of the map in x
 			return false;
 		

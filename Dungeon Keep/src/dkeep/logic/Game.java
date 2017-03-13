@@ -152,14 +152,6 @@ public class Game
 			return 0;
 		}
 		
-		if (x == 0 && y == 1 && hero.GetSymbol() == 'K')
-		{
-			make_play_value = MakePlay(x, y);
-			RefreshMap();
-			return make_play_value;
-		}
-			
-		
 		if(!map.MoveTo(x, y))
 			return 0;
 		
