@@ -53,7 +53,7 @@ public class KeepMapTests implements GameMap
 	
 	public GameMap NextMap()
 	{
-		return new KeepMap();
+		return null;
 	}
 	
 	public void SetCellState(int x, int y, char symbol)

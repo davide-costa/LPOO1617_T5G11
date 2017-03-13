@@ -55,7 +55,8 @@ public class TestKeepGameLogic
         game.MoveHero(1,3);//moves down
         game.MoveHero(1,2);//moves up
         game.MoveHero(1,1);//moves up
-        game.MoveHero(0,1);//moves up
+        assertEquals(0, game.MoveHero(0,1));//moves up
+        assertEquals(0, game.GetHero().GetX());//hero must be on top of the door cell
         game.MoveHero(-1,1);//moves up
         assertTrue(game.IsEndOfGame());
     }
