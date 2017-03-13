@@ -82,6 +82,7 @@ public class KeepMapTests implements GameMap
 	@Override
 	public void OpenDoors()
 	{
+		door_open = true;
 		return;
 	}
 

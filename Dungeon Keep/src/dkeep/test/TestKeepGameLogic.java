@@ -41,8 +41,8 @@ public class TestKeepGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, 2);
-        game.MoveHero(1,2);//moves down
-        game.MoveHero(1,3);//moves down
+        game.MoveHero(1,2);//move hero down
+        game.MoveHero(1,3);//move hero down
         assertTrue(game.GetMap().IsDoorOpen());
     }
 	

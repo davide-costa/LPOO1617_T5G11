@@ -239,10 +239,11 @@ public class Game
 		else if (dst_state == 'k')
 		{
 			map.PickUpKey();
+			map.OpenDoors();
+			//TODO maybe remove this switch
 			switch(level)
 			{
 			case 1:
-				map.OpenDoors();
 				break;
 			case 2:
 				hero.SetSymbol('K');
