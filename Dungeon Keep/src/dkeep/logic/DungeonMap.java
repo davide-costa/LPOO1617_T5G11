@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class DungeonMap implements GameMap
 {
-	private char[][] map =  {
+	protected char[][] map =  {
 			{ 'X','X','X','X','X','X','X','X','X','X' },
 			{ 'X',0,0,0,'I',0,'X',0,0,'X' },
 			{ 'X','X','X',0,'X','X','X',0,0,'X' },
@@ -17,15 +17,15 @@ public class DungeonMap implements GameMap
 			{ 'X','X','X','X','X','X','X','X','X','X'}
 			};
 	
-	private int map_x_size = 10;
-	private int map_y_size = 10;
+	protected int map_x_size = 10;
+	protected int map_y_size = 10;
 	
 	public boolean MoveTo(int x, int y)
 	{
-		if( x > 9 || x < 0 )
+		if(x > map_x_size || x < 0)
 			return false;
 		
-		if(y > 9 || y < 0)
+		if(y > map_y_size || y < 0)
 			return false;
 			
 		if(map[y][x] == 'X' || map[y][x] == 'I')
