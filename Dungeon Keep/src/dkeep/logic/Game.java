@@ -28,21 +28,22 @@ public class Game
 		InitLevel2();
 	}
 	
-	public Game(GameMap map, int level)
+	public Game(GameMap map)
 	{
 		SetGameMap(map);
 		hero = new Hero(1,1);
-		this.level = level;
-		switch (level)
-		{
-		case 1:
-			guard = new TestGuard(3,1,'G');
-			break;
-		case 2:
-			ogres = new ArrayList<Ogre>();
-			ogres.add(new TestOgre(3,1,3,2));
-			break;
-		}
+		this.level = 1;
+		guard = new TestGuard(3,1,'G');
+		RefreshMap();
+	}
+	
+	public Game(GameMap map, Ogre ogre)
+	{
+		SetGameMap(map);
+		hero = new Hero(1,1);
+		this.level = 2;
+		ogres = new ArrayList<Ogre>();
+		ogres.add(ogre);
 		RefreshMap();
 	}
 	
@@ -61,6 +62,12 @@ public class Game
 	{
 		return level;
 	}
+	
+	public List<Ogre> GetOgres()
+	{
+		return ogres;
+	}
+	
 	
 	public void RefreshMap()
 	{
