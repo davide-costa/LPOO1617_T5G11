@@ -3,15 +3,7 @@ package dkeep.test;
 import dkeep.logic.DungeonMap;
 
 public class DungeonMapTests extends DungeonMap
-{
-	char[][] map = {
-			{ 'X', 'X', 'X', 'X', 'X'},
-			{ 'X', 0,  0, 0, 'X'},
-			{ 'I', 0, 0, 0, 'X'},
-			{ 'I', 'k', 0, 0, 'X'},
-			{ 'X', 'X', 'X', 'X', 'X'}
-			};
-	
+{	
 	public DungeonMapTests()
 	{
 		map_x_size = 5;
