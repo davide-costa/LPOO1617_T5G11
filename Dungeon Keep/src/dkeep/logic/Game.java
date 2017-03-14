@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import dkeep.gui.Drunken;
+import dkeep.gui.Rookie;
+import dkeep.gui.Suspicious;
 import dkeep.test.TestGuard;
 import dkeep.test.TestOgre;
 
@@ -96,6 +99,12 @@ public class Game
 	{
 		level = 1;
 		
+		if(personality_name == "Rookie")
+			guard = new Rookie();
+		else if(personality_name == "Drunken")
+			guard = new Drunken();
+		else if(personality_name == "Suspicious")
+			guard = new Suspicious();
 		//Generate the type of guard for this game, if the user didn't specify the one he wants
 		if (guard == null)
 		{
