@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import dkeep.gui.Drunken;
-import dkeep.gui.Rookie;
-import dkeep.gui.Suspicious;
+
 import dkeep.test.TestGuard;
 import dkeep.test.TestOgre;
 
@@ -22,12 +20,11 @@ public class Game
 	private int temp_x;
 	private int temp_y;
 	
-	public Game(Guard guard, int num_of_ogres)
+	public Game(String guard_name, int num_of_ogres)
 	{
 		hero = new Hero(1,1);
 		this.num_of_ogres = num_of_ogres;
-		this.guard = guard;
-		InitLevel1();
+		InitLevel1(guard_name);
 		
 		//debugging
 //		SetGameMap(map.NextMap());
@@ -95,29 +92,37 @@ public class Game
 		}
 	}
 	
-	public void InitLevel1()
+	public void InitLevel1(String guard_name)
 	{
 		level = 1;
 		
-		if(personality_name == "Rookie")
-			guard = new Rookie();
-		else if(personality_name == "Drunken")
-			guard = new Drunken();
-		else if(personality_name == "Suspicious")
-			guard = new Suspicious();
+		
 		//Generate the type of guard for this game, if the user didn't specify the one he wants
-		if (guard == null)
+		int guard_num;
+		if (guard_name == null || guard_name == "")
 		{
 			int min = 1;
 			int max = 3;
-			int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-			if(randomNum == 1)
-				guard = new Rookie(8,1,'G');
-			else if(randomNum == 2)
-				guard = new Drunken(8,1,'G');
-			else
-				guard = new Suspicious(8,1,'G');
+			guard_num = ThreadLocalRandom.current().nextInt(min, max + 1);
 		}
+		else
+		{
+			if(guard_name == "Rookie")
+				guard_num = 1;
+			else if(guard_name == "Drunken")
+				guard_num = 2;
+			else if(guard_name == "Suspicious")
+				guard_num = 3;
+			else
+				guard_num = 1;
+		}
+		
+		if(guard_num == 1)
+			guard = new Rookie(8,1,'G');
+		else if(guard_num == 2)
+			guard = new Drunken(8,1,'G');
+		else
+			guard = new Suspicious(8,1,'G');
 		
 		SetGameMap(new DungeonMap());
 		RefreshMap();
