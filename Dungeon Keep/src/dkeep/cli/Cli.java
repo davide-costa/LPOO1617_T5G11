@@ -14,7 +14,7 @@ public class Cli
 	{
 		char user_input;
 		int move_hero_value;
-		game = new Game();
+		game = new Game(null, 0);
 		char curr_map[][] = game.GetGameMap();
 		DrawBoard(curr_map);
 

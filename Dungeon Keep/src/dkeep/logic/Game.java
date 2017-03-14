@@ -23,7 +23,8 @@ public class Game
 	{
 		hero = new Hero(1,1);
 		this.num_of_ogres = num_of_ogres;
-		InitLevel1(guard);
+		this.guard = guard;
+		InitLevel1();
 		
 		//debugging
 		SetGameMap(map.NextMap());
@@ -91,7 +92,7 @@ public class Game
 		}
 	}
 	
-	public void InitLevel1(Guard guard)
+	public void InitLevel1()
 	{
 		level = 1;
 		
@@ -120,11 +121,12 @@ public class Game
 		int club_spawn_x[] = {2, 3, 4};
 		int club_spawn_y[] = {2, 2, 2};
 		
-		if (num_of_ogres != 0)
+		ogres = new ArrayList<Ogre>();
+		
+		if (num_of_ogres == 0)
 		{
 			int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
-		
-			ogres = new ArrayList<Ogre>();
+			
 			Ogre curr_ogre;
 			for (int i = 0; i < randomNum; i++)
 			{
