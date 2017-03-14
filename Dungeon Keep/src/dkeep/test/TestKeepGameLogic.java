@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import dkeep.logic.Game;
 import dkeep.logic.GameMap;
+import dkeep.logic.KeepMap;
 import dkeep.logic.Ogre;
 
 public class TestKeepGameLogic
@@ -65,8 +66,8 @@ public class TestKeepGameLogic
 	@Test (timeout = 2000)
 	public void TestOgreAndClubRandomness()
 	{
-		int init_x = 3;
-		int init_y = 2;
+		int init_x = 4;
+		int init_y = 5;
 		
 		EnsureOgreGoesTo(init_x - 1, init_y);
 		EnsureOgreGoesTo(init_x + 1, init_y);
@@ -90,18 +91,16 @@ public class TestKeepGameLogic
 	
 	public void EnsureOgreGoesTo(int x, int y)
 	{
-		int init_x = 3;
-		int init_y = 2;
+		int init_x = 4;
+		int init_y = 5;
 		
 		int curr_x = x - 1;
 		int curr_y = y - 1;
 		
-		int counter = 0;
-		while ((curr_x != x || curr_y != y) && counter < 100)
+		while (curr_x != x || curr_y != y)
 		{
-			counter++;
-			GameMap gameMap = new KeepMapTests();
-			Game game = new Game(gameMap, new Ogre(init_x,init_y,3,2));
+			GameMap gameMap = new KeepMap();
+			Game game = new Game(gameMap, new Ogre(init_x,init_y,5,5));
 	        game.MoveHero(1,2);//moves down
 	        Ogre ogre = game.GetOgres().get(0);
 	        if (!gameMap.MoveTo(ogre.GetX(), ogre.GetY()))
