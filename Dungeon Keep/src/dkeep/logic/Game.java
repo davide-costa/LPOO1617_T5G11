@@ -15,13 +15,15 @@ public class Game
 	private Hero hero;
 	private Guard guard;
 	List<Ogre> ogres;
+	int num_of_ogres;
 	private int temp_x;
 	private int temp_y;
 	
-	public Game()
+	public Game(Guard guard, int num_of_ogres)
 	{
 		hero = new Hero(1,1);
-		InitLevel1();
+		this.num_of_ogres = num_of_ogres;
+		InitLevel1(guard);
 		
 		//debugging
 		SetGameMap(map.NextMap());
@@ -89,19 +91,23 @@ public class Game
 		}
 	}
 	
-	public void InitLevel1()
+	public void InitLevel1(Guard guard)
 	{
 		level = 1;
-		//Generate the type of guard for this game
-		int min = 1;
-		int max = 3;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		if(randomNum == 1)
-			guard = new Rookie(8,1,'G');
-		else if(randomNum == 2)
-			guard = new Drunken(8,1,'G');
-		else
-			guard = new Suspicious(8,1,'G');
+		
+		//Generate the type of guard for this game, if the user didn't specify the one he wants
+		if (guard == null)
+		{
+			int min = 1;
+			int max = 3;
+			int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+			if(randomNum == 1)
+				guard = new Rookie(8,1,'G');
+			else if(randomNum == 2)
+				guard = new Drunken(8,1,'G');
+			else
+				guard = new Suspicious(8,1,'G');
+		}
 		
 		SetGameMap(new DungeonMap());
 		RefreshMap();
@@ -114,16 +120,19 @@ public class Game
 		int club_spawn_x[] = {2, 3, 4};
 		int club_spawn_y[] = {2, 2, 2};
 		
-		
-		int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
-		
-		ogres = new ArrayList<Ogre>();
-		Ogre curr_ogre;
-		for (int i = 0; i < randomNum; i++)
+		if (num_of_ogres != 0)
 		{
-			curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
-			ogres.add(curr_ogre);
+			int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+		
+			ogres = new ArrayList<Ogre>();
+			Ogre curr_ogre;
+			for (int i = 0; i < randomNum; i++)
+			{
+				curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
+				ogres.add(curr_ogre);
+			}
 		}
+		
 		level = 2;
 		hero.SetX(1);
 		hero.SetY(7);
