@@ -62,21 +62,16 @@ public class TestKeepGameLogic
         assertTrue(game.IsEndOfGame());
     }
 	
-	@Test
+	@Test (timeout = 2000)
 	public void TestOgreAndClubRandomness()
 	{
-		GameMap gameMap = new KeepMapTests();
 		int init_x = 3;
-		int init_y = 1;
-        Game game = new Game(gameMap, new Ogre(init_x,init_y,3,2));
-        game.MoveHero(1,2);//moves down
-        Ogre ogre = game.GetOgres().get(0);
-        if (!gameMap.MoveTo(ogre.GetX(), ogre.GetY()))
-        	fail("Ogre moved onto forbiden position.");
-        else if (!CellsAreAdjacent(init_x, init_y, ogre.GetX(), ogre.GetY()))
-        	fail("Ogre moved onto not adjacent position (relative to his initial position)");
-        else if (!CellsAreAdjacent(ogre.GetX(), ogre.GetY(), ogre.GetClubX(), ogre.GetClubY()))
-        	fail("Club new position is not adjacent to new Ogre position");
+		int init_y = 2;
+		
+		EnsureOgreGoesTo(init_x - 1, init_y);
+		EnsureOgreGoesTo(init_x + 1, init_y);
+		EnsureOgreGoesTo(init_x, init_y - 1);
+		EnsureOgreGoesTo(init_x, init_y + 1);		
 	}
 	
 	public boolean CellsAreAdjacent(int x1, int y1, int x2, int y2)
@@ -91,5 +86,28 @@ public class TestKeepGameLogic
         	return true;
 		else
 			return false;
+	}
+	
+	@Test (timeout = 500)
+	public void EnsureOgreGoesTo(int x, int y)
+	{
+		int init_x = 3;
+		int init_y = 2;
+		
+		int curr_x = x - 1;
+		int curr_y = y - 1;
+		while (curr_x != x || curr_y != y)
+		{
+			GameMap gameMap = new KeepMapTests();
+			Game game = new Game(gameMap, new Ogre(init_x,init_y,3,2));
+	        game.MoveHero(1,2);//moves down
+	        Ogre ogre = game.GetOgres().get(0);
+	        if (!gameMap.MoveTo(ogre.GetX(), ogre.GetY()))
+	        	fail("Ogre moved onto forbiden position.");
+	        else if (!CellsAreAdjacent(init_x, init_y, ogre.GetX(), ogre.GetY()))
+	        	fail("Ogre moved onto not adjacent position (relative to his initial position)");
+	        else if (!CellsAreAdjacent(ogre.GetX(), ogre.GetY(), ogre.GetClubX(), ogre.GetClubY()))
+	        	fail("Club new position is not adjacent to new Ogre position");
+		}
 	}
 }
