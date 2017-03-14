@@ -88,7 +88,6 @@ public class TestKeepGameLogic
 			return false;
 	}
 	
-	@Test (timeout = 500)
 	public void EnsureOgreGoesTo(int x, int y)
 	{
 		int init_x = 3;
@@ -96,8 +95,11 @@ public class TestKeepGameLogic
 		
 		int curr_x = x - 1;
 		int curr_y = y - 1;
-		while (curr_x != x || curr_y != y)
+		
+		int counter = 0;
+		while ((curr_x != x || curr_y != y) && counter < 100)
 		{
+			counter++;
 			GameMap gameMap = new KeepMapTests();
 			Game game = new Game(gameMap, new Ogre(init_x,init_y,3,2));
 	        game.MoveHero(1,2);//moves down
