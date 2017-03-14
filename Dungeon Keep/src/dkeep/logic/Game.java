@@ -27,8 +27,8 @@ public class Game
 		InitLevel1();
 		
 		//debugging
-		SetGameMap(map.NextMap());
-		InitLevel2();
+//		SetGameMap(map.NextMap());
+//		InitLevel2();
 	}
 	
 	public Game(GameMap map)
