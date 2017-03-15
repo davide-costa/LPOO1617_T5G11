@@ -103,6 +103,8 @@ public class TestKeepGameLogic
 			Game game = new Game(gameMap, new Ogre(init_x,init_y,5,5));
 	        game.MoveHero(1,2);//moves down
 	        Ogre ogre = game.GetOgres().get(0);
+	        curr_x = ogre.GetX();
+	        curr_y = ogre.GetY();
 	        if (!gameMap.MoveTo(ogre.GetX(), ogre.GetY()))
 	        	fail("Ogre moved onto forbiden position.");
 	        else if (!CellsAreAdjacent(init_x, init_y, ogre.GetX(), ogre.GetY()))
