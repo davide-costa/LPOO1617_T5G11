@@ -114,7 +114,7 @@ public class Game
 			else if(guard_name == "Suspicious")
 				guard_num = 3;
 			else
-				guard_num = 1;
+				guard_num = 1; //code never executed, just to avoid compilation error
 		}
 		
 		if(guard_num == 1)
