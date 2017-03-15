@@ -27,8 +27,8 @@ public class Game
 		InitLevel1(guard_name);
 		
 		//debugging
-//		SetGameMap(map.NextMap());
-//		InitLevel2();
+		SetGameMap(map.NextMap());
+		InitLevel2();
 	}
 	
 	public Game(GameMap map)
@@ -130,10 +130,10 @@ public class Game
 	
 	public void InitLevel2()
 	{
-		int ogre_spawn_x[] = {2, 3, 4};
-		int ogre_spawn_y[] = {1, 1, 1};
-		int club_spawn_x[] = {2, 3, 4};
-		int club_spawn_y[] = {2, 2, 2};
+		int ogre_init_spawn_x = 1;
+		int ogre_init_spawn_y = 1;
+		int club_init_spawn_x = 1;
+		int club_init_spawn_y = 2;
 		
 		ogres = new ArrayList<Ogre>();
 		
@@ -144,7 +144,7 @@ public class Game
 			Ogre curr_ogre;
 			for (int i = 0; i < randomNum; i++)
 			{
-				curr_ogre = new Ogre(ogre_spawn_x[i], ogre_spawn_y[i], club_spawn_x[i], club_spawn_y[i]);
+				curr_ogre = new Ogre(ogre_init_spawn_x + i, ogre_init_spawn_y, club_init_spawn_x + i, club_init_spawn_y);
 				ogres.add(curr_ogre);
 			}
 		}
