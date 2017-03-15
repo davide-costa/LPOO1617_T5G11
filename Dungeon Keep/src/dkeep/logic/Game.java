@@ -27,8 +27,8 @@ public class Game
 		InitLevel1(guard_name);
 		
 		//debugging
-		SetGameMap(map.NextMap());
-		InitLevel2();
+//		SetGameMap(map.NextMap());
+//		InitLevel2();
 	}
 	
 	public Game(GameMap map)

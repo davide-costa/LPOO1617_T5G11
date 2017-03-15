@@ -29,8 +29,12 @@ public class Gui
 
 	private JFrame frame;
 	private JTextField num_ogres_value;
-	private static JTextArea GameArea;
+	private JTextArea GameArea;
 	private JLabel LableState;
+	JButton btnUp;
+	JButton btnDown;
+	JButton btnLeft;
+	JButton btnRight;
 	private Game game;
 	private int dst_x = 0;
 	private int dst_y = 0;
@@ -105,12 +109,15 @@ public class Gui
 				String personality_name = personality_value.getName();
 				game = new Game(personality_name, num_ogres);
 				LableState.setText("Game started");
+				DrawBoard(game.GetGameMap());
+				ActivateGameButtons();
 			}
 		});
 		btnNewGame.setBounds(690, 164, 115, 29);
 		frame.getContentPane().add(btnNewGame);
 		
-		JButton btnUp = new JButton("Up");
+		btnUp = new JButton("Up");
+		btnUp.setEnabled(false);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -120,7 +127,8 @@ public class Gui
 		btnUp.setBounds(690, 254, 115, 26);
 		frame.getContentPane().add(btnUp);
 		
-		JButton btnDown = new JButton("Down");
+		btnDown = new JButton("Down");
+		btnDown.setEnabled(false);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -130,7 +138,8 @@ public class Gui
 		btnDown.setBounds(690, 338, 115, 26);
 		frame.getContentPane().add(btnDown);
 		
-		JButton btnLeft = new JButton("Left");
+		btnLeft = new JButton("Left");
+		btnLeft.setEnabled(false);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -140,7 +149,8 @@ public class Gui
 		btnLeft.setBounds(609, 296, 115, 26);
 		frame.getContentPane().add(btnLeft);
 		
-		JButton btnRight = new JButton("Right");
+		btnRight = new JButton("Right");
+		btnRight.setEnabled(false);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -186,7 +196,8 @@ public class Gui
 		{
 			curr_map = game.GetGameMap();
 			DrawBoard(curr_map);
-			System.out.println("END OF GAME...YOU LOSE");
+			LableState.setText("END OF GAME...YOU LOOSE");
+			InactivateGameButtons();
 			return;
 		}
 
@@ -194,7 +205,8 @@ public class Gui
 		{
 			curr_map = game.GetGameMap();
 			DrawBoard(curr_map);
-			System.out.println("END OF GAME...YOU WIN");	
+			LableState.setText("END OF GAME...YOU WIN");
+			InactivateGameButtons();
 		}
 		
 		LableState.setText("You can play");
@@ -217,20 +229,40 @@ public class Gui
 	}
 
 
-	public static void DrawBoard(char curr_map[][])
+	public void DrawBoard(char curr_map[][])
 	{
 		int map_x_size = curr_map[0].length;
 		int map_y_size = curr_map.length;
+		String character;
 		
 		GameArea.setText(null);
 		for (int i = 0; i < map_y_size; i++)
 		{
 			for (int j = 0; j < map_x_size; j++)
 			{
-				String character = curr_map[i][j] + " ";
+				if(curr_map[i][j] == 0)
+					character = "    ";
+				else
+					character = curr_map[i][j] + " ";
 				GameArea.append(character);
 			}
 			GameArea.append("\n");
 		}
+	}
+
+	public void InactivateGameButtons()
+	{
+		btnUp.setEnabled(false);
+		btnDown.setEnabled(false);
+		btnLeft.setEnabled(false);
+		btnRight.setEnabled(false);
+	}
+	
+	public void ActivateGameButtons()
+	{
+		btnUp.setEnabled(true);
+		btnDown.setEnabled(true);
+		btnLeft.setEnabled(true);
+		btnRight.setEnabled(true);
 	}
 }
