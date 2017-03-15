@@ -72,7 +72,9 @@ public class TestKeepGameLogic
 		EnsureOgreGoesTo(init_x - 1, init_y);
 		EnsureOgreGoesTo(init_x + 1, init_y);
 		EnsureOgreGoesTo(init_x, init_y - 1);
-		EnsureOgreGoesTo(init_x, init_y + 1);		
+		EnsureOgreGoesTo(init_x, init_y + 1);
+		
+		EnsureClubGoesToAllPossiblePositions();
 	}
 	
 	public boolean CellsAreAdjacent(int x1, int y1, int x2, int y2)
@@ -110,6 +112,40 @@ public class TestKeepGameLogic
 	        else if (!CellsAreAdjacent(init_x, init_y, ogre.GetX(), ogre.GetY()))
 	        	fail("Ogre moved onto not adjacent position (relative to his initial position)");
 	        else if (!CellsAreAdjacent(ogre.GetX(), ogre.GetY(), ogre.GetClubX(), ogre.GetClubY()))
+	        	fail("Club new position is not adjacent to new Ogre position");
+		}
+	}
+	
+	public void EnsureClubGoesToAllPossiblePositions()
+	{
+		int init_x = 4;
+		int init_y = 5;
+		
+		boolean up = false;
+		boolean down = false;
+		boolean left = false;
+		boolean right = false;
+		int ogre_x, ogre_y, club_x, club_y;
+		
+		while (!up || !down || !left || !right)
+		{
+			GameMap gameMap = new KeepMap();
+			Game game = new Game(gameMap, new Ogre(init_x,init_y,5,5));
+	        game.MoveHero(1,2);//moves down
+	        Ogre ogre = game.GetOgres().get(0);
+	        ogre_x = ogre.GetX();
+	        ogre_y = ogre.GetY();
+	        club_x = ogre.GetClubX();
+	        club_y = ogre.GetClubY();
+	        if (club_x == ogre_x - 1 && club_y == ogre_y)
+	        	left = true;
+	        else if (club_x == ogre_x + 1 && club_y == ogre_y)
+	        	right = true;
+	        else if (club_x == ogre_x && club_y == ogre_y - 1)
+	        	up = true;
+	        else if (club_x == ogre_x && club_y == ogre_y + 1)
+	        	down = true;
+	        else
 	        	fail("Club new position is not adjacent to new Ogre position");
 		}
 	}
