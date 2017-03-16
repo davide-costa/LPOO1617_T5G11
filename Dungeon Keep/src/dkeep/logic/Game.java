@@ -71,6 +71,10 @@ public class Game
 		return ogres;
 	}
 	
+	public Guard GetGuard()
+	{
+		return guard;
+	}
 	
 	public void RefreshMap()
 	{
