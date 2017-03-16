@@ -160,7 +160,7 @@ public class Gui
 		btnRight.setBounds(762, 296, 115, 26);
 		frame.getContentPane().add(btnRight);
 		
-		LableState = new JLabel("");
+		LableState = new JLabel("You can start a new game");
 		LableState.setHorizontalAlignment(SwingConstants.LEFT);
 		LableState.setBounds(42, 522, 616, 20);
 		frame.getContentPane().add(LableState);
@@ -184,7 +184,6 @@ public class Gui
 	{
 		int move_hero_value;
 		char curr_map[][] = game.GetGameMap();
-		DrawBoard(curr_map);
 
 		ComputeDestination(user_input);
 
@@ -209,6 +208,7 @@ public class Gui
 			InactivateGameButtons();
 		}
 		
+		DrawBoard(curr_map);
 		LableState.setText("You can play");
 	}
 	
