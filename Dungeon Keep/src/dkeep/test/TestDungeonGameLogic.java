@@ -1,6 +1,10 @@
 package dkeep.test;
 
 import static org.junit.Assert.*;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 import org.junit.Test;
 
 import dkeep.logic.Drunken;
@@ -129,6 +133,49 @@ public class TestDungeonGameLogic
         game.MoveHero(2,1);
         assertEquals(game.GetGuard().GetX(), 7);
         assertEquals(game.GetGuard().GetY(), 1);
+	}
+	
+	@Test (timeout = 2000)
+	public void TestSuspiciousMovRandomness()
+	{
+        Game game = new Game("Suspicious", 1);
+		boolean reversed = false;
+		Queue<Integer> pos_x = new LinkedList<Integer>();
+		Queue<Integer> pos_y = new LinkedList<Integer>();
+		
+		//Initialize the queue with two initial positions of the guard
+		game.MoveHero(2,1);
+		pos_x.add(game.GetGuard().GetX());
+		pos_y.add(game.GetGuard().GetY());
+		game.MoveHero(1,1);
+		pos_x.add(game.GetGuard().GetX());
+		pos_y.add(game.GetGuard().GetY());
+		
+		int guard_x, guard_y;
+		int old_guard_x, old_guard_y;
+		
+		//ensure he reverts the patrolling path
+		for (int i = 0; true; i++)
+		{
+			//Move the hero back and forth waiting for the guard to perform the reversing in patrolling path
+			if (i % 2 == 0)
+				game.MoveHero(2,1);
+			else
+				game.MoveHero(1,1);
+		
+			guard_x = game.GetGuard().GetX();
+			guard_y = game.GetGuard().GetY();
+			old_guard_x = pos_x.poll();
+			old_guard_y = pos_y.poll();
+			
+			if (guard_x == old_guard_x && guard_y == old_guard_y)
+				break;
+			else
+			{
+				pos_x.add(guard_x);
+				pos_y.add(guard_y);
+			}
+		}
 	}
 	
 }
