@@ -1,16 +1,13 @@
 package dkeep.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.*; 
 
 import org.junit.Test;
 
-import dkeep.logic.Drunken;
 import dkeep.logic.Game;
 import dkeep.logic.GameMap;
 import dkeep.logic.KeepMap;
 import dkeep.logic.Ogre;
-import dkeep.logic.Rookie;
-import dkeep.logic.Suspicious;
 
 public class TestKeepGameLogic
 {
@@ -152,44 +149,4 @@ public class TestKeepGameLogic
 	        	fail("Club new position is not adjacent to new Ogre position");
 		}
 	}
-	
-	@Test
-	public void EnsureAllGuardsAreSpawned()
-	{
-	   boolean rookie = false;
-	   boolean drunken = false;
-	   boolean suspicious = false;
-	   
-	   while (!(rookie && drunken && suspicious))
-	   {
-		   Game game = new Game(null, 1);
-		   if (game.GetGuard() instanceof Rookie)
-			   rookie = true;
-		   else if (game.GetGuard() instanceof Drunken)
-			   drunken = true;
-		   else if (game.GetGuard()  instanceof Suspicious)
-			   suspicious = true;
-	   }
-	}
-	
-	@Test
-	public void TestRookie()
-	{
-        Game game = new Game("Rookie", 1);
-        game.MoveHero(2,1);
-        assertEquals(game.GetGuard().GetX(), 7);
-        assertEquals(game.GetGuard().GetY(), 1);
-	}
-	/*
-	@Test
-	public void TestRookie()
-	{
-		GameMap gameMap = new KeepMapTests();
-        Game game = new Game("Rookie", 1);
-        game.MoveHero(2,1);
-        assertEquals(game.GetGuard().GetX(), 7);
-        assertEquals(game.GetGuard().GetY(), 1);
-	}
-	*/
-	
 }
