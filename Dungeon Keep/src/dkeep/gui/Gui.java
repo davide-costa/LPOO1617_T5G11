@@ -97,7 +97,15 @@ public class Gui
 			public void actionPerformed(ActionEvent e) 
 			{
 				//handle the num of ogres
-				int num_ogres = Integer.parseInt(num_ogres_value.getText());
+				String num_ogres_str = num_ogres_value.getText();
+				if(num_ogres_str.isEmpty())
+				{
+					JPanel panel = new JPanel();
+					JOptionPane.showMessageDialog(panel, "You must enter a number of ogres", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				int num_ogres = Integer.parseInt(num_ogres_str);
 				if(num_ogres < 1 || num_ogres > 5)
 				{
 					 JPanel panel = new JPanel();
