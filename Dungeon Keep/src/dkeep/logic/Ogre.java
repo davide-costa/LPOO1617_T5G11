@@ -40,6 +40,22 @@ public class Ogre extends GameCreature implements Serializable
 		this.club_coords.SetY(club_y);
 	}
 	
+	public Coords GetClubCoords()
+	{
+		return club_coords;
+	}
+	
+	public void SetClubCoords(Coords coords)
+	{
+		club_coords.Set(coords);
+	}
+	
+	public void SetClubCoords(int x, int y)
+	{
+		club_coords.Set(x, y);
+	}
+	
+	
 	public char GetClubSymbol()
 	{
 		return club_symbol;
