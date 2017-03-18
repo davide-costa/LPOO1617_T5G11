@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class KeepMap implements GameMap
+public class KeepMap implements GameMap, Serializable
 {
 	protected char map[][] = {
 			{ 'X','X','X','X','X','X','X','X','X' },

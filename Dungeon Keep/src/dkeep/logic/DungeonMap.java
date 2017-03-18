@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class DungeonMap implements GameMap
+public class DungeonMap implements GameMap, Serializable
 {
 	protected char[][] map =  {
 			{ 'X','X','X','X','X','X','X','X','X','X' },

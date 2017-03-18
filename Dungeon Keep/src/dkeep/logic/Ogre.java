@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ogre extends GameCreature
+public class Ogre extends GameCreature implements Serializable
 {
 	private static char default_symbol = 'O';
 	private static char stunned_symbol = '8';
