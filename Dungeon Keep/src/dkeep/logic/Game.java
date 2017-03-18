@@ -20,6 +20,7 @@ public class Game implements Serializable
 	int num_of_ogres;
 	private int temp_x;
 	private int temp_y;
+	private boolean game_over = false;
 	
 	public Game(String guard_name, int num_of_ogres)
 	{
@@ -182,6 +183,9 @@ public class Game implements Serializable
 	
 	public int MoveHero(int x, int y)
 	{
+		if(IsGameOver())
+			return 0;
+		
 		int make_play_value;
 		if (x == -1 && y == 1 && level == 2)
 		{
@@ -262,7 +266,10 @@ public class Game implements Serializable
 			TryStunOgres();
 		
 		if (WasCaught())
+		{
+			game_over = true;
 			return -1;
+		}	
 		else if (dst_state == 0)
 			return 0;
 		else if (dst_state == 'k')
@@ -376,4 +383,8 @@ public class Game implements Serializable
 		return map == null;
 	}
 
+	public boolean IsGameOver()
+	{
+		return map == null || game_over == true;
+	}
 }

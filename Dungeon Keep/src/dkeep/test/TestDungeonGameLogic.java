@@ -43,6 +43,7 @@ public class TestDungeonGameLogic
         GameMap gameMap = new DungeonMapTests(); 
 		Game game = new Game(gameMap);
         assertEquals(-1, game.MoveHero(2,1));
+        assertTrue(game.IsGameOver());
     }
 	
 	@Test

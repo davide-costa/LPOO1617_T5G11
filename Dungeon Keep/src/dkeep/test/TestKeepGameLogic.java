@@ -16,7 +16,8 @@ public class TestKeepGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, new TestOgre(3,1,3,2));
-        assertEquals(-1, game.MoveHero(2,1));// move hero right. 
+        assertEquals(-1, game.MoveHero(2,1));// move hero right.
+        assertTrue(game.IsGameOver());
     }
 	
 	@Test

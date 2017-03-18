@@ -20,6 +20,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,10 +34,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
-public class Gui 
+public class Gui extends JPanel implements MouseListener, MouseMotionListener, KeyListener
 {
 	private JFrame frame;
-	private JTextField num_ogres_value;
 	private JTextArea GameArea;
 	private JLabel LableState;
 	JButton btnLoadGame;
@@ -72,39 +75,19 @@ public class Gui
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 914, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel num_ogres_label = new JLabel("Number of ogres");
-		num_ogres_label.setBounds(84, 16, 204, 20);
-		num_ogres_label.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(num_ogres_label);
-		
-		num_ogres_value = new JTextField();
-		num_ogres_value.setBounds(303, 13, 146, 26);
-		frame.getContentPane().add(num_ogres_value);
-		num_ogres_value.setColumns(10);
-		
-		JLabel GuardPersonality = new JLabel("Guard Personality");
-		GuardPersonality.setBounds(127, 67, 144, 20);
-		frame.getContentPane().add(GuardPersonality);
-		
-		JComboBox personality_value = new JComboBox();
-		personality_value.setModel(new DefaultComboBoxModel(new String[] {"Rookie", "Drunken", "Suspicious"}));
-		personality_value.setMaximumRowCount(3);
-		personality_value.setToolTipText("");
-		personality_value.setBounds(303, 64, 146, 26);
-		frame.getContentPane().add(personality_value);
 		
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
 				//handle the num of ogres
-				String num_ogres_str = num_ogres_value.getText();
+				String num_ogres_str = JOptionPane.showInputDialog(null, "Number of ogres", "2");
 				if(num_ogres_str.isEmpty())
 				{
 					JPanel panel = new JPanel();
@@ -121,16 +104,19 @@ public class Gui
 				}
 					
 				//handle the guard personality
-				String personality_name = personality_value.getName();
+				String personalities[] = new String[] {"Rookie", "Drunken", "Suspicious"};
+				String personality_name = (String) JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
 				game = new Game(personality_name, num_ogres);
 				LableState.setText("Game started");
 				DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
 				
+				GameArea.requestFocusInWindow();
+				
 				//TODO:no activate game buttons deve estar o saveGame
 			}
 		});
-		btnNewGame.setBounds(690, 164, 115, 29);
+		btnNewGame.setBounds(690, 120, 115, 29);
 		frame.getContentPane().add(btnNewGame);
 		
 		btnUp = new JButton("Up");
@@ -178,8 +164,9 @@ public class Gui
 		frame.getContentPane().add(btnRight);
 		
 		LableState = new JLabel("You can start a new game");
+		LableState.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		LableState.setHorizontalAlignment(SwingConstants.LEFT);
-		LableState.setBounds(42, 522, 616, 20);
+		LableState.setBounds(43, 517, 616, 20);
 		frame.getContentPane().add(LableState);
 		
 		JButton btnExit = new JButton("Exit");
@@ -194,8 +181,9 @@ public class Gui
 		
 		GameArea = new JTextArea();
 		GameArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
-		GameArea.setBounds(31, 147, 506, 361);
+		GameArea.setBounds(43, 86, 527, 399);
 		frame.getContentPane().add(GameArea);
+		GameArea.addKeyListener(this);
 		
 		btnLoadGame = new JButton("Load Game");
 		btnLoadGame.addActionListener(new ActionListener() {
@@ -227,9 +215,10 @@ public class Gui
 			    LableState.setText("Game started");
 				DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
+				GameArea.requestFocusInWindow();
 			}
 		});
-		btnLoadGame.setBounds(721, 15, 115, 29);
+		btnLoadGame.setBounds(216, 24, 115, 29);
 		frame.getContentPane().add(btnLoadGame);
 		
 		btnSaveGame = new JButton("Save Game");
@@ -253,8 +242,9 @@ public class Gui
 			      }
 			}
 		});
-		btnSaveGame.setBounds(721, 66, 115, 29);
+		btnSaveGame.setBounds(66, 24, 115, 29);
 		frame.getContentPane().add(btnSaveGame);
+		GameArea.requestFocusInWindow();
 	}
 	
 	public void NewPlay(char user_input)
@@ -288,8 +278,10 @@ public class Gui
 
 		curr_map = game.GetGameMap();
 		DrawBoard(curr_map);
-		LableState.setText("You can play");
+		if(!game.IsGameOver())
+			LableState.setText("You can play");
 		GameArea.repaint();
+		GameArea.requestFocusInWindow();
 	}
 	
 	public void ComputeDestination(char input)
@@ -328,8 +320,6 @@ public class Gui
 			}
 			GameArea.append("\n");
 		}
-		
-		
 	}
 
 	public void InactivateGameButtons()
@@ -346,5 +336,88 @@ public class Gui
 		btnDown.setEnabled(true);
 		btnLeft.setEnabled(true);
 		btnRight.setEnabled(true);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) 
+	{
+		switch(e.getKeyCode())
+		{
+		 case KeyEvent.VK_LEFT: 
+			 NewPlay('a');
+			 break;
+		 case KeyEvent.VK_RIGHT: 
+			 NewPlay('d');
+			 break;
+		 case KeyEvent.VK_UP: 
+			 NewPlay('w');
+			 break;
+		 case KeyEvent.VK_DOWN: 
+			 NewPlay('s');
+			 break;
+		 }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) 
+	{
+
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) 
+	{
+	
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) 
+	{
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0)
+	{
+		
+		
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) 
+	{
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0)
+	{
+		
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) 
+	{
+		
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) 
+	{
+		
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) 
+	{
+		
+		
 	}
 }
