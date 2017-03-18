@@ -8,8 +8,7 @@ public class Ogre extends GameCreature implements Serializable
 	private static char default_symbol = 'O';
 	private static char stunned_symbol = '8';
 	private static char owns_key_symbol = '$';
-	private int club_x;
-	private int club_y;
+	private Coords club_coords;
 	private char club_symbol = '*';
 	private int stun_count;
 	private boolean is_stunned;
@@ -17,29 +16,28 @@ public class Ogre extends GameCreature implements Serializable
 	public Ogre(int x, int y, int club_x, int club_y)
 	{
 		super(x, y, default_symbol);
-		this.club_x = club_x;
-		this.club_y = club_y;
+		club_coords = new Coords(club_x, club_y);
 		is_stunned = false;
 	}
 	
 	public int GetClubX()
 	{
-		return club_x;
+		return club_coords.GetX();
 	}
 	
 	public void SetClubX(int club_x)
 	{
-		this.club_x = club_x;
+		this.club_coords.SetX(club_x);
 	}
 	
 	public int GetClubY()
 	{
-		return club_y;
+		return club_coords.GetY();
 	}
 	
 	public void SetClubY(int club_y)
 	{
-		this.club_y = club_y;
+		this.club_coords.SetY(club_y);
 	}
 	
 	public char GetClubSymbol()
