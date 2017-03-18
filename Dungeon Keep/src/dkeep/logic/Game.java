@@ -1,6 +1,7 @@
 package dkeep.logic;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import dkeep.test.TestGuard;
 import dkeep.test.TestOgre;
 
-public class Game
+public class Game implements Serializable
 {
 	private char map_matrix[][];
 	private GameMap map;

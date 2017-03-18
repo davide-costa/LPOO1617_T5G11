@@ -20,17 +20,24 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class Gui 
 {
-
 	private JFrame frame;
 	private JTextField num_ogres_value;
 	private JTextArea GameArea;
 	private JLabel LableState;
+	JButton btnLoadGame;
+	JButton btnSaveGame;
 	JButton btnUp;
 	JButton btnDown;
 	JButton btnLeft;
@@ -119,6 +126,8 @@ public class Gui
 				LableState.setText("Game started");
 				DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
+				
+				//TODO:no activate game buttons deve estar o saveGame
 			}
 		});
 		btnNewGame.setBounds(690, 164, 115, 29);
@@ -184,8 +193,68 @@ public class Gui
 		frame.getContentPane().add(btnExit);
 		
 		GameArea = new JTextArea();
+		GameArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
 		GameArea.setBounds(31, 147, 506, 361);
 		frame.getContentPane().add(GameArea);
+		
+		btnLoadGame = new JButton("Load Game");
+		btnLoadGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				game = null;
+			     try 
+			     {
+			         FileInputStream fileIn = new FileInputStream("GameStateFile");
+			         ObjectInputStream in = new ObjectInputStream(fileIn);
+			         game = (Game) in.readObject();
+			         in.close();
+			         fileIn.close();
+			         LableState.setText("Game loaded sucessfully");
+			      }
+			     catch(IOException i) 
+			     {
+			    	 JPanel panel = new JPanel();
+			    	 JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
+			    	 return;	
+			      }
+			     catch(ClassNotFoundException c) 
+			     {
+			    	 JPanel panel = new JPanel();
+			    	 JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
+			    	 return;
+			      }
+			     
+			    LableState.setText("Game started");
+				DrawBoard(game.GetGameMap());
+				ActivateGameButtons();
+			}
+		});
+		btnLoadGame.setBounds(721, 15, 115, 29);
+		frame.getContentPane().add(btnLoadGame);
+		
+		btnSaveGame = new JButton("Save Game");
+		btnSaveGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				 try 
+			      {
+			          FileOutputStream fileOut = new FileOutputStream("GameStateFile");
+			          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			          out.writeObject(game);
+			          out.close();
+			          fileOut.close();
+			          LableState.setText("Game saved in GameStateFile");
+			       }
+			      catch(IOException i)
+			      {
+			    	  JPanel panel = new JPanel();
+			    	  JOptionPane.showMessageDialog(panel, "Error saving the game state file", "Error", JOptionPane.ERROR_MESSAGE);
+			    	  return;	
+			      }
+			}
+		});
+		btnSaveGame.setBounds(721, 66, 115, 29);
+		frame.getContentPane().add(btnSaveGame);
 	}
 	
 	public void NewPlay(char user_input)
@@ -256,6 +325,8 @@ public class Gui
 			}
 			GameArea.append("\n");
 		}
+		
+		
 	}
 
 	public void InactivateGameButtons()
