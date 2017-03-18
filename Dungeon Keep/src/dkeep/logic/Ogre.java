@@ -94,11 +94,10 @@ public class Ogre extends GameCreature implements Serializable
 		else if (randomNum == 4)
 			temp_y--; //ogre moves to down
 
-		if (!map.MoveTo(temp_x, temp_y))
+		if (!map.MoveTo(new Coords(temp_x, temp_y)))
 			return false;
 
-		SetX(temp_x);
-		SetY(temp_y);
+		SetCoords(temp_x, temp_y);
 		
 		return true;
 	}
@@ -123,7 +122,7 @@ public class Ogre extends GameCreature implements Serializable
 		else if (randomNum == 4)
 			temp_y--; //club moves to down
 
-		if (!map.MoveTo(temp_x, temp_y))
+		if (!map.MoveTo(new Coords(temp_x, temp_y)))
 			return false;
 		
 		SetClubX(temp_x);

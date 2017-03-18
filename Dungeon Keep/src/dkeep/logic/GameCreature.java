@@ -38,7 +38,7 @@ public class GameCreature
 	
 	public void SetCoords(Coords coords)
 	{
-		coords.Set(coords);
+		this.coords.Set(coords);
 	}
 	
 	public void SetCoords(int x, int y)

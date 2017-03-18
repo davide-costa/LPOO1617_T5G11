@@ -21,8 +21,11 @@ public class DungeonMap implements GameMap, Serializable
 	protected int map_x_size = 10;
 	protected int map_y_size = 10;
 	
-	public boolean MoveTo(int x, int y)
+	public boolean MoveTo(Coords coords)
 	{
+		int x = coords.GetX();
+		int y = coords.GetY();
+		
 		if(x > map_x_size || x < 0)
 			return false;
 		
@@ -55,14 +58,14 @@ public class DungeonMap implements GameMap, Serializable
 		return new KeepMap();
 	}
 	
-	public void SetCellState(int x, int y, char symbol)
+	public void SetCellState(Coords coords, char symbol)
 	{
-		map[y][x] = symbol;
+		map[coords.GetY()][coords.GetX()] = symbol;
 	}
 	
-	public char GetCellState(int x, int y)
+	public char GetCellState(Coords coords)
 	{
-		return map[y][x];
+		return map[coords.GetY()][coords.GetX()];
 	}
 	
 	public char[][] GetMapCopy()

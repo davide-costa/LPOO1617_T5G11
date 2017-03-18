@@ -22,8 +22,7 @@ public class Suspicious extends Guard
 		if (randomNum == 1) //change movement direction
 			movement_increment = -movement_increment;
 		
-		SetX(x_path[movement_step]);
-		SetY(y_path[movement_step]);
+		SetCoords(x_path[movement_step], y_path[movement_step]);
 
 		movement_step += movement_increment;
 	}

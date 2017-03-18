@@ -22,6 +22,25 @@ public class Game implements Serializable
 	private int temp_y;
 	private boolean game_over = false;
 	
+	private boolean CellsAreAdjacent(Coords cell1, Coords cell2)
+	{
+		int cell1_x = cell1.GetX();
+		int cell1_y = cell1.GetY();
+		int cell2_x = cell2.GetX();
+		int cell2_y = cell2.GetY();
+		
+		if (cell1_x == (cell2_x - 1) && cell1_y == cell2_y)
+			return true;
+		else if (cell1_x == (cell2_x + 1) && cell1_y == cell2_y)
+			return true;
+		else if (cell1_x == cell2_x && cell1_y == (cell2_y - 1))
+			return true;
+		else if (cell1_x == cell2_x && cell1_y == (cell2_y + 1))
+			return true;
+		else
+			return false;
+	}
+	
 	public Game(String guard_name, int num_of_ogres)
 	{
 		hero = new Hero(1,1);
@@ -53,14 +72,14 @@ public class Game implements Serializable
 	}
 	
 	
-	public char GetCellState(int x, int y)
+	public char GetCellState(Coords coords)
 	{
-		return map_matrix[y][x];
+		return map_matrix[coords.GetY()][coords.GetX()];
 	}
 	
-	public void SetCellState(int x, int y, char symbol)
+	public void SetCellState(Coords coords, char symbol)
 	{
-		map_matrix[y][x] = symbol;
+		map_matrix[coords.GetY()][coords.GetX()] = symbol;
 	}
 	
 	public int GetLevel()
@@ -81,19 +100,19 @@ public class Game implements Serializable
 	public void RefreshMap()
 	{
 		map_matrix = map.GetMapCopy();
-		map_matrix[hero.GetY()][hero.GetX()] = hero.GetSymbol();
+		SetCellState(hero.GetCoords(), hero.GetSymbol());
 		
 		switch (level)
 		{
 		case 1:
-			map_matrix[guard.GetY()][guard.GetX()] = guard.GetSymbol();
+			SetCellState(guard.GetCoords(), guard.GetSymbol());
 			break;
 			
 		case 2:
 			for (Ogre ogre : ogres)
 			{
 				map_matrix[ogre.GetClubY()][ogre.GetClubX()] = ogre.GetClubSymbol();
-				map_matrix[ogre.GetY()][ogre.GetX()] = ogre.GetSymbol();
+				SetCellState(ogre.GetCoords(), ogre.GetSymbol());
 			}
 		}
 	}
@@ -156,8 +175,7 @@ public class Game implements Serializable
 		}
 		
 		level = 2;
-		hero.SetX(1);
-		hero.SetY(7);
+		hero.SetCoords(1, 7);
 		RefreshMap();
 	}
 	
@@ -183,6 +201,7 @@ public class Game implements Serializable
 	
 	public int MoveHero(int x, int y)
 	{
+		Coords dst_coords = new Coords(x, y);
 		if(IsGameOver())
 			return 0;
 		
@@ -193,7 +212,7 @@ public class Game implements Serializable
 			return 0;
 		}
 		
-		if(!map.MoveTo(x, y))
+		if(!map.MoveTo(dst_coords))
 			return 0;
 		
 		switch(level)
@@ -206,7 +225,7 @@ public class Game implements Serializable
 			break;
 		}
 
-		make_play_value = MakePlay(x,y);
+		make_play_value = MakePlay(dst_coords);
 		if (make_play_value == 1)
 		{
 			SetGameMap(map.NextMap());
@@ -225,29 +244,28 @@ public class Game implements Serializable
 	
 	public void MoveGuard()
 	{
-		SetCellState(guard.GetX(), guard.GetY(), (char)0);
+		SetCellState(guard.GetCoords(), (char)0);
 		guard.Move();
-		SetCellState(guard.GetX(), guard.GetY(), guard.GetSymbol());
+		SetCellState(guard.GetCoords(), guard.GetSymbol());
 	}
 	
 	public void MoveOgresAndClubs()
 	{
 		for (Ogre ogre : ogres)
 		{
-			int ogre_x_pos = ogre.GetX();
-			int ogre_y_pos = ogre.GetY();
-			int club_x_pos = ogre.GetClubX();
-			int club_y_pos = ogre.GetClubY();
+			Coords ogre_coords = ogre.GetCoords();
+			Coords club_coords = ogre.GetClubCoords();
 			
 			ogre.Move(map);
 			
 			//Changes ogre char if he is in the key position
-			if (map.GetCellState(ogre_x_pos, ogre_y_pos) == 'k')
+			if (map.GetCellState(ogre_coords) == 'k')
 				ogre.SetOwnsKey();
 			else
 				ogre.SetNotOwnsKey();
+			
 			//Changes club char if he is in the key position
-			if (map.GetCellState(club_x_pos, club_y_pos) == 'k')
+			if (map.GetCellState(club_coords) == 'k')
 				ogre.SetClubSymbol('$');
 			else
 				ogre.SetClubSymbol('*');
@@ -255,12 +273,11 @@ public class Game implements Serializable
 		
 	}
 	
-	public int MakePlay(int x, int y)
+	public int MakePlay(Coords coords)
 	{
-		hero.SetX(x);
-		hero.SetY(y);
+		hero.SetCoords(coords);
 		
-		char dst_state = GetCellState(x,y);
+		char dst_state = GetCellState(coords);
 		
 		if (level == 2)
 			TryStunOgres();
@@ -295,26 +312,11 @@ public class Game implements Serializable
 	
 	public void TryStunOgres() 
 	{
-		int player_x_pos = hero.GetX();
-		int player_y_pos = hero.GetY();
-		int mob_x_pos;
-		int mob_y_pos;
-		
 		for(Ogre ogre: ogres)
 		{
-			mob_x_pos = ogre.GetX();
-			mob_y_pos = ogre.GetY();
-			
-			if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
-				ogre.Stun();
-			else if (player_x_pos == (mob_x_pos + 1) && player_y_pos == mob_y_pos)
-				ogre.Stun();
-			else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos - 1))
-				ogre.Stun();
-			else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos + 1))
+			if (CellsAreAdjacent(hero.GetCoords(), ogre.GetCoords()))
 				ogre.Stun();
 		}
-		
 	}
 
 	public boolean WasCaught()
@@ -337,45 +339,15 @@ public class Game implements Serializable
 	
 	public boolean WasCaughtByMob(GameCreature mob)
 	{
-		int player_x_pos = hero.GetX();
-		int player_y_pos = hero.GetY();
-		int mob_x_pos = mob.GetX();
-		int mob_y_pos = mob.GetY();
-		
 		if (mob.GetSymbol() == 'g' || mob.GetSymbol() == '8')
 			return false;
 		
-		if (player_x_pos == (mob_x_pos - 1) && player_y_pos == mob_y_pos)
-			return true;
-		else if (player_x_pos == (mob_x_pos + 1) && player_y_pos == mob_y_pos)
-			return true;
-		else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos - 1))
-			return true;
-		else if (player_x_pos == mob_x_pos && player_y_pos == (mob_y_pos + 1))
-			return true;
-		else
-			return false;
+		return CellsAreAdjacent(hero.GetCoords(), mob.GetCoords());
 	}
 	
 	public boolean WasCaughtByClub(Ogre ogre)
 	{
-		int player_x_pos = hero.GetX();
-		int player_y_pos = hero.GetY();
-		int club_x_pos = ogre.GetClubX();
-		int club_y_pos = ogre.GetClubY();
-		
-		if (player_x_pos == club_x_pos && player_y_pos == club_y_pos)
-			return true;
-		else if (player_x_pos == (club_x_pos - 1) && player_y_pos == club_y_pos)
-			return true;
-		else if (player_x_pos == (club_x_pos + 1) && player_y_pos == club_y_pos)
-			return true;
-		else if (player_x_pos == club_x_pos && player_y_pos == (club_y_pos - 1))
-			return true;
-		else if (player_x_pos == club_x_pos && player_y_pos == (club_y_pos + 1))
-			return true;
-		else
-			return false;
+		return CellsAreAdjacent(hero.GetCoords(), ogre.GetClubCoords());
 	}
 	
 	public boolean IsEndOfGame()
