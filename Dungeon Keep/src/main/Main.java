@@ -6,10 +6,10 @@ public class Main {
 
 	public static void main(String[] args)
 	{
-//		Cli cli = new Cli();
-//		cli.main();
+		Cli cli = new Cli();
+		cli.main();
 
-		Gui gui = new Gui();
+		//Gui gui = new Gui();
 	}
 
 }

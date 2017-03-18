@@ -68,8 +68,8 @@ public class Ogre extends GameCreature implements Serializable
 		int min = 1;
 		int max = 4;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = x;
-		int temp_y = y;
+		int temp_x = GetX();
+		int temp_y = GetY();
 
 		if (randomNum == 1)
 			temp_x++; //ogre moves to right
@@ -97,8 +97,8 @@ public class Ogre extends GameCreature implements Serializable
 		int min = 1;
 		int max = 4;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = x;
-		int temp_y = y;
+		int temp_x = GetX();
+		int temp_y = GetY();
 		
 		if (randomNum == 1)
 			temp_x++; //club moves to right

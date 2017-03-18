@@ -12,8 +12,8 @@ public class Rookie extends Guard
 		if (movement_step == 24)
 			movement_step = 0;
 
-		x = x_path[movement_step];
-		y = y_path[movement_step];
+		SetX(x_path[movement_step]);
+		SetY(y_path[movement_step]);
 		
 		movement_step++;
 	}

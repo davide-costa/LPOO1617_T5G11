@@ -39,8 +39,8 @@ public class Drunken extends Guard
 			return;
 		}
 		
-		x = x_path[movement_step];
-		y = y_path[movement_step];
+		SetX(x_path[movement_step]);
+		SetY(y_path[movement_step]);
 
 		movement_step += movement_increment;
 	}

@@ -2,42 +2,54 @@ package dkeep.logic;
 
 public class GameCreature
 {
-	protected int x;
-	protected int y;
+	protected Coords coords;
 	protected char symbol;
 	
 	public GameCreature(int x, int y, char symbol)
 	{
-		this.x = x;
-		this.y = y;
+		coords = new Coords(x, y);
 		this.symbol = symbol;
 	}
 	
-	public int GetX() 
+	public int GetX()
 	{
-		return x;
+		return coords.GetX();
 	}
 	
-	public void SetX(int x) 
+	public void SetX(int x)
 	{
-		this.x = x;
+		coords.SetX(x);
 	}
 	
-	public int GetY() 
+	public int GetY()
 	{
-		return y;
+		return coords.GetY();
 	}
 	
 	public void SetY(int y)
 	{
-		this.y = y;
+		coords.SetY(y);
+	}
+	
+	public Coords GetCoords()
+	{
+		return coords;
+	}
+	
+	public void SetCoords(Coords coords)
+	{
+		coords.Set(coords);
+	}
+	
+	public void SetCoords(int x, int y)
+	{
+		coords.Set(x, y);
 	}
 	
 	public char GetSymbol()
 	{
 		return symbol;
 	}
-	
 	
 	public void SetSymbol(char symbol) 
 	{
