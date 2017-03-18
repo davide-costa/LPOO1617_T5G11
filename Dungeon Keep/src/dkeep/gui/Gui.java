@@ -259,8 +259,8 @@ public class Gui
 	
 	public void NewPlay(char user_input)
 	{
+		char curr_map[][];
 		int move_hero_value;
-		char curr_map[][] = game.GetGameMap();
 
 		ComputeDestination(user_input);
 
@@ -285,8 +285,11 @@ public class Gui
 			InactivateGameButtons();
 		}
 		
+
+		curr_map = game.GetGameMap();
 		DrawBoard(curr_map);
 		LableState.setText("You can play");
+		GameArea.repaint();
 	}
 	
 	public void ComputeDestination(char input)
