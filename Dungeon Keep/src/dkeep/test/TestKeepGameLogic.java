@@ -108,7 +108,7 @@ public class TestKeepGameLogic
 	        Ogre ogre = game.GetOgres().get(0);
 	        curr_x = ogre.GetX();
 	        curr_y = ogre.GetY();
-	        if (!gameMap.MoveTo(ogre.GetX(), ogre.GetY()))
+	        if (!gameMap.MoveTo(ogre.GetCoords()))
 	        	fail("Ogre moved onto forbiden position.");
 	        else if (!CellsAreAdjacent(init_x, init_y, ogre.GetX(), ogre.GetY()))
 	        	fail("Ogre moved onto not adjacent position (relative to his initial position)");
