@@ -34,10 +34,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
-public class Gui extends JPanel implements MouseListener, MouseMotionListener, KeyListener
+public class Gui
 {
 	private JFrame frame;
-	private JTextArea GameArea;
+	private GameArea game_area;
 	private JLabel LableState;
 	JButton btnLoadGame;
 	JButton btnSaveGame;
@@ -108,10 +108,10 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 				String personality_name = (String) JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
 				game = new Game(personality_name, num_ogres);
 				LableState.setText("Game started");
-				DrawBoard(game.GetGameMap());
+				game_area.DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
 				
-				GameArea.requestFocusInWindow();
+				game_area.requestFocusInWindow();
 				
 				//TODO:no activate game buttons deve estar o saveGame
 			}
@@ -179,12 +179,6 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 		btnExit.setBounds(690, 513, 115, 29);
 		frame.getContentPane().add(btnExit);
 		
-		GameArea = new JTextArea();
-		GameArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
-		GameArea.setBounds(43, 86, 527, 399);
-		frame.getContentPane().add(GameArea);
-		GameArea.addKeyListener(this);
-		
 		btnLoadGame = new JButton("Load Game");
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -213,9 +207,9 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 			      }
 			     
 			    LableState.setText("Game started");
-				DrawBoard(game.GetGameMap());
+				game_area.DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
-				GameArea.requestFocusInWindow();
+				game_area.requestFocusInWindow();
 			}
 		});
 		btnLoadGame.setBounds(216, 24, 115, 29);
@@ -244,7 +238,7 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 		});
 		btnSaveGame.setBounds(66, 24, 115, 29);
 		frame.getContentPane().add(btnSaveGame);
-		GameArea.requestFocusInWindow();
+		game_area.requestFocusInWindow();
 	}
 	
 	public void NewPlay(char user_input)
@@ -261,7 +255,7 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 		else if (move_hero_value == -1)
 		{
 			curr_map = game.GetGameMap();
-			DrawBoard(curr_map);
+			game_area.DrawBoard(curr_map);
 			LableState.setText("END OF GAME...YOU LOOSE");
 			InactivateGameButtons();
 			return;
@@ -270,18 +264,18 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 		if (game.IsEndOfGame())
 		{
 			curr_map = game.GetGameMap();
-			DrawBoard(curr_map);
+			game_area.DrawBoard(curr_map);
 			LableState.setText("END OF GAME...YOU WIN");
 			InactivateGameButtons();
 		}
 		
 
 		curr_map = game.GetGameMap();
-		DrawBoard(curr_map);
+		game_area.DrawBoard(curr_map);
 		if(!game.IsGameOver())
 			LableState.setText("You can play");
-		GameArea.repaint();
-		GameArea.requestFocusInWindow();
+		game_area.repaint();
+		game_area.requestFocusInWindow();
 	}
 	
 	public void ComputeDestination(char input)
@@ -301,27 +295,6 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 	}
 
 
-	public void DrawBoard(char curr_map[][])
-	{
-		int map_x_size = curr_map[0].length;
-		int map_y_size = curr_map.length;
-		String character;
-		
-		GameArea.setText(null);
-		for (int i = 0; i < map_y_size; i++)
-		{
-			for (int j = 0; j < map_x_size; j++)
-			{
-				if(curr_map[i][j] == 0)
-					character = "    ";
-				else
-					character = curr_map[i][j] + " ";
-				GameArea.append(character);
-			}
-			GameArea.append("\n");
-		}
-	}
-
 	public void InactivateGameButtons()
 	{
 		btnUp.setEnabled(false);
@@ -336,88 +309,5 @@ public class Gui extends JPanel implements MouseListener, MouseMotionListener, K
 		btnDown.setEnabled(true);
 		btnLeft.setEnabled(true);
 		btnRight.setEnabled(true);
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) 
-	{
-		switch(e.getKeyCode())
-		{
-		 case KeyEvent.VK_LEFT: 
-			 NewPlay('a');
-			 break;
-		 case KeyEvent.VK_RIGHT: 
-			 NewPlay('d');
-			 break;
-		 case KeyEvent.VK_UP: 
-			 NewPlay('w');
-			 break;
-		 case KeyEvent.VK_DOWN: 
-			 NewPlay('s');
-			 break;
-		 }
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) 
-	{
-
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) 
-	{
-	
-		
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) 
-	{
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0)
-	{
-		
-		
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) 
-	{
-		
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0)
-	{
-		
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) 
-	{
-		
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) 
-	{
-		
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) 
-	{
-		
-		
 	}
 }
