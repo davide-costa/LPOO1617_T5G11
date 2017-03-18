@@ -14,7 +14,7 @@ public class Coords
 	public Coords(Coords coords)
 	{
 		x = coords.x;
-		x = coords.y;
+		y = coords.y;
 	}
 	
 	public int GetX()
@@ -40,7 +40,7 @@ public class Coords
 	public void Set(Coords coords)
 	{
 		x = coords.x;
-		x = coords.y;
+		y = coords.y;
 	}
 	
 	public void Set(int x, int y)
