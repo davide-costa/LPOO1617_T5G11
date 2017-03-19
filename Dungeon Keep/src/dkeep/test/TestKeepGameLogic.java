@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dkeep.logic.Coords;
 import dkeep.logic.Game;
 import dkeep.logic.GameMap;
 import dkeep.logic.KeepMap;
@@ -36,7 +37,7 @@ public class TestKeepGameLogic
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, new TestOgre(3,1,3,2));
         assertEquals(0, game.MoveHero("left"));// move hero left. 
-        assertEquals(1, game.GetHero().GetX());//hero must remain in postion 1 at x
+        assertEquals(new Coords(1, 1), game.GetHero().GetCoords());
     }
 	
 	@Test
@@ -59,7 +60,7 @@ public class TestKeepGameLogic
         game.MoveHero("up");//moves up
         game.MoveHero("up");//moves up
         assertEquals(0, game.MoveHero("left"));//moves left
-        assertEquals(0, game.GetHero().GetX());//hero must be on top of the door cell
+        assertEquals(new Coords(0, 1), game.GetHero().GetCoords()); //hero must be on top of the door cell
         game.MoveHero("left");//moves left
         assertTrue(game.IsEndOfGame());
     }
@@ -67,13 +68,12 @@ public class TestKeepGameLogic
 	@Test (timeout = 2000)
 	public void TestOgreAndClubRandomness()
 	{
-		int init_x = 4;
-		int init_y = 5;
+		Coords init_coords = new Coords(4, 5);
 		
-		EnsureOgreGoesTo(init_x - 1, init_y);
-		EnsureOgreGoesTo(init_x + 1, init_y);
-		EnsureOgreGoesTo(init_x, init_y - 1);
-		EnsureOgreGoesTo(init_x, init_y + 1);
+		EnsureOgreGoesTo(init_coords, init_coords.left());
+		EnsureOgreGoesTo(init_coords, init_coords.right());
+		EnsureOgreGoesTo(init_coords, init_coords.up());
+		EnsureOgreGoesTo(init_coords, init_coords.down());
 		
 		EnsureClubGoesToAllPossiblePositions();
 	}
@@ -92,59 +92,52 @@ public class TestKeepGameLogic
 			return false;
 	}
 	
-	public void EnsureOgreGoesTo(int x, int y)
+	public void EnsureOgreGoesTo(Coords init_coords, Coords dst_coords)
 	{
-		int init_x = 4;
-		int init_y = 5;
+		Coords curr_coords = new Coords(dst_coords);
+		curr_coords.SetX(0); //ensure the coords are different at start
 		
-		int curr_x = x - 1;
-		int curr_y = y - 1;
-		
-		while (curr_x != x || curr_y != y)
+		while (!curr_coords.equals(dst_coords))
 		{
 			GameMap gameMap = new KeepMap();
-			Game game = new Game(gameMap, new Ogre(init_x,init_y,5,5));
+			Game game = new Game(gameMap, new Ogre(init_coords.GetX(),init_coords.GetY(),5,5));
 	        game.MoveHero("down");//moves down
 	        Ogre ogre = game.GetOgres().get(0);
-	        curr_x = ogre.GetX();
-	        curr_y = ogre.GetY();
+	        curr_coords.Set(ogre.GetCoords());
 	        if (!gameMap.MoveTo(ogre.GetCoords()))
 	        	fail("Ogre moved onto forbiden position.");
-	        else if (!CellsAreAdjacent(init_x, init_y, ogre.GetX(), ogre.GetY()))
+	        else if (!init_coords.adjacentTo(ogre.GetCoords()))
 	        	fail("Ogre moved onto not adjacent position (relative to his initial position)");
-	        else if (!CellsAreAdjacent(ogre.GetX(), ogre.GetY(), ogre.GetClubX(), ogre.GetClubY()))
+	        else if (!ogre.GetCoords().adjacentTo(ogre.GetClubCoords()))
 	        	fail("Club new position is not adjacent to new Ogre position");
 		}
 	}
 	
 	public void EnsureClubGoesToAllPossiblePositions()
 	{
-		int init_x = 4;
-		int init_y = 5;
+		Coords init_coords = new Coords(4, 5);
 		
 		boolean up = false;
 		boolean down = false;
 		boolean left = false;
 		boolean right = false;
-		int ogre_x, ogre_y, club_x, club_y;
+		Coords ogre_coords, club_coords;
 		
 		while (!up || !down || !left || !right)
 		{
 			GameMap gameMap = new KeepMap();
-			Game game = new Game(gameMap, new Ogre(init_x,init_y,5,5));
+			Game game = new Game(gameMap, new Ogre(init_coords.GetX(),init_coords.GetY(),5,5));
 	        game.MoveHero("down");//moves down
 	        Ogre ogre = game.GetOgres().get(0);
-	        ogre_x = ogre.GetX();
-	        ogre_y = ogre.GetY();
-	        club_x = ogre.GetClubX();
-	        club_y = ogre.GetClubY();
-	        if (club_x == ogre_x - 1 && club_y == ogre_y)
+	        ogre_coords = ogre.GetCoords();
+	        club_coords = ogre.GetClubCoords();
+	        if (club_coords.equals(ogre_coords.left()))
 	        	left = true;
-	        else if (club_x == ogre_x + 1 && club_y == ogre_y)
+	        else if (club_coords.equals(ogre_coords.right()))
 	        	right = true;
-	        else if (club_x == ogre_x && club_y == ogre_y - 1)
+	        else if (club_coords.equals(ogre_coords.up()))
 	        	up = true;
-	        else if (club_x == ogre_x && club_y == ogre_y + 1)
+	        else if (club_coords.equals(ogre_coords.down()))
 	        	down = true;
 	        else
 	        	fail("Club new position is not adjacent to new Ogre position");

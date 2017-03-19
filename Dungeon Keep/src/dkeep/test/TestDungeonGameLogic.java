@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import org.junit.Test;
 
+import dkeep.logic.Coords;
 import dkeep.logic.Drunken;
 import dkeep.logic.Game;
 import dkeep.logic.GameMap;
@@ -20,11 +21,9 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
-		assertEquals(1, game.GetHero().GetX());
-		assertEquals(1, game.GetHero().GetY());
+		assertEquals(new Coords(1, 1), game.GetHero().GetCoords());
 		game.MoveHero("down"); // move hero down.
-		assertEquals(1, game.GetHero().GetX());
-		assertEquals(2, game.GetHero().GetY());
+		assertEquals(new Coords(1, 2), game.GetHero().GetCoords());
 	}
 	
 	@Test
@@ -33,8 +32,7 @@ public class TestDungeonGameLogic
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
 		game.MoveHero("up"); // move hero up.
-		assertEquals(1, game.GetHero().GetX());
-		assertEquals(1, game.GetHero().GetY());
+		assertEquals(new Coords(1, 1), game.GetHero().GetCoords());
 	}
 	
 	@Test
@@ -53,8 +51,7 @@ public class TestDungeonGameLogic
 		Game game = new Game(gameMap);
 		game.MoveHero("down"); // move hero down.
 		game.MoveHero("left"); // move hero left.
-		assertEquals(1, game.GetHero().GetX());
-		assertEquals(2, game.GetHero().GetY());
+		assertEquals(new Coords(1, 2), game.GetHero().GetCoords());
 	}
 	
 	@Test
@@ -103,8 +100,7 @@ public class TestDungeonGameLogic
 	{
         Game game = new Game("Rookie", 1);
         game.MoveHero("right");
-        assertEquals(game.GetGuard().GetX(), 7);
-        assertEquals(game.GetGuard().GetY(), 1);
+        assertEquals(new Coords(7, 1), game.GetGuard().GetCoords());
 	}
 	
 	@Test
@@ -115,14 +111,12 @@ public class TestDungeonGameLogic
         game.MoveHero("right");
         if(game.GetGuard().GetSymbol() == 'G')
         {
-        	assertEquals(game.GetGuard().GetX(), 7);
-            assertEquals(game.GetGuard().GetY(), 1);
+        	assertEquals(new Coords(7, 1), game.GetGuard().GetCoords());
         }
         else if(game.GetGuard().GetSymbol() == 'g')
         {
         	//initial pos because its sleeping
-        	assertEquals(game.GetGuard().GetX(), 8);
-            assertEquals(game.GetGuard().GetY(), 1);
+        	assertEquals(new Coords(8, 1), game.GetGuard().GetCoords());
         }
 	}
 	
@@ -132,28 +126,22 @@ public class TestDungeonGameLogic
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game("Suspicious", 1);
         game.MoveHero("right");
-        assertEquals(game.GetGuard().GetX(), 7);
-        assertEquals(game.GetGuard().GetY(), 1);
+        assertEquals(new Coords(7, 1), game.GetGuard().GetCoords());
 	}
 	
 	@Test (timeout = 2000)
 	public void TestSuspiciousMovRandomness()
 	{
         Game game = new Game("Suspicious", 1);
-		boolean reversed = false;
-		Queue<Integer> pos_x = new LinkedList<Integer>();
-		Queue<Integer> pos_y = new LinkedList<Integer>();
+		Queue<Coords> coords_q = new LinkedList<Coords>();
 		
 		//Initialize the queue with two initial positions of the guard
 		game.MoveHero("right");
-		pos_x.add(game.GetGuard().GetX());
-		pos_y.add(game.GetGuard().GetY());
+		coords_q.add(game.GetGuard().GetCoords());
 		game.MoveHero("left");
-		pos_x.add(game.GetGuard().GetX());
-		pos_y.add(game.GetGuard().GetY());
+		coords_q.add(game.GetGuard().GetCoords());
 		
-		int guard_x, guard_y;
-		int old_guard_x, old_guard_y;
+		Coords guard_coords, old_guard_c;
 		
 		//ensure he reverts the patrolling path
 		for (int i = 0; true; i++)
@@ -164,17 +152,14 @@ public class TestDungeonGameLogic
 			else
 				game.MoveHero("left");
 		
-			guard_x = game.GetGuard().GetX();
-			guard_y = game.GetGuard().GetY();
-			old_guard_x = pos_x.poll();
-			old_guard_y = pos_y.poll();
+			guard_coords = game.GetGuard().GetCoords();
+			old_guard_c = coords_q.poll();
 			
-			if (guard_x == old_guard_x && guard_y == old_guard_y)
+			if (guard_coords.equals(old_guard_c))
 				break;
 			else
 			{
-				pos_x.add(guard_x);
-				pos_y.add(guard_y);
+				coords_q.add(guard_coords);
 			}
 		}
 	}
