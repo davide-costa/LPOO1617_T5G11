@@ -48,4 +48,15 @@ public class Coords
 		this.x = x;
 		this.y = y;
 	}
+	
+	@Override
+	public boolean equals(Object coords2)
+	{
+		return (this.x == ((Coords)coords2).x) && (this.y == ((Coords)coords2).y);
+	}
+	
+	public boolean equals(int x, int y)
+	{
+		return (this.x == x) && (this.y == y);
+	}
 }
