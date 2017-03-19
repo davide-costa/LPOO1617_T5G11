@@ -88,23 +88,6 @@ public class Cli
 		return direction;
 	}
 
-	public void ComputeDestination(char input)
-	{
-		Hero hero = game.GetHero();
-		dst_x = hero.GetX();
-		dst_y = hero.GetY();
-
-		if (input == 'w' || input == 'W')
-			dst_y--;
-		else if (input == 'a' || input == 'A')
-			dst_x--;
-		else if (input == 's' || input == 'S')
-			dst_y++;
-		else if (input == 'd' || input == 'D')
-			dst_x++;
-	}
-
-
 	public static void DrawBoard(char curr_map[][])
 	{
 		int map_x_size = curr_map[0].length;
