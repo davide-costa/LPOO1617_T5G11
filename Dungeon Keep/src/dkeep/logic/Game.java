@@ -236,27 +236,19 @@ public class Game implements Serializable
 	
 	private Coords ComputeDestination(String direction)
 	{
-		int x = hero.GetX();
-		int y = hero.GetY();
 		switch (direction)
 		{
 		case "left":
-			x--;
-			break;
+			return hero.GetCoords().left();
 		case "right":
-			x++;
-			break;
+			return hero.GetCoords().right();
 		case "up":
-			y--;
-			break;
+			return hero.GetCoords().up();
 		case "down":
-			y++;
-			break;
+			return hero.GetCoords().down();
 		default:
 			return null;
 		}
-
-		return new Coords(x, y);
 	}
 	
 	public void MoveGuard()
