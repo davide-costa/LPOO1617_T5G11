@@ -55,7 +55,6 @@ public class Ogre extends GameCreature implements Serializable
 		club_coords.Set(x, y);
 	}
 	
-	
 	public char GetClubSymbol()
 	{
 		return club_symbol;
@@ -82,8 +81,8 @@ public class Ogre extends GameCreature implements Serializable
 		int min = 1;
 		int max = 4;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = GetX();
-		int temp_y = GetY();
+		int temp_x = coords.GetX();
+		int temp_y = coords.GetY();
 
 		if (randomNum == 1)
 			temp_x++; //ogre moves to right
@@ -102,7 +101,6 @@ public class Ogre extends GameCreature implements Serializable
 		return true;
 	}
 	
-	//TODO colocar no ogre
 	public boolean TryClubNextPos(GameMap map)
 	{
 		//nextInt is normally exclusive of the top value,
@@ -110,8 +108,8 @@ public class Ogre extends GameCreature implements Serializable
 		int min = 1;
 		int max = 4;
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = GetX();
-		int temp_y = GetY();
+		int temp_x = coords.GetX();
+		int temp_y = coords.GetY();
 		
 		if (randomNum == 1)
 			temp_x++; //club moves to right
