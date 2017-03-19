@@ -22,7 +22,7 @@ public class TestDungeonGameLogic
 		Game game = new Game(gameMap);
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(1, game.GetHero().GetY());
-		game.MoveHero(1,2); // move hero down.
+		game.MoveHero("down"); // move hero down.
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(2, game.GetHero().GetY());
 	}
@@ -32,7 +32,7 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
-		game.MoveHero(0,1); // move hero right.
+		game.MoveHero("up"); // move hero up.
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(1, game.GetHero().GetY());
 	}
@@ -42,7 +42,7 @@ public class TestDungeonGameLogic
 	{ 
         GameMap gameMap = new DungeonMapTests(); 
 		Game game = new Game(gameMap);
-        assertEquals(-1, game.MoveHero(2,1));
+        assertEquals(-1, game.MoveHero("right"));
         assertTrue(game.IsGameOver());
     }
 	
@@ -51,8 +51,8 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
-		game.MoveHero(1,2); // move hero down.
-		game.MoveHero(0,2); // move hero left.
+		game.MoveHero("down"); // move hero down.
+		game.MoveHero("left"); // move hero left.
 		assertEquals(1, game.GetHero().GetX());
 		assertEquals(2, game.GetHero().GetY());
 	}
@@ -62,8 +62,8 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
-		game.MoveHero(1,2); // move hero down.
-		game.MoveHero(1,3); // move hero down.
+		game.MoveHero("down"); // move hero down.
+		game.MoveHero("down"); // move hero down.
 		assertEquals('S', game.GetGameMap()[3][0]);
 		assertEquals('S', game.GetGameMap()[2][0]);
 	}
@@ -73,9 +73,9 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
-		game.MoveHero(1,2); // move hero down.
-		game.MoveHero(1,3); // move hero down.
-		game.MoveHero(0,3); // move hero right.
+		game.MoveHero("down"); // move hero down.
+		game.MoveHero("down"); // move hero down.
+		game.MoveHero("left"); // move hero left.
 		assertEquals(2, game.GetLevel());
 	}
 	
@@ -102,7 +102,7 @@ public class TestDungeonGameLogic
 	public void TestRookieFirstPos()
 	{
         Game game = new Game("Rookie", 1);
-        game.MoveHero(2,1);
+        game.MoveHero("right");
         assertEquals(game.GetGuard().GetX(), 7);
         assertEquals(game.GetGuard().GetY(), 1);
 	}
@@ -112,7 +112,7 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game("Drunken", 1);
-        game.MoveHero(2,1);
+        game.MoveHero("right");
         if(game.GetGuard().GetSymbol() == 'G')
         {
         	assertEquals(game.GetGuard().GetX(), 7);
@@ -131,7 +131,7 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game("Suspicious", 1);
-        game.MoveHero(2,1);
+        game.MoveHero("right");
         assertEquals(game.GetGuard().GetX(), 7);
         assertEquals(game.GetGuard().GetY(), 1);
 	}
@@ -145,10 +145,10 @@ public class TestDungeonGameLogic
 		Queue<Integer> pos_y = new LinkedList<Integer>();
 		
 		//Initialize the queue with two initial positions of the guard
-		game.MoveHero(2,1);
+		game.MoveHero("right");
 		pos_x.add(game.GetGuard().GetX());
 		pos_y.add(game.GetGuard().GetY());
-		game.MoveHero(1,1);
+		game.MoveHero("left");
 		pos_x.add(game.GetGuard().GetX());
 		pos_y.add(game.GetGuard().GetY());
 		
@@ -160,9 +160,9 @@ public class TestDungeonGameLogic
 		{
 			//Move the hero back and forth waiting for the guard to perform the reversing in patrolling path
 			if (i % 2 == 0)
-				game.MoveHero(2,1);
+				game.MoveHero("right");
 			else
-				game.MoveHero(1,1);
+				game.MoveHero("left");
 		
 			guard_x = game.GetGuard().GetX();
 			guard_y = game.GetGuard().GetY();
