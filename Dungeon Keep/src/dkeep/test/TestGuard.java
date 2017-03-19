@@ -4,9 +4,9 @@ import dkeep.logic.Guard;
 
 public class TestGuard extends Guard
 {
-	public TestGuard(int x, int y, char symbol)
+	public TestGuard(int x, int y)
 	{
-		super(x, y, symbol);
+		super(x, y);
 	}
 
 	@Override

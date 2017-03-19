@@ -29,7 +29,7 @@ public class Game implements Serializable
 	
 	public Game(String guard_name, int num_of_ogres)
 	{
-		hero = new Hero(1,1);
+		hero = new Hero(1, 1);
 		this.num_of_ogres = num_of_ogres;
 		InitLevel1(guard_name);
 		
@@ -41,16 +41,16 @@ public class Game implements Serializable
 	public Game(GameMap map)
 	{
 		SetGameMap(map);
-		hero = new Hero(1,1);
+		hero = new Hero(1, 1);
 		this.level = 1;
-		guard = new TestGuard(3,1,'G');
+		guard = new TestGuard(3, 1);
 		RefreshMap();
 	}
 	
 	public Game(GameMap map, Ogre ogre)
 	{
 		SetGameMap(map);
-		hero = new Hero(1,1);
+		hero = new Hero(1, 1);
 		this.level = 2;
 		ogres = new ArrayList<Ogre>();
 		ogres.add(ogre);
