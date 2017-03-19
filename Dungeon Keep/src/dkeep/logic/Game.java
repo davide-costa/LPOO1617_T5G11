@@ -24,21 +24,7 @@ public class Game implements Serializable
 	
 	private boolean CellsAreAdjacent(Coords cell1, Coords cell2)
 	{
-		int cell1_x = cell1.GetX();
-		int cell1_y = cell1.GetY();
-		int cell2_x = cell2.GetX();
-		int cell2_y = cell2.GetY();
-		
-		if (cell1_x == (cell2_x - 1) && cell1_y == cell2_y)
-			return true;
-		else if (cell1_x == (cell2_x + 1) && cell1_y == cell2_y)
-			return true;
-		else if (cell1_x == cell2_x && cell1_y == (cell2_y - 1))
-			return true;
-		else if (cell1_x == cell2_x && cell1_y == (cell2_y + 1))
-			return true;
-		else
-			return false;
+		return cell1.adjacentTo(cell2);
 	}
 	
 	public Game(String guard_name, int num_of_ogres)

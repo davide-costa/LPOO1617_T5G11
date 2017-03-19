@@ -59,4 +59,28 @@ public class Coords
 	{
 		return (this.x == x) && (this.y == y);
 	}
+	
+	public boolean adjacentTo(Coords coords2)
+	{
+		int cell1_x = this.GetX();
+		int cell1_y = this.GetY();
+		int cell2_x = coords2.GetX();
+		int cell2_y = coords2.GetY();
+		
+		if (cell1_x == (cell2_x - 1) && cell1_y == cell2_y)
+			return true;
+		else if (cell1_x == (cell2_x + 1) && cell1_y == cell2_y)
+			return true;
+		else if (cell1_x == cell2_x && cell1_y == (cell2_y - 1))
+			return true;
+		else if (cell1_x == cell2_x && cell1_y == (cell2_y + 1))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean adjacentTo(int x, int y)
+	{
+		return adjacentTo(new Coords(x, y));
+	}
 }
