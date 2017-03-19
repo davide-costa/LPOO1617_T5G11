@@ -111,7 +111,7 @@ public class Game implements Serializable
 		case 2:
 			for (Ogre ogre : ogres)
 			{
-				map_matrix[ogre.GetClubY()][ogre.GetClubX()] = ogre.GetClubSymbol();
+				SetCellState(ogre.GetClubCoords(), ogre.GetClubSymbol());
 				SetCellState(ogre.GetCoords(), ogre.GetSymbol());
 			}
 		}
