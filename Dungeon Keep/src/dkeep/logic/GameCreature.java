@@ -10,7 +10,8 @@ public class GameCreature
 		coords = new Coords(x, y);
 		this.symbol = symbol;
 	}
-	
+	//TODO: consider removing this
+	/*
 	public int GetX()
 	{
 		return coords.GetX();
@@ -30,7 +31,7 @@ public class GameCreature
 	{
 		coords.SetY(y);
 	}
-	
+	*/
 	public Coords GetCoords()
 	{
 		return coords;

@@ -19,7 +19,8 @@ public class Ogre extends GameCreature implements Serializable
 		club_coords = new Coords(club_x, club_y);
 		is_stunned = false;
 	}
-	
+	//TODO: consider removing this
+	/*
 	public int GetClubX()
 	{
 		return club_coords.GetX();
@@ -39,7 +40,7 @@ public class Ogre extends GameCreature implements Serializable
 	{
 		this.club_coords.SetY(club_y);
 	}
-	
+	*/
 	public Coords GetClubCoords()
 	{
 		return club_coords;
@@ -123,8 +124,7 @@ public class Ogre extends GameCreature implements Serializable
 		if (!map.MoveTo(new Coords(temp_x, temp_y)))
 			return false;
 		
-		SetClubX(temp_x);
-		SetClubY(temp_y);
+		SetClubCoords(temp_x, temp_y);
 		
 		return true;
 	}
