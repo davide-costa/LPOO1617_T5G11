@@ -7,8 +7,6 @@ import dkeep.logic.*;
 public class Cli
 {
 	private Game game;
-	private int dst_x = 0;
-	private int dst_y = 0;
 
 	public void main()
 	{

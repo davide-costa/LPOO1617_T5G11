@@ -46,8 +46,6 @@ public class Gui
 	JButton btnLeft;
 	JButton btnRight;
 	private Game game;
-	private int dst_x = 0;
-	private int dst_y = 0;
 
 	/**
 	 * Launch the application.
@@ -267,7 +265,6 @@ public class Gui
 			InactivateGameButtons();
 		}
 		
-
 		curr_map = game.GetGameMap();
 		game_area.DrawBoard(curr_map);
 		if(!game.IsGameOver())
