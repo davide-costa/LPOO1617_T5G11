@@ -17,7 +17,7 @@ public class TestKeepGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, new TestOgre(3,1,3,2));
-        assertEquals(-1, game.MoveHero("right"));// move hero right.
+        assertEquals(-1, game.MoveHero("right")); // move hero right
         assertTrue(game.IsGameOver());
     }
 	
@@ -26,7 +26,7 @@ public class TestKeepGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, new TestOgre(3,1,3,2));
-        assertEquals(0, game.MoveHero("down")); // move hero down.
+        assertEquals(0, game.MoveHero("down")); // move hero down
         assertEquals(0, game.MoveHero("down")); // move hero down to the key cell
         assertEquals('K', game.GetHero().GetSymbol());   
     }
@@ -104,6 +104,7 @@ public class TestKeepGameLogic
 	        game.MoveHero("down");//moves down
 	        Ogre ogre = game.GetOgres().get(0);
 	        curr_coords.Set(ogre.GetCoords());
+	        assertEquals('O', game.GetCellState(curr_coords));
 	        if (!gameMap.MoveTo(ogre.GetCoords()))
 	        	fail("Ogre moved onto forbiden position.");
 	        else if (!init_coords.adjacentTo(ogre.GetCoords()))

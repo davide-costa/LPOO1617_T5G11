@@ -22,8 +22,9 @@ public class TestDungeonGameLogic
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
 		assertEquals(new Coords(1, 1), game.GetHero().GetCoords());
-		game.MoveHero("down"); // move hero down.
+		game.MoveHero("down"); // move hero down
 		assertEquals(new Coords(1, 2), game.GetHero().GetCoords());
+		assertEquals('H', game.GetCellState(new Coords(1, 2)));
 	}
 	
 	@Test
@@ -101,6 +102,7 @@ public class TestDungeonGameLogic
         Game game = new Game("Rookie", 1);
         game.MoveHero("right");
         assertEquals(new Coords(7, 1), game.GetGuard().GetCoords());
+        assertEquals('G', game.GetCellState(new Coords(7, 1)));
 	}
 	
 	@Test
