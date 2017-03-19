@@ -210,7 +210,7 @@ public class Game implements Serializable
 		switch(level)
 		{
 		case 1:
-			MoveGuard();
+			guard.Move();
 			break;
 		case 2:
 			MoveOgresAndClubs();
@@ -250,14 +250,7 @@ public class Game implements Serializable
 			return null;
 		}
 	}
-	
-	public void MoveGuard()
-	{
-		SetCellState(guard.GetCoords(), (char)0);
-		guard.Move();
-		SetCellState(guard.GetCoords(), guard.GetSymbol());
-	}
-	
+		
 	public void MoveOgresAndClubs()
 	{
 		for (Ogre ogre : ogres)
