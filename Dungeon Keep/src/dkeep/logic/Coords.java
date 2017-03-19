@@ -83,4 +83,25 @@ public class Coords
 	{
 		return adjacentTo(new Coords(x, y));
 	}
+	
+	public Coords left()
+	{
+		return new Coords(x - 1, y);
+	}
+	
+	public Coords right()
+	{
+		return new Coords(x + 1, y);
+	}
+	
+	public Coords up()
+	{
+		return new Coords(x, y - 1);
+	}
+	
+	public Coords down()
+	{
+		return new Coords(x, y + 1);
+	}
+	
 }
