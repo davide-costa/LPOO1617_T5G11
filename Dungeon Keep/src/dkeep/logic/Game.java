@@ -199,14 +199,20 @@ public class Game implements Serializable
 		this.map = map;
 	}
 	
-	public int MoveHero(int x, int y)
+	public int MoveHero(String direction)
 	{
-		Coords dst_coords = new Coords(x, y);
+		if (direction == null)
+			return 0;
+		
+		Coords dst_coords = ComputeDestination(direction);
+		if (dst_coords == null)
+			return 0;
+		
 		if(IsGameOver())
 			return 0;
 		
 		int make_play_value;
-		if (x == -1 && y == 1 && level == 2)
+		if (dst_coords.equals(-1, 1) && level == 2)
 		{
 			SetGameMap(map.NextMap());
 			return 0;
@@ -240,6 +246,31 @@ public class Game implements Serializable
 		
 		RefreshMap();
 		return make_play_value;
+	}
+	
+	private Coords ComputeDestination(String direction)
+	{
+		int x = hero.GetX();
+		int y = hero.GetY();
+		switch (direction)
+		{
+		case "left":
+			x--;
+			break;
+		case "right":
+			x++;
+			break;
+		case "up":
+			y--;
+			break;
+		case "down":
+			y++;
+			break;
+		default:
+			return null;
+		}
+
+		return new Coords(x, y);
 	}
 	
 	public void MoveGuard()

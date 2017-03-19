@@ -124,7 +124,7 @@ public class Gui
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				NewPlay('w');
+				NewPlay("up");
 			}
 		});
 		btnUp.setBounds(690, 254, 115, 26);
@@ -135,7 +135,7 @@ public class Gui
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				NewPlay('s');
+				NewPlay("down");
 			}
 		});
 		btnDown.setBounds(690, 338, 115, 26);
@@ -146,7 +146,7 @@ public class Gui
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				NewPlay('a');
+				NewPlay("left");
 			}
 		});
 		btnLeft.setBounds(609, 296, 115, 26);
@@ -157,7 +157,7 @@ public class Gui
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				NewPlay('d');
+				NewPlay("right");
 			}
 		});
 		btnRight.setBounds(762, 296, 115, 26);
@@ -241,14 +241,12 @@ public class Gui
 		game_area.requestFocusInWindow();
 	}
 	
-	public void NewPlay(char user_input)
+	public void NewPlay(String direction)
 	{
 		char curr_map[][];
 		int move_hero_value;
 
-		ComputeDestination(user_input);
-
-		move_hero_value = game.MoveHero(dst_x, dst_y);
+		move_hero_value = game.MoveHero(direction);
 
 		if (move_hero_value == 1)
 			LableState.setText("NEXT LEVEL");
@@ -278,23 +276,6 @@ public class Gui
 		game_area.requestFocusInWindow();
 	}
 	
-	public void ComputeDestination(char input)
-	{
-		Hero hero = game.GetHero();
-		dst_x = hero.GetX();
-		dst_y = hero.GetY();
-
-		if (input == 'w')
-			dst_y--;
-		else if (input == 'a')
-			dst_x--;
-		else if (input == 's')
-			dst_y++;
-		else if (input == 'd')
-			dst_x++;
-	}
-
-
 	public void InactivateGameButtons()
 	{
 		btnUp.setEnabled(false);

@@ -12,7 +12,7 @@ public class Cli
 
 	public void main()
 	{
-		char user_input;
+		String direction;
 		int move_hero_value;
 		game = new Game(null, 0);
 		char curr_map[][] = game.GetGameMap();
@@ -21,11 +21,11 @@ public class Cli
 		while (true)
 		{
 
-			user_input = WaitForPlay();
+			direction = WaitForPlay();
+			if (direction == null)
+				continue;
 
-			ComputeDestination(user_input);
-
-			move_hero_value = game.MoveHero(dst_x, dst_y);
+			move_hero_value = game.MoveHero(direction);
 
 			if (move_hero_value == 1)
 			{
@@ -58,15 +58,34 @@ public class Cli
 		System.out.println();
 	}
 
-	public static char WaitForPlay()
+	public static String WaitForPlay()
 	{
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
 		while (input.length() == 0)
 			input = scan.nextLine();
 		char ch = input.charAt(0);
+		
+		String direction;
+		switch(ch)
+		{
+		case 'a':
+			direction = "left";
+			break;
+		case 'd':
+			direction = "right";
+			break;
+		case 'w':
+			direction = "up";
+			break;
+		case 's':
+			direction = "down";
+			break;
+		default:
+			direction = null;
+		}
 
-		return ch;
+		return direction;
 	}
 
 	public void ComputeDestination(char input)

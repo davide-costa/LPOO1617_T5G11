@@ -33,16 +33,16 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 		switch(e.getKeyCode())
 		{
 		 case KeyEvent.VK_LEFT: 
-			 gui.NewPlay('a');
+			 gui.NewPlay("left");
 			 break;
 		 case KeyEvent.VK_RIGHT: 
-			 gui.NewPlay('d');
+			 gui.NewPlay("right");
 			 break;
 		 case KeyEvent.VK_UP: 
-			 gui.NewPlay('w');
+			 gui.NewPlay("up");
 			 break;
 		 case KeyEvent.VK_DOWN: 
-			 gui.NewPlay('s');
+			 gui.NewPlay("down");
 			 break;
 		 }
 	}
