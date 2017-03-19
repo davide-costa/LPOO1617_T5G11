@@ -2,9 +2,9 @@ package dkeep.logic;
 
 public class Rookie extends Guard
 {	
-	public Rookie(int x, int y, char symbol)
+	public Rookie(int x, int y)
 	{
-		super(x, y, 'G');
+		super(x, y);
 	}
 	
 	public void Move()

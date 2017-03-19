@@ -6,9 +6,9 @@ public class Drunken extends Guard
 {
 	private int sleep_turns = 0;
 	private int movement_increment = 1;
-	public Drunken(int x, int y, char symbol)
+	public Drunken(int x, int y)
 	{
-		super(x, y, 'G');
+		super(x, y);
 	}
 	
 	public void Move()

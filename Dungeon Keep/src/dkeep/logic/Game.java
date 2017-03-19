@@ -129,11 +129,11 @@ public class Game implements Serializable
 		}
 		
 		if(guard_num == 1)
-			guard = new Rookie(8,1,'G');
+			guard = new Rookie(8, 1);
 		else if(guard_num == 2)
-			guard = new Drunken(8,1,'G');
+			guard = new Drunken(8, 1);
 		else
-			guard = new Suspicious(8,1,'G');
+			guard = new Suspicious(8, 1);
 		
 		SetGameMap(new DungeonMap());
 		RefreshMap();

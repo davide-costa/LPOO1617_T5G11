@@ -9,7 +9,7 @@ public abstract class Guard extends GameCreature implements Serializable
 	protected int y_path[] = {1,1,2,3,4,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,5,4,3,2};
 	
 	
-	public Guard(int x, int y, char symbol)
+	public Guard(int x, int y)
 	{
 		super(x, y, 'G');
 	}

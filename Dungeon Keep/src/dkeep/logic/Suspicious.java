@@ -5,9 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Suspicious extends Guard
 {	
 	private int movement_increment = 1;
-	public Suspicious(int x, int y, char symbol)
+	public Suspicious(int x, int y)
 	{
-		super(x, y, 'G');
+		super(x, y);
 	}
 	
 	public void Move()
