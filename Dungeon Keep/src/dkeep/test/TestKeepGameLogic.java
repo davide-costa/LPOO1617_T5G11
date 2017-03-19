@@ -104,7 +104,8 @@ public class TestKeepGameLogic
 	        game.MoveHero("down");//moves down
 	        Ogre ogre = game.GetOgres().get(0);
 	        curr_coords.Set(ogre.GetCoords());
-	        assertEquals('O', game.GetCellState(curr_coords));
+	        assertEquals('O', game.GetCellState(ogre.GetCoords()));
+	        assertEquals('*', game.GetCellState(ogre.GetClubCoords()));
 	        if (!gameMap.MoveTo(ogre.GetCoords()))
 	        	fail("Ogre moved onto forbiden position.");
 	        else if (!init_coords.adjacentTo(ogre.GetCoords()))
