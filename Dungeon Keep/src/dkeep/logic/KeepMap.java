@@ -10,7 +10,7 @@ public class KeepMap implements GameMap, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 8532318868372099106L;
-	ArrayList<Coords> coords;
+	ArrayList<Coords> mobs_coords;
 
 	public KeepMap()
 	{
@@ -117,6 +117,6 @@ public class KeepMap implements GameMap, Serializable
 	@Override
 	public ArrayList<Coords> GetInitMobsCoords()
 	{
-		return coords;
+		return mobs_coords;
 	}
 }

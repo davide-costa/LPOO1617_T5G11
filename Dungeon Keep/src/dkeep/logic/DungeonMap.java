@@ -11,10 +11,13 @@ public class DungeonMap implements GameMap, Serializable
 	 */
 	private static final long serialVersionUID = -7021531527768779419L;
 	private Coords guard_coords;
+	private ArrayList<Coords> doors_coords;
 
 	public DungeonMap()
 	{
-		
+		doors_coords = new ArrayList<Coords>();
+		doors_coords.add(new Coords(0, 5));
+		doors_coords.add(new Coords(0, 6));
 	}
 	
 	protected char[][] map =  {
@@ -99,17 +102,22 @@ public class DungeonMap implements GameMap, Serializable
 	@Override
 	public void OpenDoors()
 	{
-		map[5][0] = 'S';
-		map[6][0] = 'S';
+		for (Coords door_c : doors_coords)
+		{
+			SetCellState(door_c, 'S');
+		}
 	}
 
 	@Override
 	public boolean IsDoorOpen() 
 	{
-		if(map[5][0] == 'S' || map[6][0] == 'S')
-			return true;
-		else
-			return false;
+		for (Coords door_c : doors_coords)
+		{
+			if (GetCellState(door_c) == 'S')
+				return true;
+		}
+		
+		return false;
 	}
 
 	@Override
