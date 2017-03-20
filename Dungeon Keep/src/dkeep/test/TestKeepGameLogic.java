@@ -26,9 +26,11 @@ public class TestKeepGameLogic
 	{
 		GameMap gameMap = new KeepMapTests();
         Game game = new Game(gameMap, new TestOgre(3,1,3,2));
+        assertEquals('k', game.GetMap().GetCellState(new Coords(1,3)));
         assertEquals(0, game.MoveHero("down")); // move hero down
         assertEquals(0, game.MoveHero("down")); // move hero down to the key cell
-        assertEquals('K', game.GetHero().GetSymbol());   
+        assertEquals('K', game.GetHero().GetSymbol());  
+        assertEquals((char)0, game.GetMap().GetCellState(new Coords(1,3)));
     }
 	
 	@Test

@@ -61,11 +61,13 @@ public class TestDungeonGameLogic
 	{
 		GameMap gameMap = new DungeonMapTests();
 		Game game = new Game(gameMap);
+		assertEquals('k', game.GetMap().GetCellState(new Coords(1,3)));
 		game.MoveHero("down"); // move hero down.
 		game.MoveHero("down"); // move hero down.
 		assertTrue(game.GetMap().IsDoorOpen());
 		assertEquals('S', game.GetGameMap()[3][0]);
 		assertEquals('S', game.GetGameMap()[2][0]);
+		assertEquals((char)0, game.GetMap().GetCellState(new Coords(1,3)));
 	}
 
 	@Test
