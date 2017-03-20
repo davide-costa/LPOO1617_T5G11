@@ -1,6 +1,7 @@
 package dkeep.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class KeepMap implements GameMap, Serializable
@@ -9,7 +10,13 @@ public class KeepMap implements GameMap, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 8532318868372099106L;
+	ArrayList<Coords> coords;
 
+	public KeepMap()
+	{
+		
+	}
+	
 	protected char map[][] = {
 			{ 'X','X','X','X','X','X','X','X','X' },
 			{ 'I',0,0,0,0,0,0,'k','X' },
@@ -105,5 +112,11 @@ public class KeepMap implements GameMap, Serializable
 	public boolean IsDoorOpen() 
 	{
 		return door_open;
+	}
+
+	@Override
+	public ArrayList<Coords> GetInitMobsCoords()
+	{
+		return coords;
 	}
 }

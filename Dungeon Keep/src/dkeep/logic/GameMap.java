@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
+
 public interface GameMap
 {
 	public boolean MoveTo(Coords coords);
@@ -13,4 +15,5 @@ public interface GameMap
 	public void PickUpKey();
 	public void OpenDoors();
 	public boolean IsDoorOpen();
+	public ArrayList<Coords> GetInitMobsCoords();
 }

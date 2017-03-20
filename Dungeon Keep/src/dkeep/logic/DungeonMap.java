@@ -1,6 +1,7 @@
 package dkeep.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DungeonMap implements GameMap, Serializable
@@ -9,7 +10,13 @@ public class DungeonMap implements GameMap, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = -7021531527768779419L;
+	private Coords guard_coords;
 
+	public DungeonMap()
+	{
+		
+	}
+	
 	protected char[][] map =  {
 			{ 'X','X','X','X','X','X','X','X','X','X' },
 			{ 'X',0,0,0,'I',0,'X',0,0,'X' },
@@ -103,5 +110,13 @@ public class DungeonMap implements GameMap, Serializable
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public ArrayList<Coords> GetInitMobsCoords()
+	{
+		ArrayList<Coords> coords = new ArrayList<Coords>();
+		coords.add(guard_coords);
+		return coords;
 	}
 }
