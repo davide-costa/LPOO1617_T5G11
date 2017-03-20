@@ -1,5 +1,6 @@
 package dkeep.test;
 
+import dkeep.logic.Coords;
 import dkeep.logic.DungeonMap;
 
 public class DungeonMapTests extends DungeonMap
@@ -18,6 +19,10 @@ public class DungeonMapTests extends DungeonMap
 				};
 		
 		map = temp_map;
+		for (int i = 0; i < 2; i++)
+			doors_coords.remove(0);
+		doors_coords.add(new Coords(0, 2));
+		doors_coords.add(new Coords(0, 3));		
 	}
 
 	@Override
@@ -25,20 +30,13 @@ public class DungeonMapTests extends DungeonMap
 	{
 		map[3][1] = (char)0;
 	}
-
-	@Override
-	public void OpenDoors()
-	{
-		map[2][0] = 'S';
-		map[3][0] = 'S';
-	}
-
-	@Override
-	public boolean IsDoorOpen() 
-	{
-		if(map[5][0] == 'S' || map[6][0] == 'S')
-			return true;
-		else
-			return false;
-	}
+//
+//	@Override
+//	public boolean IsDoorOpen() 
+//	{
+//		if(map[5][0] == 'S' || map[6][0] == 'S')
+//			return true;
+//		else
+//			return false;
+//	}
 }

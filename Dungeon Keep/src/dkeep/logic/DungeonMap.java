@@ -10,8 +10,8 @@ public class DungeonMap implements GameMap, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = -7021531527768779419L;
-	private Coords guard_coords;
-	private ArrayList<Coords> doors_coords;
+	protected Coords guard_coords;
+	protected ArrayList<Coords> doors_coords;
 
 	public DungeonMap()
 	{
