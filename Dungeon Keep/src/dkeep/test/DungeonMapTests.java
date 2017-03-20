@@ -1,5 +1,7 @@
 package dkeep.test;
 
+import java.util.ArrayList;
+
 import dkeep.logic.Coords;
 import dkeep.logic.DungeonMap;
 
@@ -19,8 +21,7 @@ public class DungeonMapTests extends DungeonMap
 				};
 		
 		map = temp_map;
-		for (int i = 0; i < 2; i++)
-			doors_coords.remove(0);
+		doors_coords = new ArrayList<Coords>();
 		doors_coords.add(new Coords(0, 2));
 		doors_coords.add(new Coords(0, 3));		
 	}
