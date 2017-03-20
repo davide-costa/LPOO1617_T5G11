@@ -51,23 +51,32 @@ public class CustomizableKeepMap extends KeepMap
 		//TODO:
 	}
 	
-	public void RemoveDoorAt(Coords scr_coords)
+	public void RemoveElement(Coords scr_coords)
 	{
 		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		char state = GetCellState(board_c);
+		if(state == 'H')
+			RemoveHero();
+		if(state == 'O')
+			RemoveOgre(board_c);
+		
 		SetCellState(board_c, (char) 0);
 	}
 	
-	public void RemoveWallAt(Coords scr_coords)
+	/*public void RemoveDoorAt(Coords board_c)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		SetCellState(board_c, (char) 0);
+	}
+	
+	public void RemoveWallAt(Coords board_c)
+	{
 		SetCellState(board_c, (char) 0);
 	}
 	
 	public void RemoveKeyAt(Coords scr_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
 		SetCellState(board_c, (char) 0);
-	}
+	}*/
 	
 	public void RemoveOgre(Coords scr_coords)
 	{
