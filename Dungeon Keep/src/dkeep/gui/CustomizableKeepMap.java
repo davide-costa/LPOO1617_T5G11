@@ -40,12 +40,45 @@ public class CustomizableKeepMap extends KeepMap
 	public void AddOgre(Coords scr_coords)
 	{
 		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		mobs_coords.add(board_c);
 		//TODO:
 	}
 	
 	public void AddHero(Coords scr_coords)
 	{
 		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		hero_coords = board_c;
+		//TODO:
+	}
+	
+	public void RemoveDoorAt(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		SetCellState(board_c, (char) 0);
+	}
+	
+	public void RemoveWallAt(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		SetCellState(board_c, (char) 0);
+	}
+	
+	public void RemoveKeyAt(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		SetCellState(board_c, (char) 0);
+	}
+	
+	public void RemoveOgre(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		mobs_coords.remove(board_c);
+		//TODO:
+	}
+	
+	public void RemoveHero()
+	{
+		hero_coords = null;
 		//TODO:
 	}
 	

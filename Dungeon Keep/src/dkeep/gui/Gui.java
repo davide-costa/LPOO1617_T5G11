@@ -82,7 +82,7 @@ public class Gui
 		frame.setBounds(100, 100, 914, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.add(game_area);
+		frame.getContentPane().add(game_area);
 		frame.setVisible(true);
 		
 	
@@ -243,6 +243,17 @@ public class Gui
 		});
 		btnSaveGame.setBounds(66, 24, 115, 29);
 		frame.getContentPane().add(btnSaveGame);
+		
+		JButton CustomizeKeepMap = new JButton("Customize Keep Map");
+		CustomizeKeepMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				CustomizableJFrame cust_frame = new CustomizableJFrame();
+				cust_frame.main(null);
+			}
+		});
+		CustomizeKeepMap.setBounds(667, 42, 161, 29);
+		frame.getContentPane().add(CustomizeKeepMap);
 		game_area.requestFocusInWindow();
 	}
 	
