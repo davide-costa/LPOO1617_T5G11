@@ -13,9 +13,6 @@ import javax.swing.JPanel;
 
 public class KeepMap implements GameMap, Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8532318868372099106L;
 	protected ArrayList<Coords> mobs_coords;
 

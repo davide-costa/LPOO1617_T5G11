@@ -25,6 +25,18 @@ public class CustomizableKeepMap extends KeepMap
 		SetCellState(board_c, 'I');
 	}
 	
+	public void AddWallAt(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		SetCellState(board_c, 'X');
+	}
+	
+	public void AddKeyAt(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		SetCellState(board_c, 'k');
+	}
+	
 	public void SaveTo(String file_path)
 	{
 		try

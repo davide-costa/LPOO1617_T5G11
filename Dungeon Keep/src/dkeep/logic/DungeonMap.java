@@ -6,9 +6,6 @@ import java.util.Arrays;
 
 public class DungeonMap implements GameMap, Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7021531527768779419L;
 	protected Coords guard_coords;
 	protected ArrayList<Coords> doors_coords;
