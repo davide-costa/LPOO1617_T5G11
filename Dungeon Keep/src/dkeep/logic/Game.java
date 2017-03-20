@@ -297,7 +297,7 @@ public class Game implements Serializable
 			return 0;
 		else if (dst_state == 'k')
 		{
-			map.PickUpKey();
+			map.PickUpKey(hero.GetCoords());
 			map.OpenDoors();
 			//TODO maybe remove this switch
 			switch(level)

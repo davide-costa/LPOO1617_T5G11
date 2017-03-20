@@ -21,8 +21,6 @@ public class KeepMapTests extends KeepMap
 				};
 		
 		map = temp_map;
-		keys_coords = new ArrayList<Coords>();
-		keys_coords.add(new Coords(3, 1));
 	}
 	
 //	@Override

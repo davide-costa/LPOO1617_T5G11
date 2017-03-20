@@ -12,14 +12,12 @@ public class DungeonMap implements GameMap, Serializable
 	private static final long serialVersionUID = -7021531527768779419L;
 	protected Coords guard_coords;
 	protected ArrayList<Coords> doors_coords;
-	protected Coords key_coords;
 
 	public DungeonMap()
 	{
 		doors_coords = new ArrayList<Coords>();
 		doors_coords.add(new Coords(0, 5));
 		doors_coords.add(new Coords(0, 6));
-		key_coords = new Coords(7, 8);
 	}
 	
 	protected char[][] map =  {
@@ -96,9 +94,9 @@ public class DungeonMap implements GameMap, Serializable
 	}
 	
 	@Override
-	public void PickUpKey()
+	public void PickUpKey(Coords coords)
 	{
-		SetCellState(key_coords, (char)0);
+		SetCellState(coords, (char)0);
 	}
 
 	@Override

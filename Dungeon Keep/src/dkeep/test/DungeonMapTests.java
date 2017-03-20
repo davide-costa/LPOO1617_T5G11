@@ -23,8 +23,7 @@ public class DungeonMapTests extends DungeonMap
 		map = temp_map;
 		doors_coords = new ArrayList<Coords>();
 		doors_coords.add(new Coords(0, 2));
-		doors_coords.add(new Coords(0, 3));	
-		key_coords = new Coords(1, 3);
+		doors_coords.add(new Coords(0, 3));
 	}
 //
 //	@Override
