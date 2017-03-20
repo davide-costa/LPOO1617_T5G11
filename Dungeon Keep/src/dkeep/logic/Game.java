@@ -11,9 +11,6 @@ import dkeep.test.TestOgre;
 
 public class Game implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -834698263061286937L;
 	private char map_matrix[][];
 	private GameMap map;
@@ -33,7 +30,6 @@ public class Game implements Serializable
 	
 	public Game(String guard_name, int num_of_ogres)
 	{
-		hero = new Hero(1, 1);
 		this.num_of_ogres = num_of_ogres;
 		InitLevel1(guard_name);
 		
@@ -42,6 +38,7 @@ public class Game implements Serializable
 //		InitLevel2();
 	}
 	
+	//used to test dungeon map
 	public Game(GameMap map)
 	{
 		SetGameMap(map);
@@ -51,6 +48,7 @@ public class Game implements Serializable
 		RefreshMap();
 	}
 	
+	//used to test keep map
 	public Game(GameMap map, Ogre ogre)
 	{
 		SetGameMap(map);
@@ -111,7 +109,6 @@ public class Game implements Serializable
 	{
 		level = 1;
 		
-		
 		//Generate the type of guard for this game, if the user didn't specify the one he wants
 		int guard_num;
 		if (guard_name == null || guard_name == "")
@@ -140,6 +137,8 @@ public class Game implements Serializable
 			guard = new Suspicious(8, 1);
 		
 		SetGameMap(new DungeonMap());
+		Coords hero_coords = map.GetHeroCoords();
+		hero = new Hero(hero_coords.GetX(), hero_coords.GetY());
 		RefreshMap();
 	}
 	
@@ -165,7 +164,7 @@ public class Game implements Serializable
 		}
 		
 		level = 2;
-		hero.SetCoords(1, 7);
+		hero.SetCoords(map.GetHeroCoords());
 		RefreshMap();
 	}
 	

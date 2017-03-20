@@ -12,6 +12,7 @@ public interface GameMap
 	public void SetCellState(Coords coords, char symbol);
 	public char GetCellState(Coords coords);
 	public char[][] GetMapCopy();
+	public Coords GetHeroCoords();
 	void PickUpKey(Coords key_coords);
 	public void OpenDoors();
 	public boolean IsDoorOpen();

@@ -37,6 +37,32 @@ public class CustomizableKeepMap extends KeepMap
 		SetCellState(board_c, 'k');
 	}
 	
+	public void AddOgre(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		//TODO:
+	}
+	
+	public void AddHero(Coords scr_coords)
+	{
+		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
+		//TODO:
+	}
+	
+	public boolean IsMapValid()
+	{
+		if(mobs_coords.size() == 0)
+			return false;
+		//if(keys.size() == 0)
+			//return false;
+		if(hero_coords == null)
+			return false;
+		
+		return true;
+		
+		//TODO:
+	}
+	
 	public void SaveTo(String file_path)
 	{
 		try

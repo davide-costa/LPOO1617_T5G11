@@ -8,6 +8,7 @@ public class DungeonMap implements GameMap, Serializable
 {
 	private static final long serialVersionUID = -7021531527768779419L;
 	protected Coords guard_coords;
+	protected Coords hero_coords;
 	protected ArrayList<Coords> doors_coords;
 
 	public DungeonMap()
@@ -15,6 +16,7 @@ public class DungeonMap implements GameMap, Serializable
 		doors_coords = new ArrayList<Coords>();
 		doors_coords.add(new Coords(0, 5));
 		doors_coords.add(new Coords(0, 6));
+		hero_coords = new Coords(1, 1);
 	}
 	
 	protected char[][] map =  {
@@ -123,5 +125,11 @@ public class DungeonMap implements GameMap, Serializable
 		ArrayList<Coords> coords = new ArrayList<Coords>();
 		coords.add(guard_coords);
 		return coords;
+	}
+
+	@Override
+	public Coords GetHeroCoords() 
+	{
+		return hero_coords;
 	}
 }

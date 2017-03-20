@@ -15,11 +15,13 @@ public class KeepMap implements GameMap, Serializable
 {
 	private static final long serialVersionUID = 8532318868372099106L;
 	protected ArrayList<Coords> mobs_coords;
+	protected Coords hero_coords;
 
 	public KeepMap()
 	{
 		try
 		{
+			hero_coords = new Coords(1, 7);
 			LoadMapFromFile("KeepMap");
 		}
 		catch(IOException | ClassNotFoundException c) 
@@ -130,6 +132,12 @@ public class KeepMap implements GameMap, Serializable
 	public ArrayList<Coords> GetInitMobsCoords()
 	{
 		return mobs_coords;
+	}
+	
+	@Override
+	public Coords GetHeroCoords() 
+	{
+		return hero_coords;
 	}
 	
 	private void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
