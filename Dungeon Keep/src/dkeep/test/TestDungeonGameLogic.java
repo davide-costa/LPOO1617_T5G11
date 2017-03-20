@@ -52,6 +52,7 @@ public class TestDungeonGameLogic
 		Game game = new Game(gameMap);
 		game.MoveHero("down"); // move hero down.
 		game.MoveHero("left"); // move hero left.
+		assertTrue(!game.GetMap().IsDoorOpen());
 		assertEquals(new Coords(1, 2), game.GetHero().GetCoords());
 	}
 	
@@ -62,6 +63,7 @@ public class TestDungeonGameLogic
 		Game game = new Game(gameMap);
 		game.MoveHero("down"); // move hero down.
 		game.MoveHero("down"); // move hero down.
+		assertTrue(game.GetMap().IsDoorOpen());
 		assertEquals('S', game.GetGameMap()[3][0]);
 		assertEquals('S', game.GetGameMap()[2][0]);
 	}
