@@ -38,8 +38,8 @@ public class Game implements Serializable
 		InitLevel1(guard_name);
 		
 		//debugging
-//		SetGameMap(map.NextMap());
-//		InitLevel2();
+		SetGameMap(map.NextMap());
+		InitLevel2();
 	}
 	
 	public Game(GameMap map)
@@ -154,14 +154,14 @@ public class Game implements Serializable
 		
 		if (num_of_ogres == 0)
 		{
-			int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
-			
-			Ogre curr_ogre;
-			for (int i = 0; i < randomNum; i++)
-			{
-				curr_ogre = new Ogre(ogre_init_spawn_x + i, ogre_init_spawn_y, club_init_spawn_x + i, club_init_spawn_y);
-				ogres.add(curr_ogre);
-			}
+			num_of_ogres = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+		}
+		
+		Ogre curr_ogre;
+		for (int i = 0; i < num_of_ogres; i++)
+		{
+			curr_ogre = new Ogre(ogre_init_spawn_x + i, ogre_init_spawn_y, club_init_spawn_x + i, club_init_spawn_y);
+			ogres.add(curr_ogre);
 		}
 		
 		level = 2;
