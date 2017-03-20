@@ -1,8 +1,15 @@
 package dkeep.logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class KeepMap implements GameMap, Serializable
 {
@@ -14,7 +21,15 @@ public class KeepMap implements GameMap, Serializable
 
 	public KeepMap()
 	{
-		
+		try
+		{
+			LoadMapFromFile("KeepMap");
+		}
+		catch(IOException | ClassNotFoundException c) 
+	    {
+			//do nothing, leave the default map
+			return;	
+	    }
 	}
 	
 	protected char map[][] = {
@@ -118,5 +133,15 @@ public class KeepMap implements GameMap, Serializable
 	public ArrayList<Coords> GetInitMobsCoords()
 	{
 		return mobs_coords;
+	}
+	
+	private void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
+	{
+		FileInputStream fileIn = new FileInputStream("GameStateFile");
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		KeepMap t = this;
+		t = (KeepMap) in.readObject();
+		in.close();
+		fileIn.close();
 	}
 }
