@@ -1,20 +1,34 @@
 package dkeep.logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 public class KeepMap implements GameMap, Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8532318868372099106L;
 	protected ArrayList<Coords> mobs_coords;
+	protected Coords hero_coords;
 
 	public KeepMap()
 	{
-		
+		try
+		{
+			hero_coords = new Coords(1, 7);
+			LoadMapFromFile("KeepMap");
+		}
+		catch(IOException | ClassNotFoundException c) 
+	    {
+			//do nothing, leave the default map
+			return;	
+	    }
 	}
 	
 	protected char map[][] = {
@@ -118,5 +132,21 @@ public class KeepMap implements GameMap, Serializable
 	public ArrayList<Coords> GetInitMobsCoords()
 	{
 		return mobs_coords;
+	}
+	
+	@Override
+	public Coords GetHeroCoords() 
+	{
+		return hero_coords;
+	}
+	
+	private void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
+	{
+		FileInputStream fileIn = new FileInputStream("GameStateFile");
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		KeepMap t = this;
+		t = (KeepMap) in.readObject();
+		in.close();
+		fileIn.close();
 	}
 }
