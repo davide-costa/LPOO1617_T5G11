@@ -1,30 +1,35 @@
 package dkeep.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GameArea extends JPanel implements MouseListener, MouseMotionListener, KeyListener
 {
 	private Gui gui;
+	private BufferedImage ogre_image;
 	
 	public GameArea(Gui gui)
 	{
 		this.gui = gui;
-		setBounds(43, 86, 527, 399);
-		addKeyListener(this);
+		ogre_image = loadImage("src/dkeep/gui/ogre.png");
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g); // clear background
-		
+		 g.drawImage(ogre_image, 20, 20, this);
 	}
 	
 	@Override
@@ -130,4 +135,19 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 		//	game_area.append("\n");
 		}
 	}
+	
+	 public BufferedImage loadImage(String path) 
+	 {
+	        BufferedImage image = null;
+	        try 
+	        {
+	            image = ImageIO.read(new File(path));
+	        }
+	        catch(IOException e) 
+	        {
+	            // May as well use what is given...
+	            System.out.println("read error:" + e.getMessage());
+	        }
+	        return image;
+	    }
 }

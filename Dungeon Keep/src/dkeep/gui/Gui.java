@@ -75,10 +75,17 @@ public class Gui
 	 */
 	private void initialize() 
 	{
+		//Create game_area
+		game_area = new GameArea(this);
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 914, 625);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.add(game_area);
+		frame.setVisible(true);
+		
+	
 		
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
