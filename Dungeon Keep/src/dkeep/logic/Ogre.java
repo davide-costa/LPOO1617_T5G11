@@ -3,8 +3,12 @@ package dkeep.logic;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ogre extends GameCreature implements Serializable
+public class Ogre extends GameCreature
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6436743285118414030L;
 	private static char default_symbol = 'O';
 	private static char stunned_symbol = '8';
 	private static char owns_key_symbol = '$';

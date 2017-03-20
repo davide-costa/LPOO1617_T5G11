@@ -11,6 +11,10 @@ import dkeep.test.TestOgre;
 
 public class Game implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -834698263061286937L;
 	private char map_matrix[][];
 	private GameMap map;
 	private int level;

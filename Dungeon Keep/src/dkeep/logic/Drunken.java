@@ -4,6 +4,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Drunken extends Guard
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int sleep_turns = 0;
 	private int movement_increment = 1;
 	public Drunken(int x, int y)

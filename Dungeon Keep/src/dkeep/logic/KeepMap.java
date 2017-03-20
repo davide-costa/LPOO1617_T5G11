@@ -5,6 +5,11 @@ import java.util.Arrays;
 
 public class KeepMap implements GameMap, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8532318868372099106L;
+
 	protected char map[][] = {
 			{ 'X','X','X','X','X','X','X','X','X' },
 			{ 'I',0,0,0,0,0,0,'k','X' },

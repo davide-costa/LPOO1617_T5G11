@@ -5,6 +5,11 @@ import java.util.Arrays;
 
 public class DungeonMap implements GameMap, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7021531527768779419L;
+
 	protected char[][] map =  {
 			{ 'X','X','X','X','X','X','X','X','X','X' },
 			{ 'X',0,0,0,'I',0,'X',0,0,'X' },

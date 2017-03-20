@@ -1,7 +1,13 @@
 package dkeep.logic;
 
-public class GameCreature
+import java.io.Serializable;
+
+public class GameCreature implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5210983083815627858L;
 	protected Coords coords;
 	protected char symbol;
 	

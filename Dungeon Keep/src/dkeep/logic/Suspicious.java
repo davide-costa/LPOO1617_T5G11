@@ -4,6 +4,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Suspicious extends Guard
 {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6323767492698851852L;
 	private int movement_increment = 1;
 	public Suspicious(int x, int y)
 	{

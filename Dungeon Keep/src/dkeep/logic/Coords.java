@@ -1,7 +1,13 @@
 package dkeep.logic;
 
-public class Coords
+import java.io.Serializable;
+
+public class Coords implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8723525205856284319L;
 	private int x;
 	private int y;
 	
