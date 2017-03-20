@@ -1,5 +1,8 @@
 package dkeep.test;
 
+import java.util.ArrayList;
+
+import dkeep.logic.Coords;
 import dkeep.logic.KeepMap;
 
 public class KeepMapTests extends KeepMap
@@ -18,12 +21,14 @@ public class KeepMapTests extends KeepMap
 				};
 		
 		map = temp_map;
+		keys_coords = new ArrayList<Coords>();
+		keys_coords.add(new Coords(3, 1));
 	}
 	
-	@Override
-	public void PickUpKey()
-	{
-		map[3][1] = (char)0;
-		
-	}
+//	@Override
+//	public void PickUpKey()
+//	{
+//		map[3][1] = (char)0;
+//		
+//	}
 }

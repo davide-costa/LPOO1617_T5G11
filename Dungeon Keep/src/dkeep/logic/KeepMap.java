@@ -10,11 +10,13 @@ public class KeepMap implements GameMap, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 8532318868372099106L;
-	ArrayList<Coords> mobs_coords;
+	protected ArrayList<Coords> mobs_coords;
+	protected ArrayList<Coords> keys_coords;
 
 	public KeepMap()
 	{
-		
+		keys_coords = new ArrayList<Coords>();
+		keys_coords.add(new Coords(7, 1));
 	}
 	
 	protected char map[][] = {
@@ -98,7 +100,10 @@ public class KeepMap implements GameMap, Serializable
 	@Override
 	public void PickUpKey()
 	{
-		map[1][7] = (char)0;
+		for (Coords key_c : keys_coords)
+		{
+			SetCellState(key_c, (char)0);
+		}
 	}
 
 	@Override
