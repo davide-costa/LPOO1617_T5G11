@@ -45,7 +45,7 @@ public class Gui
 	JButton btnDown;
 	JButton btnLeft;
 	JButton btnRight;
-	public Game game;
+	private Game game;
 
 	/**
 	 * Launch the application.
@@ -82,7 +82,9 @@ public class Gui
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
-	
+		//Create game_area
+		game_area = new GameArea(this);
+		game_area.setBounds(36,89,785,622);
 		
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
@@ -110,13 +112,14 @@ public class Gui
 				String personality_name = (String) JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
 				game = new Game(personality_name, num_ogres);
 				LableState.setText("Game started");
-				game_area.DrawBoard(game.GetGameMap());
-				ActivateGameButtons();
 				
+			
+				game_area.SetGame(game);
 				frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
 				game_area.repaint();
 				
+				ActivateGameButtons();
 				//TODO:no activate game buttons deve estar o saveGame
 			}
 		});
@@ -211,7 +214,6 @@ public class Gui
 			      }
 			     
 			    LableState.setText("Game started");
-				game_area.DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
 				game_area.requestFocusInWindow();
 			}
@@ -253,15 +255,10 @@ public class Gui
 		});
 		CustomizeKeepMap.setBounds(911, 44, 161, 29);
 		frame.getContentPane().add(CustomizeKeepMap);
-		//Create game_area
-		game_area = new GameArea(this);
-		game_area.setBounds(36,89,785,622);
-		
 	}
 	
 	public void NewPlay(String direction)
 	{
-		char curr_map[][];
 		int move_hero_value;
 
 		move_hero_value = game.MoveHero(direction);
@@ -270,8 +267,6 @@ public class Gui
 			LableState.setText("NEXT LEVEL");
 		else if (move_hero_value == -1)
 		{
-			curr_map = game.GetGameMap();
-			game_area.DrawBoard(curr_map);
 			LableState.setText("END OF GAME...YOU LOOSE");
 			InactivateGameButtons();
 			return;
@@ -279,14 +274,10 @@ public class Gui
 
 		if (game.IsEndOfGame())
 		{
-			curr_map = game.GetGameMap();
-			game_area.DrawBoard(curr_map);
 			LableState.setText("END OF GAME...YOU WIN");
 			InactivateGameButtons();
 		}
 		
-		curr_map = game.GetGameMap();
-		game_area.DrawBoard(curr_map);
 		if(!game.IsGameOver())
 			LableState.setText("You can play");
 		game_area.repaint();

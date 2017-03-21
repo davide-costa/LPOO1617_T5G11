@@ -14,12 +14,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+import dkeep.logic.Game;
 import dkeep.logic.GameMap;
 
-public class GameArea extends JPanel implements MouseListener, MouseMotionListener, KeyListener
+public class GameArea extends JPanel implements KeyListener
 {
 	private Gui gui;
+	private Game game;
 	private BufferedImage ogre_image;
 	private BufferedImage hero_image;
 	private BufferedImage guard_image;
@@ -27,14 +30,13 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 	private BufferedImage key_image;
 	private BufferedImage door_open_image;
 	private BufferedImage door_closed_image;
-	private int curr_x_pos;
-	private int curr_y_pos;
+	private int images_x_length = 40;
+	private int images_y_length = 40;
 	
 	public GameArea(Gui gui)
 	{
 		this.gui = gui;
 		ogre_image = loadImage("img/ogre.png");
-		ogre_image.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 		hero_image = loadImage("img/hero.png");
 		guard_image = loadImage("img/guard.png");
 		wall_image = loadImage("img/wall.png");
@@ -43,31 +45,35 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 		door_closed_image = loadImage("img/door_closed.png");
 	}
 	
+	public void SetGame(Game game)
+	{
+		this.game = game;
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) 
 	{
-		char map[][] = gui.game.GetGameMap();
+		char map[][] = game.GetGameMap();
+		int curr_y_pos = 0;
+		int curr_x_pos = 0;
 		int map_x_size = map[0].length;
 		int map_y_size = map.length;
-		String character;
 		
 		super.paintComponent(g); // clear background
-		
-		curr_y_pos = 0;
-		curr_x_pos = 0;
 		for (int i = 0; i < map_y_size; i++)
 		{
 			for (int j = 0; j < map_x_size; j++)
-				DrawElement(g, map[i][j]); 
+			{
+				DrawElement(g, map[i][j], curr_x_pos, curr_y_pos);
+				curr_x_pos += images_x_length;
+			}
 			
-			curr_y_pos += 30;
+			curr_y_pos += images_y_length;
 			curr_x_pos = 0;
 		}
-			
-		// g.drawImage(ogre_image, 20, 20, this);
 	}
 
-	public void DrawElement(Graphics g, char element)
+	public void DrawElement(Graphics g, char element, int curr_x_pos, int curr_y_pos)
 	{
 		switch(element)
 		{
@@ -90,8 +96,6 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 			g.drawImage(key_image, curr_x_pos, curr_y_pos, null);	
 			break;
 		}
-		
-		curr_x_pos += 30;
 	}
 	
 	
@@ -101,15 +105,19 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 		switch(e.getKeyCode())
 		{
 		 case KeyEvent.VK_LEFT: 
+			 System.out.println("left");
 			 gui.NewPlay("left");
 			 break;
 		 case KeyEvent.VK_RIGHT: 
+			 System.out.println("right");
 			 gui.NewPlay("right");
 			 break;
 		 case KeyEvent.VK_UP: 
+			 System.out.println("up");
 			 gui.NewPlay("up");
 			 break;
 		 case KeyEvent.VK_DOWN: 
+			 System.out.println("down");
 			 gui.NewPlay("down");
 			 break;
 		 }
@@ -129,76 +137,20 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 		
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent arg0) 
-	{
-		
-	}
 
-	@Override
-	public void mouseEntered(MouseEvent arg0)
-	{
-		
-		
-		
-	}
 
-	@Override
-	public void mouseExited(MouseEvent arg0) 
+	private void AddElementAt(int x, int y) 
 	{
 		
 		
 	}
 
-	@Override
-	public void mousePressed(MouseEvent arg0)
+	private void RemoveElementAt(int x, int y)
 	{
 		
 		
 	}
 
-	@Override
-	public void mouseReleased(MouseEvent arg0) 
-	{
-		
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) 
-	{
-		
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) 
-	{
-		
-		
-	}
-	
-	public void DrawBoard(char curr_map[][])
-	{
-		int map_x_size = curr_map[0].length;
-		int map_y_size = curr_map.length;
-		String character;
-		
-		//game_area.setText(null);
-		for (int i = 0; i < map_y_size; i++)
-		{
-			for (int j = 0; j < map_x_size; j++)
-			{
-				if(curr_map[i][j] == 0)
-					character = "    ";
-				else
-					character = curr_map[i][j] + " ";
-				//game_area.append(character);
-			}
-		//	game_area.append("\n");
-		}
-	}
-	
 	 public BufferedImage loadImage(String path) 
 	 {
 	        BufferedImage image = null;
