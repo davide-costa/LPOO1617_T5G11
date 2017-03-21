@@ -10,7 +10,6 @@ public class Main {
 		//cli.main();
 
 		Gui gui = new Gui();
-		gui.main(args);
 	}
 
 }

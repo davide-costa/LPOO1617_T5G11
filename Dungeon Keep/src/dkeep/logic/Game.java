@@ -28,6 +28,11 @@ public class Game implements Serializable
 		return cell1.adjacentTo(cell2);
 	}
 	
+	/**  
+	 * Constructor of game class for the Gui interface.  
+     * @param guard_name, is the name of the guard for that game instance, chosen by the user
+	 * @param num_of_ogres, is the number of ogres for that game instance, chosen by the user
+	 */  
 	public Game(String guard_name, int num_of_ogres)
 	{
 		this.num_of_ogres = num_of_ogres;
@@ -38,7 +43,10 @@ public class Game implements Serializable
 		InitLevel2();
 	}
 	
-	//used to test dungeon map
+	/**  
+	 * Constructor of game class used in dungeon map tests.
+     * @param map is the map in which the tests will occur
+	 */  
 	public Game(GameMap map)
 	{
 		SetGameMap(map);
