@@ -13,8 +13,8 @@ import javax.swing.JTextArea;
 
 public class CustomizableJFrame extends JFrame
 {
-
 	private JPanel contentPane;
+	private String element_selected;
 
 	/**
 	 * Launch the application.
@@ -55,13 +55,20 @@ public class CustomizableJFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
+				element_selected = "ogre";
 			}
 		});
 		btnOgre.setBounds(979, 238, 115, 29);
 		contentPane.add(btnOgre);
 		
 		JButton btnWall = new JButton("Wall");
+		btnWall.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				element_selected = "ogre";
+			}
+		});
 		btnWall.setBounds(979, 328, 115, 29);
 		contentPane.add(btnWall);
 		
