@@ -322,7 +322,7 @@ public class Game implements Serializable
 		return 0;
 	}
 	
-	public void TryStunOgres() 
+	private void TryStunOgres() 
 	{
 		for(Ogre ogre: ogres)
 		{
@@ -331,7 +331,7 @@ public class Game implements Serializable
 		}
 	}
 
-	public boolean WasCaught()
+	private boolean WasCaught()
 	{
 		switch (level)
 		{
@@ -349,7 +349,7 @@ public class Game implements Serializable
 		return false;
 	}
 	
-	public boolean WasCaughtByMob(GameCreature mob)
+	private boolean WasCaughtByMob(GameCreature mob)
 	{
 		if (mob.GetSymbol() == 'g' || mob.GetSymbol() == '8')
 			return false;
@@ -357,7 +357,7 @@ public class Game implements Serializable
 		return CellsAreAdjacent(hero.GetCoords(), mob.GetCoords());
 	}
 	
-	public boolean WasCaughtByClub(Ogre ogre)
+	private boolean WasCaughtByClub(Ogre ogre)
 	{
 		return CellsAreAdjacent(hero.GetCoords(), ogre.GetClubCoords());
 	}
