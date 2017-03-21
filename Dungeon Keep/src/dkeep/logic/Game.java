@@ -59,13 +59,12 @@ public class Game implements Serializable
 		RefreshMap();
 	}
 	
-	
 	public char GetCellState(Coords coords)
 	{
 		return map_matrix[coords.GetY()][coords.GetX()];
 	}
 	
-	public void SetCellState(Coords coords, char symbol)
+	private void SetCellState(Coords coords, char symbol)
 	{
 		map_matrix[coords.GetY()][coords.GetX()] = symbol;
 	}
@@ -85,7 +84,7 @@ public class Game implements Serializable
 		return guard;
 	}
 	
-	public void RefreshMap()
+	private void RefreshMap()
 	{
 		map_matrix = map.GetMapCopy();
 		SetCellState(hero.GetCoords(), hero.GetSymbol());
@@ -105,7 +104,7 @@ public class Game implements Serializable
 		}
 	}
 	
-	public void InitLevel1(String guard_name)
+	private void InitLevel1(String guard_name)
 	{
 		level = 1;
 		
@@ -142,7 +141,7 @@ public class Game implements Serializable
 		RefreshMap();
 	}
 	
-	public void InitLevel2()
+	private void InitLevel2()
 	{
 		int ogre_init_spawn_x = 1;
 		int ogre_init_spawn_y = 1;
@@ -183,7 +182,7 @@ public class Game implements Serializable
 		return hero;
 	}
 	
-	public void SetGameMap(GameMap map)
+	private void SetGameMap(GameMap map)
 	{
 		this.map = map;
 	}
@@ -254,7 +253,7 @@ public class Game implements Serializable
 		}
 	}
 		
-	public void MoveOgresAndClubs()
+	private void MoveOgresAndClubs()
 	{
 		for (Ogre ogre : ogres)
 		{
@@ -278,7 +277,7 @@ public class Game implements Serializable
 		
 	}
 	
-	public int MakePlay(Coords coords)
+	private int MakePlay(Coords coords)
 	{
 		hero.SetCoords(coords);
 		
