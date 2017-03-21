@@ -75,14 +75,11 @@ public class Gui
 	 */
 	private void initialize() 
 	{
-		//Create game_area
-		game_area = new GameArea(this);
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 914, 625);
+		frame.setBounds(100, 100, 1152, 851);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(game_area);
 		frame.setVisible(true);
 		
 	
@@ -116,12 +113,13 @@ public class Gui
 				game_area.DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
 				
+				game_area.repaint();
 				game_area.requestFocusInWindow();
 				
 				//TODO:no activate game buttons deve estar o saveGame
 			}
 		});
-		btnNewGame.setBounds(690, 120, 115, 29);
+		btnNewGame.setBounds(928, 123, 115, 29);
 		frame.getContentPane().add(btnNewGame);
 		
 		btnUp = new JButton("Up");
@@ -132,7 +130,7 @@ public class Gui
 				NewPlay("up");
 			}
 		});
-		btnUp.setBounds(690, 254, 115, 26);
+		btnUp.setBounds(928, 257, 115, 26);
 		frame.getContentPane().add(btnUp);
 		
 		btnDown = new JButton("Down");
@@ -143,7 +141,7 @@ public class Gui
 				NewPlay("down");
 			}
 		});
-		btnDown.setBounds(690, 338, 115, 26);
+		btnDown.setBounds(928, 341, 115, 26);
 		frame.getContentPane().add(btnDown);
 		
 		btnLeft = new JButton("Left");
@@ -154,7 +152,7 @@ public class Gui
 				NewPlay("left");
 			}
 		});
-		btnLeft.setBounds(609, 296, 115, 26);
+		btnLeft.setBounds(847, 299, 115, 26);
 		frame.getContentPane().add(btnLeft);
 		
 		btnRight = new JButton("Right");
@@ -165,13 +163,13 @@ public class Gui
 				NewPlay("right");
 			}
 		});
-		btnRight.setBounds(762, 296, 115, 26);
+		btnRight.setBounds(1000, 299, 115, 26);
 		frame.getContentPane().add(btnRight);
 		
 		LableState = new JLabel("You can start a new game");
-		LableState.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		LableState.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		LableState.setHorizontalAlignment(SwingConstants.LEFT);
-		LableState.setBounds(43, 517, 616, 20);
+		LableState.setBounds(66, 727, 628, 52);
 		frame.getContentPane().add(LableState);
 		
 		JButton btnExit = new JButton("Exit");
@@ -181,7 +179,7 @@ public class Gui
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(690, 513, 115, 29);
+		btnExit.setBounds(928, 516, 115, 29);
 		frame.getContentPane().add(btnExit);
 		
 		btnLoadGame = new JButton("Load Game");
@@ -252,8 +250,12 @@ public class Gui
 				cust_frame.main(null);
 			}
 		});
-		CustomizeKeepMap.setBounds(667, 42, 161, 29);
+		CustomizeKeepMap.setBounds(911, 44, 161, 29);
 		frame.getContentPane().add(CustomizeKeepMap);
+		//Create game_area
+		game_area = new GameArea(this);
+		game_area.setBounds(36,89,785,622);
+		frame.getContentPane().add(game_area);
 		game_area.requestFocusInWindow();
 	}
 	

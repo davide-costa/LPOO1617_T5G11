@@ -22,7 +22,7 @@ public class GameArea extends JPanel implements MouseListener, MouseMotionListen
 	public GameArea(Gui gui)
 	{
 		this.gui = gui;
-		ogre_image = loadImage("src/dkeep/gui/ogre.png");
+		ogre_image = loadImage("img/ogre.png");
 	}
 	
 	@Override
