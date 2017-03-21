@@ -37,6 +37,7 @@ public class GameArea extends JPanel implements KeyListener
 	public GameArea(Gui gui)
 	{
 		this.gui = gui;
+		addKeyListener(this);
 		LoadImages();
 	}
 	
@@ -121,19 +122,15 @@ public class GameArea extends JPanel implements KeyListener
 		switch(e.getKeyCode())
 		{
 		 case KeyEvent.VK_LEFT: 
-			 System.out.println("left");
 			 gui.NewPlay("left");
 			 break;
 		 case KeyEvent.VK_RIGHT: 
-			 System.out.println("right");
 			 gui.NewPlay("right");
 			 break;
 		 case KeyEvent.VK_UP: 
-			 System.out.println("up");
 			 gui.NewPlay("up");
 			 break;
 		 case KeyEvent.VK_DOWN: 
-			 System.out.println("down");
 			 gui.NewPlay("down");
 			 break;
 		 }
@@ -142,29 +139,25 @@ public class GameArea extends JPanel implements KeyListener
 	@Override
 	public void keyReleased(KeyEvent e) 
 	{
-
-		
+	
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) 
 	{
 	
-		
 	}
 
 
 
 	private void AddElementAt(int x, int y) 
 	{
-		
-		
+			
 	}
 
 	private void RemoveElementAt(int x, int y)
 	{
-		
-		
+			
 	}
 
 	 public BufferedImage loadImage(String path) 
