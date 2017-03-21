@@ -66,25 +66,42 @@ public class CustomizableJFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				element_selected = "ogre";
+				element_selected = "wall";
 			}
 		});
 		btnWall.setBounds(979, 328, 115, 29);
 		contentPane.add(btnWall);
 		
 		JButton btnDoor = new JButton("Door");
-		btnDoor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnDoor.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				element_selected = "door";
 			}
 		});
 		btnDoor.setBounds(979, 373, 115, 29);
 		contentPane.add(btnDoor);
 		
 		JButton btnHero = new JButton("Hero");
+		btnHero.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				element_selected = "hero";
+			}
+		});
 		btnHero.setBounds(979, 283, 115, 29);
 		contentPane.add(btnHero);
 		
 		JButton btnKey = new JButton("Key");
+		btnKey.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				element_selected = "key";
+			}
+		});
 		btnKey.setBounds(979, 418, 115, 29);
 		contentPane.add(btnKey);
 		

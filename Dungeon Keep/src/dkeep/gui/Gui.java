@@ -45,7 +45,7 @@ public class Gui
 	JButton btnDown;
 	JButton btnLeft;
 	JButton btnRight;
-	private Game game;
+	public Game game;
 
 	/**
 	 * Launch the application.
@@ -113,8 +113,9 @@ public class Gui
 				game_area.DrawBoard(game.GetGameMap());
 				ActivateGameButtons();
 				
-				game_area.repaint();
+				frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
+				game_area.repaint();
 				
 				//TODO:no activate game buttons deve estar o saveGame
 			}
@@ -255,8 +256,7 @@ public class Gui
 		//Create game_area
 		game_area = new GameArea(this);
 		game_area.setBounds(36,89,785,622);
-		frame.getContentPane().add(game_area);
-		game_area.requestFocusInWindow();
+		
 	}
 	
 	public void NewPlay(String direction)
