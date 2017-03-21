@@ -45,8 +45,8 @@ public class Game implements Serializable
 	
 	/**  
 	 * Constructor of game class used in dungeon map tests.
-     * @param map is the map in which the tests will occur
-	 */  
+     * @param map The the map in which the tests will occur
+	 */
 	public Game(GameMap map)
 	{
 		SetGameMap(map);
@@ -56,7 +56,11 @@ public class Game implements Serializable
 		RefreshMap();
 	}
 	
-	//used to test keep map
+	/**  
+	 * Constructor of game class used in keep map tests.
+     * @param map The map in which the tests will occur
+     * @param ogre The Ogre object used in the tests.
+	 */
 	public Game(GameMap map, Ogre ogre)
 	{
 		SetGameMap(map);
@@ -174,7 +178,10 @@ public class Game implements Serializable
 		hero.SetCoords(map.GetHeroCoords());
 		RefreshMap();
 	}
-	
+	/**
+	 * Returns the map used in the game in the form of a bidimensional array.
+	 * @return a bidimensional array that represents the map.
+	 */
 	public char[][] GetGameMap()
 	{
 		return map_matrix;
