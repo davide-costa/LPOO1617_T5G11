@@ -39,14 +39,14 @@ public class Game implements Serializable
 		InitLevel1(guard_name);
 		
 		//debugging
-		SetGameMap(map.NextMap());
-		InitLevel2();
+//		SetGameMap(map.NextMap());
+//		InitLevel2();
 	}
 	
 	/**  
 	 * Constructor of game class used in dungeon map tests.
-     * @param map is the map in which the tests will occur
-	 */  
+     * @param map The the map in which the tests will occur
+	 */
 	public Game(GameMap map)
 	{
 		SetGameMap(map);
@@ -56,7 +56,11 @@ public class Game implements Serializable
 		RefreshMap();
 	}
 	
-	//used to test keep map
+	/**  
+	 * Constructor of game class used in keep map tests.
+     * @param map The map in which the tests will occur
+     * @param ogre The Ogre object used in the tests.
+	 */
 	public Game(GameMap map, Ogre ogre)
 	{
 		SetGameMap(map);
@@ -174,17 +178,26 @@ public class Game implements Serializable
 		hero.SetCoords(map.GetHeroCoords());
 		RefreshMap();
 	}
-	
+	/**
+	 * Returns the map used in the game in the form of a bidimensional array.
+	 * @return a bidimensional array that represents the map.
+	 */
 	public char[][] GetGameMap()
 	{
 		return map_matrix;
 	}
-	
+	/**
+	 * Returns the Map object used in the game to reperesent the game map.
+	 * @return the Map object.
+	 */
 	public GameMap GetMap()
 	{
 		return map;
 	}
-	
+	/**
+	 * Returns the object Hero used in the game.
+	 * @return the Hero object.
+	 */
 	public Hero GetHero()
 	{
 		return hero;
@@ -194,7 +207,12 @@ public class Game implements Serializable
 	{
 		this.map = map;
 	}
-	
+	/**
+	 * Function that establishes the interface between Cli and Gui classes on each game iteration.
+	 * The Cli and Gui read the input from user and call this function to make a new game play.
+	 * @param direction A string containing information to inform the direction in which the hero should move. Its should be "left", "right", "up" or "down". (Any other value has no effect and is ignored by the Game class)
+	 * @return true if the game has ended with victory, false if not.
+	 */
 	public int MoveHero(String direction)
 	{
 		if (direction == null)
@@ -362,11 +380,19 @@ public class Game implements Serializable
 		return CellsAreAdjacent(hero.GetCoords(), ogre.GetClubCoords());
 	}
 	
+	/**
+	 * Function that evaluates the state of the game, tells whether it has ended with victory or not.
+	 * @return true if the game has ended with victory, false if not.
+	 */
 	public boolean IsEndOfGame()
 	{
 		return map == null;
 	}
-
+	
+	/**
+	 * Function that evaluates the state of the game, tells whether it is over or not. The game is over when it ends with defeat or victory.
+	 * @return true if the game is over, false if not.
+	 */
 	public boolean IsGameOver()
 	{
 		return map == null || game_over == true;
