@@ -28,6 +28,7 @@ public class GameArea extends JPanel implements KeyListener
 	private BufferedImage guard_image;
 	private BufferedImage wall_image;
 	private BufferedImage key_image;
+	private BufferedImage club_image;
 	private BufferedImage door_open_image;
 	private BufferedImage door_closed_image;
 	private int images_x_length = 40;
@@ -36,6 +37,11 @@ public class GameArea extends JPanel implements KeyListener
 	public GameArea(Gui gui)
 	{
 		this.gui = gui;
+		LoadImages();
+	}
+	
+	public void LoadImages()
+	{
 		ogre_image = loadImage("img/ogre.png");
 		hero_image = loadImage("img/hero.png");
 		guard_image = loadImage("img/guard.png");
@@ -43,6 +49,7 @@ public class GameArea extends JPanel implements KeyListener
 		key_image = loadImage("img/key.png");
 		door_open_image = loadImage("img/door_opened.png");
 		door_closed_image = loadImage("img/door_closed.png");
+		club_image = loadImage("img/club.png");
 	}
 	
 	public void SetGame(Game game)
@@ -81,10 +88,10 @@ public class GameArea extends JPanel implements KeyListener
 			g.drawImage(wall_image, curr_x_pos, curr_y_pos, null);
 			break;
 		case 'I':
-			g.drawImage(door_open_image, curr_x_pos, curr_y_pos, null);	
+			g.drawImage(door_closed_image, curr_x_pos, curr_y_pos, null);	
 			break;
-		case 'S':
-			g.drawImage(door_closed_image, curr_x_pos, curr_y_pos, null);
+		case 'H':
+			g.drawImage(hero_image, curr_x_pos, curr_y_pos, null);	
 			break;
 		case 'G':
 			g.drawImage(guard_image, curr_x_pos, curr_y_pos, null);	
@@ -92,8 +99,17 @@ public class GameArea extends JPanel implements KeyListener
 		case 'O':
 			g.drawImage(ogre_image, curr_x_pos, curr_y_pos, null);
 			break;
+		case '*':
+			g.drawImage(club_image, curr_x_pos, curr_y_pos, null);
+			break;
 		case 'k':
-			g.drawImage(key_image, curr_x_pos, curr_y_pos, null);	
+			g.drawImage(key_image, curr_x_pos, curr_y_pos, null);
+			break;
+		case 'S':
+			g.drawImage(door_open_image, curr_x_pos, curr_y_pos, null);
+			break;
+		case 'K':
+			//TODO:
 			break;
 		}
 	}
