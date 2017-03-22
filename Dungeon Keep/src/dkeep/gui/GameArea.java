@@ -24,14 +24,16 @@ public class GameArea extends JPanel implements KeyListener
 	private Gui gui;
 	private Game game;
 	private BufferedImage ogre_image;
+	private BufferedImage ogre_stunned_image;
 	private BufferedImage hero_image;
+	private BufferedImage hero_with_key_image;
 	private BufferedImage guard_image;
 	private BufferedImage wall_image;
 	private BufferedImage key_image;
 	private BufferedImage club_image;
 	private BufferedImage door_open_image;
 	private BufferedImage door_closed_image;
-	private BufferedImage hero_with_key_image;
+	
 	private int images_x_length = 40;
 	private int images_y_length = 40;
 	
@@ -53,6 +55,7 @@ public class GameArea extends JPanel implements KeyListener
 		door_closed_image = loadImage("img/door_closed.png");
 		club_image = loadImage("img/club.png");
 		hero_with_key_image = loadImage("img/hero_with_key.png");
+		ogre_stunned_image = loadImage("img/ogre_stunned.png");
 	}
 	
 	public void SetGame(Game game)
@@ -104,6 +107,9 @@ public class GameArea extends JPanel implements KeyListener
 			break;
 		case '*':
 			g.drawImage(club_image, curr_x_pos, curr_y_pos, null);
+			break;
+		case '8':
+			g.drawImage(ogre_stunned_image, curr_x_pos, curr_y_pos, null);
 			break;
 		case 'k':
 			g.drawImage(key_image, curr_x_pos, curr_y_pos, null);
