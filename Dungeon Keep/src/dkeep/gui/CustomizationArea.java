@@ -14,8 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import dkeep.logic.Coords;
+
 public class CustomizationArea extends JPanel implements MouseListener
 {
+	private CustomizableKeepMap cust_keep_map;
 	private BufferedImage ogre_image;
 	private BufferedImage hero_image;
 	private BufferedImage wall_image;
@@ -29,6 +32,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 	
 	public CustomizationArea()
 	{
+		cust_keep_map = new CustomizableKeepMap();
 		addMouseListener(this);
 		LoadImages();
 	}
@@ -46,17 +50,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 	@Override
 	public void paintComponent(Graphics g) 
 	{
-		char map[][] = {
-				{ 'X','X','X','X','X','X','X','X','X' },
-				{ 'I',0,0,0,0,0,0,'k','X' },
-				{ 'X',0,0,0,0,0,0,0,'X' },
-				{ 'X',0,0,0,0,0,0,0,'X' },
-				{ 'X',0,0,0,0,0,0,0,'X' },
-				{ 'X',0,0,0,0,0,0,0,'X' },
-				{ 'X',0,0,0,0,0,0,0,'X' },
-				{ 'X',0,0,0,0,0,0,0,'X' },
-				{ 'X','X','X','X','X','X','X','X','X' }
-			};
+		char map[][] = cust_keep_map.GetMapCopy();
 		int curr_y_pos = 0;
 		int curr_x_pos = 0;
 		int map_x_size = map[0].length;
@@ -123,7 +117,10 @@ public class CustomizationArea extends JPanel implements MouseListener
 	public void mousePressed(MouseEvent mouse_event) 
 	{
 		if(SwingUtilities.isRightMouseButton(mouse_event))
+			{
 			RemoveElementAt(mouse_event.getX(), mouse_event.getY());
+			System.out.println("remove at x:" + mouse_event.getX() + "   y: " + mouse_event.getY());
+			}
 		else if(SwingUtilities.isLeftMouseButton(mouse_event))
 			AddElementAt(mouse_event.getX(), mouse_event.getY());	
 	}
@@ -134,6 +131,13 @@ public class CustomizationArea extends JPanel implements MouseListener
 	
 	}
 	
+	public Coords ScrCoordsToBoardCoords(Coords scr_coords)
+	{
+		int board_x = scr_coords.GetX() / images_x_length;
+		int board_y = scr_coords.GetY() / images_y_length;
+		
+		return new Coords(board_x, board_y);
+	}
 
 	private void AddElementAt(int x, int y) 
 	{
@@ -142,7 +146,9 @@ public class CustomizationArea extends JPanel implements MouseListener
 
 	private void RemoveElementAt(int x, int y)
 	{
-			
+		Coords board_coords = ScrCoordsToBoardCoords(new Coords(x,y));
+		cust_keep_map.RemoveElement(board_coords);
+		this.repaint();
 	}
 	
 	 public BufferedImage loadImage(String path) 

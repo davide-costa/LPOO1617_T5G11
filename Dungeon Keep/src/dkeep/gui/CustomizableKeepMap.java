@@ -9,58 +9,43 @@ import dkeep.logic.Coords;
 import dkeep.logic.KeepMap;
 
 public class CustomizableKeepMap extends KeepMap
-{
-	public Coords ScrCoordsToBoardCoords(Coords scr_coords)
+{	
+	public void AddDoorAt(Coords board_coords)
 	{
-		//TODO: make the adequate conversion
-		int x = scr_coords.GetX();
-		int y = scr_coords.GetY();
-		
-		return new Coords(x, y);
+		SetCellState(board_coords, 'I');
 	}
 	
-	public void AddDoorAt(Coords scr_coords)
+	public void AddWallAt(Coords board_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		SetCellState(board_c, 'I');
+		SetCellState(board_coords, 'X');
 	}
 	
-	public void AddWallAt(Coords scr_coords)
+	public void AddKeyAt(Coords board_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		SetCellState(board_c, 'X');
+		SetCellState(board_coords, 'k');
 	}
 	
-	public void AddKeyAt(Coords scr_coords)
+	public void AddOgre(Coords board_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		SetCellState(board_c, 'k');
-	}
-	
-	public void AddOgre(Coords scr_coords)
-	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		mobs_coords.add(board_c);
+		mobs_coords.add(board_coords);
 		//TODO:
 	}
 	
-	public void AddHero(Coords scr_coords)
+	public void AddHero(Coords board_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		hero_coords = board_c;
+		hero_coords = board_coords;
 		//TODO:
 	}
 	
-	public void RemoveElement(Coords scr_coords)
+	public void RemoveElement(Coords board_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		char state = GetCellState(board_c);
+		char state = GetCellState(board_coords);
 		if(state == 'H')
 			RemoveHero();
 		if(state == 'O')
-			RemoveOgre(board_c);
+			RemoveOgre(board_coords);
 		
-		SetCellState(board_c, (char) 0);
+		SetCellState(board_coords, (char) 0);
 	}
 	
 	/*public void RemoveDoorAt(Coords board_c)
@@ -78,10 +63,9 @@ public class CustomizableKeepMap extends KeepMap
 		SetCellState(board_c, (char) 0);
 	}*/
 	
-	public void RemoveOgre(Coords scr_coords)
+	public void RemoveOgre(Coords board_coords)
 	{
-		Coords board_c = ScrCoordsToBoardCoords(scr_coords);
-		mobs_coords.remove(board_c);
+		mobs_coords.remove(board_coords);
 		//TODO:
 	}
 	
