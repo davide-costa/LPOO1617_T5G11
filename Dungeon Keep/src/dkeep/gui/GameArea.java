@@ -157,17 +157,6 @@ public class GameArea extends JPanel implements KeyListener
 	}
 
 
-
-	private void AddElementAt(int x, int y) 
-	{
-			
-	}
-
-	private void RemoveElementAt(int x, int y)
-	{
-			
-	}
-
 	 public BufferedImage loadImage(String path) 
 	 {
 	        BufferedImage image = null;

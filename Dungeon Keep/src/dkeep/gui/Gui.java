@@ -66,7 +66,8 @@ public class Gui
 	/**
 	 * Create the application.
 	 */
-	public Gui() {
+	public Gui()
+	{
 		initialize();
 	}
 
@@ -75,7 +76,6 @@ public class Gui
 	 */
 	private void initialize() 
 	{
-		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1152, 851);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

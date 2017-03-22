@@ -15,6 +15,7 @@ public class CustomizableJFrame extends JFrame
 {
 	private JPanel contentPane;
 	private String element_selected;
+	private CustomizationArea cust_area;
 
 	/**
 	 * Launch the application.
@@ -43,12 +44,18 @@ public class CustomizableJFrame extends JFrame
 	 */
 	public CustomizableJFrame() 
 	{
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1152, 851);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		//Create cust area
+		cust_area = new CustomizationArea();
+		cust_area.setBounds(36,89,785,622);
+		this.getContentPane().add(cust_area);
+		cust_area.requestFocusInWindow();
+		cust_area.repaint();
 		
 		JButton btnOgre = new JButton("Ogre");
 		btnOgre.addActionListener(new ActionListener() 

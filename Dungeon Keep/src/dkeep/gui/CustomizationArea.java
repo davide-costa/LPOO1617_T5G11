@@ -7,23 +7,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-public class CustomizationArea extends JPanel implements MouseListener, MouseMotionListener
+public class CustomizationArea extends JPanel implements MouseListener
 {
-	@Override
-	public void mouseDragged(MouseEvent mouse_event) 
+	public CustomizationArea()
 	{
-		// TODO Auto-generated method stub
-		
+		addMouseListener(this);
 	}
-
-	@Override
-	public void mouseMoved(MouseEvent mouse_event)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent mouse_event) 
 	{
@@ -48,16 +40,30 @@ public class CustomizationArea extends JPanel implements MouseListener, MouseMot
 	@Override
 	public void mousePressed(MouseEvent mouse_event) 
 	{
-		//if(SwingUtilities.isLeftMouseButton(mouseEvent))
-			
+		if(SwingUtilities.isRightMouseButton(mouse_event))
+			RemoveElementAt(mouse_event.getX(), mouse_event.getY());
+		else if(SwingUtilities.isLeftMouseButton(mouse_event))
+			AddElementAt(mouse_event.getX(), mouse_event.getY());	
 		
+		System.out.println("dsvksjdhgksdh");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent mouse_event)
 	{
-		// TODO Auto-generated method stub
 		
+		
+	}
+	
+
+	private void AddElementAt(int x, int y) 
+	{
+			
+	}
+
+	private void RemoveElementAt(int x, int y)
+	{
+			
 	}
 
 }
