@@ -142,7 +142,7 @@ public class KeepMap implements GameMap, Serializable
 	
 	private void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
 	{
-		FileInputStream fileIn = new FileInputStream("GameStateFile");
+		FileInputStream fileIn = new FileInputStream("KeepMap");
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 		KeepMap t = this;
 		t = (KeepMap) in.readObject();
