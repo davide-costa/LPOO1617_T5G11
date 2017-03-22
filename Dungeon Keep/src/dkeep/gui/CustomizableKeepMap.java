@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import dkeep.logic.Coords;
 import dkeep.logic.KeepMap;
@@ -81,18 +82,58 @@ public class CustomizableKeepMap extends KeepMap
 		//TODO:
 	}
 	
-	public boolean IsMapValid()
+	public ArrayList<String> IsMapValid()
 	{
+		ArrayList<String> error_messages = new ArrayList<String>();
+		
 		if(mobs_coords.size() == 0)
-			return false;
+		{
+			error_messages.add("The map must have at least one ogre");
+		}
 		//if(keys.size() == 0)
 			//return false;
 		if(hero_coords == null)
-			return false;
+		{
+			error_messages.add("The map must have a hero");
+		}
 		
-		return true;
+		boolean key_found = false;
+		for(int i = 0; i < map_y_size; i++)
+			for(int j = 0; j < map_x_size; j++)
+			{
+				if(map[i][j] == 'k')
+				{
+					key_found = true;
+					continue;
+				}
+			}
+		
+		if(!key_found)
+			error_messages.add("The map must have at least one key");
+		
+		if(!IsMapClosed())
+			error_messages.add("The map must have be closed (having a wall or door at his round)");
+		
+		return error_messages;
 		
 		//TODO:
+	}
+	
+	public boolean IsMapClosed()
+	{
+		//analising the first line and the last one
+		for(int i = 0; i < map_y_size; i += map_y_size-1)
+			for(int j = 0; j < map_x_size; j++)
+				if(map[i][j] != 'X' || map[i][j] != 'I')
+					return false;
+		
+		//analising the first column and the last one
+		for(int i = 1; i < map_y_size - 1; i++)
+			for(int j = 1; j < map_x_size; j += map_x_size - 1)
+				if(map[i][j] != 'X' || map[i][j] != 'I')
+					return false;
+				
+		return true;
 	}
 	
 	public void SaveTo(String file_path)

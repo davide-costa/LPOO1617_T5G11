@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class CustomizableJFrame extends JFrame
 {
@@ -53,7 +56,7 @@ public class CustomizableJFrame extends JFrame
 		
 		//Create cust area
 		cust_area = new CustomizationArea(this);
-		cust_area.setBounds(38,89,846,637);
+		cust_area.setBounds(38,51,846,637);
 		this.getContentPane().add(cust_area);
 		cust_area.requestFocusInWindow();
 		cust_area.repaint();
@@ -74,7 +77,6 @@ public class CustomizableJFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println(element_selected);
 				element_selected = "wall";
 			}
 		});
@@ -119,7 +121,7 @@ public class CustomizableJFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(cust_area.GetCustKeepMap().IsMapValid())
+				if(cust_area.GetCustKeepMap().IsMapValid().isEmpty())
 				{
 					cust_area.GetCustKeepMap().SaveTo("KeepMap");
 					JPanel panel = new JPanel();
@@ -147,6 +149,12 @@ public class CustomizableJFrame extends JFrame
 		});
 		btnExit.setBounds(979, 741, 115, 29);
 		contentPane.add(btnExit);
+		
+		JLabel InfoLabel = new JLabel("<html>Keep map must contain:<br>1 to 5 ogres<br>1 hero<br>A closed map (walls closing map)<br>1 key or more");
+		InfoLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		InfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		InfoLabel.setBounds(38, 717, 628, 95);
+		contentPane.add(InfoLabel);
 	}
 	
 	public String GetElementSelected()
