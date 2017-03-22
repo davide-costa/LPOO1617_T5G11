@@ -198,7 +198,9 @@ public class Gui
 			         game = (Game) in.readObject();
 			         in.close();
 			         fileIn.close();
-			         LableState.setText("Game loaded sucessfully");
+			         LableState.setText("Game loaded sucessfully. You can play");
+			         game_area.SetGame(game); //update the Game object pointer in the game to the newly loaded game
+			         game_area.repaint();
 			      }
 			     catch(IOException i) 
 			     {
@@ -213,7 +215,6 @@ public class Gui
 			    	 return;
 			      }
 			     
-			    LableState.setText("Game started");
 				ActivateGameButtons();
 				game_area.requestFocusInWindow();
 			}
