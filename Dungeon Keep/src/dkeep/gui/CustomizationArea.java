@@ -19,6 +19,7 @@ import dkeep.logic.Coords;
 public class CustomizationArea extends JPanel implements MouseListener
 {
 	private CustomizableKeepMap cust_keep_map;
+	private CustomizableJFrame cust_frame;
 	private BufferedImage ogre_image;
 	private BufferedImage hero_image;
 	private BufferedImage wall_image;
@@ -30,9 +31,10 @@ public class CustomizationArea extends JPanel implements MouseListener
 	private int images_y_length = 40;
 	
 	
-	public CustomizationArea()
+	public CustomizationArea(CustomizableJFrame cust_frame)
 	{
 		cust_keep_map = new CustomizableKeepMap();
+		this.cust_frame = cust_frame;
 		addMouseListener(this);
 		LoadImages();
 	}
@@ -122,10 +124,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 	public void mousePressed(MouseEvent mouse_event) 
 	{
 		if(SwingUtilities.isRightMouseButton(mouse_event))
-			{
 			RemoveElementAt(mouse_event.getX(), mouse_event.getY());
-			System.out.println("remove at x:" + mouse_event.getX() + "   y: " + mouse_event.getY());
-			}
 		else if(SwingUtilities.isLeftMouseButton(mouse_event))
 			AddElementAt(mouse_event.getX(), mouse_event.getY());	
 	}
@@ -146,7 +145,30 @@ public class CustomizationArea extends JPanel implements MouseListener
 
 	private void AddElementAt(int x, int y) 
 	{
-			
+		Coords board_coords = ScrCoordsToBoardCoords(new Coords(x,y));
+		
+		String element_selected = cust_frame.GetElementSelected();
+		switch(element_selected)
+		{
+		case "door":
+			cust_keep_map.AddDoorAt(board_coords);
+			break;
+		case "wall":
+			cust_keep_map.AddWallAt(board_coords);
+			break;
+		case "key":
+			cust_keep_map.AddKeyAt(board_coords);
+			break;
+		case "ogre":
+			cust_keep_map.AddOgreAt(board_coords);
+			break;
+		case "hero":
+			cust_keep_map.AddHeroAt(board_coords);
+			break;
+		}
+		
+		cust_keep_map.RemoveElement(board_coords);
+		this.repaint();
 	}
 
 	private void RemoveElementAt(int x, int y)

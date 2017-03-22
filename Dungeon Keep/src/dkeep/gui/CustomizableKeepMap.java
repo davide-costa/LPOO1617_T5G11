@@ -10,6 +10,12 @@ import dkeep.logic.KeepMap;
 
 public class CustomizableKeepMap extends KeepMap
 {	
+	public CustomizableKeepMap()
+	{
+		super();
+		map[hero_coords.GetY()][hero_coords.GetX()] = 'H';
+	}
+	
 	public void AddDoorAt(Coords board_coords)
 	{
 		SetCellState(board_coords, 'I');
@@ -25,13 +31,13 @@ public class CustomizableKeepMap extends KeepMap
 		SetCellState(board_coords, 'k');
 	}
 	
-	public void AddOgre(Coords board_coords)
+	public void AddOgreAt(Coords board_coords)
 	{
 		mobs_coords.add(board_coords);
 		//TODO:
 	}
 	
-	public void AddHero(Coords board_coords)
+	public void AddHeroAt(Coords board_coords)
 	{
 		hero_coords = board_coords;
 		//TODO:

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -51,7 +52,7 @@ public class CustomizableJFrame extends JFrame
 		contentPane.setLayout(null);
 		
 		//Create cust area
-		cust_area = new CustomizationArea();
+		cust_area = new CustomizationArea(this);
 		cust_area.setBounds(38,89,846,637);
 		this.getContentPane().add(cust_area);
 		cust_area.requestFocusInWindow();
@@ -73,6 +74,7 @@ public class CustomizableJFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				System.out.println(element_selected);
 				element_selected = "wall";
 			}
 		});
@@ -117,7 +119,18 @@ public class CustomizableJFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				cust_area.GetCustKeepMap().SaveTo("KeepMap");
+				if(cust_area.GetCustKeepMap().IsMapValid())
+				{
+					cust_area.GetCustKeepMap().SaveTo("KeepMap");
+					JPanel panel = new JPanel();
+					JOptionPane.showMessageDialog(panel, "Keep Map saved sucessfully", "Info", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else
+				{
+					JPanel panel = new JPanel();
+					JOptionPane.showMessageDialog(panel, "You must enter a number of ogres", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+					
 			}
 		});
 		btnSaveChanges.setBounds(979, 31, 115, 29);
@@ -134,5 +147,10 @@ public class CustomizableJFrame extends JFrame
 		});
 		btnExit.setBounds(979, 741, 115, 29);
 		contentPane.add(btnExit);
+	}
+	
+	public String GetElementSelected()
+	{
+		return element_selected;
 	}
 }
