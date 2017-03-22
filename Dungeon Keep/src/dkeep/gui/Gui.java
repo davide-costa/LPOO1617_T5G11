@@ -215,8 +215,11 @@ public class Gui
 			    	 return;
 			      }
 			     
-				ActivateGameButtons();
+			 	frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
+				game_area.repaint();
+				
+				ActivateGameButtons();
 			}
 		});
 		btnLoadGame.setBounds(216, 24, 115, 29);
