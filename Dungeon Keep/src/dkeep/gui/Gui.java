@@ -268,6 +268,7 @@ public class Gui
 		else if (move_hero_value == -1)
 		{
 			LableState.setText("END OF GAME...YOU LOOSE");
+			game_area.repaint();
 			InactivateGameButtons();
 			return;
 		}
