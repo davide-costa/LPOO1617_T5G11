@@ -52,7 +52,7 @@ public class CustomizableJFrame extends JFrame
 		
 		//Create cust area
 		cust_area = new CustomizationArea();
-		cust_area.setBounds(36,89,785,622);
+		cust_area.setBounds(38,89,846,637);
 		this.getContentPane().add(cust_area);
 		cust_area.requestFocusInWindow();
 		cust_area.repaint();
@@ -111,9 +111,5 @@ public class CustomizableJFrame extends JFrame
 		});
 		btnKey.setBounds(979, 418, 115, 29);
 		contentPane.add(btnKey);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(32, 54, 900, 664);
-		contentPane.add(panel);
 	}
 }
