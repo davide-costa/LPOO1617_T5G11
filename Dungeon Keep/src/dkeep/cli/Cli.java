@@ -6,9 +6,9 @@ import dkeep.logic.*;
 
 public class Cli
 {
-	private Game game;
+	private static Game game;
 
-	public void main()
+	public static void main(String[] args)
 	{
 		String direction;
 		int move_hero_value;
