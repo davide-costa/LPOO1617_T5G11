@@ -1,6 +1,7 @@
 package dkeep.logic;
 
 import java.io.Serializable;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Coords implements Serializable
 {
@@ -110,4 +111,25 @@ public class Coords implements Serializable
 		return new Coords(x, y + 1);
 	}
 	
+	public Coords randomAdjacentCell()
+	{
+		//nextInt is normally exclusive of the top value,
+		//so add 1 to make it inclusive
+		int min = 1;
+		int max = 4;
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		int temp_x = GetX();
+		int temp_y = GetY();
+		
+		if (randomNum == 1)
+			temp_x++;
+		else if (randomNum == 2)
+			temp_x--;
+		else if (randomNum == 3)
+			temp_y++;
+		else if (randomNum == 4)
+			temp_y--;
+		
+		return new Coords(temp_x, temp_y);
+	}
 }

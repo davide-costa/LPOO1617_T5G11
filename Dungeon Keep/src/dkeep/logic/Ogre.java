@@ -81,54 +81,24 @@ public class Ogre extends GameCreature
 
 	public boolean TryOgreNextPos(GameMap map)
 	{
-		//nextInt is normally exclusive of the top value,
-		//so add 1 to make it inclusive
-		int min = 1;
-		int max = 4;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = coords.GetX();
-		int temp_y = coords.GetY();
+		Coords next_pos = GetCoords().randomAdjacentCell();
 
-		if (randomNum == 1)
-			temp_x++; //ogre moves to right
-		else if (randomNum == 2)
-			temp_x--; //ogre moves to left
-		else if (randomNum == 3)
-			temp_y++; //ogre moves up
-		else if (randomNum == 4)
-			temp_y--; //ogre moves to down
-
-		if (!map.MoveTo(new Coords(temp_x, temp_y)))
+		if (!map.MoveTo(next_pos))
 			return false;
 
-		SetCoords(temp_x, temp_y);
+		SetCoords(next_pos);
 		
 		return true;
 	}
 	
 	public boolean TryClubNextPos(GameMap map)
 	{
-		//nextInt is normally exclusive of the top value,
-		//so add 1 to make it inclusive
-		int min = 1;
-		int max = 4;
-		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
-		int temp_x = coords.GetX();
-		int temp_y = coords.GetY();
+		Coords next_pos = GetCoords().randomAdjacentCell();
 		
-		if (randomNum == 1)
-			temp_x++; //club moves to right
-		else if (randomNum == 2)
-			temp_x--; //club moves to left
-		else if (randomNum == 3)
-			temp_y++; //club moves up
-		else if (randomNum == 4)
-			temp_y--; //club moves to down
-
-		if (!map.MoveTo(new Coords(temp_x, temp_y)))
+		if (!map.MoveTo(next_pos))
 			return false;
 		
-		SetClubCoords(temp_x, temp_y);
+		SetClubCoords(next_pos);
 		
 		return true;
 	}
