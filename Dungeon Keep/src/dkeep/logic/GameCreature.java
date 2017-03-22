@@ -16,6 +16,12 @@ public class GameCreature implements Serializable
 		coords = new Coords(x, y);
 		this.symbol = symbol;
 	}
+	
+	public GameCreature(Coords coords, char symbol)
+	{
+		this.coords = coords;
+		this.symbol = symbol;
+	}
 	//TODO: consider removing this
 	/*
 	public int GetX()

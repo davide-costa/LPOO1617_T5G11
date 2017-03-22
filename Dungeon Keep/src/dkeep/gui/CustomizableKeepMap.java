@@ -12,7 +12,7 @@ public class CustomizableKeepMap extends KeepMap
 {
 	public Coords ScrCoordsToBoardCoords(Coords scr_coords)
 	{
-		//TODO: make the adequate convertion
+		//TODO: make the adequate conversion
 		int x = scr_coords.GetX();
 		int y = scr_coords.GetY();
 		

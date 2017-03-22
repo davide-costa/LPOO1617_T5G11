@@ -10,4 +10,9 @@ public class Hero extends GameCreature
 	{
 		super(x, y, 'H');
 	}
+	
+	public Hero(Coords coords)
+	{
+		super(coords, 'H');
+	}
 }

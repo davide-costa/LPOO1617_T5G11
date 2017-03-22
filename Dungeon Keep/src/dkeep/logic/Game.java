@@ -149,7 +149,7 @@ public class Game implements Serializable
 		
 		SetGameMap(new DungeonMap());
 		Coords hero_coords = map.GetHeroCoords();
-		hero = new Hero(hero_coords.GetX(), hero_coords.GetY());
+		hero = new Hero(hero_coords);
 		RefreshMap();
 	}
 	
