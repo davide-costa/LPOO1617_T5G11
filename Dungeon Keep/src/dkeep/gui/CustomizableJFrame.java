@@ -111,5 +111,28 @@ public class CustomizableJFrame extends JFrame
 		});
 		btnKey.setBounds(979, 418, 115, 29);
 		contentPane.add(btnKey);
+		
+		JButton btnSaveChanges = new JButton("Save Changes");
+		btnSaveChanges.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				cust_area.GetCustKeepMap().SaveTo("KeepMap");
+			}
+		});
+		btnSaveChanges.setBounds(979, 31, 115, 29);
+		contentPane.add(btnSaveChanges);
+		
+		JFrame cust_frame = this;
+		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				cust_frame.dispose();
+			}
+		});
+		btnExit.setBounds(979, 741, 115, 29);
+		contentPane.add(btnExit);
 	}
 }

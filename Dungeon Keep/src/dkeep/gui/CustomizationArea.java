@@ -37,6 +37,11 @@ public class CustomizationArea extends JPanel implements MouseListener
 		LoadImages();
 	}
 	
+	public CustomizableKeepMap GetCustKeepMap()
+	{
+		return cust_keep_map;
+	}
+	
 	public void LoadImages()
 	{
 		ogre_image = loadImage("img/ogre.png");
@@ -50,7 +55,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 	@Override
 	public void paintComponent(Graphics g) 
 	{
-		char map[][] = cust_keep_map.GetMapCopy();
+		char map[][] = cust_keep_map.GetMap();
 		int curr_y_pos = 0;
 		int curr_x_pos = 0;
 		int map_x_size = map[0].length;

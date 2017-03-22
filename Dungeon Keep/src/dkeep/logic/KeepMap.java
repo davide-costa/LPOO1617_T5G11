@@ -27,6 +27,7 @@ public class KeepMap implements GameMap, Serializable
 		catch(IOException | ClassNotFoundException c) 
 	    {
 			//do nothing, leave the default map
+			map[hero_coords.GetY()][hero_coords.GetX()] = 'H';
 			return;	
 	    }
 	}
