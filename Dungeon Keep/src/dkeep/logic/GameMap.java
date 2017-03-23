@@ -1,10 +1,12 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class GameMap
+public abstract class GameMap implements Serializable
 {
+	private static final long serialVersionUID = 3515396607030332572L;
 	protected Coords hero_coords;
 	protected char[][] map;
 	protected int map_x_size;
