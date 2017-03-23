@@ -26,8 +26,6 @@ public class KeepMap implements GameMap, Serializable
 		catch(IOException | ClassNotFoundException c) 
 	    {
 			//do nothing, leave the default map
-			//mobs_coords = new ArrayList<Coords>(); //assim nao estouras, mas nao ta a fazer nada
-			hero_coords = new Coords(1, 7);
 			return;	
 	    }
 	}

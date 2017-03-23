@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -116,11 +117,18 @@ public class CustomizableJFrame extends JFrame
 		btnKey.setBounds(979, 418, 115, 29);
 		contentPane.add(btnKey);
 		
+		JLabel InfoLabel = new JLabel("<html>Keep map must contain:<br>1 to 5 ogres<br>1 hero<br>A closed map (walls closing map)<br>1 key or more</html>");
+		InfoLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		InfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		InfoLabel.setBounds(38, 717, 628, 95);
+		contentPane.add(InfoLabel);
+		
 		JButton btnSaveChanges = new JButton("Save Changes");
 		btnSaveChanges.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				ArrayList<String> error_msgs = cust_area.GetCustKeepMap().IsMapValid();
 				if(cust_area.GetCustKeepMap().IsMapValid().isEmpty())
 				{
 					cust_area.GetCustKeepMap().SaveTo("KeepMap");
@@ -129,8 +137,17 @@ public class CustomizableJFrame extends JFrame
 				}
 				else
 				{
+					String message = "<html>";
+					message += error_msgs.get(0);
+					for(int i = 1; i < error_msgs.size(); i++)
+					{
+						message += "<br>";
+						message += error_msgs.get(i);
+					}
+					message += "</html>";
+					InfoLabel.setText(message);
 					JPanel panel = new JPanel();
-					JOptionPane.showMessageDialog(panel, "You must enter a number of ogres", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(panel, "The map is not valid. See the reasons below", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 					
 			}
@@ -150,11 +167,6 @@ public class CustomizableJFrame extends JFrame
 		btnExit.setBounds(979, 741, 115, 29);
 		contentPane.add(btnExit);
 		
-		JLabel InfoLabel = new JLabel("<html>Keep map must contain:<br>1 to 5 ogres<br>1 hero<br>A closed map (walls closing map)<br>1 key or more");
-		InfoLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		InfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		InfoLabel.setBounds(38, 717, 628, 95);
-		contentPane.add(InfoLabel);
 	}
 	
 	public String GetElementSelected()

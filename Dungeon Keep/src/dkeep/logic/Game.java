@@ -175,7 +175,10 @@ public class Game implements Serializable
 		}
 		
 		level = 2;
-		hero.SetCoords(map.GetHeroCoords());
+		if(map.GetHeroCoords() == null)
+			hero.SetCoords(new Coords(1,7));
+		else
+			hero.SetCoords(map.GetHeroCoords());
 		RefreshMap();
 	}
 	/**

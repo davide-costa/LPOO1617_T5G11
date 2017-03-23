@@ -14,7 +14,9 @@ public class CustomizableKeepMap extends KeepMap
 	public CustomizableKeepMap()
 	{
 		super();
-		map[hero_coords.GetY()][hero_coords.GetX()] = 'H';
+		hero_coords = null;
+		if(mobs_coords == null)
+			mobs_coords = new ArrayList<Coords>();
 	}
 	
 	public void AddDoorAt(Coords board_coords)
@@ -97,14 +99,15 @@ public class CustomizableKeepMap extends KeepMap
 			error_messages.add("The map must have a hero");
 		}
 		
-		boolean key_found = false;
+		boolean key_found = false;		
+		loop:		
 		for(int i = 0; i < map_y_size; i++)
 			for(int j = 0; j < map_x_size; j++)
 			{
 				if(map[i][j] == 'k')
 				{
 					key_found = true;
-					continue;
+					break loop;
 				}
 			}
 		
@@ -112,7 +115,7 @@ public class CustomizableKeepMap extends KeepMap
 			error_messages.add("The map must have at least one key");
 		
 		if(!IsMapClosed())
-			error_messages.add("The map must have be closed (having a wall or door at his round)");
+			error_messages.add("The map must be closed (having a wall or door at his round)");
 		
 		return error_messages;
 		
