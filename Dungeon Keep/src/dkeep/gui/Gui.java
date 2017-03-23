@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.TextField;
 
 public class Gui
 {
@@ -253,8 +254,42 @@ public class Gui
 		CustomizeKeepMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				CustomizableJFrame cust_frame = new CustomizableJFrame();
-				cust_frame.main(null);
+				JTextField x_size_str = new JTextField();
+				JTextField y_size_str = new JTextField();
+				Object[] message = {
+					    "KeepMap X size:", x_size_str,
+					    "KeepMap Y size:", y_size_str
+					};
+
+
+				int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.OK_CANCEL_OPTION);
+				
+				if (option == JOptionPane.OK_OPTION) 
+				{
+					if(x_size_str.getText().isEmpty() || y_size_str.getText().isEmpty())
+					 {
+				    	JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel, "You must introduce x and y size for KeepMap", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+				    }
+					
+					int x_size = Integer.parseInt(x_size_str.getText());
+				    if(x_size > 15 && x_size < 4)
+				    {
+				    	JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel, "KeepMap x size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+				    }
+				    
+				    int y_size = Integer.parseInt(y_size_str.getText());
+				    if(y_size > 15 && y_size < 4)
+				    {
+				    	JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel, "KeepMap y size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+				    }
+				CustomizableJFrame cust_frame = new CustomizableJFrame(x_size, y_size);
+				}
 			}
 		});
 		CustomizeKeepMap.setBounds(911, 44, 161, 29);

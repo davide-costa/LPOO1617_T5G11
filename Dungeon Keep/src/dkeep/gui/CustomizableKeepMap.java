@@ -22,6 +22,8 @@ public class CustomizableKeepMap extends KeepMap
 	public void CreateNewGameMap(int x_size, int y_size)
 	{
 		map = new char[y_size][x_size];
+		map_x_size = x_size;
+		map_y_size = y_size;
 		
 		//filling the first line and the last one
 				for(int i = 0; i < map_y_size; i += map_y_size-1)
@@ -34,7 +36,7 @@ public class CustomizableKeepMap extends KeepMap
 						if(map[i][j] != 'X' && map[i][j] != 'I')
 							map[i][j] = 'X';
 				
-				map[0][1] = 'I';
+				map[1][0] = 'I';
 	}
 	
 	public void AddElementAt(Coords board_coords, String element_selected)

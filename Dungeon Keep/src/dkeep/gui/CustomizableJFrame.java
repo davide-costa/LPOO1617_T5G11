@@ -25,92 +25,26 @@ public class CustomizableJFrame extends JFrame
 	private CustomizationArea cust_area;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) 
-	{
-		EventQueue.invokeLater(new Runnable() 
-		{
-			public void run() 
-			{
-				try 
-				{
-					CustomizableJFrame frame = new CustomizableJFrame();
-					frame.setVisible(true);
-				} 
-				catch (Exception e) 
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public CustomizableJFrame() 
+	public CustomizableJFrame(int x_size, int y_size) 
 	{
 		setBounds(100, 100, 1152, 851);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		
-		//String option = (String) JOptionPane.showInputDialog(null, message);
-		//System.out.println(option);
-		
-		JTextField x_size_str = new JTextField();
-		JTextField y_size_str = new JTextField();
-		Object[] message = {
-			    "KeepMap X size:", x_size_str,
-			    "KeepMap Y size:", y_size_str
-			};
-
-
-		int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.OK_CANCEL_OPTION);
-		
-		if (option == JOptionPane.OK_OPTION) 
-		{
-			if(x_size_str.getText().isEmpty() || y_size_str.getText().isEmpty())
-			 {
-		    	JPanel panel = new JPanel();
-				JOptionPane.showMessageDialog(panel, "You must introduce x and y size for KeepMap", "Error", JOptionPane.ERROR_MESSAGE);
-				this.dispose();
-				return;
-		    }
-			
-			System.out.println("::" + x_size_str.getText() + "::");
-			System.out.println("::" + y_size_str.getText() + "::");
-			
-			int x_size = Integer.parseInt(x_size_str.getText());
-		    if(x_size > 15 && x_size < 4)
-		    {
-		    	JPanel panel = new JPanel();
-				JOptionPane.showMessageDialog(panel, "KeepMap x size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
-				return;
-		    }
-		    
-		    int y_size = Integer.parseInt(y_size_str.getText());
-		    if(y_size > 15 && y_size < 4)
-		    {
-		    	JPanel panel = new JPanel();
-				JOptionPane.showMessageDialog(panel, "KeepMap y size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
-				return;
-		    }
-		    
-		    cust_area.GetCustKeepMap().CreateNewGameMap(x_size, y_size);
-		    	
-		}
+		setVisible(true);
 		
 		//Create cust area
 		cust_area = new CustomizationArea(this);
 		cust_area.setBounds(38,51,846,637);
+		cust_area.GetCustKeepMap().CreateNewGameMap(x_size, y_size);
 		this.getContentPane().add(cust_area);
 		cust_area.requestFocusInWindow();
 		cust_area.repaint();
+		
+		   
 		
 		JButton btnOgre = new JButton("Ogre");
 		btnOgre.addActionListener(new ActionListener() 
