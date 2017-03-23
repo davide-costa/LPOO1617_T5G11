@@ -180,7 +180,7 @@ public class Game implements Serializable
 		{
 			for (int i = 0; i < mobs_coords.size(); i++)
 			{
-				curr_ogre = new Ogre(mobs_coords.get(i));
+				curr_ogre = new Ogre(mobs_coords.get(i), map);
 				ogres.add(curr_ogre);
 			}
 		}
