@@ -71,15 +71,21 @@ public class CustomizableJFrame extends JFrame
 
 
 		int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.OK_CANCEL_OPTION);
+		
 		if (option == JOptionPane.OK_OPTION) 
 		{
-			if(x_size_str.getText() == "" || y_size_str.getText() == "")
+			if(x_size_str.getText().isEmpty() || y_size_str.getText().isEmpty())
 			 {
 		    	JPanel panel = new JPanel();
 				JOptionPane.showMessageDialog(panel, "You must introduce x and y size for KeepMap", "Error", JOptionPane.ERROR_MESSAGE);
+				this.dispose();
 				return;
 		    }
 			
+			System.out.println("::" + x_size_str.getText() + "::");
+			System.out.println("::" + y_size_str.getText() + "::");
+			
+			int x_size = Integer.parseInt(x_size_str.getText());
 		    if(x_size > 15 && x_size < 4)
 		    {
 		    	JPanel panel = new JPanel();
@@ -94,6 +100,8 @@ public class CustomizableJFrame extends JFrame
 				JOptionPane.showMessageDialog(panel, "KeepMap y size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 		    }
+		    
+		    cust_area.GetCustKeepMap().CreateNewGameMap(x_size, y_size);
 		    	
 		}
 		
