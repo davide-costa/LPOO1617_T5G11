@@ -25,6 +25,8 @@ public class DungeonMapTests extends DungeonMap
 		doors_coords.add(new Coords(0, 2));
 		doors_coords.add(new Coords(0, 3));
 	}
+	
+	//TODO:
 //
 //	@Override
 //	public void PickUpKey()

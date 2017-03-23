@@ -11,27 +11,29 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class KeepMap implements GameMap, Serializable
+public class KeepMap extends GameMap implements Serializable
 {
 	private static final long serialVersionUID = 8532318868372099106L;
 	protected ArrayList<Coords> mobs_coords;
-	protected Coords hero_coords;
-
-	protected char map[][] = {
-			{ 'X','X','X','X','X','X','X','X','X' },
-			{ 'I',0,0,0,0,0,0,'k','X' },
-			{ 'X',0,0,0,0,0,0,0,'X' },
-			{ 'X',0,0,0,0,0,0,0,'X' },
-			{ 'X',0,0,0,0,0,0,0,'X' },
-			{ 'X',0,0,0,0,0,0,0,'X' },
-			{ 'X',0,0,0,0,0,0,0,'X' },
-			{ 'X',0,0,0,0,0,0,0,'X' },
-			{ 'X','X','X','X','X','X','X','X','X' }
-		};
-	
-	protected int map_x_size = 9;
-	protected int map_y_size = 9;
 	protected boolean door_open = false;
+	
+	public KeepMap()
+	{
+		map_x_size = 9;
+		map_y_size = 9;
+		char keep_map[][] = {
+				{ 'X','X','X','X','X','X','X','X','X' },
+				{ 'I',0,0,0,0,0,0,'k','X' },
+				{ 'X',0,0,0,0,0,0,0,'X' },
+				{ 'X',0,0,0,0,0,0,0,'X' },
+				{ 'X',0,0,0,0,0,0,0,'X' },
+				{ 'X',0,0,0,0,0,0,0,'X' },
+				{ 'X',0,0,0,0,0,0,0,'X' },
+				{ 'X',0,0,0,0,0,0,0,'X' },
+				{ 'X','X','X','X','X','X','X','X','X' }
+			};
+		map = keep_map;
+	}
 	
 	public boolean MoveTo(Coords coords)
 	{
@@ -53,52 +55,9 @@ public class KeepMap implements GameMap, Serializable
 		return true;
 	}
 	
-	public char[][] GetMap()
-	{
-		return map;
-	}
-	
-	public int GetMapXSize()
-	{
-		return map_x_size;
-	}
-	
-	public int GetMapYSize()
-	{
-		return map_y_size;
-	}
-	
-	
 	public GameMap NextMap()
 	{
 		return null;
-	}
-	
-	public void SetCellState(Coords coords, char symbol)
-	{
-		map[coords.GetY()][coords.GetX()] = symbol;
-	}
-	
-	public char GetCellState(Coords coords)
-	{
-		return map[coords.GetY()][coords.GetX()];
-	}
-	
-	
-	public char[][] GetMapCopy()
-	{
-		char map_copy[][] = new char[map_y_size][map_x_size];
-		
-		for (int y = 0; y < map_y_size; y++)
-			map_copy[y] = Arrays.copyOf(map[y], map_x_size);
-		
-		return map_copy;
-	}
-
-	@Override
-	public void PickUpKey(Coords key_coords)
-	{
-		SetCellState(key_coords, (char)0);
 	}
 
 	@Override
@@ -118,12 +77,6 @@ public class KeepMap implements GameMap, Serializable
 	public ArrayList<Coords> GetInitMobsCoords()
 	{
 		return mobs_coords;
-	}
-	
-	@Override
-	public Coords GetHeroCoords() 
-	{
-		return hero_coords;
 	}
 	
 	public void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException

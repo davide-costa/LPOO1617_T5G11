@@ -23,6 +23,7 @@ public class KeepMapTests extends KeepMap
 		map = temp_map;
 	}
 	
+	//TODO:
 //	@Override
 //	public void PickUpKey()
 //	{
