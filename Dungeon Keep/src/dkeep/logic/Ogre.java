@@ -27,6 +27,7 @@ public class Ogre extends GameCreature
 	public Ogre(Coords coords, GameMap map)
 	{
 		super(coords, default_symbol);
+		club_coords = new Coords(coords);
 		while (!TryClubNextPos(map));
 		is_stunned = false;
 	}

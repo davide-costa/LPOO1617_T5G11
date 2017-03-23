@@ -1,6 +1,9 @@
 package dkeep.logic;
 
 import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -39,8 +42,8 @@ public class Game implements Serializable
 		InitLevel1(guard_name);
 		
 		//debugging
-//		SetGameMap(map.NextMap());
-//		InitLevel2();
+		SetGameMap(map.NextMap());
+		InitLevel2();
 	}
 	
 	/**  
@@ -155,6 +158,19 @@ public class Game implements Serializable
 	
 	private void InitLevel2()
 	{
+		try
+		{
+			FileInputStream fileIn = new FileInputStream("KeepMap");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			map = (KeepMap) in.readObject();
+			in.close();
+			fileIn.close();
+		}
+		catch (ClassNotFoundException | IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int ogre_init_spawn_x = 1;
 		int ogre_init_spawn_y = 1;
 		int club_init_spawn_x = 1;

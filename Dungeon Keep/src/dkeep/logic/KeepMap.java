@@ -17,19 +17,6 @@ public class KeepMap implements GameMap, Serializable
 	protected ArrayList<Coords> mobs_coords;
 	protected Coords hero_coords;
 
-	public KeepMap()
-	{
-		try
-		{
-			LoadMapFromFile("KeepMap");
-		}
-		catch(IOException | ClassNotFoundException c) 
-	    {
-			//do nothing, leave the default map
-			return;	
-	    }
-	}
-	
 	protected char map[][] = {
 			{ 'X','X','X','X','X','X','X','X','X' },
 			{ 'I',0,0,0,0,0,0,'k','X' },
@@ -139,7 +126,7 @@ public class KeepMap implements GameMap, Serializable
 		return hero_coords;
 	}
 	
-	private void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
+	public void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
 	{
 		FileInputStream fileIn = new FileInputStream("KeepMap");
 		ObjectInputStream in = new ObjectInputStream(fileIn);

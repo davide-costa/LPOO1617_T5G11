@@ -184,6 +184,12 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public void SaveTo(String file_path)
 	{
+		for (Coords coord : mobs_coords)
+		{
+			SetCellState(coord, (char)0);
+		}
+		SetCellState(hero_coords, (char)0);
+		
 		try
 		{
 			FileOutputStream fileOut = new FileOutputStream(file_path);
