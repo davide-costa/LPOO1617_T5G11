@@ -67,7 +67,9 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public void AddDoorAt(Coords board_coords)
 	{
-		SetCellState(board_coords, 'I');
+		if(board_coords.GetX() == 0 || board_coords.GetX() == map_x_size - 1)
+			if(board_coords.GetY() == 0 || board_coords.GetY() == map_y_size - 1)
+				SetCellState(board_coords, 'I');
 	}
 	
 	public void AddWallAt(Coords board_coords)
@@ -89,7 +91,6 @@ public class CustomizableKeepMap extends KeepMap
 			SetCellState(mobs_coords.get(0), (char)0);
 			mobs_coords.remove(0);
 		}
-		//TODO:
 	}
 	
 	public void AddHeroAt(Coords board_coords)
@@ -99,8 +100,7 @@ public class CustomizableKeepMap extends KeepMap
 			SetCellState(hero_coords, (char)0);
 		
 		hero_coords = board_coords;
-		SetCellState(board_coords, 'H');
-		//TODO:
+		SetCellState(hero_coords, 'H');
 	}
 	
 	public void RemoveElementAt(Coords board_coords)
@@ -117,31 +117,14 @@ public class CustomizableKeepMap extends KeepMap
 		SetCellState(board_coords, (char) 0);
 	}
 	
-	/*public void RemoveDoorAt(Coords board_c)
-	{
-		SetCellState(board_c, (char) 0);
-	}
-	
-	public void RemoveWallAt(Coords board_c)
-	{
-		SetCellState(board_c, (char) 0);
-	}
-	
-	public void RemoveKeyAt(Coords scr_coords)
-	{
-		SetCellState(board_c, (char) 0);
-	}*/
-	
 	public void RemoveOgre(Coords board_coords)
 	{
 		mobs_coords.remove(board_coords);
-		//TODO:
 	}
 	
 	public void RemoveHero()
 	{
 		hero_coords = null;
-		//TODO:
 	}
 	
 	public ArrayList<String> IsMapValid()
@@ -152,14 +135,13 @@ public class CustomizableKeepMap extends KeepMap
 		{
 			error_messages.add("The map must have at least one ogre");
 		}
-		//if(keys.size() == 0)
-			//return false;
+		
 		if(hero_coords == null)
 		{
 			error_messages.add("The map must have a hero");
 		}
 		
-		boolean key_found = false;		
+		boolean key_found = false;
 		loop:		
 		for(int i = 0; i < map_y_size; i++)
 			for(int j = 0; j < map_x_size; j++)
@@ -170,7 +152,6 @@ public class CustomizableKeepMap extends KeepMap
 					break loop;
 				}
 			}
-		
 		if(!key_found)
 			error_messages.add("The map must have at least one key");
 		
@@ -178,8 +159,6 @@ public class CustomizableKeepMap extends KeepMap
 			error_messages.add("The map must be closed (having a wall or door at his round)");
 		
 		return error_messages;
-		
-		//TODO:
 	}
 	
 	public boolean IsMapClosed()
