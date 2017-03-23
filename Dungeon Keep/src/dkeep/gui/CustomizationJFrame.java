@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class CustomizableJFrame extends JFrame
+public class CustomizationJFrame extends JFrame
 {
 	private JPanel contentPane;
 	private String element_selected = "";
@@ -27,7 +27,7 @@ public class CustomizableJFrame extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public CustomizableJFrame(int x_size, int y_size) 
+	public CustomizationJFrame(int x_size, int y_size) 
 	{
 		setBounds(100, 100, 1152, 851);
 		contentPane = new JPanel();

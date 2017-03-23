@@ -20,13 +20,13 @@ import dkeep.logic.Coords;
 public class CustomizationArea extends JPanel implements MouseListener
 {
 	private CustomizableKeepMap cust_keep_map;
-	private CustomizableJFrame cust_frame;
+	private CustomizationJFrame cust_frame;
 	private Hashtable<Character, BufferedImage> images;
 	private int images_x_length = 40;
 	private int images_y_length = 40;
 	
 	
-	public CustomizationArea(CustomizableJFrame cust_frame)
+	public CustomizationArea(CustomizationJFrame cust_frame)
 	{
 		cust_keep_map = new CustomizableKeepMap();
 		this.cust_frame = cust_frame;
