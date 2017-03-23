@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -20,13 +21,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 {
 	private CustomizableKeepMap cust_keep_map;
 	private CustomizableJFrame cust_frame;
-	private BufferedImage ogre_image;
-	private BufferedImage hero_image;
-	private BufferedImage wall_image;
-	private BufferedImage key_image;
-	private BufferedImage club_image;
-	private BufferedImage door_closed_image;
-	
+	private Hashtable<Character, BufferedImage> images;
 	private int images_x_length = 40;
 	private int images_y_length = 40;
 	
@@ -35,6 +30,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 	{
 		cust_keep_map = new CustomizableKeepMap();
 		this.cust_frame = cust_frame;
+		images = new Hashtable<Character, BufferedImage>();
 		addMouseListener(this);
 		LoadImages();
 	}
@@ -46,12 +42,12 @@ public class CustomizationArea extends JPanel implements MouseListener
 	
 	public void LoadImages()
 	{
-		ogre_image = loadImage("img/ogre.png");
-		hero_image = loadImage("img/hero.png");
-		wall_image = loadImage("img/wall.png");
-		key_image = loadImage("img/key.png");
-		door_closed_image = loadImage("img/door_closed.png");
-		club_image = loadImage("img/club.png");
+		images.put('O',loadImage("img/ogre.png"));
+		images.put('H',loadImage("img/hero.png"));
+		images.put('X',loadImage("img/wall.png"));
+		images.put('k',loadImage("img/key.png"));
+		images.put('I',loadImage("img/door_closed.png"));
+		images.put('*',loadImage("img/club.png"));
 	}
 	
 	@Override
@@ -68,7 +64,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 		{
 			for (int j = 0; j < map_x_size; j++)
 			{
-				DrawElement(g, map[i][j], curr_x_pos, curr_y_pos);
+				g.drawImage(images.get(map[i][j]), curr_x_pos, curr_y_pos, null);
 				curr_x_pos += images_x_length;
 			}
 			
@@ -77,31 +73,6 @@ public class CustomizationArea extends JPanel implements MouseListener
 		}
 	}
 
-	public void DrawElement(Graphics g, char element, int curr_x_pos, int curr_y_pos)
-	{
-		switch(element)
-		{
-		case 'X':
-			g.drawImage(wall_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'I':
-			g.drawImage(door_closed_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'H':
-			g.drawImage(hero_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'O':
-			g.drawImage(ogre_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case '*':
-			g.drawImage(club_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'k':
-			g.drawImage(key_image, curr_x_pos, curr_y_pos, null);
-			break;
-		}
-	}
-	
 	@Override
 	public void mouseClicked(MouseEvent mouse_event) 
 	{

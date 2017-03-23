@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -17,16 +18,7 @@ public class GameArea extends JPanel implements KeyListener
 {
 	private Gui gui;
 	private Game game;
-	private BufferedImage ogre_image;
-	private BufferedImage ogre_stunned_image;
-	private BufferedImage hero_image;
-	private BufferedImage hero_with_key_image;
-	private BufferedImage guard_image;
-	private BufferedImage wall_image;
-	private BufferedImage key_image;
-	private BufferedImage club_image;
-	private BufferedImage door_open_image;
-	private BufferedImage door_closed_image;
+	private Hashtable<Character, BufferedImage> images;
 	
 	private int images_x_length = 40;
 	private int images_y_length = 40;
@@ -34,22 +26,23 @@ public class GameArea extends JPanel implements KeyListener
 	public GameArea(Gui gui)
 	{
 		this.gui = gui;
+		images = new Hashtable<Character, BufferedImage>();
 		addKeyListener(this);
 		LoadImages();
 	}
 	
 	public void LoadImages()
 	{
-		ogre_image = loadImage("img/ogre.png");
-		hero_image = loadImage("img/hero.png");
-		guard_image = loadImage("img/guard.png");
-		wall_image = loadImage("img/wall.png");
-		key_image = loadImage("img/key.png");
-		door_open_image = loadImage("img/door_opened.png");
-		door_closed_image = loadImage("img/door_closed.png");
-		club_image = loadImage("img/club.png");
-		hero_with_key_image = loadImage("img/hero_with_key.png");
-		ogre_stunned_image = loadImage("img/ogre_stunned.png");
+		images.put('O',loadImage("img/ogre.png"));
+		images.put('H',loadImage("img/hero.png"));
+		images.put('G',loadImage("img/guard.png"));
+		images.put('X',loadImage("img/wall.png"));
+		images.put('k',loadImage("img/key.png"));
+		images.put('I',loadImage("img/door_closed.png"));
+		images.put('S',loadImage("img/door_opened.png"));
+		images.put('*',loadImage("img/club.png"));
+		images.put('K',loadImage("img/hero_with_key.png"));
+		images.put('8',loadImage("img/ogre_stunned.png"));
 	}
 	
 	public void SetGame(Game game)
@@ -71,7 +64,7 @@ public class GameArea extends JPanel implements KeyListener
 		{
 			for (int j = 0; j < map_x_size; j++)
 			{
-				DrawElement(g, map[i][j], curr_x_pos, curr_y_pos);
+				g.drawImage(images.get(map[i][j]), curr_x_pos, curr_y_pos, null);
 				curr_x_pos += images_x_length;
 			}
 			
@@ -79,44 +72,6 @@ public class GameArea extends JPanel implements KeyListener
 			curr_x_pos = 0;
 		}
 	}
-
-	public void DrawElement(Graphics g, char element, int curr_x_pos, int curr_y_pos)
-	{
-		switch(element)
-		{
-		case 'X':
-			g.drawImage(wall_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'I':
-			g.drawImage(door_closed_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'H':
-			g.drawImage(hero_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'G':
-			g.drawImage(guard_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'O':
-			g.drawImage(ogre_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case '*':
-			g.drawImage(club_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case '8':
-			g.drawImage(ogre_stunned_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'k':
-			g.drawImage(key_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'S':
-			g.drawImage(door_open_image, curr_x_pos, curr_y_pos, null);
-			break;
-		case 'K':
-			g.drawImage(hero_with_key_image, curr_x_pos, curr_y_pos, null);
-			break;
-		}
-	}
-	
 	
 	@Override
 	public void keyPressed(KeyEvent e) 
