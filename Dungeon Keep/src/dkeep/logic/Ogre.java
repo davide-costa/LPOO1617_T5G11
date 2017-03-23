@@ -23,6 +23,13 @@ public class Ogre extends GameCreature
 		club_coords = new Coords(club_x, club_y);
 		is_stunned = false;
 	}
+	
+	public Ogre(Coords coords, GameMap map)
+	{
+		super(coords, default_symbol);
+		while (!TryClubNextPos(map));
+		is_stunned = false;
+	}
 	//TODO: consider removing this
 	/*
 	public int GetClubX()
