@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 public class CustomizableJFrame extends JFrame
 {
 	private JPanel contentPane;
-	private String element_selected;
+	private String element_selected = "";
 	private CustomizationArea cust_area;
 
 	/**
@@ -133,6 +133,7 @@ public class CustomizableJFrame extends JFrame
 				{
 					cust_area.GetCustKeepMap().SaveTo("KeepMap");
 					JPanel panel = new JPanel();
+					InfoLabel.setText("Keep Map saved sucessfully");
 					JOptionPane.showMessageDialog(panel, "Keep Map saved sucessfully", "Info", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else

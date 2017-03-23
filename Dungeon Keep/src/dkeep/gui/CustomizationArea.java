@@ -146,35 +146,15 @@ public class CustomizationArea extends JPanel implements MouseListener
 	private void AddElementAt(int x, int y) 
 	{
 		Coords board_coords = ScrCoordsToBoardCoords(new Coords(x,y));
-		
 		String element_selected = cust_frame.GetElementSelected();
-		switch(element_selected)
-		{
-		case "door":
-			cust_keep_map.AddDoorAt(board_coords);
-			break;
-		case "wall":
-			cust_keep_map.AddWallAt(board_coords);
-			break;
-		case "key":
-			cust_keep_map.AddKeyAt(board_coords);
-			break;
-		case "ogre":
-			cust_keep_map.AddOgreAt(board_coords);
-			break;
-		case "hero":
-			cust_keep_map.AddHeroAt(board_coords);
-			break;
-		}
-		
-		cust_keep_map.RemoveElement(board_coords);
+		cust_keep_map.AddElementAt(board_coords, element_selected);
 		this.repaint();
 	}
 
 	private void RemoveElementAt(int x, int y)
 	{
 		Coords board_coords = ScrCoordsToBoardCoords(new Coords(x,y));
-		cust_keep_map.RemoveElement(board_coords);
+		cust_keep_map.RemoveElementAt(board_coords);
 		this.repaint();
 	}
 	
@@ -191,6 +171,5 @@ public class CustomizationArea extends JPanel implements MouseListener
 	            System.out.println("read error:" + e.getMessage());
 	        }
 	        return image;
-	    }
-
+	   }
 }

@@ -19,6 +19,32 @@ public class CustomizableKeepMap extends KeepMap
 			mobs_coords = new ArrayList<Coords>();
 	}
 	
+	public void AddElementAt(Coords board_coords, String element_selected)
+	{
+		if(IsOutOfRange(board_coords))
+			return;
+		
+		switch(element_selected)
+		{
+		case "door":
+			AddDoorAt(board_coords);
+			break;
+		case "wall":
+			AddWallAt(board_coords);
+			break;
+		case "key":
+			AddKeyAt(board_coords);
+			break;
+		case "ogre":
+			AddOgreAt(board_coords);
+			break;
+		case "hero":
+			AddHeroAt(board_coords);
+			break;
+		}
+		return;
+	}
+	
 	public void AddDoorAt(Coords board_coords)
 	{
 		SetCellState(board_coords, 'I');
@@ -37,17 +63,22 @@ public class CustomizableKeepMap extends KeepMap
 	public void AddOgreAt(Coords board_coords)
 	{
 		mobs_coords.add(board_coords);
+		SetCellState(board_coords, 'O');
 		//TODO:
 	}
 	
 	public void AddHeroAt(Coords board_coords)
 	{
 		hero_coords = board_coords;
+		SetCellState(board_coords, 'H');
 		//TODO:
 	}
 	
-	public void RemoveElement(Coords board_coords)
+	public void RemoveElementAt(Coords board_coords)
 	{
+		if(IsOutOfRange(board_coords))
+			return;
+		
 		char state = GetCellState(board_coords);
 		if(state == 'H')
 			RemoveHero();
@@ -124,20 +155,32 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public boolean IsMapClosed()
 	{
+		System.out.println(map_x_size);
+		System.out.println(map_y_size);
 		//analising the first line and the last one
 		for(int i = 0; i < map_y_size; i += map_y_size-1)
 			for(int j = 0; j < map_x_size; j++)
-				if(map[i][j] != 'X' || map[i][j] != 'I')
+				if(map[i][j] != 'X' && map[i][j] != 'I')
 					return false;
 		
 		//analising the first column and the last one
 		for(int i = 1; i < map_y_size - 1; i++)
-			for(int j = 1; j < map_x_size; j += map_x_size - 1)
-				if(map[i][j] != 'X' || map[i][j] != 'I')
+			for(int j = 0; j < map_x_size; j += map_x_size - 1)
+				if(map[i][j] != 'X' && map[i][j] != 'I')
 					return false;
 				
 		return true;
 	}
+	
+
+	 public boolean IsOutOfRange(Coords board_coords)
+	 {
+		 if(board_coords.GetX() >= map_x_size || board_coords.GetX() < 0)
+			 return true;
+		 if(board_coords.GetY() >= map_y_size || board_coords.GetY() < 0)
+			 return true;
+		 return false;
+	 }
 	
 	public void SaveTo(String file_path)
 	{
