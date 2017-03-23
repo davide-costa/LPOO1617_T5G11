@@ -64,11 +64,20 @@ public class CustomizableKeepMap extends KeepMap
 	{
 		mobs_coords.add(board_coords);
 		SetCellState(board_coords, 'O');
+		if (mobs_coords.size() > 5)
+		{
+			SetCellState(mobs_coords.get(0), (char)0);
+			mobs_coords.remove(0);
+		}
 		//TODO:
 	}
 	
 	public void AddHeroAt(Coords board_coords)
 	{
+		//ensure that the user cannot place multiple hero instances on the map
+		if (hero_coords != null)
+			SetCellState(hero_coords, (char)0);
+		
 		hero_coords = board_coords;
 		SetCellState(board_coords, 'H');
 		//TODO:
