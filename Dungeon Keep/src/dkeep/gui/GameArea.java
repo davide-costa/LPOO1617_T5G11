@@ -33,16 +33,17 @@ public class GameArea extends JPanel implements KeyListener
 	
 	public void LoadImages()
 	{
-		images.put('O',loadImage("img/ogre.png"));
-		images.put('H',loadImage("img/hero.png"));
-		images.put('G',loadImage("img/guard.png"));
-		images.put('X',loadImage("img/wall.png"));
-		images.put('k',loadImage("img/key.png"));
-		images.put('I',loadImage("img/door_closed.png"));
-		images.put('S',loadImage("img/door_opened.png"));
-		images.put('*',loadImage("img/club.png"));
-		images.put('K',loadImage("img/hero_with_key.png"));
-		images.put('8',loadImage("img/ogre_stunned.png"));
+		images.put('O', loadImage("img/ogre.png"));
+		images.put('H', loadImage("img/hero.png"));
+		images.put('G', loadImage("img/guard.png"));
+		images.put('X', loadImage("img/wall.png"));
+		images.put('k', loadImage("img/key.png"));
+		images.put('I', loadImage("img/door_closed.png"));
+		images.put('S', loadImage("img/door_opened.png"));
+		images.put('*', loadImage("img/club.png"));
+		images.put('K', loadImage("img/hero_with_key.png"));
+		images.put('8', loadImage("img/ogre_stunned.png"));
+		images.put('$', loadImage("img/ogre_club_key.png"));
 	}
 	
 	public void SetGame(Game game)
