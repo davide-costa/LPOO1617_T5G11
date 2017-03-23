@@ -274,7 +274,7 @@ public class Gui
 				    }
 					
 					int x_size = Integer.parseInt(x_size_str.getText());
-				    if(x_size > 15 && x_size < 4)
+				    if(x_size > 15 || x_size < 4)
 				    {
 				    	JPanel panel = new JPanel();
 						JOptionPane.showMessageDialog(panel, "KeepMap x size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
@@ -282,7 +282,7 @@ public class Gui
 				    }
 				    
 				    int y_size = Integer.parseInt(y_size_str.getText());
-				    if(y_size > 15 && y_size < 4)
+				    if(y_size > 15 || y_size < 4)
 				    {
 				    	JPanel panel = new JPanel();
 						JOptionPane.showMessageDialog(panel, "KeepMap y size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
