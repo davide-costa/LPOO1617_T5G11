@@ -6,12 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -54,6 +56,46 @@ public class CustomizableJFrame extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		
+		
+		//String option = (String) JOptionPane.showInputDialog(null, message);
+		//System.out.println(option);
+		
+		JTextField x_size_str = new JTextField();
+		JTextField y_size_str = new JTextField();
+		Object[] message = {
+			    "KeepMap X size:", x_size_str,
+			    "KeepMap Y size:", y_size_str
+			};
+
+
+		int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.OK_CANCEL_OPTION);
+		if (option == JOptionPane.OK_OPTION) 
+		{
+			if(x_size_str.getText() == "" || y_size_str.getText() == "")
+			 {
+		    	JPanel panel = new JPanel();
+				JOptionPane.showMessageDialog(panel, "You must introduce x and y size for KeepMap", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+		    }
+			
+		    if(x_size > 15 && x_size < 4)
+		    {
+		    	JPanel panel = new JPanel();
+				JOptionPane.showMessageDialog(panel, "KeepMap x size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+		    }
+		    
+		    int y_size = Integer.parseInt(y_size_str.getText());
+		    if(y_size > 15 && y_size < 4)
+		    {
+		    	JPanel panel = new JPanel();
+				JOptionPane.showMessageDialog(panel, "KeepMap y size must be in 4 to 15 range", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+		    }
+		    	
+		}
 		
 		//Create cust area
 		cust_area = new CustomizationArea(this);

@@ -168,21 +168,21 @@ public class Game implements Serializable
 		}
 		catch (ClassNotFoundException | IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
-		int ogre_init_spawn_x = 1;
-		int ogre_init_spawn_y = 1;
-		int club_init_spawn_x = 1;
-		int club_init_spawn_y = 2;
+		
 		
 		ogres = new ArrayList<Ogre>();
-		
 		
 		Ogre curr_ogre;
 		ArrayList<Coords> mobs_coords = map.GetInitMobsCoords();
 		if(mobs_coords == null)
 		{
+			int ogre_init_spawn_x = 1;
+			int ogre_init_spawn_y = 1;
+			int club_init_spawn_x = 1;
+			int club_init_spawn_y = 2;
+			
 			if (num_of_ogres == 0)
 				num_of_ogres = ThreadLocalRandom.current().nextInt(1, 3 + 1);
 
