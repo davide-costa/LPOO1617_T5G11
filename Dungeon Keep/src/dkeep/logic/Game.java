@@ -256,7 +256,7 @@ public class Game implements Serializable
 			return 0;
 		
 		int make_play_value;
-		if (dst_coords.equals(-1, 1) && level == 2)
+		if (level == 2 && HeroLeftKeep(dst_coords))
 		{
 			SetGameMap(map.NextMap());
 			return 0;
@@ -417,6 +417,19 @@ public class Game implements Serializable
 			if(coord.equals(dst_coords) && map.IsDoorOpen())
 				return true;
 		}
+		
+		return false;
+	}
+	
+	private boolean HeroLeftKeep(Coords dst_coords)
+	{
+		if(!HeroIsLeaving(hero.GetCoords()))//hero was leaving in the last play
+			return false;
+		
+		int x_coord = dst_coords.GetX();
+		int y_coord = dst_coords.GetY();
+		if(x_coord == -1 || y_coord == -1 || x_coord == map.GetMapXSize() || y_coord == map.GetMapYSize())
+			return true;
 		
 		return false;
 	}

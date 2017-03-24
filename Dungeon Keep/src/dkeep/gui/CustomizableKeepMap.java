@@ -67,7 +67,9 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public void AddDoorAt(Coords board_coords)
 	{
+		
 		if(board_coords.GetX() == 0 || board_coords.GetX() == map_x_size - 1)
+			
 			if(board_coords.GetY() == 0 || board_coords.GetY() == map_y_size - 1)
 			{
 				doors_coords.add(board_coords);
