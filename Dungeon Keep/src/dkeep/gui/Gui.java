@@ -245,6 +245,7 @@ public class Gui
 			    	  JOptionPane.showMessageDialog(panel, "Error saving the game state file", "Error", JOptionPane.ERROR_MESSAGE);
 			    	  return;	
 			      }
+				 game_area.requestFocusInWindow();
 			}
 		});
 		btnSaveGame.setBounds(66, 24, 115, 29);
