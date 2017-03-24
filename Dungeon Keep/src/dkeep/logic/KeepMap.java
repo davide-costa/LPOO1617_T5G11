@@ -37,23 +37,6 @@ public class KeepMap extends GameMap implements Serializable
 		doors_coords.add(new Coords(0,1));
 	}
 	
-	public boolean MoveTo(Coords coords)
-	{
-		int x = coords.GetX();
-		int y = coords.GetY();
-		
-		if (x > map_x_size || x < 0) //Out of range of the map in x
-			return false;
-		
-		if (y > map_y_size || y < 0) //Out of range of the map in y
-			return false;
-		
-		if (map[y][x] == 'X' || map[y][x] == 'I')
-			return false;
-		
-		return true;
-	}
-	
 	public GameMap NextMap()
 	{
 		return null;

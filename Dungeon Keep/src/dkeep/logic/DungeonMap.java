@@ -31,24 +31,7 @@ public class DungeonMap extends GameMap implements Serializable
 					};
 		map = dungeon_map;
 	}
-	
-	public boolean MoveTo(Coords coords)
-	{
-		int x = coords.GetX();
-		int y = coords.GetY();
 		
-		if(x > map_x_size || x < 0)
-			return false;
-		
-		if(y > map_y_size || y < 0)
-			return false;
-			
-		if(map[y][x] == 'X' || map[y][x] == 'I')
-			return false;
-		
-		return true;	
-	}
-	
 	public GameMap NextMap()
 	{
 		return new KeepMap();
