@@ -123,6 +123,16 @@ public class Game implements Serializable
 	{
 		level = 1;
 		
+		ComputeGuard(guard_name);
+		
+		ComputeHero();
+
+		SetGameMap(new DungeonMap());
+		RefreshMap();
+	}
+	
+	private void ComputeGuard(String guard_name)
+	{
 		//Generate the type of guard for this game, if the user didn't specify the one he wants
 		int guard_num;
 		if (guard_name == null || guard_name == "")
@@ -142,18 +152,12 @@ public class Game implements Serializable
 			else
 				guard_num = 1; //code never executed, just to avoid compilation error
 		}
-		
 		if(guard_num == 1)
 			guard = new Rookie(8, 1);
 		else if(guard_num == 2)
 			guard = new Drunken(8, 1);
 		else
 			guard = new Suspicious(8, 1);
-		
-		SetGameMap(new DungeonMap());
-		Coords hero_coords = map.GetHeroCoords();
-		hero = new Hero(hero_coords);
-		RefreshMap();
 	}
 	
 	private void InitLevel2()
@@ -165,12 +169,12 @@ public class Game implements Serializable
 		
 		level = 2;
 		
-		PlaceHero();
+		ComputeHero();
 	
 		RefreshMap();
 	}
 	
-	private void PlaceHero() 
+	private void ComputeHero() 
 	{
 		if(map.GetHeroCoords() == null)
 			hero.SetCoords(new Coords(1,7));
@@ -281,15 +285,7 @@ public class Game implements Serializable
 		if(!map.MoveTo(dst_coords) && !HeroIsLeaving(dst_coords))
 			return 0;
 		
-		switch(level)
-		{
-		case 1:
-			guard.Move();
-			break;
-		case 2:
-			MoveOgresAndClubs();
-			break;
-		}
+		MoveMobsOnCurrLevel();
 
 		make_play_value = MakePlay(dst_coords);
 		if (make_play_value == 1)
@@ -306,6 +302,19 @@ public class Game implements Serializable
 		
 		RefreshMap();
 		return make_play_value;
+	}
+	
+	private void MoveMobsOnCurrLevel()
+	{
+		switch(level)
+		{
+		case 1:
+			guard.Move();
+			break;
+		case 2:
+			MoveOgresAndClubs();
+			break;
+		}
 	}
 	
 	private Coords ComputeDestination(String direction)
