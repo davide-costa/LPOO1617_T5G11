@@ -15,7 +15,7 @@ public class KeepMap extends GameMap implements Serializable
 {
 	private static final long serialVersionUID = 8532318868372099106L;
 	protected ArrayList<Coords> mobs_coords;
-	protected boolean door_open = false;
+	protected boolean doors_open = false;
 	
 	public KeepMap()
 	{
@@ -33,15 +33,14 @@ public class KeepMap extends GameMap implements Serializable
 				{ 'X','X','X','X','X','X','X','X','X' }
 			};
 		map = keep_map;
+		doors_coords = new ArrayList<Coords>();
+		doors_coords.add(new Coords(0,1));
 	}
 	
 	public boolean MoveTo(Coords coords)
 	{
 		int x = coords.GetX();
 		int y = coords.GetY();
-		
-		if (x == 0 && y == 1 && map[y][x+1] == 'K')
-			return true;
 		
 		if (x > map_x_size || x < 0) //Out of range of the map in x
 			return false;
@@ -63,14 +62,14 @@ public class KeepMap extends GameMap implements Serializable
 	@Override
 	public void OpenDoors()
 	{
-		door_open = true;
+		doors_open = true;
 		return;
 	}
 
 	@Override
 	public boolean IsDoorOpen() 
 	{
-		return door_open;
+		return doors_open;
 	}
 
 	@Override

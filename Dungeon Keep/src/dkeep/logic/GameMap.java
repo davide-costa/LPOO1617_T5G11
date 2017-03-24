@@ -11,6 +11,7 @@ public abstract class GameMap implements Serializable
 	protected char[][] map;
 	protected int map_x_size;
 	protected int map_y_size;
+	protected ArrayList<Coords> doors_coords;
 	
 	public abstract boolean MoveTo(Coords coords);
 	
@@ -27,6 +28,11 @@ public abstract class GameMap implements Serializable
 	public int GetMapYSize()
 	{
 		return map_y_size;
+	}
+	
+	public ArrayList<Coords> GetDoorsCoords()
+	{
+		return doors_coords;
 	}
 	
 	public abstract GameMap NextMap();

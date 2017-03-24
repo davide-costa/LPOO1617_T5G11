@@ -262,7 +262,7 @@ public class Game implements Serializable
 			return 0;
 		}
 		
-		if(!map.MoveTo(dst_coords))
+		if(!map.MoveTo(dst_coords) && !HeroIsLeaving(dst_coords))
 			return 0;
 		
 		switch(level)
@@ -408,6 +408,17 @@ public class Game implements Serializable
 	private boolean WasCaughtByClub(Ogre ogre)
 	{
 		return CellsAreAdjacent(hero.GetCoords(), ogre.GetClubCoords());
+	}
+	
+	private boolean HeroIsLeaving(Coords dst_coords)
+	{
+		for(Coords coord: map.GetDoorsCoords())
+		{
+			if(coord.equals(dst_coords) && map.IsDoorOpen())
+				return true;
+		}
+		
+		return false;
 	}
 	
 	/**
