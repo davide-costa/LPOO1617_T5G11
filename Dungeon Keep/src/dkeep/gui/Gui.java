@@ -230,7 +230,12 @@ public class Gui
 		btnSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				 try 
+				if (game == null)
+				{
+					LableState.setText("A game must be running in order to use the Save Game function.");
+					return;
+				}
+				 try
 			      {
 			          FileOutputStream fileOut = new FileOutputStream("GameStateFile");
 			          ObjectOutputStream out = new ObjectOutputStream(fileOut);
