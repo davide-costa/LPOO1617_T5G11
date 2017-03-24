@@ -67,8 +67,6 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public void AddDoorAt(Coords board_coords)
 	{
-	
-			
 		boolean left_or_right_col = board_coords.GetX() == 0 || board_coords.GetX() == map_x_size - 1;
 		boolean upper_or_bottom_line = board_coords.GetY() == 0 || board_coords.GetY() == map_y_size - 1;
 		
@@ -100,6 +98,9 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public void AddOgreAt(Coords board_coords)
 	{
+		if(mobs_coords.contains(board_coords))
+			return;
+		
 		mobs_coords.add(board_coords);
 		SetCellState(board_coords, 'O');
 		if (mobs_coords.size() > 5)
