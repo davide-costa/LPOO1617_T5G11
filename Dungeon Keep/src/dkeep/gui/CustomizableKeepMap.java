@@ -67,14 +67,25 @@ public class CustomizableKeepMap extends KeepMap
 	
 	public void AddDoorAt(Coords board_coords)
 	{
-		
-		if(board_coords.GetX() == 0 || board_coords.GetX() == map_x_size - 1)
+	
 			
-			if(board_coords.GetY() == 0 || board_coords.GetY() == map_y_size - 1)
-			{
-				doors_coords.add(board_coords);
-				SetCellState(board_coords, 'I');
-			}
+		boolean left_or_right_col = board_coords.GetX() == 0 || board_coords.GetX() == map_x_size - 1;
+		boolean upper_or_bottom_line = board_coords.GetY() == 0 || board_coords.GetY() == map_y_size - 1;
+		
+		boolean upper_left_corner = board_coords.GetX() == 0 && board_coords.GetY() == 0;
+		boolean upper_right_corner = board_coords.GetX() == map_x_size - 1 && board_coords.GetY() == 0;
+		boolean lower_left_corner = board_coords.GetX() == 0 && board_coords.GetY() == map_y_size - 1;
+		boolean lower_right_corner = board_coords.GetX() == map_x_size - 1 && board_coords.GetY() == map_y_size - 1;
+		
+		
+		if(!(left_or_right_col || upper_or_bottom_line))
+			return;
+		
+		if (upper_left_corner || upper_right_corner || lower_left_corner || lower_right_corner)
+			return;
+		
+		doors_coords.add(board_coords);
+		SetCellState(board_coords, 'I');
 	}
 	
 	public void AddWallAt(Coords board_coords)
