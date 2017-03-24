@@ -48,7 +48,7 @@ public class KeepMap extends GameMap implements Serializable
 		if (y > map_y_size || y < 0) //Out of range of the map in y
 			return false;
 		
-		if (map[y][x] == 'X' || (map[y][x] == 'I' && map[y][x+1] != 'K'))
+		if (map[y][x] == 'X' || map[y][x] == 'I')
 			return false;
 		
 		return true;
