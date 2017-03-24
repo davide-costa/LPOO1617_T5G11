@@ -125,7 +125,7 @@ public class Game implements Serializable
 		
 		ComputeGuard(guard_name);
 		
-		ComputeHero(guard_name);
+		ComputeHero();
 
 		SetGameMap(new DungeonMap());
 		RefreshMap();
@@ -169,12 +169,12 @@ public class Game implements Serializable
 		
 		level = 2;
 		
-		PlaceHero();
+		ComputeHero();
 	
 		RefreshMap();
 	}
 	
-	private void PlaceHero() 
+	private void ComputeHero() 
 	{
 		if(map.GetHeroCoords() == null)
 			hero.SetCoords(new Coords(1,7));
