@@ -204,9 +204,6 @@ public class Gui
 			         game = (Game) in.readObject();
 			         in.close();
 			         fileIn.close();
-			         LableState.setText("Game loaded sucessfully. You can play");
-			         game_area.SetGame(game); //update the Game object pointer in the game to the newly loaded game
-			         game_area.repaint();
 			      }
 			     catch(IOException i) 
 			     {
@@ -220,7 +217,15 @@ public class Gui
 			    	 JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
 			    	 return;
 			      }
+
+			    if (game.IsGameOver())
+			    {
+			    	LableState.setText("This game has already ended. Please start a new game.");
+			    	return;
+			    }
 			     
+		        LableState.setText("Game loaded sucessfully. You can play");
+		        game_area.SetGame(game); //update the Game object pointer in the game to the newly loaded game
 			 	frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
 				game_area.repaint();
