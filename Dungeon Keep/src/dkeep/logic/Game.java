@@ -285,15 +285,7 @@ public class Game implements Serializable
 		if(!map.MoveTo(dst_coords) && !HeroIsLeaving(dst_coords))
 			return 0;
 		
-		switch(level)
-		{
-		case 1:
-			guard.Move();
-			break;
-		case 2:
-			MoveOgresAndClubs();
-			break;
-		}
+		MoveMobsOnCurrLevel();
 
 		make_play_value = MakePlay(dst_coords);
 		if (make_play_value == 1)
@@ -310,6 +302,19 @@ public class Game implements Serializable
 		
 		RefreshMap();
 		return make_play_value;
+	}
+	
+	private void MoveMobsOnCurrLevel()
+	{
+		switch(level)
+		{
+		case 1:
+			guard.Move();
+			break;
+		case 2:
+			MoveOgresAndClubs();
+			break;
+		}
 	}
 	
 	private Coords ComputeDestination(String direction)
