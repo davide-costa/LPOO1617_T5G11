@@ -381,15 +381,8 @@ public class Game implements Serializable
 		{
 			map.PickUpKey(hero.GetCoords());
 			map.OpenDoors();
-			//TODO maybe remove this switch
-			switch(level)
-			{
-			case 1:
-				break;
-			case 2:
+			if (level == 2)
 				hero.SetSymbol('K');
-				break;
-			}
 			return 0;
 		}
 		else if (dst_state == 'S')
