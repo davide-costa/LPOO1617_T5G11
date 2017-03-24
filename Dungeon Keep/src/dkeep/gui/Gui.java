@@ -93,6 +93,9 @@ public class Gui
 			{
 				//handle the num of ogres
 				String num_ogres_str = JOptionPane.showInputDialog(null, "Number of ogres", "2");
+				if(num_ogres_str == null)
+					return;
+
 				if(num_ogres_str.isEmpty())
 				{
 					JPanel panel = new JPanel();
@@ -111,6 +114,8 @@ public class Gui
 				//handle the guard personality
 				String personalities[] = new String[] {"Rookie", "Drunken", "Suspicious"};
 				String personality_name = (String) JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
+				if(personality_name == null)
+					return;
 				game = new Game(personality_name, num_ogres);
 				LableState.setText("Game started");
 				
