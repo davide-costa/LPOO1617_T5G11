@@ -24,6 +24,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -91,6 +92,9 @@ public class Gui
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				int num_ogres = 0; 
+				if(!new File("KeepMap").isFile())
+				{	
 				//handle the num of ogres
 				String num_ogres_str = JOptionPane.showInputDialog(null, "Number of ogres", "2");
 				if(num_ogres_str == null)
@@ -103,14 +107,14 @@ public class Gui
 					return;
 				}
 				
-				int num_ogres = Integer.parseInt(num_ogres_str);
+				num_ogres = Integer.parseInt(num_ogres_str);
 				if(num_ogres < 1 || num_ogres > 5)
 				{
 					 JPanel panel = new JPanel();
 					 JOptionPane.showMessageDialog(panel, "Number of ogres must be in 1 to 5 range!", "Error", JOptionPane.ERROR_MESSAGE);
 					 return;
 				}
-					
+				}	
 				//handle the guard personality
 				String personalities[] = new String[] {"Rookie", "Drunken", "Suspicious"};
 				String personality_name = (String) JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
