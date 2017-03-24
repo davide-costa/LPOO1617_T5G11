@@ -40,7 +40,7 @@ public class KeepMap extends GameMap implements Serializable
 		int x = coords.GetX();
 		int y = coords.GetY();
 		
-		if (x == 0 && y == 1 && door_open)
+		if (x == 0 && y == 1 && map[y][x+1] == 'K')
 			return true;
 		
 		if (x > map_x_size || x < 0) //Out of range of the map in x
