@@ -289,16 +289,7 @@ public class Game implements Serializable
 
 		make_play_value = MakePlay(dst_coords);
 		if (make_play_value == 1)
-		{
-			SetGameMap(map.NextMap());
-			level++;
-			switch(level)
-			{
-			case 2:
-				InitLevel2();
-				break;
-			}
-		}
+			NextLevel();
 		
 		RefreshMap();
 		return make_play_value;
@@ -313,6 +304,18 @@ public class Game implements Serializable
 			break;
 		case 2:
 			MoveOgresAndClubs();
+			break;
+		}
+	}
+	
+	private void NextLevel()
+	{
+		SetGameMap(map.NextMap());
+		level++;
+		switch(level)
+		{
+		case 2:
+			InitLevel2();
 			break;
 		}
 	}
