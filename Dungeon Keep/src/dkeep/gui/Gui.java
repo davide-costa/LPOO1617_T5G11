@@ -217,20 +217,22 @@ public class Gui
 			    	 JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
 			    	 return;
 			      }
-
-			    if (game.IsGameOver())
-			    {
-			    	LableState.setText("This game has already ended. Please start a new game.");
-			    	return;
-			    }
-			     
-		        LableState.setText("Game loaded sucessfully. You can play");
+		
 		        game_area.SetGame(game); //update the Game object pointer in the game to the newly loaded game
 			 	frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
 				game_area.repaint();
 				
-				ActivateGameButtons();
+			    if (game.IsGameOver())
+			    {
+			    	LableState.setText("This game has already ended. Please start a new game.");
+			    	InactivateGameButtons();
+			    }
+			    else
+			    {
+			        LableState.setText("Game loaded sucessfully. You can play");
+			    	ActivateGameButtons();
+			    }
 			}
 		});
 		btnLoadGame.setBounds(216, 24, 115, 29);
@@ -314,9 +316,10 @@ public class Gui
 	
 	public void NewPlay(String direction)
 	{
-		int move_hero_value;
-
-		move_hero_value = game.MoveHero(direction);
+		if (game.IsGameOver())
+			return;
+		
+		int move_hero_value = game.MoveHero(direction);
 
 		if (move_hero_value == 1)
 			LableState.setText("NEXT LEVEL");

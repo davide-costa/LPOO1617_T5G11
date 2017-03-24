@@ -134,7 +134,6 @@ public class CustomizationJFrame extends JFrame
 					JPanel panel = new JPanel();
 					JOptionPane.showMessageDialog(panel, "The map is not valid. See the reasons below", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-					
 			}
 		});
 		btnSaveChanges.setBounds(979, 31, 115, 29);
