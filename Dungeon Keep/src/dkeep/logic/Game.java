@@ -125,9 +125,10 @@ public class Game implements Serializable
 		
 		ComputeGuard(guard_name);
 		
+		hero = new Hero(0, 0); //hero initialization (this coords are unused, they'll be set properly in the next function call)
+		SetGameMap(new DungeonMap());
 		ComputeHero();
 
-		SetGameMap(new DungeonMap());
 		RefreshMap();
 	}
 	
