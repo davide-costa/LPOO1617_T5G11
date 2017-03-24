@@ -7,53 +7,63 @@ import dkeep.logic.*;
 public class Cli
 {
 	private static Game game;
+	private static char curr_map[][];
 
 	public static void main(String[] args)
 	{
 		String direction;
 		int move_hero_value;
 		game = new Game(null, 0);
-		char curr_map[][] = game.GetGameMap();
+		curr_map = game.GetGameMap();
 		DrawBoard(curr_map);
 
 		while (true)
 		{
-
 			direction = WaitForPlay();
 			if (direction == null)
 				continue;
 
 			move_hero_value = game.MoveHero(direction);
 
-			if (move_hero_value == 1)
+			ComputeMoveHeroValue(move_hero_value);
+			
+			if (game.IsEndOfGame())
 			{
-				System.out.println();
-				System.out.println("NEXT LEVEL");
-				System.out.println();
-			}
-			else if (move_hero_value == -1)
-			{
-				curr_map = game.GetGameMap();
-				DrawBoard(curr_map);
-				System.out.println();
-				System.out.println("END OF GAME");
-				System.out.println("YOU LOSE");
-				System.out.println();
+				EndOfGame();
 				return;
 			}
-
-			if (game.IsEndOfGame())
-				break;
 			
 			curr_map = game.GetGameMap();
 			DrawBoard(curr_map);
 		}
+	}
 
-
+	private static void EndOfGame() 
+	{
 		System.out.println();
 		System.out.println("END OF GAME");
 		System.out.println("YOU WIN");
 		System.out.println();
+	}
+
+	private static void ComputeMoveHeroValue(int move_hero_value)
+	{
+		if (move_hero_value == 1)
+		{
+			System.out.println();
+			System.out.println("NEXT LEVEL");
+			System.out.println();
+		}
+		else if (move_hero_value == -1)
+		{
+			curr_map = game.GetGameMap();
+			DrawBoard(curr_map);
+			System.out.println();
+			System.out.println("END OF GAME");
+			System.out.println("YOU LOSE");
+			System.out.println();
+			return;
+		}
 	}
 
 	public static String WaitForPlay()
