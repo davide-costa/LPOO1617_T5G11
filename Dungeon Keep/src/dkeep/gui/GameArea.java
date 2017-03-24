@@ -36,6 +36,7 @@ public class GameArea extends JPanel implements KeyListener
 		images.put('O', loadImage("img/ogre.png"));
 		images.put('H', loadImage("img/hero.png"));
 		images.put('G', loadImage("img/guard.png"));
+		images.put('g', loadImage("img/guard_sleeping.png"));
 		images.put('X', loadImage("img/wall.png"));
 		images.put('k', loadImage("img/key.png"));
 		images.put('I', loadImage("img/door_closed.png"));
