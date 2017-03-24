@@ -158,22 +158,28 @@ public class Game implements Serializable
 	
 	private void InitLevel2()
 	{
-		try
-		{
-			FileInputStream fileIn = new FileInputStream("KeepMap");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			map = (KeepMap) in.readObject();
-			in.close();
-			fileIn.close();
-		}
-		catch (ClassNotFoundException | IOException e)
-		{
-			
-		}
-		
-		
+		LoadKeepMapFromFile();
+	
 		ogres = new ArrayList<Ogre>();
+		ComputeOgres();
 		
+		level = 2;
+		
+		PlaceHero();
+	
+		RefreshMap();
+	}
+	
+	private void PlaceHero() 
+	{
+		if(map.GetHeroCoords() == null)
+			hero.SetCoords(new Coords(1,7));
+		else
+			hero.SetCoords(map.GetHeroCoords());
+	}
+
+	private void ComputeOgres() 
+	{
 		Ogre curr_ogre;
 		ArrayList<Coords> mobs_coords = map.GetInitMobsCoords();
 		if(mobs_coords == null)
@@ -200,14 +206,24 @@ public class Game implements Serializable
 				ogres.add(curr_ogre);
 			}
 		}
-		
-		level = 2;
-		if(map.GetHeroCoords() == null)
-			hero.SetCoords(new Coords(1,7));
-		else
-			hero.SetCoords(map.GetHeroCoords());
-		RefreshMap();
 	}
+
+	private void LoadKeepMapFromFile() 
+	{
+		try
+		{
+			FileInputStream fileIn = new FileInputStream("KeepMap");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			map = (KeepMap) in.readObject();
+			in.close();
+			fileIn.close();
+		}
+		catch (ClassNotFoundException | IOException e)
+		{
+			
+		}
+	}
+
 	/**
 	 * Returns the map used in the game in the form of a bidimensional array.
 	 * @return a bidimensional array that represents the map.
