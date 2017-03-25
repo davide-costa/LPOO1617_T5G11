@@ -182,10 +182,10 @@ public class Game implements Serializable
 	
 	private void ComputeHero() 
 	{
-		if(map.GetHeroCoords() == null)
+		if(map.GetInitHeroCoords() == null)
 			hero.SetCoords(new Coords(1,7));
 		else
-			hero.SetCoords(map.GetHeroCoords());
+			hero.SetCoords(map.GetInitHeroCoords());
 	}
 
 	private void ComputeOgres() 

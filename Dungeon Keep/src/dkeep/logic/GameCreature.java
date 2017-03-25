@@ -44,6 +44,10 @@ public class GameCreature implements Serializable
 		coords.SetY(y);
 	}
 	*/
+	/**
+	 * Function that returns the coords of the game creature on the map.
+	 * @return the coords of the game creature on the map.
+	 */
 	public Coords GetCoords()
 	{
 		return coords;
@@ -59,6 +63,10 @@ public class GameCreature implements Serializable
 		coords.Set(x, y);
 	}
 	
+	/**
+	 * Function that returns the symbol of the game creature.
+	 * @return the symbol of the game creature.
+	 */
 	public char GetSymbol()
 	{
 		return symbol;

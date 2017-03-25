@@ -52,11 +52,21 @@ public abstract class GameMap implements Serializable
 	
 	public abstract GameMap NextMap();
 	
+	/**
+	 * Sets the state of a cell in the given coords with the given symbol.
+	 * @param coords the coords of the cell we want to get the state.
+	 * @param symbol the symbol we want to set in the given coords.
+	 */
 	public void SetCellState(Coords coords, char symbol)
 	{
 		map[coords.GetY()][coords.GetX()] = symbol;
 	}
 	
+	/**
+	 * Returns the state (i.e. representation or symbol) of a the given coords in the map.
+	 * @param coords the coords of the cell we want to get the state.
+	 * @return the state of the cell.
+	 */
 	public char GetCellState(Coords coords)
 	{
 		return map[coords.GetY()][coords.GetX()];
@@ -72,7 +82,7 @@ public abstract class GameMap implements Serializable
 		return map_copy;
 	}
 	
-	public Coords GetHeroCoords() 
+	public Coords GetInitHeroCoords() 
 	{
 		return hero_coords;
 	}
