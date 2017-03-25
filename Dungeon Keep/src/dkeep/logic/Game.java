@@ -26,10 +26,6 @@ public class Game implements Serializable
 	private int temp_y;
 	private boolean game_over = false;
 	
-	private boolean CellsAreAdjacent(Coords cell1, Coords cell2)
-	{
-		return cell1.adjacentTo(cell2);
-	}
 	
 	/**  
 	 * Constructor of game class for the Gui interface.  
@@ -40,10 +36,6 @@ public class Game implements Serializable
 	{
 		this.num_of_ogres = num_of_ogres;
 		InitLevel1(guard_name);
-		
-		//debugging
-//		SetGameMap(map.NextMap());
-//		InitLevel2();
 	}
 	
 	/**  
@@ -74,6 +66,11 @@ public class Game implements Serializable
 		RefreshMap();
 	}
 	
+	/**  
+	 * Allows to get the state of a cell given its coords.
+     * @param coords The coords of which to return the state
+     * @return the state of the cell.
+	 */
 	public char GetCellState(Coords coords)
 	{
 		return map_matrix[coords.GetY()][coords.GetX()];
@@ -84,16 +81,28 @@ public class Game implements Serializable
 		map_matrix[coords.GetY()][coords.GetX()] = symbol;
 	}
 	
+	/**  
+	 * Allows to get the level in which the game is.
+	 * @return the level in which the game is.
+	 */
 	public int GetLevel()
 	{
 		return level;
 	}
 	
+	/**  
+	 * Allows to get the list of ogres of a game.
+	 * @return the list of ogres of a game.
+	 */
 	public List<Ogre> GetOgres()
 	{
 		return ogres;
 	}
 	
+	/**  
+	 * Allows to get the guard of a game.
+	 * @return the guard of a game.
+	 */
 	public Guard GetGuard()
 	{
 		return guard;
@@ -454,6 +463,11 @@ public class Game implements Serializable
 			return true;
 		
 		return false;
+	}
+	
+	private boolean CellsAreAdjacent(Coords cell1, Coords cell2)
+	{
+		return cell1.adjacentTo(cell2);
 	}
 	
 	/**
