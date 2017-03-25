@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -156,7 +157,10 @@ public class CustomizationArea extends JPanel implements MouseListener, MouseMot
 	        }
 	        catch(IOException e) 
 	        {
-	           
+	        	JPanel panel = new JPanel();
+				JOptionPane.showMessageDialog(panel, "An error ocurered loading the images necessary to represent the game. Please verify the validity of the image files.", "Error", JOptionPane.ERROR_MESSAGE);
+	            System.out.println("An error ocurered loading the images necessary to represent the game. Please verify the validity of the image files. Error: " + e.getMessage());
+	            System.exit(1);
 	        }
 	        return image;
 	 }

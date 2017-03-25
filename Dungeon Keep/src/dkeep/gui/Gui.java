@@ -66,9 +66,11 @@ public class Gui
 				{
 					Gui window = new Gui();
 					window.frame.setVisible(true);
-				} catch (Exception e)
+				}
+				catch (Exception e)
 				{
 					e.printStackTrace();
+					System.exit(1);
 				}
 			}
 		});

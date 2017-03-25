@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import dkeep.logic.Coords;
 import dkeep.logic.KeepMap;
 
@@ -241,13 +244,15 @@ public class CustomizableKeepMap extends KeepMap
 		}
 		catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        	JPanel panel = new JPanel();
+			JOptionPane.showMessageDialog(panel, "An error ocurered saving the file containing your customization. Please try restarting the program.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("An error ocurered saving the file containing your customization. Please try restarting the program. Error: " + e.getMessage());
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JPanel panel = new JPanel();
+			JOptionPane.showMessageDialog(panel, "An error ocurered saving the file containing your customization. Please try restarting the program.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("An error ocurered saving the file containing your customization. Please try restarting the program. Error: " + e.getMessage());
 		}
 
 	}
