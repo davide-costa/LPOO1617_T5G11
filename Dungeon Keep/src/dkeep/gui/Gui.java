@@ -56,13 +56,18 @@ public class Gui
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
 					Gui window = new Gui();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				} catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -99,7 +104,8 @@ public class Gui
 	private void CreateButtonCustomizeKeepMap() 
 	{
 		CustomizeKeepMap = new JButton("Customize Keep Map");
-		CustomizeKeepMap.addActionListener(new ActionListener() {
+		CustomizeKeepMap.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				JTextField x_size_str = new JTextField();
@@ -147,7 +153,8 @@ public class Gui
 	private void CreateButtonSaveGame() 
 	{
 		btnSaveGame = new JButton("Save Game");
-		btnSaveGame.addActionListener(new ActionListener() {
+		btnSaveGame.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				if (game == null)
@@ -313,7 +320,8 @@ public class Gui
 	private JButton CreateButtonNewGame() 
 	{
 		btnNewGame = new JButton("New Game");
-		btnNewGame.addActionListener(new ActionListener() {
+		btnNewGame.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent e)
 			{
 				int num_ogres = 0;
