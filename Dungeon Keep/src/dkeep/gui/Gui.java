@@ -185,42 +185,42 @@ public class Gui
 			public void actionPerformed(ActionEvent e) 
 			{
 				game = null;
-			     try 
-			     {
-			         FileInputStream fileIn = new FileInputStream("GameStateFile");
-			         ObjectInputStream in = new ObjectInputStream(fileIn);
-			         game = (Game) in.readObject();
-			         in.close();
-			         fileIn.close();
-			      }
-			     catch(IOException i) 
-			     {
-			    	 JPanel panel = new JPanel();
-			    	 JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
-			    	 return;	
-			      }
-			     catch(ClassNotFoundException c) 
-			     {
-			    	 JPanel panel = new JPanel();
-			    	 JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
-			    	 return;
-			      }
-		
-		        game_area.SetGame(game); //update the Game object pointer in the game to the newly loaded game
-			 	frame.getContentPane().add(game_area);
+				try
+				{
+					FileInputStream fileIn = new FileInputStream("GameStateFile");
+					ObjectInputStream in = new ObjectInputStream(fileIn);
+					game = (Game)in.readObject();
+					in.close();
+					fileIn.close();
+				}
+				catch (IOException i)
+				{
+					JPanel panel = new JPanel();
+					JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				catch (ClassNotFoundException c)
+				{
+					JPanel panel = new JPanel();
+					JOptionPane.showMessageDialog(panel, "Error loading the game state file", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				game_area.SetGame(game); //update the Game object pointer in the game to the newly loaded game
+				frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
 				game_area.repaint();
-				
-			    if (game.IsGameOver())
-			    {
-			    	LableState.setText("This game has already ended. Please start a new game.");
-			    	InactivateGameButtons();
-			    }
-			    else
-			    {
-			        LableState.setText("Game loaded sucessfully. You can play");
-			    	ActivateGameButtons();
-			    }
+
+				if (game.IsGameOver())
+				{
+					LableState.setText("This game has already ended. Please start a new game.");
+					InactivateGameButtons();
+				}
+				else
+				{
+					LableState.setText("Game loaded sucessfully. You can play");
+					ActivateGameButtons();
+				}
 			}
 		});
 		btnLoadGame.setBounds(216, 24, 115, 29);
@@ -314,44 +314,44 @@ public class Gui
 	{
 		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e)
 			{
-				int num_ogres = 0; 
-				if(!new File("KeepMap").isFile())
-				{	
-				//handle the num of ogres
-				String num_ogres_str = JOptionPane.showInputDialog(null, "Number of ogres", "2");
-				if(num_ogres_str == null)
-					return;
+				int num_ogres = 0;
+				if (!new File("KeepMap").isFile())
+				{
+					//handle the num of ogres
+					String num_ogres_str = JOptionPane.showInputDialog(null, "Number of ogres", "2");
+					if (num_ogres_str == null)
+						return;
 
-				if(num_ogres_str.isEmpty())
-				{
-					JPanel panel = new JPanel();
-					JOptionPane.showMessageDialog(panel, "You must enter a number of ogres", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
+					if (num_ogres_str.isEmpty())
+					{
+						JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel, "You must enter a number of ogres", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					num_ogres = Integer.parseInt(num_ogres_str);
+					if (num_ogres < 1 || num_ogres > 5)
+					{
+						JPanel panel = new JPanel();
+						JOptionPane.showMessageDialog(panel, "Number of ogres must be in 1 to 5 range!", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 				}
-				
-				num_ogres = Integer.parseInt(num_ogres_str);
-				if(num_ogres < 1 || num_ogres > 5)
-				{
-					 JPanel panel = new JPanel();
-					 JOptionPane.showMessageDialog(panel, "Number of ogres must be in 1 to 5 range!", "Error", JOptionPane.ERROR_MESSAGE);
-					 return;
-				}
-				}	
 				//handle the guard personality
-				String personalities[] = new String[] {"Rookie", "Drunken", "Suspicious"};
-				String personality_name = (String) JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
-				if(personality_name == null)
+				String personalities[] = new String[]{ "Rookie", "Drunken", "Suspicious" };
+				String personality_name = (String)JOptionPane.showInputDialog(null, "Select guard personality", "Guard Personality", JOptionPane.QUESTION_MESSAGE, null, personalities, personalities[0]);
+				if (personality_name == null)
 					return;
 				game = new Game(personality_name, num_ogres);
 				LableState.setText("Game started");
-				
+
 				game_area.SetGame(game);
 				frame.getContentPane().add(game_area);
 				game_area.requestFocusInWindow();
 				game_area.repaint();
-				
+
 				ActivateGameButtons();
 			}
 		});
