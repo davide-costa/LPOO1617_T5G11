@@ -113,14 +113,14 @@ public class Game implements Serializable
 		{
 		case 1:
 			SetCellState(guard.GetCoords(), guard.GetSymbol());
-			break;
-			
+			break;			
 		case 2:
 			for (Ogre ogre : ogres)
-			{
 				SetCellState(ogre.GetClubCoords(), ogre.GetClubSymbol());
+			for (Ogre ogre : ogres)
 				SetCellState(ogre.GetCoords(), ogre.GetSymbol());
-			}
+			
+			break;
 		}
 	}
 	
