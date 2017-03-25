@@ -63,7 +63,7 @@ public class CustomizationJFrame extends JFrame
 	private void CreateCustArea(int x_size, int y_size)
 	{
 		cust_area = new CustomizationArea(this);
-		cust_area.setBounds(38,51,846,637);
+		cust_area.setBounds(38,51,800,640);
 		cust_area.GetCustKeepMap().CreateNewGameMap(x_size, y_size);
 		this.getContentPane().add(cust_area);
 		cust_area.requestFocusInWindow();
