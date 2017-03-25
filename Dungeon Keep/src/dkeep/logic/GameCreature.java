@@ -22,28 +22,7 @@ public class GameCreature implements Serializable
 		this.coords = new Coords(coords);
 		this.symbol = symbol;
 	}
-	//TODO: consider removing this
-	/*
-	public int GetX()
-	{
-		return coords.GetX();
-	}
 	
-	public void SetX(int x)
-	{
-		coords.SetX(x);
-	}
-	
-	public int GetY()
-	{
-		return coords.GetY();
-	}
-	
-	public void SetY(int y)
-	{
-		coords.SetY(y);
-	}
-	*/
 	/**
 	 * Function that returns the coords of the game creature on the map.
 	 * @return the coords of the game creature on the map.
