@@ -112,7 +112,6 @@ public class TestDungeonGameLogic
 	@Test
 	public void TestDrunkenFirstPos()
 	{
-		GameMap gameMap = new KeepMapTests();
         Game game = new Game("Drunken", 1);
         game.MoveHero("right");
         if(game.GetGuard().GetSymbol() == 'G')
@@ -129,7 +128,6 @@ public class TestDungeonGameLogic
 	@Test
 	public void TestSuspiciousFirstPos()
 	{
-		GameMap gameMap = new KeepMapTests();
         Game game = new Game("Suspicious", 1);
         game.MoveHero("right");
         assertEquals(new Coords(7, 1), game.GetGuard().GetCoords());
