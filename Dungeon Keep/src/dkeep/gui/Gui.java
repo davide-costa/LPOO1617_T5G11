@@ -115,9 +115,7 @@ public class Gui
 					    "KeepMap Y size:", y_size_str
 					};
 
-
 				int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.OK_CANCEL_OPTION);
-				
 				if (option == JOptionPane.OK_OPTION) 
 				{
 					if(x_size_str.getText().isEmpty() || y_size_str.getText().isEmpty())
