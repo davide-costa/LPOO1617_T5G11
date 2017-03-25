@@ -194,20 +194,20 @@ public class Game implements Serializable
 	{
 		Ogre curr_ogre;
 		ArrayList<Coords> mobs_coords = map.GetInitMobsCoords();
+		Coords ogre_spawn_coords = new Coords(1, 1);
+		Coords club_spawn_coords = new Coords(1, 2);
+		
 		if(mobs_coords == null)
-		{
-			int ogre_init_spawn_x = 1;
-			int ogre_init_spawn_y = 1;
-			int club_init_spawn_x = 1;
-			int club_init_spawn_y = 2;
-			
+		{			
 			if (num_of_ogres == 0)
 				num_of_ogres = ThreadLocalRandom.current().nextInt(1, 3 + 1);
 
 			for (int i = 0; i < num_of_ogres; i++)
 			{
-				curr_ogre = new Ogre(ogre_init_spawn_x + i, ogre_init_spawn_y, club_init_spawn_x + i, club_init_spawn_y);
+				curr_ogre = new Ogre(ogre_spawn_coords, club_spawn_coords);
 				ogres.add(curr_ogre);
+				ogre_spawn_coords = ogre_spawn_coords.right();
+				club_spawn_coords = club_spawn_coords.right();
 			}
 		}
 		else

@@ -15,10 +15,10 @@ public class Ogre extends GameCreature
 	private int stun_count;
 	private boolean is_stunned;
 	
-	public Ogre(int x, int y, int club_x, int club_y)
+	public Ogre(Coords ogre_c, Coords club_c)
 	{
-		super(x, y, default_symbol);
-		club_coords = new Coords(club_x, club_y);
+		super(ogre_c, default_symbol);
+		club_coords = new Coords(club_c);
 		is_stunned = false;
 	}
 	

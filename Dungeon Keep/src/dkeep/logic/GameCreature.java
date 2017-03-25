@@ -19,7 +19,7 @@ public class GameCreature implements Serializable
 	
 	public GameCreature(Coords coords, char symbol)
 	{
-		this.coords = coords;
+		this.coords = new Coords(coords);
 		this.symbol = symbol;
 	}
 	//TODO: consider removing this

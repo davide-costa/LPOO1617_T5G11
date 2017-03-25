@@ -1,14 +1,15 @@
 package dkeep.test;
 
+import dkeep.logic.Coords;
 import dkeep.logic.GameMap;
 import dkeep.logic.Ogre;
 
 public class TestOgre extends Ogre
 {
 
-	public TestOgre(int x, int y, int club_x, int club_y)
+	public TestOgre(Coords ogre_c, Coords club_c)
 	{
-		super(x, y, club_x, club_y);
+		super(ogre_c, club_c);
 	}
 	
 	@Override

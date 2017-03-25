@@ -16,7 +16,7 @@ public class TestKeepGameLogic
     public void testHeroIsCapturedByOgre()
 	{
 		GameMap gameMap = new KeepMapTests();
-        Game game = new Game(gameMap, new TestOgre(3,1,3,2));
+        Game game = new Game(gameMap, new TestOgre(new Coords(3,1), new Coords(3,2)));
         assertEquals(-1, game.MoveHero("right")); // move hero right
         assertTrue(game.IsGameOver());
     }
@@ -25,7 +25,7 @@ public class TestKeepGameLogic
     public void testHeroPicksUpKey()
 	{
 		GameMap gameMap = new KeepMapTests();
-        Game game = new Game(gameMap, new TestOgre(3,1,3,2));
+        Game game = new Game(gameMap, new TestOgre(new Coords(3,1), new Coords(3,2)));
         assertEquals('k', game.GetMap().GetCellState(new Coords(1,3)));
         assertEquals(0, game.MoveHero("down")); // move hero down
         assertEquals(0, game.MoveHero("down")); // move hero down to the key cell
@@ -37,7 +37,7 @@ public class TestKeepGameLogic
     public void testHeroCantLeave()
 	{
 		GameMap gameMap = new KeepMapTests();
-        Game game = new Game(gameMap, new TestOgre(3,1,3,2));
+        Game game = new Game(gameMap, new TestOgre(new Coords(3,1), new Coords(3,2)));
         assertEquals(0, game.MoveHero("left"));// move hero left. 
         assertEquals(new Coords(1, 1), game.GetHero().GetCoords());
     }
@@ -46,7 +46,7 @@ public class TestKeepGameLogic
     public void testHeroOpenDoor()
 	{
 		GameMap gameMap = new KeepMapTests();
-        Game game = new Game(gameMap, new TestOgre(3,1,3,2));
+        Game game = new Game(gameMap, new TestOgre(new Coords(3,1), new Coords(3,2)));
         game.MoveHero("down");//move hero down
         game.MoveHero("down");//move hero down
         assertTrue(game.GetMap().IsDoorOpen());
@@ -56,7 +56,7 @@ public class TestKeepGameLogic
     public void testHeroWinsKeepLevel()
 	{
 		GameMap gameMap = new KeepMapTests();
-        Game game = new Game(gameMap, new TestOgre(3,1,3,2));
+        Game game = new Game(gameMap, new TestOgre(new Coords(3,1), new Coords(3,2)));
         game.MoveHero("down");//moves down
         game.MoveHero("down");//moves down
         game.MoveHero("up");//moves up
@@ -102,7 +102,7 @@ public class TestKeepGameLogic
 		while (!curr_coords.equals(dst_coords))
 		{
 			GameMap gameMap = new KeepMap();
-			Game game = new Game(gameMap, new Ogre(init_coords.GetX(),init_coords.GetY(),5,5));
+			Game game = new Game(gameMap, new Ogre(init_coords, new Coords(5, 5)));
 	        game.MoveHero("down");//moves down
 	        Ogre ogre = game.GetOgres().get(0);
 	        curr_coords.Set(ogre.GetCoords());
@@ -130,7 +130,7 @@ public class TestKeepGameLogic
 		while (!up || !down || !left || !right)
 		{
 			GameMap gameMap = new KeepMap();
-			Game game = new Game(gameMap, new Ogre(init_coords.GetX(),init_coords.GetY(),5,5));
+			Game game = new Game(gameMap, new Ogre(init_coords, new Coords(5, 5)));
 	        game.MoveHero("down");//moves down
 	        Ogre ogre = game.GetOgres().get(0);
 	        ogre_coords = ogre.GetCoords();
