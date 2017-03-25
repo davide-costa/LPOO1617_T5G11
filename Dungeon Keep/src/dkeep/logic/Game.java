@@ -434,7 +434,10 @@ public class Game implements Serializable
 	
 	private boolean WasCaughtByClub(Ogre ogre)
 	{
-		return CellsAreAdjacent(hero.GetCoords(), ogre.GetClubCoords());
+		boolean adjacent = CellsAreAdjacent(hero.GetCoords(), ogre.GetClubCoords());
+		boolean on_top_of = hero.GetCoords().equals(ogre.GetClubCoords());
+		
+		return adjacent || on_top_of;
 	}
 	
 	private boolean HeroIsLeaving(Coords dst_coords)
