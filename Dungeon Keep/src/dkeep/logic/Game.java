@@ -20,8 +20,6 @@ public class Game implements Serializable
 	private Guard guard;
 	List<Ogre> ogres;
 	int num_of_ogres;
-	private int temp_x;
-	private int temp_y;
 	private boolean game_over = false;
 	
 	
