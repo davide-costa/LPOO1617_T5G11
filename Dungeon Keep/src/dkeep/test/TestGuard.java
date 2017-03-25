@@ -10,8 +10,8 @@ public class TestGuard extends Guard
 	}
 
 	@Override
-	public void Move() {
-		// TODO Auto-generated method stub
+	public void Move()
+	{
 		
 	}
 
