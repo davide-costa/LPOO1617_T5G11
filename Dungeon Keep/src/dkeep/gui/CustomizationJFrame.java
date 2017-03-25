@@ -37,13 +37,7 @@ public class CustomizationJFrame extends JFrame
 	 */
 	public CustomizationJFrame(int x_size, int y_size) 
 	{
-		setBounds(100, 100, 1152, 851);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setVisible(true);
-		
+		CreateJFrame();
 		CreateCustArea(x_size, y_size);
 		CreateButtonOgre();
 		CreateButtonWall();
@@ -53,6 +47,16 @@ public class CustomizationJFrame extends JFrame
 		CreateInfoLabel();
 		CreateButtonSaveChanges();
 		CreateButtonExit();		
+	}
+	
+	private void CreateJFrame()
+	{
+		setBounds(100, 100, 1152, 851);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setVisible(true);
 	}
 	
 	private void CreateCustArea(int x_size, int y_size)
