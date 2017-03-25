@@ -158,20 +158,9 @@ public class CustomizableKeepMap extends KeepMap
 			error_messages.add("The map must have a hero");
 		}
 		
-		boolean key_found = false;
-		loop:		
-		for(int i = 0; i < map_y_size; i++)
-			for(int j = 0; j < map_x_size; j++)
-			{
-				if(map[i][j] == 'k')
-				{
-					key_found = true;
-					break loop;
-				}
-			}
-		if(!key_found)
+		if(!AreKeyInMap())
 			error_messages.add("The map must have at least one key");
-		
+
 		if(!IsMapClosed())
 			error_messages.add("The map must be closed (having a wall or door at his round)");
 		
@@ -181,6 +170,20 @@ public class CustomizableKeepMap extends KeepMap
 		return error_messages;
 	}
 	
+	private boolean AreKeyInMap() 
+	{	
+		for(int i = 0; i < map_y_size; i++)
+			for(int j = 0; j < map_x_size; j++)
+			{
+				if(map[i][j] == 'k')
+				{
+					return true;
+				}
+			}
+		
+		return false;
+	}
+
 	public boolean IsMapClosed()
 	{
 		System.out.println(map_x_size);
