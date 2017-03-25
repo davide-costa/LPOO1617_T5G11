@@ -170,7 +170,7 @@ public class Game implements Serializable
 	
 	private void InitLevel2()
 	{
-		LoadKeepMapFromFile();
+		TryLoadKeepMapFromFile();
 	
 		ogres = new ArrayList<Ogre>();
 		ComputeOgres();
@@ -220,7 +220,7 @@ public class Game implements Serializable
 		}
 	}
 
-	private void LoadKeepMapFromFile() 
+	private void TryLoadKeepMapFromFile() 
 	{
 		try
 		{
@@ -232,7 +232,8 @@ public class Game implements Serializable
 		}
 		catch (ClassNotFoundException | IOException e)
 		{
-			
+			//If the file doesn'tdoesn't exist, the map will be generated automatically using default vajes
+			return;
 		}
 	}
 	/**
