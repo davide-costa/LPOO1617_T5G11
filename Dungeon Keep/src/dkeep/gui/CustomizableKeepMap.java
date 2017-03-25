@@ -44,6 +44,8 @@ public class CustomizableKeepMap extends KeepMap
 		if(IsOutOfRange(board_coords))
 			return;
 		
+		RemoveElementAt(board_coords);
+		
 		switch(element_selected)
 		{
 		case "door":
@@ -126,12 +128,25 @@ public class CustomizableKeepMap extends KeepMap
 			return;
 		
 		char state = GetCellState(board_coords);
-		if(state == 'H')
+		switch(state)
+		{
+		case 'H':
 			RemoveHero();
-		if(state == 'O')
+			break;
+		case 'O':
 			RemoveOgre(board_coords);
-		
+			break;
+		case 'I':
+			RemoveDoor(board_coords);
+			break;
+		}
+
 		SetCellState(board_coords, (char) 0);
+	}
+	
+	public void RemoveHero()
+	{
+		hero_coords = null;
 	}
 	
 	public void RemoveOgre(Coords board_coords)
@@ -139,10 +154,11 @@ public class CustomizableKeepMap extends KeepMap
 		mobs_coords.remove(board_coords);
 	}
 	
-	public void RemoveHero()
+	public void RemoveDoor(Coords board_coords)
 	{
-		hero_coords = null;
+		doors_coords.remove(board_coords);
 	}
+	
 	
 	public ArrayList<String> IsMapValid()
 	{
