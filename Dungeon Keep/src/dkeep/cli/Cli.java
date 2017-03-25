@@ -25,7 +25,8 @@ public class Cli
 
 			move_hero_value = game.MoveHero(direction);
 
-			ComputeMoveHeroValue(move_hero_value);
+			if (ComputeMoveHeroValue(move_hero_value) == -1)
+				return;
 			
 			if (game.IsEndOfGame())
 			{
@@ -46,7 +47,7 @@ public class Cli
 		System.out.println();
 	}
 
-	private static void ComputeMoveHeroValue(int move_hero_value)
+	private static int ComputeMoveHeroValue(int move_hero_value)
 	{
 		if (move_hero_value == 1)
 		{
@@ -62,8 +63,10 @@ public class Cli
 			System.out.println("END OF GAME");
 			System.out.println("YOU LOSE");
 			System.out.println();
-			return;
+			return -1;
 		}
+		
+		return 0;
 	}
 
 	public static String WaitForPlay()
