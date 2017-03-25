@@ -138,21 +138,37 @@ public class Coords implements Serializable
 		return adjacentTo(new Coords(x, y));
 	}
 	
+	/**  
+	 * Returns the coords of the left adjacent cell of this instance of coords.
+     * @return coords of the left adjacent cell.
+	 */
 	public Coords left()
 	{
 		return new Coords(x - 1, y);
 	}
 	
+	/**  
+	 * Returns the coords of the right adjacent cell of this instance of coords.
+     * @return coords of the left adjacent cell.
+	 */
 	public Coords right()
 	{
 		return new Coords(x + 1, y);
 	}
 	
+	/**  
+	 * Returns the coords of the upper adjacent cell of this instance of coords.
+     * @return coords of the left adjacent cell.
+	 */
 	public Coords up()
 	{
 		return new Coords(x, y - 1);
 	}
 	
+	/**  
+	 * Returns the coords of the bottom adjacent cell of this instance of coords.
+     * @return coords of the left adjacent cell.
+	 */
 	public Coords down()
 	{
 		return new Coords(x, y + 1);

@@ -29,28 +29,7 @@ public class Ogre extends GameCreature
 		while (!TryClubNextPos(map));
 		is_stunned = false;
 	}
-	//TODO: consider removing this
-	/*
-	public int GetClubX()
-	{
-		return club_coords.GetX();
-	}
 	
-	public void SetClubX(int club_x)
-	{
-		this.club_coords.SetX(club_x);
-	}
-	
-	public int GetClubY()
-	{
-		return club_coords.GetY();
-	}
-	
-	public void SetClubY(int club_y)
-	{
-		this.club_coords.SetY(club_y);
-	}
-	*/
 	/**  
 	 * Returns the coords of the club of this ogre.
      * @return the coords of the club.
