@@ -149,14 +149,10 @@ public class CustomizableKeepMap extends KeepMap
 		ArrayList<String> error_messages = new ArrayList<String>();
 		
 		if(mobs_coords.size() == 0)
-		{
 			error_messages.add("The map must have at least one ogre");
-		}
 		
 		if(hero_coords == null)
-		{
 			error_messages.add("The map must have a hero");
-		}
 		
 		if(!AreKeyInMap())
 			error_messages.add("The map must have at least one key");
@@ -186,8 +182,6 @@ public class CustomizableKeepMap extends KeepMap
 
 	public boolean IsMapClosed()
 	{
-		System.out.println(map_x_size);
-		System.out.println(map_y_size);
 		//analising the first line and the last one
 		for(int i = 0; i < map_y_size; i += map_y_size-1)
 			for(int j = 0; j < map_x_size; j++)
