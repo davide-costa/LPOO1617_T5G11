@@ -253,7 +253,7 @@ public class Gui
 		LableState = new JLabel("You can start a new game");
 		LableState.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		LableState.setHorizontalAlignment(SwingConstants.LEFT);
-		LableState.setBounds(66, 727, 628, 52);
+		LableState.setBounds(66, 740, 640, 52);
 		frame.getContentPane().add(LableState);
 	}
 
@@ -371,7 +371,7 @@ public class Gui
 	private void CreateGameArea() 
 	{
 		game_area = new GameArea(this);
-		game_area.setBounds(36,89,785,622);
+		game_area.setBounds(36,89,800,640);
 	}
 
 	private void CreateJFrame() 
