@@ -25,17 +25,19 @@ public class Game implements Serializable
 	
 	/**  
 	 * Constructor of game class for the Gui interface.  
-     * @param guard_name, is the name of the guard for that game instance, chosen by the user
-	 * @param num_of_ogres, is the number of ogres for that game instance, chosen by the user
+     * @param guard_name The name of the guard for that game instance, chosen by the user. Can either be "Rookie", "Drunken" or "Suspicious". Any other cause the exception IllegalArgumentException to be thrown.
+	 * @param num_of_ogres The number of ogres for that game instance, chosen by the user. Can be between 0 and 5. Any other cause the exception IllegalArgumentException to be thrown.
 	 */  
 	public Game(String guard_name, int num_of_ogres)
 	{
+		if (num_of_ogres < 0 || num_of_ogres > 5)
+			throw new IllegalArgumentException();
 		this.num_of_ogres = num_of_ogres;
 		InitLevel1(guard_name);
 	}
 	
 	/**  
-	 * Constructor of game class used in dungeon map tests.
+	 * Constructor of game class used for testing the Dungeon Map logic tests.
      * @param map The the map in which the tests will occur
 	 */
 	public Game(GameMap map)
@@ -48,7 +50,7 @@ public class Game implements Serializable
 	}
 	
 	/**  
-	 * Constructor of game class used in keep map tests.
+	 * Constructor of game class used in Keep Map logic tests.
      * @param map The map in which the tests will occur
      * @param ogre The Ogre object used in the tests.
 	 */
@@ -87,7 +89,7 @@ public class Game implements Serializable
 	}
 	
 	/**  
-	 * Allows to get the list of ogres of a game.
+	 * Allows to get the list of ogres (the mobs used in level 2) of the game.
 	 * @return the list of ogres of a game.
 	 */
 	public List<Ogre> GetOgres()
@@ -96,8 +98,8 @@ public class Game implements Serializable
 	}
 	
 	/**  
-	 * Allows to get the guard of a game.
-	 * @return the guard of a game.
+	 * Allows to get the guard (the mobs used in level 1) of the game.
+	 * @return the guard of the game.
 	 */
 	public Guard GetGuard()
 	{
@@ -156,7 +158,7 @@ public class Game implements Serializable
 			else if(guard_name == "Suspicious")
 				guard_num = 3;
 			else
-				guard_num = 1; //code never executed, just to avoid compilation error
+				throw new IllegalArgumentException();
 		}
 		if(guard_num == 1)
 			guard = new Rookie(8, 1);
@@ -233,18 +235,17 @@ public class Game implements Serializable
 			
 		}
 	}
-
 	/**
-	 * Returns the map used in the game in the form of a bidimensional array.
-	 * @return a bidimensional array that represents the map.
+	 * Returns the current map used in the game in the form of a bidimensional array.
+	 * @return a bidimensional array that represents the current map.
 	 */
 	public char[][] GetGameMap()
 	{
 		return map_matrix;
 	}
 	/**
-	 * Returns the Map object used in the game to reperesent the game map.
-	 * @return the Map object.
+	 * Returns the current object used in the game to represent the game map.
+	 * @return the current Map object.
 	 */
 	public GameMap GetMap()
 	{
@@ -264,10 +265,11 @@ public class Game implements Serializable
 		this.map = map;
 	}
 	/**
-	 * Function that establishes the interface between Cli and Gui classes on each game iteration.
+	 * Function that establishes the interface between Cli and Gui classes on each game iteration (i.e. play).
 	 * The Cli and Gui read the input from user and call this function to make a new game play.
-	 * @param direction A string containing information to inform the direction in which the hero should move. Its should be "left", "right", "up" or "down". (Any other value has no effect and is ignored by the Game class)
-	 * @return true if the game has ended with victory, false if not.
+	 * Returns a value that informs of what hapenned in the game.
+	 * @param direction A string containing the direction in which the hero should move. It should be "left", "right", "up" or "down". (Any other value has no effect and is ignored by the Game class)
+	 * @return Returns -1 if the Hero was caught; 1 if he went to the next level; 0 on any other situation (no action is performed by Gui or Cli in this case (no action necessary).
 	 */
 	public int MoveHero(String direction)
 	{
@@ -470,7 +472,7 @@ public class Game implements Serializable
 	}
 	
 	/**
-	 * Function that evaluates the state of the game, tells whether it has ended with victory or not.
+	 * Function that evaluates the state of the game. Tells whether it has ended with victory or not. (Not ending with victory means not ending at all (still running), or ending with defeat).
 	 * @return true if the game has ended with victory, false if not.
 	 */
 	public boolean IsEndOfGame()
@@ -479,7 +481,7 @@ public class Game implements Serializable
 	}
 	
 	/**
-	 * Function that evaluates the state of the game, tells whether it is over or not. The game is over when it ends with defeat or victory.
+	 * Function that evaluates the state of the game. Tells whether it is over or not. The game is over when it ends with defeat or victory.
 	 * @return true if the game is over, false if not.
 	 */
 	public boolean IsGameOver()
