@@ -8,9 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 import dkeep.test.TestGuard;
-import dkeep.test.TestOgre;
 
 public class Game implements Serializable
 {

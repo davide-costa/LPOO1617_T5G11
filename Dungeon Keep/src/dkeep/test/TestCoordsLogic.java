@@ -14,7 +14,6 @@ public class TestCoordsLogic
 		Coords coords = new Coords(1,2);
 		assertEquals(1, coords.GetX());
 		assertEquals(2, coords.GetY());
-		
 	}
 	
 	@Test

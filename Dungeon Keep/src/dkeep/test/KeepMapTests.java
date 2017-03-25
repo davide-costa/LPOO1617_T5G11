@@ -1,8 +1,5 @@
 package dkeep.test;
 
-import java.util.ArrayList;
-
-import dkeep.logic.Coords;
 import dkeep.logic.KeepMap;
 
 public class KeepMapTests extends KeepMap

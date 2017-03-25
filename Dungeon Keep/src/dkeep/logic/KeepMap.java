@@ -1,15 +1,11 @@
 package dkeep.logic;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class KeepMap extends GameMap implements Serializable
 {
