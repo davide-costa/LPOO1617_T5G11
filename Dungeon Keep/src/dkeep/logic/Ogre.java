@@ -1,7 +1,5 @@
 package dkeep.logic;
 
-import java.io.Serializable;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Ogre extends GameCreature
 {

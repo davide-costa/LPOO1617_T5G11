@@ -1,8 +1,5 @@
 package dkeep.logic;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -55,15 +52,5 @@ public class KeepMap extends GameMap implements Serializable
 	public ArrayList<Coords> GetInitMobsCoords()
 	{
 		return mobs_coords;
-	}
-	
-	public void LoadMapFromFile(String file_path) throws IOException, ClassNotFoundException
-	{
-		FileInputStream fileIn = new FileInputStream("KeepMap");
-		ObjectInputStream in = new ObjectInputStream(fileIn);
-		KeepMap t = this;
-		t = (KeepMap) in.readObject();
-		in.close();
-		fileIn.close();
 	}
 }
