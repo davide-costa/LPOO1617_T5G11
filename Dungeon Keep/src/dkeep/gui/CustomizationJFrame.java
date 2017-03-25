@@ -30,8 +30,9 @@ public class CustomizationJFrame extends JFrame
 	private JButton btnKey;
 	private JButton btnSaveChanges;
 	private JButton btnExit;
+	private JLabel InfoLabel;
 	
-	JLabel InfoLabel;
+	
 	/**
 	 * Create the frame.
 	 */

@@ -52,6 +52,7 @@ public class Gui
 	private JButton CustomizeKeepMap;
 	private Game game;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -92,11 +93,7 @@ public class Gui
 		CreateButtonExit();
 		CreateButtonLoadGame();
 		CreateButtonSaveGame();
-		CreateButtonCustomizeKeepMap();
-		
-		
-		
-		
+		CreateButtonCustomizeKeepMap();	
 	}
 	
 	private void CreateButtonCustomizeKeepMap() 
