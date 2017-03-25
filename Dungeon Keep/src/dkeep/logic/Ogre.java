@@ -51,6 +51,10 @@ public class Ogre extends GameCreature
 		this.club_coords.SetY(club_y);
 	}
 	*/
+	/**  
+	 * Returns the coords of the club of this ogre.
+     * @return the coords of the club.
+	 */
 	public Coords GetClubCoords()
 	{
 		return club_coords;
