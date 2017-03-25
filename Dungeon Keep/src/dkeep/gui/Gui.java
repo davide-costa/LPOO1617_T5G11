@@ -126,7 +126,7 @@ public class Gui
 						JOptionPane.showMessageDialog(panel, "KeepMap y size must be in 4 to 16 range", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 				    }
-				    CustomizationJFrame cust_frame = new CustomizationJFrame(x_size, y_size);
+				    new CustomizationJFrame(x_size, y_size);
 				}
 			}
 		});
