@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
 
 import dkeep.logic.Coords;
 
-public class CustomizationArea extends JPanel implements MouseListener
+public class CustomizationArea extends JPanel implements MouseListener, MouseMotionListener
 {
 	private CustomizableKeepMap cust_keep_map;
 	private CustomizationJFrame cust_frame;
@@ -32,6 +32,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 		this.cust_frame = cust_frame;
 		images = new Hashtable<Character, BufferedImage>();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		LoadImages();
 	}
 	
@@ -72,7 +73,7 @@ public class CustomizationArea extends JPanel implements MouseListener
 			curr_x_pos = 0;
 		}
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent mouse_event) 
 	{
@@ -94,16 +95,33 @@ public class CustomizationArea extends JPanel implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent mouse_event) 
 	{
-		if(SwingUtilities.isRightMouseButton(mouse_event))
-			RemoveElementAt(mouse_event.getX(), mouse_event.getY());
-		else if(SwingUtilities.isLeftMouseButton(mouse_event))
-			AddElementAt(mouse_event.getX(), mouse_event.getY());	
+		HandleMouseEvent(mouse_event);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent mouse_event)
 	{
 	
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent mouse_event) 
+	{
+		HandleMouseEvent(mouse_event);
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent mouse_event) 
+	{
+		
+	}
+	
+	public void HandleMouseEvent(MouseEvent mouse_event)
+	{
+		if(SwingUtilities.isRightMouseButton(mouse_event))
+			RemoveElementAt(mouse_event.getX(), mouse_event.getY());
+		else if(SwingUtilities.isLeftMouseButton(mouse_event))
+			AddElementAt(mouse_event.getX(), mouse_event.getY());	
 	}
 	
 	public Coords ScrCoordsToBoardCoords(Coords scr_coords)
@@ -138,9 +156,8 @@ public class CustomizationArea extends JPanel implements MouseListener
 	        }
 	        catch(IOException e) 
 	        {
-	            // May as well use what is given...
-	            System.out.println("read error:" + e.getMessage());
+	           
 	        }
 	        return image;
-	   }
+	 }
 }
