@@ -175,6 +175,12 @@ public class Gui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				if (!new File("GameStateFile").isFile())
+				{
+					LableState.setText("A game state must have been saved in order to use Load Game function.");
+					return;
+				}
+
 				game = null;
 				try
 				{
