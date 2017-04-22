@@ -2,7 +2,7 @@
 //© Usman Saleem, 2002 and beyond.
 //usman_saleem@yahoo.com
 
-package com.usal.serverPattern;
+package bship.network.sockets;
 
 import java.net.ServerSocket;
 import java.net.Socket;

@@ -2,22 +2,24 @@
 //© Usman Saleem, 2002 and Beyond
 //usman_saleem@yahoo.com
 
-package com.usal.serverPattern;
+package bship.network.sockets;
 
 import java.net.Socket;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.util.Observable;
 
 public class ClientThread extends Observable implements Runnable {
     /** For reading input from socket */
-    private BufferedReader br;
+	private ObjectInputStream socket_input;
 
     /** For writing output to socket. */
-    private PrintWriter pw;
+	 private ObjectOutputStream socket_output;
 
     /** Socket object representing client connection */
 
@@ -29,13 +31,9 @@ public class ClientThread extends Observable implements Runnable {
         running = false;
         //get I/O from socket
         try {
-            br = new BufferedReader(
-                     new InputStreamReader(
-                                           socket.getInputStream()
-                                          )
-                                   );
+        	socket_input = new ObjectInputStream(socket.getInputStream());
             
-            pw = new PrintWriter(socket.getOutputStream(), true);
+        	socket_output = new ObjectOutputStream(socket.getOutputStream());
             running = true; //set status
         }
         catch (IOException ioe) {
@@ -55,7 +53,7 @@ public class ClientThread extends Observable implements Runnable {
     }
 
     public void run() {
-        String msg = ""; //will hold message sent from client
+        BattleShipData data; //will hold message sent from client
 
 	pw.println("Welcome to Java based Server");
 		
@@ -63,7 +61,7 @@ public class ClientThread extends Observable implements Runnable {
 	  //start listening message from client//
 
         try {
-                while ((msg = br.readLine()) != null && running) {
+                while ((msg = socket_input.readObject()) != null && running) {
                     //provide your server's logic here//
 			
                     //right now it is acting as an ECHO server//
