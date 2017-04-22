@@ -2,7 +2,7 @@
 //© Usman Saleem, 2002 and Beyond.
 //usman_saleem@yahoo.com
 
-package bship.network;
+package bship.network.sockets;
 
 import java.net.Socket;
 import java.io.BufferedReader;
@@ -11,6 +11,9 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Observable;
+
+import bship.network.data.BattleShipData;
+import bship.network.data.GameData;
 
 
 public class Client extends Observable implements Runnable {
