@@ -1,4 +1,4 @@
-package bship.network;
+package bship.network.data;
 
 public class GameData implements BattleShipData
 {
