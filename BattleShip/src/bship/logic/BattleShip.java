@@ -1,6 +1,6 @@
 package bship.logic;
 
-public class BattleShip extends Boat {
+public class BattleShip extends Ship {
 
 	public BattleShip(int size, Coords startPos, String direction) 
 	{

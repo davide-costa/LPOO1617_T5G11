@@ -1,11 +1,11 @@
 package bship.logic;
 
-public class Boat
+public class Ship
 {
 	protected int size;
 	Coords startPos;
 	String direction;
-	public Boat(int size, Coords startPos, String direction)
+	public Ship(int size, Coords startPos, String direction)
 	{
 		this.size = size;
 		this.startPos = new Coords(startPos);
