@@ -5,14 +5,13 @@
 package bship.network.sockets;
 
 import java.net.Socket;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.util.Observable;
+
+import bship.network.data.*;
 
 public class ClientThread extends Observable implements Runnable {
     /** For reading input from socket */
@@ -55,25 +54,28 @@ public class ClientThread extends Observable implements Runnable {
     public void run() {
         BattleShipData data; //will hold message sent from client
 
-	pw.println("Welcome to Java based Server");
+        //socket_output.println("Welcome to Java based Server");
 		
 
 	  //start listening message from client//
 
         try {
-                while ((msg = socket_input.readObject()) != null && running) {
+                while ((data = (BattleShipData) socket_input.readObject()) != null && running) {
                     //provide your server's logic here//
 			
                     //right now it is acting as an ECHO server//
 
-                    pw.println(msg); //echo msg back to client//
-                    System.out.println(msg);
+                    socket_output.writeObject(data); //echo msg back to client//
+                    System.out.println(((GameData)data).stuff);
                 }
                 running = false;
             }
             catch (IOException ioe) {
                 running = false;
-            }
+            } catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         //it's time to close the socket
         try {
             this.socket.close();
