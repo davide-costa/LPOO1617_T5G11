@@ -5,11 +5,11 @@
 package bship.network;
 
 import java.net.Socket;
-import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Observable;
 
 
@@ -23,12 +23,12 @@ public class Client extends Observable implements Runnable {
     /**
      * For reading input from server. 
      */
-    private BufferedReader br;
+    private ObjectInputStream socket_input;
 
     /**
      * For writing output to server. 
      */
-    private PrintWriter pw;
+    private ObjectOutputStream socket_output;
 
     /**
      * Status of client. 
@@ -56,8 +56,8 @@ public class Client extends Observable implements Runnable {
            this.port = port;
            socket = new Socket(hostName,port);
            //get I/O from socket
-           br = new BufferedReader(new         InputStreamReader(socket.getInputStream()));
-           pw = new PrintWriter(socket.getOutputStream(),true);
+           this.socket_output = new ObjectOutputStream(socket.getOutputStream());
+           this.socket_input = new ObjectInputStream(socket.getInputStream());
 
 		   connected = true;
            //initiate reading from server...
@@ -66,10 +66,10 @@ public class Client extends Observable implements Runnable {
         }
     }
 
-    public void sendMessage(String msg) throws IOException
+    public void sendGameData(BattleShipData data) throws IOException
     {
 		if(connected) {
-	        pw.println(msg);
+	        socket_output.writeObject(data);
         } else throw new IOException("Not connected to server");
     }
 
@@ -88,18 +88,18 @@ public class Client extends Observable implements Runnable {
     }
 
     public void run() {
-	   String msg = ""; //holds the msg recieved from server
+	   BattleShipData data;
          try {
-            while(connected && (msg = br.readLine())!= null)
+            while(connected && (data = (BattleShipData) socket_input.readObject())!= null)
             {
-			 System.out.println("Server:"+msg);
+			 System.out.println(((GameData)data).stuff);
 			 //notify observers//
 			 this.setChanged();
  //notify+send out recieved msg to Observers
-              	 this.notifyObservers(msg);
+              	 this.notifyObservers(data);
             }
          }
-         catch(IOException ioe) { }
+         catch(IOException | ClassNotFoundException ioe) { }
          finally { connected = false; }
     }
 
@@ -127,13 +127,15 @@ public class Client extends Observable implements Runnable {
 	//testing Client//
     public static void main(String[] argv)throws IOException {
         Client c = new Client();
-        c.connect("dservers.ddns.net",5555);
+        c.connect("192.168.1.7",5555);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String msg = "";
         while(!msg.equalsIgnoreCase("quit"))
         {
            msg = br.readLine();
-           c.sendMessage(msg);
+           BattleShipData data = new GameData();
+           ((GameData)data).stuff = msg;
+           c.sendGameData(data);
         }
         c.disconnect();
     }
