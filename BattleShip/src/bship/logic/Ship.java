@@ -1,6 +1,6 @@
 package bship.logic;
 
-public class Ship
+public abstract class Ship
 {
 	protected int size;
 	Coords startPos;
