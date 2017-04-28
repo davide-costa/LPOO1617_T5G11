@@ -130,7 +130,7 @@ public class Client extends Observable implements Runnable {
 	//testing Client//
     public static void main(String[] argv)throws IOException {
         Client c = new Client();
-        c.connect("192.168.1.7",5555);
+        c.connect("dservers.ddns.net",5555);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String msg = "";
         while(!msg.equalsIgnoreCase("quit"))
