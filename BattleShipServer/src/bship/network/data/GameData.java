@@ -1,6 +1,8 @@
 package bship.network.data;
 
-public class GameData extends BattleShipData
+import java.io.Serializable;
+
+public class GameData implements BattleShipData, Serializable
 {
 	/**
 	 * 
