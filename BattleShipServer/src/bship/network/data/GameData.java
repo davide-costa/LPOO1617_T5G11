@@ -2,7 +2,7 @@ package bship.network.data;
 
 import java.io.Serializable;
 
-public class GameData implements BattleShipData, Serializable
+public abstract class GameData implements BattleShipData, Serializable
 {
 	/**
 	 * 

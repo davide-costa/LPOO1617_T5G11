@@ -2,7 +2,7 @@ package bship.network.data;
 
 import java.io.Serializable;
 
-public class LobbyData implements BattleShipData, Serializable
+public abstract class LobbyData implements BattleShipData, Serializable
 {
 
 	/**
