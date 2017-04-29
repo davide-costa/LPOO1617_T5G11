@@ -1,6 +1,6 @@
 package bship.network.data;
 
-public class BoatPlacementData implements BattleShipData
+public abstract class BoatPlacementData implements BattleShipData
 {
 
 }
