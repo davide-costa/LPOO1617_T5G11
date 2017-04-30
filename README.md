@@ -1,6 +1,46 @@
 Final Project Intermediate Check-Point
 
 
+   UML Diagrams
+   
+   Client Side
+![battleship uml model](https://cloud.githubusercontent.com/assets/25772498/25568524/938dd816-2dfc-11e7-9bd5-3dd3ea340c3e.png)
+
+
+![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568527/93916288-2dfc-11e7-8e81-c6bde8f756fc.png)
+
+
+![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568528/939584f8-2dfc-11e7-9675-12005cf22be1.png)
+
+
+![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568526/938f7fd6-2dfc-11e7-98e1-7845d57caefb.png)
+
+
+![bship ai](https://cloud.githubusercontent.com/assets/25772498/25568525/938e10ce-2dfc-11e7-8470-d50a7f73e6d9.png)
+
+
+
+
+
+Server Side
+
+
+![battleshipserver uml model](https://cloud.githubusercontent.com/assets/25772498/25568538/c93b480e-2dfc-11e7-94e4-d2715d454840.png)
+
+
+![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568537/c937b176-2dfc-11e7-834e-fa442ce9d52c.png)
+
+
+![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568536/c9372b52-2dfc-11e7-940d-c99c895cfd00.png)
+
+
+![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568539/c93da5e0-2dfc-11e7-8090-d93e5f2cb51c.png)
+
+      
+      
+      
+      
+
         Describing classes responsability:
 
 
@@ -88,45 +128,6 @@ Final Project Intermediate Check-Point
 	 - InGame. Representa o estado de um jogador quando está num jogo de BattleShip. Redefine o método que analiza um evento para o estado específico InGame e toma as devidas ações.
          
          
-   UML Diagrams
-   
-   Client Side
-![battleship uml model](https://cloud.githubusercontent.com/assets/25772498/25568524/938dd816-2dfc-11e7-9bd5-3dd3ea340c3e.png)
-
-
-![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568527/93916288-2dfc-11e7-8e81-c6bde8f756fc.png)
-
-
-![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568528/939584f8-2dfc-11e7-9675-12005cf22be1.png)
-
-
-![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568526/938f7fd6-2dfc-11e7-98e1-7845d57caefb.png)
-
-
-![bship ai](https://cloud.githubusercontent.com/assets/25772498/25568525/938e10ce-2dfc-11e7-8470-d50a7f73e6d9.png)
-
-
-
-
-
-Server Side
-
-
-![battleshipserver uml model](https://cloud.githubusercontent.com/assets/25772498/25568538/c93b480e-2dfc-11e7-94e4-d2715d454840.png)
-
-
-![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568537/c937b176-2dfc-11e7-834e-fa442ce9d52c.png)
-
-
-![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568536/c9372b52-2dfc-11e7-940d-c99c895cfd00.png)
-
-
-![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568539/c93da5e0-2dfc-11e7-8090-d93e5f2cb51c.png)
-
-      
-      
-      
-      
        
    Sequence Diagrams
 
