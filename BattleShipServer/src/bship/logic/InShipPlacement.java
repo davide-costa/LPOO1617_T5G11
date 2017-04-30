@@ -1,6 +1,6 @@
 package bship.logic;
 
-public class InBoatPlacement implements PlayerState
+public class InShipPlacement implements PlayerState
 {
 	boolean readyForGame = false;
 }
