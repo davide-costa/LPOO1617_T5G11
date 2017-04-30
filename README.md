@@ -180,36 +180,6 @@ As imagens dos barcos (classe Ship) e da água (representa uma célula que não 
 
 
 
-Unit Tests
-
-						Client side
-
-	bship.logic
-	Game
-	Testar fazer um disparo no campo do advsersário.
-	 - Jogador faz um disparo numa célula já revelada (barco ou água). (Não deve ser possível fazê-lo. O teste assegura que não é possível.)
-	 - Jogador faz um disparo numa célula não revelada. (Verificar que a classe responsável por notificar o outro jogador o efetua corretamente.)
-	
-	Fazer um disparo no próprio campo. (Função que é chamada quando o adversário efetua um disparo e verificar se os efeitos foram os esperados.)
-		 - Disparar numa célula que seja água. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado).
-		 - Disparar numa célula que tenha um barco. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado).
-		 - Disparar numa célula que tenha um barco e destruir esse barco. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado). Verificar que o jogador tomou também conhecimento de qual o barco que foi destruído e que as células à (1 célula de distância) volta foram todas reveladas.
-		
-						Server side
-	bship.logic
-	Testar o login de um jogador no servidor. Simular um pedido de um cliente (uma nova ligação ao socket do servidor) e garantir que o jogador foi adicionado ao ArrayList de jogadores.
-	
-	Testar a sequência de um convite do lado do servidor. (Simular a receção de um convite de um jogador)
-	 - Jogador online convidado recebe o convite do jogador que o convidou. (Simular vários jogadores online para ter a certeza que vai para o jogador certo).
-	 - Jogador convidado aceita o convite e jogador que convidou recebe essa resposta.
-	 - Jogador convidado recusa convite e jogador que convidou recebe essa resposta.
-	
-	Testar o início de um jogo.
-	 - Jogo começa apenas quando dois jogadores estão prontos para jogar (testar se isso acontece apenas nesse caso).
-	
-	Testar a sequência de uma jogada do lado do servidor.
-	 - Servidor recebe um pedido de disparo de um jogador e informa o outro desse pedido.
-	 - Servidor recebe um resultado de uma jogada e informa o outro jogador desse resultado.
 
 GUI Design
 
@@ -259,6 +229,37 @@ GUI mock-ups
 
 
 
+
+Unit Tests
+
+						Client side
+
+	bship.logic
+	Game
+	Testar fazer um disparo no campo do advsersário.
+	 - Jogador faz um disparo numa célula já revelada (barco ou água). (Não deve ser possível fazê-lo. O teste assegura que não é possível.)
+	 - Jogador faz um disparo numa célula não revelada. (Verificar que a classe responsável por notificar o outro jogador o efetua corretamente.)
+	
+	Fazer um disparo no próprio campo. (Função que é chamada quando o adversário efetua um disparo e verificar se os efeitos foram os esperados.)
+		 - Disparar numa célula que seja água. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado).
+		 - Disparar numa célula que tenha um barco. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado).
+		 - Disparar numa célula que tenha um barco e destruir esse barco. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado). Verificar que o jogador tomou também conhecimento de qual o barco que foi destruído e que as células à (1 célula de distância) volta foram todas reveladas.
+		
+						Server side
+	bship.logic
+	Testar o login de um jogador no servidor. Simular um pedido de um cliente (uma nova ligação ao socket do servidor) e garantir que o jogador foi adicionado ao ArrayList de jogadores.
+	
+	Testar a sequência de um convite do lado do servidor. (Simular a receção de um convite de um jogador)
+	 - Jogador online convidado recebe o convite do jogador que o convidou. (Simular vários jogadores online para ter a certeza que vai para o jogador certo).
+	 - Jogador convidado aceita o convite e jogador que convidou recebe essa resposta.
+	 - Jogador convidado recusa convite e jogador que convidou recebe essa resposta.
+	
+	Testar o início de um jogo.
+	 - Jogo começa apenas quando dois jogadores estão prontos para jogar (testar se isso acontece apenas nesse caso).
+	
+	Testar a sequência de uma jogada do lado do servidor.
+	 - Servidor recebe um pedido de disparo de um jogador e informa o outro desse pedido.
+	 - Servidor recebe um resultado de uma jogada e informa o outro jogador desse resultado.
 
 
 
