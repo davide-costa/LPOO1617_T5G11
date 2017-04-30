@@ -221,17 +221,17 @@ GUI Design
 
 	Gui Functionalities
 	-Single-Player
-	 -Multi-Player
+	-Multi-Player
  	-Facebook login
  	-Game server login
  	-Disparar numa celula
  	-Posicionar os barcos no mapa
  	-Partilhar uma vitória na utilizando o Facebook
-	 -Fechar o jogo
+	-Fechar o jogo
 
 
 
-GUI mock-ups
+	GUI mock-ups
 
 
 ![intro](https://cloud.githubusercontent.com/assets/25772498/25568445/dc863038-2dfa-11e7-9150-585a0da7be00.png)
