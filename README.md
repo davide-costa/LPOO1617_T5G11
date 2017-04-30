@@ -145,7 +145,7 @@ Server Side
 
 
 
-![game](https://cloud.githubusercontent.com/assets/25772498/25568028/0ee4b85a-2df2-11e7-85b6-a02824cef0c9.png)
+![game multiplayer client server simplified](https://cloud.githubusercontent.com/assets/25772498/25568621/98e1df5e-2dfe-11e7-81fb-51c129b6c7a6.png)
 
 
 
@@ -215,8 +215,8 @@ GUI Design
 
 	Gui Functionalities
 	
-	-Single-Player
-	-Multi-Player
+	-SinglePlayer
+	-MultiPlayer
  	-Facebook login
  	-Game server login
  	-Disparar numa celula
