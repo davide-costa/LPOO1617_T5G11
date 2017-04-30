@@ -218,7 +218,7 @@ Unit Tests
 	 - Servidor recebe um resultado de uma jogada e informa o outro jogador desse resultado.
 
 
-Gui Functionalities
+	Gui Functionalities
 	-Single-Player
 	 -Multi-Player
  	-Facebook login
