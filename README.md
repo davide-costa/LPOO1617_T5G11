@@ -198,7 +198,7 @@ GUI Design
 
 GUI mock-ups
 
-[BattleShip.pdf](https://github.com/up201503995/LPOO1617_T5G11/files/967066/BattleShip.pdf)
+[GUI mock-ups.pdf](https://github.com/up201503995/LPOO1617_T5G11/files/967071/GUI.mock-ups.pdf)
 
 
 Unit Tests
