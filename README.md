@@ -90,20 +90,40 @@ Final Project Intermediate Check-Point
          
    UML Diagrams
    
-  ![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568298/8a5b9544-2df7-11e7-9d59-00fdd68c3fdf.png)
-
-
+   Client Side
 ![battleship uml model](https://cloud.githubusercontent.com/assets/25772498/25568295/8a55ab02-2df7-11e7-97ff-4e92137d268b.png)
+   
+   ![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568297/8a5902d4-2df7-11e7-85f7-e9efd58718ba.png)
+   
+   
+ ![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568298/8a5b9544-2df7-11e7-9d59-00fdd68c3fdf.png)
 
 
 ![bship ai](https://cloud.githubusercontent.com/assets/25772498/25568296/8a5882c8-2df7-11e7-8c7b-3cbc2aea5035.png)
 
 
-![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568297/8a5902d4-2df7-11e7-85f7-e9efd58718ba.png)
-
 
 ![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568294/8a54bd14-2df7-11e7-8413-9edea5949a80.png)
 
+
+
+Server Side
+
+
+![battleshipserver uml model](https://cloud.githubusercontent.com/assets/25772498/25568325/1c577530-2df8-11e7-9270-bf6381649a4f.png)
+
+
+
+![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568326/1c58b1ac-2df8-11e7-85c4-b192b03d13b9.png)
+
+
+
+![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568323/1c51fb46-2df8-11e7-9c09-6b54b3e51f59.png)
+
+
+![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568324/1c536648-2df8-11e7-85f7-d78fcb810c4a.png)
+      
+      
       
       
        
