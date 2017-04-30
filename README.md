@@ -88,7 +88,22 @@ Final Project Intermediate Check-Point
 	 - InGame. Representa o estado de um jogador quando está num jogo de BattleShip. Redefine o método que analiza um evento para o estado específico InGame e toma as devidas ações.
          
          
-      
+   UML Diagrams
+   
+  ![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568298/8a5b9544-2df7-11e7-9d59-00fdd68c3fdf.png)
+
+
+![battleship uml model](https://cloud.githubusercontent.com/assets/25772498/25568295/8a55ab02-2df7-11e7-97ff-4e92137d268b.png)
+
+
+![bship ai](https://cloud.githubusercontent.com/assets/25772498/25568296/8a5882c8-2df7-11e7-8c7b-3cbc2aea5035.png)
+
+
+![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568297/8a5902d4-2df7-11e7-85f7-e9efd58718ba.png)
+
+
+![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568294/8a54bd14-2df7-11e7-8413-9edea5949a80.png)
+
       
       
        
@@ -149,6 +164,38 @@ Cada célula do mapa de jogo (classe GameMap) tem um estado (classe CellState). 
 	Flyweight:
 As imagens dos barcos (classe Ship) e da água (representa uma célula que não contém nenhum barco) utilizadas no jogo, quando repetidas causam um custo excessivo de desempenho e uso de memória. Dessa forma, imagens mesmo que usadas varias vezes, apenas são carregadas para memória uma vez.
 
+
+
+Unit Tests
+
+						Client side
+
+	bship.logic
+	Game
+	Testar fazer um disparo no campo do advsersário.
+	 - Jogador faz um disparo numa célula já revelada (barco ou água). (Não deve ser possível fazê-lo. O teste assegura que não é possível.)
+	 - Jogador faz um disparo numa célula não revelada. (Verificar que a classe responsável por notificar o outro jogador o efetua corretamente.)
+	
+	Fazer um disparo no próprio campo. (Função que é chamada quando o adversário efetua um disparo e verificar se os efeitos foram os esperados.)
+		 - Disparar numa célula que seja água. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado).
+		 - Disparar numa célula que tenha um barco. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado).
+		 - Disparar numa célula que tenha um barco e destruir esse barco. Verificar que ficou marcada como revelada no mapa do próprio jogador. Verificar que o outro jogador foi informado de como está o local onde disparou (o local deve ser revelado). Verificar que o jogador tomou também conhecimento de qual o barco que foi destruído e que as células à (1 célula de distância) volta foram todas reveladas.
+		
+						Server side
+	bship.logic
+	Testar o login de um jogador no servidor. Simular um pedido de um cliente (uma nova ligação ao socket do servidor) e garantir que o jogador foi adicionado ao ArrayList de jogadores.
+	
+	Testar a sequência de um convite do lado do servidor. (Simular a receção de um convite de um jogador)
+	 - Jogador online convidado recebe o convite do jogador que o convidou. (Simular vários jogadores online para ter a certeza que vai para o jogador certo).
+	 - Jogador convidado aceita o convite e jogador que convidou recebe essa resposta.
+	 - Jogador convidado recusa convite e jogador que convidou recebe essa resposta.
+	
+	Testar o início de um jogo.
+	 - Jogo começa apenas quando dois jogadores estão prontos para jogar (testar se isso acontece apenas nesse caso).
+	
+	Testar a sequência de uma jogada do lado do servidor.
+	 - Servidor recebe um pedido de disparo de um jogador e informa o outro desse pedido.
+	 - Servidor recebe um resultado de uma jogada e informa o outro jogador desse resultado.
 
 
 
