@@ -162,20 +162,20 @@ Server Side
 
 Design Patterns
 
-	Singleton:
+	Singleton
 A classe Game, responsável por implementar toda lógica de jogo, é acedida em diferentes pontos do código, no entanto, deve apenas existir uma instância dessa classe que é usada em todos esses pontos do código.
 O uso do design pattern Singleton permite-nos alcançar facilmente este objetivo.
 
-	Template:
+	Template
 O jogo apresenta dois modos de jogo, singleplayer e multiplayer. No entanto, a sequência de passos a seguir para o bom funcionamento de cada uma dos modos é semelhante. Apenas difere na forma como os jogadores informam uma ao outro as jogadas e os efeitos delas, feitas pelas classes derivadas de Opponent. No caso do singleplayer é chamada a classe SingleplayerOpponent e no caso do multiplayer a classe MultiplayerOpponent.
 
-	Strategy:
+	Strategy
 No modo singleplayer, a classe AIOpponent é reponsável por computar jogadas seguindo duas estratégias. Inicialmente as jogadas são aleatórias, no entanto, quando é atingido um barco, a estratégia muda e a inteligência artificial vai produzir uma nova jogada atacando uma das celulas adjacentes.
 
-	Observer:
+	Observer
 Cada célula do mapa de jogo (classe GameMap) tem um estado (classe CellState). Pode estar revelada (ao adversário) ou oculta, isto é indicado por um boleano existente na classe CellState. Utilizando um Observer a GUI é atualizada quando houver uma alteraçao á informação da célula (mudança de estado da classe CellState).
 
-	Flyweight:
+	Flyweight
 As imagens dos barcos (classe Ship) e da água (representa uma célula que não contém nenhum barco) utilizadas no jogo, quando repetidas causam um custo excessivo de desempenho e uso de memória. Dessa forma, imagens mesmo que usadas varias vezes, apenas são carregadas para memória uma vez.
 
 
