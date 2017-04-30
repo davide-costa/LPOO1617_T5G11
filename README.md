@@ -91,8 +91,8 @@ Final Project Intermediate Check-Point
       
       
       
-         
-   						Sequence Diagrams
+       
+   Sequence Diagrams
 
 
 ![shipplacement](https://cloud.githubusercontent.com/assets/25772498/25568025/02673bc0-2df2-11e7-9d61-418ec96eddc3.png)
@@ -131,7 +131,7 @@ Final Project Intermediate Check-Point
 
 
 
-						Design Patterns
+Design Patterns
 
 	Singleton:
 A classe Game, responsável por implementar toda lógica de jogo, é acedida em diferentes pontos do código, no entanto, deve apenas existir uma instância dessa classe que é usada em todos esses pontos do código.
