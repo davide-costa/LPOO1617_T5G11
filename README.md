@@ -219,5 +219,39 @@ Unit Tests
 
 
 
+GUI mock-ups
+
+
+![intro](https://cloud.githubusercontent.com/assets/25772498/25568445/dc863038-2dfa-11e7-9150-585a0da7be00.png)
+
+
+![menu](https://cloud.githubusercontent.com/assets/25772498/25568437/dc630ae0-2dfa-11e7-8287-1081787418b7.png)
+
+
+![game server login](https://cloud.githubusercontent.com/assets/25772498/25568444/dc840b3c-2dfa-11e7-9bdf-0bb5558877d6.png)
+
+
+![lobby](https://cloud.githubusercontent.com/assets/25772498/25568439/dc66a8f8-2dfa-11e7-86c0-fac2417f1e90.png)
+
+
+![shipplacement](https://cloud.githubusercontent.com/assets/25772498/25568442/dc688344-2dfa-11e7-9893-5995e3a5aa4e.png)
+
+
+![game area](https://cloud.githubusercontent.com/assets/25772498/25568443/dc83f250-2dfa-11e7-9e58-365fb7e18bc0.png)
+
+
+
+![lose message](https://cloud.githubusercontent.com/assets/25772498/25568441/dc6898f2-2dfa-11e7-8082-b87461e96712.png)
+
+
+![win message](https://cloud.githubusercontent.com/assets/25772498/25568440/dc67dd68-2dfa-11e7-8873-176a854289c9.png)
+
+
+
+![quit alert](https://cloud.githubusercontent.com/assets/25772498/25568438/dc64414e-2dfa-11e7-9edc-71a5ce387a6e.png)
+
+
+
+
 
 
