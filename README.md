@@ -91,37 +91,38 @@ Final Project Intermediate Check-Point
    UML Diagrams
    
    Client Side
-![battleship uml model](https://cloud.githubusercontent.com/assets/25772498/25568295/8a55ab02-2df7-11e7-97ff-4e92137d268b.png)
-   
-   ![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568297/8a5902d4-2df7-11e7-85f7-e9efd58718ba.png)
-   
-   
- ![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568298/8a5b9544-2df7-11e7-9d59-00fdd68c3fdf.png)
+![battleship uml model](https://cloud.githubusercontent.com/assets/25772498/25568524/938dd816-2dfc-11e7-9bd5-3dd3ea340c3e.png)
 
 
-![bship ai](https://cloud.githubusercontent.com/assets/25772498/25568296/8a5882c8-2df7-11e7-8c7b-3cbc2aea5035.png)
+![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568527/93916288-2dfc-11e7-8e81-c6bde8f756fc.png)
 
 
+![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568528/939584f8-2dfc-11e7-9675-12005cf22be1.png)
 
-![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568294/8a54bd14-2df7-11e7-8413-9edea5949a80.png)
+
+![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568526/938f7fd6-2dfc-11e7-98e1-7845d57caefb.png)
+
+
+![bship ai](https://cloud.githubusercontent.com/assets/25772498/25568525/938e10ce-2dfc-11e7-8470-d50a7f73e6d9.png)
+
+
 
 
 
 Server Side
 
 
-![battleshipserver uml model](https://cloud.githubusercontent.com/assets/25772498/25568325/1c577530-2df8-11e7-9270-bf6381649a4f.png)
+![battleshipserver uml model](https://cloud.githubusercontent.com/assets/25772498/25568538/c93b480e-2dfc-11e7-94e4-d2715d454840.png)
 
 
-
-![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568326/1c58b1ac-2df8-11e7-85c4-b192b03d13b9.png)
-
+![bship logic](https://cloud.githubusercontent.com/assets/25772498/25568537/c937b176-2dfc-11e7-834e-fa442ce9d52c.png)
 
 
-![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568323/1c51fb46-2df8-11e7-9c09-6b54b3e51f59.png)
+![bship network data](https://cloud.githubusercontent.com/assets/25772498/25568536/c9372b52-2dfc-11e7-940d-c99c895cfd00.png)
 
 
-![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568324/1c536648-2df8-11e7-85f7-d78fcb810c4a.png)
+![bship network socket](https://cloud.githubusercontent.com/assets/25772498/25568539/c93da5e0-2dfc-11e7-8090-d93e5f2cb51c.png)
+
       
       
       
@@ -220,6 +221,7 @@ Unit Tests
 GUI Design
 
 	Gui Functionalities
+	
 	-Single-Player
 	-Multi-Player
  	-Facebook login
@@ -231,7 +233,7 @@ GUI Design
 
 
 
-	GUI mock-ups
+GUI mock-ups
 
 
 ![intro](https://cloud.githubusercontent.com/assets/25772498/25568445/dc863038-2dfa-11e7-9150-585a0da7be00.png)
