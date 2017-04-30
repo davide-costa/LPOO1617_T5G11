@@ -218,6 +218,17 @@ Unit Tests
 	 - Servidor recebe um resultado de uma jogada e informa o outro jogador desse resultado.
 
 
+Gui Functionalities
+	-Single-Player
+	 -Multi-Player
+ 	-Facebook login
+ 	-Game server login
+ 	-Disparar numa celula
+ 	-Posicionar os barcos no mapa
+ 	-Partilhar uma vitória na utilizando o Facebook
+	 -Fechar o jogo
+
+
 
 GUI mock-ups
 
