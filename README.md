@@ -41,7 +41,7 @@ Server Side
       
       
 
-        Describing classes responsability:
+        Describing classes' responsability:
 
 
                                                      Client side
