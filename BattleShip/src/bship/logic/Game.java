@@ -7,7 +7,7 @@ public class Game
 	private final char cellDestroyed = 'D';
 	private final char cellChecked = 'C';
 	private GameMap map;
-	Player opponent;
+	Opponent opponent;
 	
 	public Game(GameMap gameMap)
 	{

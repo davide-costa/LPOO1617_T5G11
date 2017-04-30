@@ -1,6 +1,6 @@
 package bship.logic;
 
-public class Player
+public class Opponent
 {
 
 }
