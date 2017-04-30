@@ -217,6 +217,7 @@ Unit Tests
 	 - Servidor recebe um pedido de disparo de um jogador e informa o outro desse pedido.
 	 - Servidor recebe um resultado de uma jogada e informa o outro jogador desse resultado.
 
+GUI Design
 
 	Gui Functionalities
 	-Single-Player
