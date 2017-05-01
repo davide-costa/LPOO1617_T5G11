@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Observable;
+import java.util.Observer;
 
 import bship.logic.Opponent;
 import bship.network.data.BattleShipData;
@@ -53,6 +54,7 @@ public class Client extends Observable implements Runnable {
 	{
 		connected = false;
 		connect("dservers.ddns.net", 5555);
+		addObserver((Observer) observer);
 	}
 
 	public void connect(String hostName, int port) throws IOException {

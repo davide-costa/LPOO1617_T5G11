@@ -9,7 +9,7 @@ import bship.network.data.*;
 
 public abstract class Opponent
 {
-	private Game game;
+	protected Game game;
 	
 	public Opponent(Game game)
 	{
