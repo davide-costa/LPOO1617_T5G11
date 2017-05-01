@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public abstract class Ship
 {
+
 	protected int size;
 	protected int health;
-	ArrayList<Coords> coords;
-	String direction;
+	protected ArrayList<Coords> coords;
+	protected String direction;
+	protected String name;
 	
 	public Ship(int size, ArrayList<Coords> coords, String direction)
 	{
@@ -17,18 +19,33 @@ public abstract class Ship
 		this.direction = new String(direction);
 	}
 	
+	public ArrayList<Coords> getCoords()
+	{
+		return coords;
+	}
+	public int getSize()
+	{
+		return size;
+	}
+
+	public String getDirection()
+	{
+		return direction;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+
 	public void shoot()
 	{
 		health--;
 	}
-	
+
 	public boolean isDestroyed()
 	{
 		return health == size;
 	}
 	
-	public void getCoords(ArrayList<Coords> coords)
-	{
-		
-	}
 }
