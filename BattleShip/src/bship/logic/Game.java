@@ -34,9 +34,14 @@ public class Game
 	}
 	
 	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
-	public void shootAlly(Coords coords, ArrayList<Coords> coords, ArrayList<CellState> resultStates)
+	public void shootAlly(Coords shootCoords, ArrayList<Coords> coords, ArrayList<CellState> resultStates)
 	{
-		CellState state = getCellState(coords);
+		CellState state = getCellState(shootCoords);
+		coords.clear();
+		resultStates.clear();
+		
+		if (state.isDiscovered())
+			return;
 		
 		if (state.hasBoat())
 		
