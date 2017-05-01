@@ -4,6 +4,7 @@ package bship.logic;
 public class Game
 {
 	private GameMap map;
+	private GameMap opponentMap;
 	Opponent opponent;
 	
 	public Game(GameMap gameMap)

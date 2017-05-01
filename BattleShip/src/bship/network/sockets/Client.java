@@ -69,7 +69,7 @@ public class Client extends Observable implements Runnable {
         }
     }
 
-    public void sendGameData(BattleShipData data) throws IOException
+    public void sendBattleShipData(BattleShipData data) throws IOException
     {
 		if(connected) {
 	        socket_output.writeObject(data);
@@ -138,7 +138,7 @@ public class Client extends Observable implements Runnable {
            msg = br.readLine();
            BattleShipData data = new GameData();
            ((GameData)data).stuff = msg;
-           c.sendGameData(data);
+           c.sendBattleShipData(data);
         }
         c.disconnect();
     }
