@@ -43,13 +43,32 @@ public class Game
 		if (state.isDiscovered())
 			return;
 		
-		if (state.hasBoat())
+		coords.add(shootCoords);
+		if (!state.hasShip())
+		{
+			CellState resultState = null;
+			resultState.setDiscovered(true);
+			resultStates.add(resultState);
+			return;
+		}
 		
-		CellState resultState = null;
-		return resultState;
+		if(state.getShip().isDestroyed())
+		{
+			state.getShip().getCoords(coords);
+			getCellStatesOfCoords(coords, resultStates)
+			getShipAroundCoords(coords);
+			getCellStatesOfCoords(coords, resultStates)
+		}
+		else
+		{
+			Ship ship = new Ship(0, shootCoords, "");
+			CellState resultState = new CellState(ship);
+			resultState.setDiscovered(true);
+			resultStates.add(resultState);
+		}
+	
+		//set all cells as discovered
+		
 	}
-	
-
-	
 	
 }

@@ -30,13 +30,13 @@ public class CellState
 		this.ship = ship;
 	}
 	
-	public boolean hasBoat()
+	public boolean hasShip()
 	{
 		return ship != null;
 	}
 	
 	public boolean isDiscoveredAndBoat()
 	{
-		return isDiscovered() && hasBoat();
+		return isDiscovered() && hasShip();
 	}
 }

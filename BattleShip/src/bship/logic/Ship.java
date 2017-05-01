@@ -1,5 +1,7 @@
 package bship.logic;
 
+import java.util.ArrayList;
+
 public abstract class Ship
 {
 	protected int size;
@@ -23,5 +25,10 @@ public abstract class Ship
 	public boolean isDestroyed()
 	{
 		return health == size;
+	}
+	
+	public void getCoords(ArrayList<Coords> coords)
+	{
+		
 	}
 }
