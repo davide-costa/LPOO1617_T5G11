@@ -1,6 +1,7 @@
 package bship.logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Game
 {
@@ -33,9 +34,14 @@ public class Game
 	}
 	
 	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
-	public void shootAlly(Coords coords)
+	public void shootAlly(Coords coords, ArrayList<Coords> coords, ArrayList<CellState> resultStates)
 	{
+		CellState state = getCellState(coords);
 		
+		if (state.hasBoat())
+		
+		CellState resultState = null;
+		return resultState;
 	}
 	
 

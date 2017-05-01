@@ -31,13 +31,25 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	@Override
 	public void update(Observable clientSocket, Object object)
 	{
-		BattleShipData data = (BattleShipData)object;
-		if (data instanceof GameShootData)
+		BattleShipData shootData = (BattleShipData)object;
+		if (shootData instanceof GameShootData)
 		{
-			Coords coords = ((GameShootData) data).getCoords();
+			Coords coords = ((GameShootData) shootData).getCoords();
 			game.shootAlly(coords);
+			
+			
+			BattleShipData resultData = new GameResultData();
+			try
+			{
+				this.clientSocket.sendBattleShipData(resultData);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		else if (data instanceof GameResultData)
+		else if (shootData instanceof GameResultData)
 		{
 			
 		}
