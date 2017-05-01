@@ -21,12 +21,19 @@ public class Game
 		map.setCellState(coords, state);
 	}
 	
-	public void shoot(Coords coords)
+	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
+	public void shootOpponent(Coords coords)
 	{
 		/*if (getCellState(coords).equals(cellNormal))
 			setCellState(coords, cellDestroyed);
 		else
 			setCellState(coords, cellChecked);*/
+	}
+	
+	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
+	public void shootAlly(Coords coords)
+	{
+		
 	}
 	
 
