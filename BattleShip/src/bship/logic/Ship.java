@@ -6,14 +6,14 @@ public abstract class Ship
 {
 	protected int size;
 	protected int health;
-	Coords startPos;
+	ArrayList<Coords> coords;
 	String direction;
 	
-	public Ship(int size, Coords startPos, String direction)
+	public Ship(int size, ArrayList<Coords> coords, String direction)
 	{
 		this.size = size;
 		health = size;
-		this.startPos = new Coords(startPos);
+		this.coords = coords;
 		this.direction = new String(direction);
 	}
 	

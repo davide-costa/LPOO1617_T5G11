@@ -52,22 +52,32 @@ public class Game
 			return;
 		}
 		
-		if(state.getShip().isDestroyed())
+		Ship ship = state.getShip();
+		if(ship.isDestroyed())
 		{
-			state.getShip().getCoords(coords);
-			getCellStatesOfCoords(coords, resultStates)
-			getShipAroundCoords(coords);
-			getCellStatesOfCoords(coords, resultStates)
+			ship.getCoords(coords);
+			getCellStatesOfCoords(coords, resultStates);
+			getSurroundingCoordsOfShip(coords);
 		}
 		else
 		{
-			Ship ship = new Ship(0, shootCoords, "");
-			CellState resultState = new CellState(ship);
+			Ship maskedShip = new BattleShip(0, shootCoords, "");
+			CellState resultState = new CellState(maskedShip);
 			resultState.setDiscovered(true);
 			resultStates.add(resultState);
 		}
 	
 		//set all cells as discovered
+		
+	}
+
+	private void getSurroundingCoordsOfShip(ArrayList<Coords> coords) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> resultStates) {
+		// TODO Auto-generated method stub
 		
 	}
 	
