@@ -1,6 +1,7 @@
 package bship.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Coords implements Serializable
@@ -82,6 +83,24 @@ public class Coords implements Serializable
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	/**  
+	 * Increments x coord of this instance by the increment it receives as parameter.
+     * @param increment The increment in x.
+	 */ 
+	public void incrementX(int increment)
+	{
+		this.x += increment;
+	}
+	
+	/**  
+	 * Increments y coord of this instance by the increment it receives as parameter.
+     * @param increment The increment in y.
+	 */ 
+	public void incrementY(int increment)
+	{
+		this.y += increment;
 	}
 	
 	/**  
@@ -197,5 +216,56 @@ public class Coords implements Serializable
 			temp_y--;
 		
 		return new Coords(temp_x, temp_y);
+	}
+	
+	static public ArrayList<Coords> getSurroundingCoords(ArrayList<Coords> coordsArray)
+	{
+		ArrayList<Coords> surroundingCoords = new ArrayList<Coords>();
+		int coordsArraySize = coordsArray.size();
+		if(coordsArraySize == 0)
+			return surroundingCoords;
+		
+		int xIncrement;
+		int yIncrement;
+		
+		if(coordsArraySize == 1)
+		{
+			xIncrement = 1;
+			yIncrement = 0;
+		}
+		else
+		{
+			xIncrement = coordsArray.get(1).GetX() - coordsArray.get(0).GetX();
+			yIncrement = coordsArray.get(1).GetY() - coordsArray.get(0).GetY();
+		}
+		
+		for(int i = 0; i < coordsArraySize; i++)
+			getSurroundingCoordsAux(coordsArray.get(i), xIncrement, yIncrement, surroundingCoords);
+
+		Coords coords = coordsArray.get(0);
+		coords.incrementX(-yIncrement);
+		coords.incrementY(-xIncrement);
+		surroundingCoords.add(coords);
+		getSurroundingCoordsAux(coords, xIncrement, yIncrement, surroundingCoords);
+		
+		coords = coordsArray.get(coordsArraySize - 1);
+		coords.incrementX(-yIncrement);
+		coords.incrementY(-xIncrement);
+		surroundingCoords.add(coords);
+		getSurroundingCoordsAux(coords, xIncrement, yIncrement, surroundingCoords);
+		
+		return surroundingCoords;
+	}
+	
+	static public void getSurroundingCoordsAux(Coords coords, int xIncrement, int yIncrement, ArrayList<Coords> surroundingCoords)
+	{
+		Coords tempCoords = new Coords(coords);
+		coords.incrementX(xIncrement);
+		coords.incrementY(yIncrement);
+		surroundingCoords.add(coords);
+		
+		tempCoords.incrementX(-xIncrement);
+		tempCoords.incrementY(-yIncrement);
+		surroundingCoords.add(tempCoords);
 	}
 }

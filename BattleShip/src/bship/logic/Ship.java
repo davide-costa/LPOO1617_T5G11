@@ -24,6 +24,7 @@ public abstract class Ship
 	{
 		return coords;
 	}
+	
 	public int getSize()
 	{
 		return size;

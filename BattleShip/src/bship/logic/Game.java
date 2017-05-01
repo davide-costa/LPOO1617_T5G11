@@ -33,18 +33,21 @@ public class Game
 		}
 	}
 	
-	private void getSurroundingCoordsOfShip(Ship ship, ArrayList<Coords> coords) 
+	private ArrayList<Coords> getSurroundingCoordsOfShip(Ship ship) 
 	{
-		int xIncrement = 0;
-		int yIncrement = 0;
+		ArrayList<Coords> shipCoords = ship.getCoords();
+		ArrayList<Coords> surroundingCoords = Coords.getSurroundingCoords(shipCoords);
+	
+		for(int i = 0; i < surroundingCoords.size(); i++)
+		{
+			if(surroundingCoords.get(i).GetX() < 0 || surroundingCoords.get(i).GetY() < 0)
+			{
+				surroundingCoords.remove(i);
+				i--;
+			}
+		}
 		
-		if(ship.getDirection.equals("vertical"))
-			xIncrement = 1;
-		else
-			yIncrement = 1;
-
-		
-		
+		return surroundingCoords;
 	}
 	
 	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
@@ -78,9 +81,9 @@ public class Game
 		Ship ship = state.getShip();
 		if(ship.isDestroyed())
 		{
-			ship.getCoords(coords);
+			coords = ship.getCoords();
 			getCellStatesOfCoords(coords, resultStates);
-			getSurroundingCoordsOfShip(ship, coords);
+			coords.addAll(getSurroundingCoordsOfShip(ship));
 		}
 		else
 		{
