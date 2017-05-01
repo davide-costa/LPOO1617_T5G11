@@ -11,12 +11,13 @@ public abstract class Ship
 	protected String direction;
 	protected String name;
 	
-	public Ship(int size, ArrayList<Coords> coords, String direction)
+	public Ship(int size, ArrayList<Coords> coords, String direction, String name)
 	{
 		this.size = size;
 		health = size;
 		this.coords = coords;
 		this.direction = new String(direction);
+		this.name = new String(name);
 	}
 	
 	public ArrayList<Coords> getCoords()
