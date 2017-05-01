@@ -1,10 +1,12 @@
 package bship.logic;
 
+import java.util.ArrayList;
+
 public class Destroyer extends Ship {
 
-	public Destroyer(int size, Coords startPos, String direction) 
+	public Destroyer(int size, ArrayList<Coords> coords,  String direction, String name)
 	{
-		super(2, startPos, direction);
+		super(2, coords, direction, "Destroyer");
 	}
 
 }

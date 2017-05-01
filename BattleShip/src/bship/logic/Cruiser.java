@@ -1,10 +1,12 @@
 package bship.logic;
 
+import java.util.ArrayList;
+
 public class Cruiser extends Ship {
 
-	public Cruiser(int size, Coords startPos, String direction) 
+	public Cruiser(int size, ArrayList<Coords> coords,  String direction, String name)
 	{
-		super(3, startPos, direction);
+		super(3, coords, direction, "Cruiser");
 	}
 
 }
