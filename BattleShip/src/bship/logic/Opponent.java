@@ -7,14 +7,14 @@ import java.io.IOException;
 import bship.network.data.*;
 
 
-public class Opponent
+public abstract class Opponent
 {
 	private Game game;
-	private Client socket;
 	
-	public void shoot(Coords coords) throws IOException
+	public Opponent(Game game)
 	{
-		BattleShipData data = new GameShootData(coords);
-		socket.sendBattleShipData(data);
+		this.game = game;
 	}
+	
+	public abstract void shoot(Coords coords) throws IOException;
 }
