@@ -33,6 +33,20 @@ public class Game
 		}
 	}
 	
+	private void getSurroundingCoordsOfShip(Ship ship, ArrayList<Coords> coords) 
+	{
+		int xIncrement = 0;
+		int yIncrement = 0;
+		
+		if(ship.getDirection.equals("vertical"))
+			xIncrement = 1;
+		else
+			yIncrement = 1;
+
+		
+		
+	}
+	
 	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
 	public void shootOpponent(Coords coords) throws IOException
 	{
@@ -66,7 +80,7 @@ public class Game
 		{
 			ship.getCoords(coords);
 			getCellStatesOfCoords(coords, resultStates);
-			getSurroundingCoordsOfShip(coords);
+			getSurroundingCoordsOfShip(ship, coords);
 		}
 		else
 		{
@@ -79,12 +93,5 @@ public class Game
 		//set all cells as discovered
 		
 	}
-
-	private void getSurroundingCoordsOfShip(ArrayList<Coords> coords) 
-	{
-		
-	}
-
-
 	
 }
