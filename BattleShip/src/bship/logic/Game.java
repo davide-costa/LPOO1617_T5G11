@@ -24,6 +24,15 @@ public class Game
 		map.setCellState(coords, state);
 	}
 	
+	private void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> states)
+	{
+		states.clear();
+		for (Coords coord : coords)
+		{
+			states.add(getCellState(coord));
+		}
+	}
+	
 	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
 	public void shootOpponent(Coords coords) throws IOException
 	{
@@ -76,9 +85,6 @@ public class Game
 		
 	}
 
-	private void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> resultStates) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 }
