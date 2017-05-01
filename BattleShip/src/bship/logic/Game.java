@@ -71,8 +71,8 @@ public class Game
 		
 	}
 
-	private void getSurroundingCoordsOfShip(ArrayList<Coords> coords) {
-		// TODO Auto-generated method stub
+	private void getSurroundingCoordsOfShip(ArrayList<Coords> coords) 
+	{
 		
 	}
 

@@ -29,6 +29,6 @@ public abstract class Ship
 	
 	public void getCoords(ArrayList<Coords> coords)
 	{
-		
+		coords = this.coords;
 	}
 }
