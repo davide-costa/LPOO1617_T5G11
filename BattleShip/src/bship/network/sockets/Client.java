@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Observable;
 
+import bship.logic.Opponent;
 import bship.network.data.BattleShipData;
 import bship.network.data.GameData;
 
@@ -46,7 +47,9 @@ public class Client extends Observable implements Runnable {
     /**
      * Host Name or IP address in String form
      */
-    private String hostName="localhost";//default host name
+    private String hostName;
+    
+    private Opponent player;
 
     public Client() {
 		connected = false;
@@ -71,7 +74,8 @@ public class Client extends Observable implements Runnable {
 
     public void sendBattleShipData(BattleShipData data) throws IOException
     {
-		if(connected) {
+		if(connected)
+		{
 	        socket_output.writeObject(data);
         } else throw new IOException("Not connected to server");
     }
