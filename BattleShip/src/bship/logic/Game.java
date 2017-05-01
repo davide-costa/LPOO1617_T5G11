@@ -14,22 +14,22 @@ public class Game
 		map = gameMap;
 	}
 	
-	public char getCellState(Coords coords)
+	public CellState getCellState(Coords coords)
 	{
 		return map.getCellState(coords);
 	}
 	
-	public void setCellState(Coords coords, char symbol)
+	public void setCellState(Coords coords, CellState state)
 	{
-		map.setCellState(coords, symbol);
+		map.setCellState(coords, state);
 	}
 	
 	public void shoot(Coords coords)
 	{
-		if (getCellState(coords) == cellNormal)
+		/*if (getCellState(coords).equals(cellNormal))
 			setCellState(coords, cellDestroyed);
 		else
-			setCellState(coords, cellChecked);
+			setCellState(coords, cellChecked);*/
 	}
 	
 

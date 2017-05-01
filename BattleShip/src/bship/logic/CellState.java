@@ -29,4 +29,14 @@ public class CellState
 	{
 		this.ship = ship;
 	}
+	
+	public boolean hasBoat()
+	{
+		return ship != null;
+	}
+	
+	public boolean isDiscoveredAndBoat()
+	{
+		return isDiscovered() && hasBoat();
+	}
 }

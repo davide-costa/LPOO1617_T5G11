@@ -5,8 +5,8 @@ public abstract class GameMap
 {
 	protected int sizeX;
 	protected int sizeY;
-	protected char map[][];
-	public char[][] getMap()
+	protected CellState map[][];
+	public CellState[][] getMap()
 	{
 		return map;
 	}
@@ -26,9 +26,9 @@ public abstract class GameMap
 	 * @param coords the coords of the cell we want to get the state.
 	 * @param symbol the symbol we want to set in the given coords.
 	 */
-	public void setCellState(Coords coords, char symbol)
+	public void setCellState(Coords coords, CellState state)
 	{
-		map[coords.GetY()][coords.GetX()] = symbol;
+		map[coords.GetY()][coords.GetX()] = state;
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public abstract class GameMap
 	 * @param coords the coords of the cell we want to get the state.
 	 * @return the state of the cell.
 	 */
-	public char getCellState(Coords coords)
+	public CellState getCellState(Coords coords)
 	{
 		return map[coords.GetY()][coords.GetX()];
 	}

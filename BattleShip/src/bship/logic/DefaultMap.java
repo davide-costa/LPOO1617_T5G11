@@ -5,6 +5,6 @@ public class DefaultMap extends GameMap
 	{
 		sizeX = 10;
 		sizeY = 10;
-		map = new char[sizeX][sizeY];
+		map = new CellState[sizeX][sizeY];
 	}
 }
