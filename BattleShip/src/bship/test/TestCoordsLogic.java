@@ -181,6 +181,53 @@ public class TestCoordsLogic
 		assertEquals(returned, correct);
 		
 
+		//Test with 2 (two) coords (horizontlly distributed)
+		coordsArray.clear();
+		coordsArray.add(new Coords(1, 2));
+		coordsArray.add(new Coords(2, 2));
 		
+		//Fill the correct coords array
+		correct.clear();
+		
+		correct.add(new Coords(0, 1));
+		correct.add(new Coords(1, 1));
+		correct.add(new Coords(2, 1));
+		correct.add(new Coords(3, 1));
+		
+		correct.add(new Coords(0, 2));
+		correct.add(new Coords(3, 2));
+		
+		correct.add(new Coords(0, 3));
+		correct.add(new Coords(1, 3));
+		correct.add(new Coords(2, 3));
+		correct.add(new Coords(3, 3));
+		
+		
+		Collections.sort(correct);
+		returned = Coords.getSurroundingCoords(coordsArray);
+		Collections.sort(returned);
+		assertEquals(returned, correct);
+		
+		
+		//Reverse way of last horizontal distribution (to ensure it works regardless of the way)
+		coordsArray.clear();
+		coordsArray.add(new Coords(2, 2));
+		coordsArray.add(new Coords(1, 2));
+
+		returned = Coords.getSurroundingCoords(coordsArray);
+		Collections.sort(returned);
+		assertEquals(returned, correct);
+		
+		//Debugging
+		for (Coords coord : correct)
+		{
+			System.out.println(coord.GetX() + " " + coord.GetY());
+		}
+		System.out.println("");
+		System.out.println("");
+		for (Coords coord : returned)
+		{
+			System.out.println(coord.GetX() + " " + coord.GetY());
+		}
 	}
 }
