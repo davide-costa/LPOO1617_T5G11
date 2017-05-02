@@ -109,4 +109,16 @@ public class TestCoordsLogic
 		assertEquals(coords.GetX(), init_x);
 		assertEquals(coords.GetY(), init_y);
 	}
+	
+	@Test
+	public void TestAdjacentGetters()
+	{
+		Coords coords = new Coords(1, 2);
+		assertEquals(coords.left(), new Coords(0, 2));
+		assertEquals(coords.right(), new Coords(2, 2));
+		assertEquals(coords.up(), new Coords(1, 3));
+		assertEquals(coords.down(), new Coords(1, 1));
+	}
+	
+	
 }
