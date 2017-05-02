@@ -156,7 +156,8 @@ public class TestCoordsLogic
 		Collections.sort(returned);
 		assertEquals(returned, correct);
 		
-		//Test with 2 (two) coords
+		
+		//Test with 2 (two) coords (vertically distributed)
 		coordsArray.add(new Coords(2, 3));
 		
 		//Fill the correct coords array
@@ -167,6 +168,14 @@ public class TestCoordsLogic
 		correct.add(new Coords(3, 4));
 		
 		Collections.sort(correct);
+		returned = Coords.getSurroundingCoords(coordsArray);
+		Collections.sort(returned);
+		assertEquals(returned, correct);
+		
+		//Reverse way of last vertical distribution (to ensure it works regardless of the way)
+		coordsArray.clear();
+		coordsArray.add(new Coords(2, 3));
+		coordsArray.add(new Coords(2, 2));
 		returned = Coords.getSurroundingCoords(coordsArray);
 		Collections.sort(returned);
 		assertEquals(returned, correct);
