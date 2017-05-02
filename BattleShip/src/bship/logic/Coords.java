@@ -2,7 +2,6 @@ package bship.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Coords implements Serializable, Comparable<Coords>

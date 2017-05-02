@@ -1,10 +1,8 @@
 package bship.logic;
 
-import bship.network.sockets.*;
 
 import java.io.IOException;
 
-import bship.network.data.*;
 
 
 public abstract class Opponent

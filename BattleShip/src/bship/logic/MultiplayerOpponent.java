@@ -1,6 +1,7 @@
 package bship.logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,11 +35,13 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		BattleShipData shootData = (BattleShipData)object;
 		if (shootData instanceof GameShootData)
 		{
-			Coords coords = ((GameShootData) shootData).getCoords();
-			game.shootAlly(coords);
+			Coords shootCoords = ((GameShootData) shootData).getCoords();
+			ArrayList<Coords> coords = new ArrayList<Coords>();
+			ArrayList<CellState> resultStates = new ArrayList<CellState>();
+			game.shootAlly(shootCoords, coords, resultStates);
 			
 			
-			BattleShipData resultData = new GameResultData();
+			BattleShipData resultData = new GameResultData(coords, resultStates);
 			try
 			{
 				this.clientSocket.sendBattleShipData(resultData);

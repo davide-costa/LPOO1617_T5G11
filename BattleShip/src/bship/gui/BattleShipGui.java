@@ -3,7 +3,6 @@ package bship.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 
 public class BattleShipGui {
 

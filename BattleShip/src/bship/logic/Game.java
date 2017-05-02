@@ -72,7 +72,7 @@ public class Game
 		coords.add(shootCoords);
 		if (!state.hasShip())
 		{
-			CellState resultState = null;
+			CellState resultState = new CellState(null);
 			resultState.setDiscovered(true);
 			resultStates.add(resultState);
 			return;
@@ -87,7 +87,9 @@ public class Game
 		}
 		else
 		{
-			Ship maskedShip = new BattleShip(0, shootCoords, "");
+			ArrayList<Coords> shipCoords = new ArrayList<Coords>();
+			shipCoords.add(shootCoords);
+			Ship maskedShip = new BattleShip(0, shipCoords, "");
 			CellState resultState = new CellState(maskedShip);
 			resultState.setDiscovered(true);
 			resultStates.add(resultState);
