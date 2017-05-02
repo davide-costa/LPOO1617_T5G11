@@ -11,79 +11,90 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.util.Observable;
 
+import bship.logic.Player;
 import bship.network.data.*;
 
 public class ClientThread extends Observable implements Runnable {
-    /** For reading input from socket */
+	/** For reading input from socket */
 	private ObjectInputStream socket_input;
 
-    /** For writing output to socket. */
-	 private ObjectOutputStream socket_output;
+	/** For writing output to socket. */
+	private ObjectOutputStream socket_output;
 
-    /** Socket object representing client connection */
+	/** Socket object representing client connection */
 
-    private Socket socket;
-    private boolean running;
+	private Socket socket;
+	private boolean running;
+	private Player player;
 
-    public ClientThread(Socket socket) throws IOException {
-        this.socket = socket;
-        running = false;
-        //get I/O from socket
-        try {
-        	socket_input = new ObjectInputStream(socket.getInputStream());
-            
-        	socket_output = new ObjectOutputStream(socket.getOutputStream());
-            running = true; //set status
-        }
-        catch (IOException ioe) {
-            throw ioe;
-        }
-    }
+	public ClientThread(Socket socket) throws IOException {
+		this.socket = socket;
+		running = false;
+		//get I/O from socket
+		try {
+			socket_input = new ObjectInputStream(socket.getInputStream());
+
+			socket_output = new ObjectOutputStream(socket.getOutputStream());
+			running = true; //set status
+		}
+		catch (IOException ioe) {
+			throw ioe;
+		}
+	}
 	
-    /** 
-     *Stops clients connection
-     */
+	public void setPlayer(Player player)
+	{
+		this.player = player;
+	}
 
-    public void stopClient()
-    {
-        try {
-		this.socket.close();
-        }catch(IOException ioe){ };
-    }
+	/**
+	*Stops clients connection
+	*/
 
-    public void run() {
-        BattleShipData data; //will hold message sent from client
+	public void stopClient()
+	{
+		try {
+			this.socket.close();
+		}
+		catch (IOException ioe) {};
+	}
 
-        //socket_output.println("Welcome to Java based Server");
-		
+	public void run() {
+		BattleShipData data; //will hold message sent from client
 
-	  //start listening message from client//
+							 //socket_output.println("Welcome to Java based Server");
 
-        try {
-                while ((data = (BattleShipData) socket_input.readObject()) != null && running) {
-                    //provide your server's logic here//
-			
-                    //right now it is acting as an ECHO server//
 
-                    socket_output.writeObject(data); //echo msg back to client//
-                    System.out.println(((GameData)data).stuff);
-                }
-                running = false;
-            }
-            catch (IOException ioe) {
-                running = false;
-            } catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+							 //start listening message from client//
+
+		try {
+			while ((data = (BattleShipData)socket_input.readObject()) != null && running) 
+			{
+				//provide your server's logic here//
+				
+				//right now it is acting as an ECHO server//
+
+				socket_output.writeObject(data); //response to client//
+				System.out.println(((GameData)data).stuff);
 			}
-        //it's time to close the socket
-        try {
-            this.socket.close();
-            System.out.println("Closing connection");
-        } catch (IOException ioe) { }
+			running = false;
+		}
+		catch (IOException ioe) {
+			running = false;
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//it's time to close the socket
+		try {
+			this.socket.close();
+			System.out.println("Closing connection");
+		}
+		catch (IOException ioe) {}
 
-        //notify the observers for cleanup etc.
-        this.setChanged();              //inherit from Observable
-        this.notifyObservers(this);     //inherit from Observable
-    }
+		//notify the observers for cleanup etc.
+		this.setChanged();              //inherit from Observable
+		this.notifyObservers(this);     //inherit from Observable
+	}
 }
