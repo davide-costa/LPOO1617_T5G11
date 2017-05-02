@@ -111,4 +111,16 @@ public class Game
 		}
 	}
 	
+	
+	private void setSurroundingCoordsAsDestroyed(ArrayList<Coords> coordsArray, int offset)
+	{
+		for (int i = offset; i < coordsArray.size(); i++)
+		{
+			Coords coords = coordsArray.get(i);
+			CellState state = getCellState(coords);
+			state.setDiscovered(true);
+		}
+
+	}
+	
 }
