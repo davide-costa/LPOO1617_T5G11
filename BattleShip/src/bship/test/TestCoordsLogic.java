@@ -131,13 +131,15 @@ public class TestCoordsLogic
 		ArrayList<Coords> returned;
 		ArrayList<Coords> correct = new ArrayList<Coords>();
 		
+		//Test with 0 (zero) coords
 		returned = Coords.getSurroundingCoords(coordsArray);
 		assertEquals(returned, correct);
 		
-		//Comparator coordsComparator = 
 		
+		//Test with 1 (one) coord
 		coordsArray.add(new Coords(2, 2));
 		
+		//Fill the correct coords array
 		correct.add(new Coords(1, 1));
 		correct.add(new Coords(2, 1));
 		correct.add(new Coords(3, 1));
@@ -150,20 +152,23 @@ public class TestCoordsLogic
 		correct.add(new Coords(3, 3));
 		
 		Collections.sort(correct);
-		
 		returned = Coords.getSurroundingCoords(coordsArray);
 		Collections.sort(returned);
-		for (Coords coord : correct)
-		{
-			System.out.println(coord.GetX() + " " + coord.GetY());
-		}
-		System.out.println("");
-		System.out.println("");
-		for (Coords coord : returned)
-		{
-			System.out.println(coord.GetX() + " " + coord.GetY());
-		}
+		assertEquals(returned, correct);
 		
+		//Test with 2 (two) coords
+		coordsArray.add(new Coords(2, 3));
+		
+		//Fill the correct coords array
+		correct.remove(6); //remove coords (2, 3) from the ArrayList of correct coords
+		
+		correct.add(new Coords(1, 4));
+		correct.add(new Coords(2, 4));
+		correct.add(new Coords(3, 4));
+		
+		Collections.sort(correct);
+		returned = Coords.getSurroundingCoords(coordsArray);
+		Collections.sort(returned);
 		assertEquals(returned, correct);
 		
 
