@@ -4,25 +4,38 @@ import java.util.ArrayList;
 
 import bship.logic.CellState;
 import bship.logic.Coords;
+import bship.logic.Ship;
 
 public class GameResultData extends GameData
 {
-	private ArrayList<Coords> coords;
-	private ArrayList<CellState> resultStates;
+	static private char HIT = (char) 0; 
+	static private char WATER = (char) 1; 
+	static private char SINK = (char) 2; 
+	private Coords coords;
+	private Ship atackedShip;
+	private char shootResult;
+	private boolean endOfGame;
 	
-	public GameResultData(ArrayList<Coords> coords, ArrayList<CellState> resultStates)
+	
+	public GameResultData(Coords coords, Ship atackedShip, char shootResult)
 	{
 		this.coords = coords;
-		this.resultStates = resultStates;
+		this.atackedShip = atackedShip;
+		this.shootResult = shootResult;
 	}
 	
-	public ArrayList<Coords> getCoords()
+	public Coords getCoords()
 	{
 		return coords;
 	}
 	
-	public ArrayList<CellState> getCellStates()
+	public Ship getShip()
 	{
-		return resultStates;
+		return atackedShip;
+	}
+	
+	public char getShootResult()
+	{
+		return shootResult;
 	}
 }
