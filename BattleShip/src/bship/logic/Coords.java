@@ -243,15 +243,15 @@ public class Coords implements Serializable, Comparable<Coords>
 		for(int i = 0; i < coordsArraySize; i++)
 			getSurroundingCoordsAux(coordsArray.get(i), xIncrement, yIncrement, surroundingCoords);
 
-		Coords coords = coordsArray.get(0);
+		Coords coords = new Coords(coordsArray.get(0));
 		coords.incrementX(-yIncrement);
 		coords.incrementY(-xIncrement);
 		surroundingCoords.add(coords);
 		getSurroundingCoordsAux(coords, xIncrement, yIncrement, surroundingCoords);
 		
-		coords = coordsArray.get(coordsArraySize - 1);
-		coords.incrementX(-yIncrement);
-		coords.incrementY(-xIncrement);
+		coords = new Coords(coordsArray.get(coordsArraySize - 1));
+		coords.incrementX(yIncrement);
+		coords.incrementY(xIncrement);
 		surroundingCoords.add(coords);
 		getSurroundingCoordsAux(coords, xIncrement, yIncrement, surroundingCoords);
 		
@@ -260,11 +260,14 @@ public class Coords implements Serializable, Comparable<Coords>
 	
 	static public void getSurroundingCoordsAux(Coords coords, int xIncrement, int yIncrement, ArrayList<Coords> surroundingCoords)
 	{
-		Coords tempCoords = new Coords(coords);
-		coords.incrementX(xIncrement);
-		coords.incrementY(yIncrement);
-		surroundingCoords.add(coords);
+		Coords tempCoords;
 		
+		tempCoords = new Coords(coords);
+		tempCoords.incrementX(xIncrement);
+		tempCoords.incrementY(yIncrement);
+		surroundingCoords.add(tempCoords);
+		
+		tempCoords = new Coords(coords);
 		tempCoords.incrementX(-xIncrement);
 		tempCoords.incrementY(-yIncrement);
 		surroundingCoords.add(tempCoords);
