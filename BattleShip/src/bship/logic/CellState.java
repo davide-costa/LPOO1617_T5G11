@@ -1,9 +1,9 @@
 package bship.logic;
 
-public class CellState
+public abstract class CellState
 {
-	private boolean discovered;
-	private Ship ship;
+	protected boolean discovered;
+	protected Ship ship;
 	
 	public CellState(Ship ship)
 	{
@@ -30,13 +30,8 @@ public class CellState
 		this.ship = ship;
 	}
 	
-	public boolean hasShip()
-	{
-		return ship != null;
-	}
+	public abstract boolean hasShip();
 	
-	public boolean isDiscoveredAndBoat()
-	{
-		return isDiscovered() && hasShip();
-	}
+	public abstract boolean isDiscoveredAndBoat();
+	
 }
