@@ -9,6 +9,13 @@ public class OpponentCellState extends CellState
 		super(ship);
 		this.hasShip = hasShip;
 	}
+	
+	public OpponentCellState(Ship ship, boolean hasShip, boolean discovered) 
+	{
+		super(ship);
+		this.hasShip = hasShip;
+		this.discovered = discovered;
+	}
 
 
 	public boolean hasShip() 

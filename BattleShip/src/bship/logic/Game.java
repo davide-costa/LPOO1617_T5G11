@@ -10,15 +10,15 @@ public class Game
 	private GameMap opponentMap;
 	Opponent opponent;
 	
-	private Game(GameMap gameMap)
+	private Game()
 	{
-		this.map = map;
+		
 	}
 	
-	public static Game getInstance(GameMap gameMap)
+	public static Game getInstance()
 	{
 		if(gameInstance == null)
-			gameInstance = new Game(gameMap);
+			gameInstance = new Game();
 
 		return gameInstance;
 	}
@@ -69,20 +69,27 @@ public class Game
 	}
 	
 	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
-	public char shootAlly(Coords shootCoords, Ship atackedShip)
+	public void shootAlly(Coords shootCoords)
 	{
-		CellState state = getCellState(shootCoords);;
+		CellState state = getCellState(shootCoords);
 		
 		if (state.isDiscovered())
-			return (char) -1;
+			return;
 		
 		//Set cell as discovered
 		state.setDiscovered(true);
 		
-		coords.add(shootCoords);
+		Ship ship = state.getShip();
+		ship.shoot();
+	}
+	
+	public void getPlayEffects(Coords shootCoords, ArrayList<Coords> coordsArray, ArrayList<CellState> resultStates)
+	{
+		CellState state = getCellState(shootCoords);
+		coordsArray.add(shootCoords);
 		if (!state.hasShip())
 		{
-			CellState resultState = new CellState(null);
+			CellState resultState = new OpponentCellState(null, false);
 			resultState.setDiscovered(true);
 			resultStates.add(resultState);
 			return;
@@ -91,22 +98,17 @@ public class Game
 		Ship ship = state.getShip();
 		if(ship.isDestroyed())
 		{
-			coords = ship.getCoords();
-			getCellStatesOfCoords(coords, resultStates);
-			coords.addAll(getSurroundingCoordsOfShip(ship));
+			coordsArray = ship.getCoords();
+			getCellStatesOfCoords(coordsArray, resultStates);
+			coordsArray.addAll(getSurroundingCoordsOfShip(ship));
+			setSorroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
 		}
 		else
 		{
-			ArrayList<Coords> shipCoords = new ArrayList<Coords>();
-			shipCoords.add(shootCoords);
-			Ship maskedShip = new BattleShip(0, shipCoords, "");
-			CellState resultState = new CellState(maskedShip);
+			CellState resultState = new OpponentCellState(null, true);
 			resultState.setDiscovered(true);
 			resultStates.add(resultState);
 		}
-	
-		//set all cells as discovered
-		
 	}
 	
 }

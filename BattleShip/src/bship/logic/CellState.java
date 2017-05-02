@@ -8,6 +8,7 @@ public abstract class CellState
 	public CellState(Ship ship)
 	{
 		this.setShip(ship);
+		this.discovered = false;
 	}
 
 	public boolean isDiscovered()
