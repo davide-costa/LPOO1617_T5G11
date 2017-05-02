@@ -127,16 +127,67 @@ public class TestCoordsLogic
 	public void TestGetSurroundingCoords()
 	{
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
-		ArrayList<Coords> returned;
+		ArrayList<Coords> returned = null;
 		ArrayList<Coords> correct = new ArrayList<Coords>();
+				
+		TestWithZeroCoords(coordsArray, returned, correct);
+		TestWithOneCoord(coordsArray, returned, correct);
+		TestWithTwoCoords(coordsArray, returned, correct);
 		
-		//Test with 0 (zero) coords
+		//TODO
+//		//Debugging
+//		for (Coords coord : correct)
+//		{
+//			System.out.println(coord.GetX() + " " + coord.GetY());
+//		}
+//		System.out.println("");
+//		System.out.println("");
+//		for (Coords coord : returned)
+//		{
+//			System.out.println(coord.GetX() + " " + coord.GetY());
+//		}
+	}
+	
+	private void TestWithZeroCoords(ArrayList<Coords> coordsArray, ArrayList<Coords> returned, ArrayList<Coords> correct)
+	{
+		coordsArray.clear();
+		correct.clear();
 		returned = Coords.getSurroundingCoords(coordsArray);
 		assertEquals(returned, correct);
-		
-		
-		//Test with 1 (one) coord
+	}
+	
+	private void TestWithOneCoord(ArrayList<Coords> coordsArray, ArrayList<Coords> returned, ArrayList<Coords> correct)
+	{
+		coordsArray.clear();
+		correct.clear();
+		// Test with 1 (one) coord
 		coordsArray.add(new Coords(2, 2));
+
+		// Fill the correct coords array
+		correct.add(new Coords(1, 1));
+		correct.add(new Coords(2, 1));
+		correct.add(new Coords(3, 1));
+
+		correct.add(new Coords(1, 2));
+		correct.add(new Coords(3, 2));
+
+		correct.add(new Coords(1, 3));
+		correct.add(new Coords(2, 3));
+		correct.add(new Coords(3, 3));
+
+		Collections.sort(correct);
+		returned = Coords.getSurroundingCoords(coordsArray);
+		Collections.sort(returned);
+		assertEquals(returned, correct);
+	}
+	
+	private void TestWithTwoCoords(ArrayList<Coords> coordsArray, ArrayList<Coords> returned, ArrayList<Coords> correct)
+	{
+		coordsArray.clear();
+		correct.clear();
+		//Test with 2 (two) coords (vertically distributed)
+		coordsArray.add(new Coords(2, 2));
+		coordsArray.add(new Coords(2, 3));
 		
 		//Fill the correct coords array
 		correct.add(new Coords(1, 1));
@@ -147,20 +198,7 @@ public class TestCoordsLogic
 		correct.add(new Coords(3, 2));
 		
 		correct.add(new Coords(1, 3));
-		correct.add(new Coords(2, 3));
 		correct.add(new Coords(3, 3));
-		
-		Collections.sort(correct);
-		returned = Coords.getSurroundingCoords(coordsArray);
-		Collections.sort(returned);
-		assertEquals(returned, correct);
-		
-		
-		//Test with 2 (two) coords (vertically distributed)
-		coordsArray.add(new Coords(2, 3));
-		
-		//Fill the correct coords array
-		correct.remove(6); //remove coords (2, 3) from the ArrayList of correct coords
 		
 		correct.add(new Coords(1, 4));
 		correct.add(new Coords(2, 4));
@@ -180,7 +218,7 @@ public class TestCoordsLogic
 		assertEquals(returned, correct);
 		
 
-		//Test with 2 (two) coords (horizontlly distributed)
+		//Test with 2 (two) coords (horizontally distributed)
 		coordsArray.clear();
 		coordsArray.add(new Coords(1, 2));
 		coordsArray.add(new Coords(2, 2));
@@ -216,17 +254,7 @@ public class TestCoordsLogic
 		returned = Coords.getSurroundingCoords(coordsArray);
 		Collections.sort(returned);
 		assertEquals(returned, correct);
-		
-		//Debugging
-		for (Coords coord : correct)
-		{
-			System.out.println(coord.GetX() + " " + coord.GetY());
-		}
-		System.out.println("");
-		System.out.println("");
-		for (Coords coord : returned)
-		{
-			System.out.println(coord.GetX() + " " + coord.GetY());
-		}
 	}
+	
+
 }
