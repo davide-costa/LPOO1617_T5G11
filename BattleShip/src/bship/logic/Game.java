@@ -8,11 +8,12 @@ public class Game
 	private static Game gameInstance = null;
 	private GameMap map;
 	private GameMap opponentMap;
-	Opponent opponent;
+	private Opponent opponent;
+	private int aliveShips;
 	
 	private Game()
 	{
-		
+		this.aliveShips = 5;
 	}
 	
 	public static Game getInstance()
@@ -31,6 +32,11 @@ public class Game
 	public void setCellState(Coords coords, CellState state)
 	{
 		map.setCellState(coords, state);
+	}
+	
+	public boolean isEndOfGame()
+	{
+		return aliveShips == 0;
 	}
 	
 	private void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> states)
@@ -102,6 +108,7 @@ public class Game
 			getCellStatesOfCoords(coordsArray, resultStates);
 			coordsArray.addAll(getSurroundingCoordsOfShip(ship));
 			setSurroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
+			aliveShips--;
 		}
 		else
 		{

@@ -36,12 +36,14 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		if (shootData instanceof GameShootData)
 		{
 			Coords shootCoords = ((GameShootData) shootData).getCoords();
-			
 			game.shootAlly(shootCoords);
-			game.getPlayEffects(shootCoords, coords, resultStates);
 			
+			ArrayList<Coords> coordsArray = new ArrayList<Coords>();
+			ArrayList<CellState> resultStates = new ArrayList<CellState>();
+			game.getPlayEffects(shootCoords, coordsArray, resultStates);
+			boolean endOfGame = game.isEndOfGame();
 			
-			BattleShipData resultData = new GameResultData(coords, resultStates);
+			BattleShipData resultData = new GameResultData(coordsArray, resultStates, endOfGame);
 			try
 			{
 				this.clientSocket.sendBattleShipData(resultData);
