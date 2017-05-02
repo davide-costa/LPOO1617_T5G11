@@ -5,13 +5,22 @@ import java.util.ArrayList;
 
 public class Game
 {
+	private static Game gameInstance = null;
 	private GameMap map;
 	private GameMap opponentMap;
 	Opponent opponent;
 	
-	public Game(GameMap gameMap)
+	private Game(GameMap gameMap)
 	{
-		map = gameMap;
+		this.map = map;
+	}
+	
+	public static Game getInstance(GameMap gameMap)
+	{
+		if(gameInstance == null)
+			gameInstance = new Game(gameMap);
+
+		return gameInstance;
 	}
 	
 	public CellState getCellState(Coords coords)
@@ -60,14 +69,15 @@ public class Game
 	}
 	
 	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
-	public void shootAlly(Coords shootCoords, ArrayList<Coords> coords, ArrayList<CellState> resultStates)
+	public char shootAlly(Coords shootCoords, Ship atackedShip)
 	{
-		CellState state = getCellState(shootCoords);
-		coords.clear();
-		resultStates.clear();
+		CellState state = getCellState(shootCoords);;
 		
 		if (state.isDiscovered())
-			return;
+			return (char) -1;
+		
+		//Set cell as discovered
+		state.setDiscovered(true);
 		
 		coords.add(shootCoords);
 		if (!state.hasShip())

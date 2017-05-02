@@ -36,8 +36,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		if (shootData instanceof GameShootData)
 		{
 			Coords shootCoords = ((GameShootData) shootData).getCoords();
-			ArrayList<Coords> coords = new ArrayList<Coords>();
-			ArrayList<CellState> resultStates = new ArrayList<CellState>();
+			
 			game.shootAlly(shootCoords, coords, resultStates);
 			
 			
