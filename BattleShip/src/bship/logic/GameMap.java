@@ -6,6 +6,17 @@ public abstract class GameMap
 	protected int sizeX;
 	protected int sizeY;
 	protected CellState map[][];
+	
+	public GameMap(boolean isOpponent, int sizeX, int sizeY)
+	{
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
+		if (isOpponent)
+			map = new OpponentCellState[sizeX][sizeY];
+		else
+			map = new AllyCellState[sizeX][sizeY];
+	}
+	
 	public CellState[][] getMap()
 	{
 		return map;
