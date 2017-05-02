@@ -101,7 +101,7 @@ public class Game
 			coordsArray = ship.getCoords();
 			getCellStatesOfCoords(coordsArray, resultStates);
 			coordsArray.addAll(getSurroundingCoordsOfShip(ship));
-			setSorroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
+			setSurroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
 		}
 		else
 		{
@@ -112,7 +112,7 @@ public class Game
 	}
 	
 	
-	private void setSurroundingCoordsAsDestroyed(ArrayList<Coords> coordsArray, int offset)
+	private void setSurroundingCoordsAsDiscovered(ArrayList<Coords> coordsArray, int offset)
 	{
 		for (int i = offset; i < coordsArray.size(); i++)
 		{
