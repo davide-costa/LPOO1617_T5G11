@@ -3,6 +3,8 @@ package bship.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.junit.Test;
 
@@ -122,5 +124,49 @@ public class TestCoordsLogic
 		assertEquals(coords.down(), new Coords(1, 3));
 	}
 	
+	@Test
+	public void TestGetSurroundingCoords()
+	{
+		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
+		ArrayList<Coords> returned;
+		ArrayList<Coords> correct = new ArrayList<Coords>();
+		
+		returned = Coords.getSurroundingCoords(coordsArray);
+		assertEquals(returned, correct);
+		
+		//Comparator coordsComparator = 
+		
+		coordsArray.add(new Coords(2, 2));
+		
+		correct.add(new Coords(1, 1));
+		correct.add(new Coords(2, 1));
+		correct.add(new Coords(3, 1));
+		
+		correct.add(new Coords(1, 2));
+		correct.add(new Coords(3, 2));
+		
+		correct.add(new Coords(1, 3));
+		correct.add(new Coords(2, 3));
+		correct.add(new Coords(3, 3));
+		
+		Collections.sort(correct);
+		
+		returned = Coords.getSurroundingCoords(coordsArray);
+		Collections.sort(returned);
+		for (Coords coord : correct)
+		{
+			System.out.println(coord.GetX() + " " + coord.GetY());
+		}
+		System.out.println("");
+		System.out.println("");
+		for (Coords coord : returned)
+		{
+			System.out.println(coord.GetX() + " " + coord.GetY());
+		}
+		
+		assertEquals(returned, correct);
+		
 
+		
+	}
 }
