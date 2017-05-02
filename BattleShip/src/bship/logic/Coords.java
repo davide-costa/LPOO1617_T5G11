@@ -2,9 +2,10 @@ package bship.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Coords implements Serializable
+public class Coords implements Serializable, Comparable<Coords>
 {
 	/**
 	 * 
@@ -267,5 +268,24 @@ public class Coords implements Serializable
 		tempCoords.incrementX(-xIncrement);
 		tempCoords.incrementY(-yIncrement);
 		surroundingCoords.add(tempCoords);
+	}
+
+	@Override
+	public int compareTo(Coords c2)
+	{
+		if (y != c2.y)
+		{
+			if (y < c2.y)
+				return -1;
+			else
+				return 1;
+		}
+		
+		if (x < c2.x)
+			return -1;
+		else if(x > c2.x)
+			return 1;
+		else
+			return 0;
 	}
 }
