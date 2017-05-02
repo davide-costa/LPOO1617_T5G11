@@ -236,8 +236,8 @@ public class Coords implements Serializable, Comparable<Coords>
 		}
 		else
 		{
-			xIncrement = coordsArray.get(1).GetX() - coordsArray.get(0).GetX();
-			yIncrement = coordsArray.get(1).GetY() - coordsArray.get(0).GetY();
+			yIncrement = coordsArray.get(1).GetX() - coordsArray.get(0).GetX();
+			xIncrement = coordsArray.get(1).GetY() - coordsArray.get(0).GetY();
 		}
 		
 		for(int i = 0; i < coordsArraySize; i++)
