@@ -2,6 +2,8 @@ package bship.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import bship.logic.Coords;
@@ -116,9 +118,9 @@ public class TestCoordsLogic
 		Coords coords = new Coords(1, 2);
 		assertEquals(coords.left(), new Coords(0, 2));
 		assertEquals(coords.right(), new Coords(2, 2));
-		assertEquals(coords.up(), new Coords(1, 3));
-		assertEquals(coords.down(), new Coords(1, 1));
+		assertEquals(coords.up(), new Coords(1, 1));
+		assertEquals(coords.down(), new Coords(1, 3));
 	}
 	
-	
+
 }
