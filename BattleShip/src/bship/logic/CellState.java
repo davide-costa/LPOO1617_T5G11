@@ -32,6 +32,6 @@ public abstract class CellState
 	
 	public abstract boolean hasShip();
 	
-	public abstract boolean isDiscoveredAndBoat();
+	public abstract boolean isDiscoveredAndShip();
 	
 }
