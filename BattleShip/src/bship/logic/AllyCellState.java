@@ -13,7 +13,7 @@ public class AllyCellState extends CellState
 		return ship != null;
 	}
 	
-	public boolean isDiscoveredAndBoat()
+	public boolean isDiscoveredAndShip()
 	{
 		return isDiscovered() && hasShip();
 	}
