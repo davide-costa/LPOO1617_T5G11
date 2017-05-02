@@ -55,4 +55,58 @@ public class TestCoordsLogic
 		assertTrue(coords.adjacentTo(coords4));
 		assertEquals(false, coords.adjacentTo(coords5));
 	}
+	
+	@Test
+	public void TestCopyConstructor()
+	{
+		Coords originalCoords = new Coords(1, 2);
+		Coords coords = new Coords(originalCoords);
+		assertEquals(originalCoords.GetX(), coords.GetX());
+		assertEquals(originalCoords.GetY(), coords.GetY());
+		
+		//Ensure no aliasing occurs but a separate copy is created
+		coords.SetX(5);
+		assertEquals(originalCoords, new Coords(1, 2));
+		coords.SetY(6);
+		assertEquals(originalCoords, new Coords(1, 2));
+	}
+	
+	@Test
+	public void TestIncrementers()
+	{
+		Coords originalCoords = new Coords(1, 2);
+		Coords coords = new Coords(originalCoords);
+		
+		EnsureRightIncrement(coords, 1);
+		
+		coords = new Coords(originalCoords);
+		EnsureRightIncrement(coords, -1);
+		
+		coords = new Coords(originalCoords);
+		EnsureRightIncrement(coords, 1000000);
+		
+		coords = new Coords(originalCoords);
+		EnsureRightIncrement(coords, -1000000);
+	}
+	
+	private void EnsureRightIncrement(Coords coords, int increment)
+	{
+		int init_x = coords.GetX();
+		int init_y = coords.GetY();
+		coords.incrementX(increment);
+		assertEquals(coords.GetX(), init_x + increment);
+		assertEquals(coords.GetY(), init_y);
+		
+		coords.incrementX(-increment);
+		assertEquals(coords.GetX(), init_x);
+		assertEquals(coords.GetY(), init_y);
+		
+		coords.incrementY(increment);
+		assertEquals(coords.GetX(), init_x);
+		assertEquals(coords.GetY(), init_y + increment);
+		
+		coords.incrementY(-increment);
+		assertEquals(coords.GetX(), init_x);
+		assertEquals(coords.GetY(), init_y);
+	}
 }
