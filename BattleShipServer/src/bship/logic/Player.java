@@ -13,9 +13,10 @@ public class Player
 		
 	}
 	
-	public Player(ClientThread thread)
+	public Player(String username, String password)
 	{
-		this.thread = thread;
+		this.username = username;
+		this.password = password;
 	}
 	
 	public void setThread(ClientThread thread) 
