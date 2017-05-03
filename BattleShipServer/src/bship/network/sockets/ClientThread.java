@@ -11,10 +11,12 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.util.Observable;
 
+import bship.logic.BattleShipServer;
 import bship.logic.Player;
 import bship.network.data.*;
 
-public class ClientThread extends Observable implements Runnable {
+public class ClientThread extends Observable implements Runnable
+{
 	/** For reading input from socket */
 	private ObjectInputStream socket_input;
 
@@ -24,24 +26,28 @@ public class ClientThread extends Observable implements Runnable {
 	/** Socket object representing client connection */
 
 	private Socket socket;
+	private BattleShipServer battleShipServer;
 	private boolean running;
 	private Player player;
 
-	public ClientThread(Socket socket) throws IOException {
+	public ClientThread(Socket socket, BattleShipServer battleShipServer) throws IOException {
 		this.socket = socket;
+		this.battleShipServer = battleShipServer;
 		running = false;
 		//get I/O from socket
-		try {
+		try
+		{
 			socket_input = new ObjectInputStream(socket.getInputStream());
 
 			socket_output = new ObjectOutputStream(socket.getOutputStream());
 			running = true; //set status
 		}
-		catch (IOException ioe) {
+		catch (IOException ioe)
+		{
 			throw ioe;
 		}
 	}
-	
+
 	public void setPlayer(Player player)
 	{
 		this.player = player;
@@ -53,13 +59,15 @@ public class ClientThread extends Observable implements Runnable {
 
 	public void stopClient()
 	{
-		try {
+		try
+		{
 			this.socket.close();
 		}
 		catch (IOException ioe) {};
 	}
 
-	public void run() {
+	public void run() 
+	{
 		BattleShipData data; //will hold message sent from client
 
 							 //socket_output.println("Welcome to Java based Server");
@@ -67,11 +75,22 @@ public class ClientThread extends Observable implements Runnable {
 
 							 //start listening message from client//
 
-		try {
-			while ((data = (BattleShipData)socket_input.readObject()) != null && running) 
+
+		try
+		{
+			boolean connectionSuccessful;
+			do
+			{
+				if ((data = (BattleShipData)socket_input.readObject()) != null && running)
+					connectionSuccessful = battleShipServer.newPlayerConnected(this, data);
+				else
+					break;
+			} while (!connectionSuccessful);
+
+			while ((data = (BattleShipData)socket_input.readObject()) != null && running)
 			{
 				//provide your server's logic here//
-				
+
 				//right now it is acting as an ECHO server//
 
 				socket_output.writeObject(data); //response to client//
@@ -79,15 +98,19 @@ public class ClientThread extends Observable implements Runnable {
 			}
 			running = false;
 		}
-		catch (IOException ioe) {
+		catch (IOException ioe)
+		{
 			running = false;
 		}
-		catch (ClassNotFoundException e) {
+		catch (ClassNotFoundException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		//it's time to close the socket
-		try {
+		try
+		{
 			this.socket.close();
 			System.out.println("Closing connection");
 		}

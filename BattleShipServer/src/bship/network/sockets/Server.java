@@ -115,8 +115,7 @@ public class Server implements Observer
 					System.out.println("Client connected");
 					try 
 					{
-						Server.this.clientThread = new ClientThread(Server.this.socket);
-						battleShipServer.newPlayerConnected(Server.this.clientThread);
+						Server.this.clientThread = new ClientThread(Server.this.socket, battleShipServer);
 						Thread t = new Thread(Server.this.clientThread);
 						Server.this.clientThread.addObserver(Server.this);
 						Server.this.clients.addElement(Server.this.clientThread);
