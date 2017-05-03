@@ -30,20 +30,22 @@ public class BattleShipServer
 	{
 		LoginData login = (LoginData) data;
 		String username = login.getUsername();
+		String password = login.getPassword();
 		
 		Player newPlayer;
 		if(battleshipPlayers.containsKey(username))
 		{
 			newPlayer = battleshipPlayers.get(username);
-			if(login.getPassword() == newPlayer.getPassword())
+			if(password != newPlayer.getPassword())
 				return false;
 		}
 		else
 		{
-			newPlayer = new Player();
+			newPlayer = new Player(username, password);
 			battleshipPlayers.put(username, newPlayer);
 		}
 		
+		newPlayer.setThread(thread);
 		thread.setPlayer(newPlayer);
 		onlinePlayers.add(newPlayer);
 		
