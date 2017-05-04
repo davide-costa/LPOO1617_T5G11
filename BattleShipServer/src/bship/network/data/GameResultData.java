@@ -7,22 +7,30 @@ import bship.logic.Coords;
 
 public class GameResultData extends GameData
 {
-	private ArrayList<Coords> coords;
+	private ArrayList<Coords> coordsArray;
 	private ArrayList<CellState> resultStates;
+	private boolean endOfGame;
 	
-	public GameResultData(ArrayList<Coords> coords, ArrayList<CellState> resultStates)
+	
+	public GameResultData(ArrayList<Coords> coordsArray, ArrayList<CellState> resultStates, boolean endOfGame)
 	{
-		this.coords = coords;
+		this.coordsArray = coordsArray;
 		this.resultStates = resultStates;
+		this.endOfGame = endOfGame;
 	}
 	
-	public ArrayList<Coords> getCoords()
+	public ArrayList<Coords> getCoordsArray()
 	{
-		return coords;
+		return coordsArray;
 	}
 	
-	public ArrayList<CellState> getCellStates()
+	public ArrayList<CellState> getResultStates()
 	{
 		return resultStates;
+	}
+	
+	public boolean isEndOfGame()
+	{
+		return endOfGame;
 	}
 }
