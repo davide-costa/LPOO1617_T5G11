@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.LoginData;
+import bship.network.data.LoginRequestData;
 import bship.network.sockets.ClientThread;
 import bship.network.sockets.Server;
 
@@ -39,7 +40,7 @@ public class BattleShipServer
 
 	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
-		LoginData login = (LoginData) data;
+		LoginRequestData login = (LoginRequestData) data;
 		String username = login.getUsername();
 		String password = login.getPassword();
 		
