@@ -1,5 +1,7 @@
 package bship.logic;
 
+import java.io.IOException;
+
 import bship.network.data.BattleShipData;
 import bship.network.sockets.ClientThread;
 
@@ -14,7 +16,7 @@ public class Player
 	
 	public Player(String username, String password)
 	{
-		this.state = new InLobby();
+		this.state = new InLobby(this);
 		this.username = username;
 		this.password = password;
 	}
@@ -29,8 +31,18 @@ public class Player
 		return password;
 	}
 	
-	public void HandleReceivedData(BattleShipData receivedData)
+	public void HandleReceivedData(BattleShipData receivedData) throws IOException
 	{
 		state.HandleReceivedData(receivedData);
+	}
+
+	public void sendData(BattleShipData data) throws IOException 
+	{
+		thread.sendData(data);	
+	}
+	
+	public void setState(PlayerState state) 
+	{
+		this.state = state;
 	}
 }

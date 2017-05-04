@@ -1,10 +1,18 @@
 package bship.logic;
 
+import java.io.IOException;
+
 import bship.network.data.BattleShipData;
 
 public abstract class PlayerState
 {
-	private Player player;
-	abstract void HandleReceivedData(BattleShipData receivedData);
+	protected Player player;
+	
+	public PlayerState(Player player)
+	{
+		this.player = player;
+	}
+	
+	abstract void HandleReceivedData(BattleShipData receivedData) throws IOException;
 
 }

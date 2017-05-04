@@ -120,4 +120,9 @@ public class ClientThread extends Observable implements Runnable
 		this.setChanged();              //inherit from Observable
 		this.notifyObservers(this);     //inherit from Observable
 	}
+
+	public void sendData(BattleShipData data) throws IOException 
+	{
+		socket_output.writeObject(data);
+	}
 }
