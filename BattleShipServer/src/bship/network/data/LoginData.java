@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public abstract class LoginData implements BattleShipData, Serializable
 {
-
 	/**
 	 * 
 	 */
@@ -17,5 +16,14 @@ public abstract class LoginData implements BattleShipData, Serializable
 		this.username = username;
 		this.password = password;
 	}
-
+	
+	public String getUsername() 
+	{
+		return username;
+	}
+	
+	public String getPassword()
+	{
+		return password;
+	}
 }
