@@ -1,17 +1,15 @@
 package bship.network.data;
 
-import bship.logic.Coords;
-
 public class GameShootData extends GameData
 {
-	private Coords coords;
+	private Object coords;
 	
-	public GameShootData(Coords coords)
+	public GameShootData(Object coords)
 	{
 		this.coords = coords;
 	}
 	
-	public Coords getCoords()
+	public Object getCoords()
 	{
 		return coords;
 	}
