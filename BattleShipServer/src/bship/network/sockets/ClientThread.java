@@ -7,7 +7,6 @@ package bship.network.sockets;
 import java.net.Socket;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.IOException;
 import java.util.Observable;
 
