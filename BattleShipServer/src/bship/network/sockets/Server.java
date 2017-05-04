@@ -70,8 +70,10 @@ public class Server implements Observer
 	}
 
 	//observer interface//
-	public void update(Observable observable, Object object) {
+	public void update(Observable observable, Object object)
+	{
 		//notified by observables, do cleanup here//
+		battleShipServer.playerDisconnected((ClientThread)object);
 		this.clients.removeElement(observable);
 	}
 

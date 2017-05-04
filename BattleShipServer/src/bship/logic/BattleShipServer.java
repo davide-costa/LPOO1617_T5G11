@@ -63,4 +63,11 @@ public class BattleShipServer
 		
 		return true;
 	}
+	
+	public void playerDisconnected(ClientThread thread)
+	{
+		//Maybe create a new state that is offline
+		onlinePlayers.remove(thread.getPlayer());
+	}
+	
 }
