@@ -67,7 +67,7 @@ public class BattleShipServer
 	public void playerDisconnected(ClientThread thread)
 	{
 		Player player = thread.getPlayer();
-		player.setState(new Offline(player));
+		player.setState(new Offline(player)); //TODO this player somehow is null when it disconnects and an exception is thrown
 		onlinePlayers.remove(player);
 	}
 	
