@@ -24,7 +24,7 @@ public class TestServerLogic
 	}
 	
 	@Test
-	public void TestAccountCreation() throws UnknownHostException, IOException, InterruptedException
+	public void TestAccountCreation() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
 		BattleShipServer server = new BattleShipServer();
 		assertEquals(server.getOnlinePlayers().size(), 0);
@@ -48,10 +48,12 @@ public class TestServerLogic
 		socket_output.writeObject(data);
 		
 		Thread.sleep(2); //wait for the other thread to read information from the socket
-		//TODO
-		//read response from server and ensure it is correct
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(1, server.getOnlinePlayers().size());
+
+		LoginResponseData response = (LoginResponseData)socket_input.readObject();
+		assertNotNull(response);
+		assertTrue(response.isSucceeded());
 		
 		//disconnect
 		socket.close();
