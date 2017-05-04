@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import bship.network.data.BattleShipData;
-import bship.network.data.LoginData;
 import bship.network.data.LoginRequestData;
 import bship.network.sockets.ClientThread;
 import bship.network.sockets.Server;
@@ -48,7 +47,7 @@ public class BattleShipServer
 		if(battleshipPlayers.containsKey(username))
 		{
 			newPlayer = battleshipPlayers.get(username);
-			if(password != newPlayer.getPassword())
+			if(password != newPlayer.getPassword() || !(newPlayer.getState() instanceof Offline))
 				return false;
 		}
 		else
@@ -66,8 +65,9 @@ public class BattleShipServer
 	
 	public void playerDisconnected(ClientThread thread)
 	{
-		//Maybe create a new state that is offline
-		onlinePlayers.remove(thread.getPlayer());
+		Player player = thread.getPlayer();
+		player.setState(new Offline(player));
+		onlinePlayers.remove(player);
 	}
 	
 }

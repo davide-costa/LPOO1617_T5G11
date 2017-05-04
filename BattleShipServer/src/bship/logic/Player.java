@@ -45,4 +45,9 @@ public class Player
 	{
 		this.state = state;
 	}
+	
+	public PlayerState getState() 
+	{
+		return state;
+	}
 }
