@@ -27,8 +27,6 @@ public class TestServerLogic
 	public void TestAccountCreation() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
 		BattleShipServer server = new BattleShipServer();
-		assertEquals(server.getOnlinePlayers().size(), 0);
-		assertEquals(server.getBattleshipPlayers().size(), 0);
 		
 		/**
 		* For reading input from server.
