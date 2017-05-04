@@ -95,7 +95,7 @@ public class TestServerLogic
 		data = new LoginRequestData("battleship", "wrongpwd");
 		socket_output.writeObject(data);
 		
-		Thread.sleep(2); //wait for the other thread to read information from the socket
+		Thread.sleep(200); //wait for the other thread to read information from the socket
 
 		LoginResponseData response = (LoginResponseData)socket_input.readObject();
 		//Ensure server responses with login failed
