@@ -82,14 +82,16 @@ public class ClientThread extends Observable implements Runnable
 
 		try
 		{
-			boolean connectionSuccessful;
+			LoginResponseData response;
 			do
 			{
 				if ((data = (BattleShipData)socket_input.readObject()) != null && running)
-					connectionSuccessful = battleShipServer.newPlayerConnected(this, data);
+					response = battleShipServer.newPlayerConnected(this, data);
 				else
 					break;
-			} while (!connectionSuccessful);
+				//Inform the client that the login was not successful
+				socket_output.writeObject(response);
+			} while (!response.isSucceeded());
 
 			while ((data = (BattleShipData)socket_input.readObject()) != null && running)
 			{

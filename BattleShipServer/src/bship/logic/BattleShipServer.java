@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.LoginRequestData;
+import bship.network.data.LoginResponseData;
 import bship.network.sockets.ClientThread;
 import bship.network.sockets.Server;
 
@@ -37,7 +38,7 @@ public class BattleShipServer
 		return battleshipPlayers;
 	}
 
-	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
+	public LoginResponseData newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
 		LoginRequestData login = (LoginRequestData) data;
 		String username = login.getUsername();
@@ -48,7 +49,7 @@ public class BattleShipServer
 		{
 			newPlayer = battleshipPlayers.get(username);
 			if(password != newPlayer.getPassword() || !(newPlayer.getState() instanceof Offline))
-				return false;
+				return new LoginResponseData(false);
 		}
 		else
 		{
@@ -60,7 +61,7 @@ public class BattleShipServer
 		thread.setPlayer(newPlayer);
 		onlinePlayers.add(newPlayer);
 		
-		return true;
+		return new LoginResponseData(true);
 	}
 	
 	public void playerDisconnected(ClientThread thread)
