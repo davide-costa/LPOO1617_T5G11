@@ -1,6 +1,14 @@
 package bship.logic;
 
-public class InLobby implements PlayerState
+import bship.network.data.BattleShipData;
+
+public class InLobby extends PlayerState
 {
+
+	@Override
+	public void HandleReceivedData(BattleShipData receivedData) 
+	{
+	
+	}
 
 }

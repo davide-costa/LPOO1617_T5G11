@@ -1,6 +1,14 @@
 package bship.logic;
 
-public class InShipPlacement implements PlayerState
+import bship.network.data.BattleShipData;
+
+public class InShipPlacement extends PlayerState
 {
 	boolean readyForGame = false;
+
+	@Override
+	public void HandleReceivedData(BattleShipData receivedData) 
+	{
+
+	}
 }

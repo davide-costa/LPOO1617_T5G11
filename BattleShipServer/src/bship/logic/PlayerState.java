@@ -1,6 +1,10 @@
 package bship.logic;
 
-public interface PlayerState
+import bship.network.data.BattleShipData;
+
+public abstract class PlayerState
 {
+	private Player player;
+	abstract void HandleReceivedData(BattleShipData receivedData);
 
 }

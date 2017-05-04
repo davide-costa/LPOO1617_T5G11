@@ -90,7 +90,7 @@ public class ClientThread extends Observable implements Runnable
 			while ((data = (BattleShipData)socket_input.readObject()) != null && running)
 			{
 				//provide your server's logic here//
-
+				player.HandleReceivedData(data);
 				//right now it is acting as an ECHO server//
 
 				socket_output.writeObject(data); //response to client//
