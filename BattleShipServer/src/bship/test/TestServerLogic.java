@@ -55,7 +55,7 @@ public class TestServerLogic
 		
 		//disconnect
 		socket.close();
-		Thread.sleep(2);
+		Thread.sleep(200);
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(0, server.getOnlinePlayers().size());
 		
