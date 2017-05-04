@@ -23,9 +23,20 @@ public class BattleShipServer
 	{
 		server = new Server(this);
 		server.startServer();
+		battleshipPlayers = new HashMap<String, Player>();
 		onlinePlayers = new ArrayList<Player>();
 	}
 	
+	public ArrayList<Player> getOnlinePlayers()
+	{
+		return onlinePlayers;
+	}
+
+	public HashMap<String, Player> getBattleshipPlayers()
+	{
+		return battleshipPlayers;
+	}
+
 	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
 		LoginData login = (LoginData) data;
