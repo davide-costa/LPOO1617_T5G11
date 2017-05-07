@@ -2,6 +2,7 @@ package bship.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.LoginRequestData;
@@ -48,7 +49,7 @@ public class BattleShipServer
 		if(battleshipPlayers.containsKey(username))
 		{
 			newPlayer = battleshipPlayers.get(username);
-			if(password != newPlayer.getPassword() || !(newPlayer.getState() instanceof Offline))
+			if(!password.equals(newPlayer.getPassword()) || !(newPlayer.getState() instanceof Offline))
 				return new LoginResponseData(false);
 		}
 		else
@@ -73,6 +74,11 @@ public class BattleShipServer
 			return;
 		player.setState(new Offline(player));
 		onlinePlayers.remove(player);
+	}
+	
+	public void stopServer()
+	{
+		server.stopServer();
 	}
 	
 }

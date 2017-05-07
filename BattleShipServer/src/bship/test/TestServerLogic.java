@@ -16,11 +16,14 @@ import bship.network.data.*;
 public class TestServerLogic
 {
 	@Test
-	public void TestConstructor()
+	public void TestConstructor() throws InterruptedException
 	{
 		BattleShipServer server = new BattleShipServer();
 		assertEquals(server.getOnlinePlayers().size(), 0);
 		assertEquals(server.getBattleshipPlayers().size(), 0);
+		
+		Thread.sleep(200);
+		server.stopServer();
 	}
 	
 	@Test
@@ -59,7 +62,8 @@ public class TestServerLogic
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(0, server.getOnlinePlayers().size());
 		
-		
+
+		server.stopServer();
 	}
 	
 	@Test
@@ -88,6 +92,8 @@ public class TestServerLogic
 		//Logout
 		socket.close();
 		
+		Thread.sleep(200); //wait for server to close the socket on the other side
+		
 		//Attempt to log in with wrong password
 		socket = new Socket("127.0.0.1", 5555);
 		socket_output = new ObjectOutputStream(socket.getOutputStream());
@@ -109,7 +115,8 @@ public class TestServerLogic
 		socket.close();
 		Thread.sleep(200);
 		
-		
+
+		server.stopServer();
 	}
 	
 }
