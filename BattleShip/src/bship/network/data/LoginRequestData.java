@@ -1,8 +1,6 @@
 package bship.network.data;
 
-import java.io.Serializable;
-
-public class LoginRequestData extends LoginData implements Serializable
+public class LoginRequestData extends LoginData
 {
 	/**
 	 * 

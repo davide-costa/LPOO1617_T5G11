@@ -1,6 +1,8 @@
 package bship.network.data;
 
-public abstract class LoginData implements BattleShipData
+import java.io.Serializable;
+
+public abstract class LoginData implements BattleShipData, Serializable
 {
 
 }
