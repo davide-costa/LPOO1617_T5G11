@@ -17,8 +17,8 @@ public class Player
 	public Player(String username, String password)
 	{
 		this.state = new InLobby(this);
-		this.username = username;
-		this.password = password;
+		this.username = new String(username);
+		this.password = new String(password);
 	}
 	
 	public void setThread(ClientThread thread) 
