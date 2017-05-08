@@ -1,6 +1,7 @@
 package bship.logic;
 
 import bship.network.data.BattleShipData;
+import bship.network.data.LobbyInviteData;
 
 public class InLobby extends PlayerState
 {
@@ -12,7 +13,8 @@ public class InLobby extends PlayerState
 	@Override
 	public void HandleReceivedData(BattleShipData data) 
 	{
-		
+		if (!(data instanceof LobbyInviteData))
+			return;
 	}
 
 }
