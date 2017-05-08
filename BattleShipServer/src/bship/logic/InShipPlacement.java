@@ -12,7 +12,7 @@ public class InShipPlacement extends PlayerState
 	boolean readyForGame = false;
 
 	@Override
-	public void HandleReceivedData(BattleShipData receivedData) 
+	public void HandleReceivedData(BattleShipData data) 
 	{
 
 	}

@@ -13,6 +13,6 @@ public abstract class PlayerState
 		this.player = player;
 	}
 	
-	abstract void HandleReceivedData(BattleShipData receivedData) throws IOException;
+	abstract void HandleReceivedData(BattleShipData data) throws IOException;
 
 }

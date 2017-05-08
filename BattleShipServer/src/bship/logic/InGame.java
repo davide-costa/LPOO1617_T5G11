@@ -14,14 +14,14 @@ public class InGame extends PlayerState
 	}
 
 	@Override
-	public void HandleReceivedData(BattleShipData receivedData) throws IOException 
+	public void HandleReceivedData(BattleShipData data) throws IOException 
 	{
-		if(!(receivedData instanceof GameData))
+		if(!(data instanceof GameData))
 			return;
 		
-		player.sendData(receivedData);
+		player.sendData(data);
 		
-		if(receivedData instanceof EndOfGameData)
+		if(data instanceof EndOfGameData)
 			player.setState(new InLobby(player));	
 	}
 

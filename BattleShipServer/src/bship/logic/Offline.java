@@ -12,7 +12,7 @@ public class Offline extends PlayerState {
 	}
 
 	@Override
-	void HandleReceivedData(BattleShipData receivedData) throws IOException 
+	void HandleReceivedData(BattleShipData data) throws IOException 
 	{
 
 	}

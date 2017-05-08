@@ -10,9 +10,9 @@ public class InLobby extends PlayerState
 	}
 
 	@Override
-	public void HandleReceivedData(BattleShipData receivedData) 
+	public void HandleReceivedData(BattleShipData data) 
 	{
-	
+		
 	}
 
 }
