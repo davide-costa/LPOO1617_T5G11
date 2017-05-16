@@ -39,7 +39,7 @@ public class Game
 		return aliveShips == 0;
 	}
 	
-	private void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> states)
+	public void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> states)
 	{
 		states.clear();
 		for (Coords coord : coords)
@@ -48,7 +48,7 @@ public class Game
 		}
 	}
 	
-	private ArrayList<Coords> getSurroundingCoordsOfShip(Ship ship) 
+	public ArrayList<Coords> getSurroundingCoordsOfShip(Ship ship) 
 	{
 		ArrayList<Coords> shipCoords = ship.getCoords();
 		ArrayList<Coords> surroundingCoords = Coords.getSurroundingCoords(shipCoords);
@@ -119,7 +119,7 @@ public class Game
 	}
 	
 	
-	private void setSurroundingCoordsAsDiscovered(ArrayList<Coords> coordsArray, int offset)
+	public void setSurroundingCoordsAsDiscovered(ArrayList<Coords> coordsArray, int offset)
 	{
 		for (int i = offset; i < coordsArray.size(); i++)
 		{
