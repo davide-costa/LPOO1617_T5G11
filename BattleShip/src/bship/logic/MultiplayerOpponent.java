@@ -7,6 +7,7 @@ import java.util.Observer;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.GameResultData;
+import bship.network.data.GameResultData.Result;
 import bship.network.data.GameShootData;
 import bship.network.sockets.Client;
 
@@ -35,15 +36,14 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		BattleShipData shootData = (BattleShipData)object;
 		if (shootData instanceof GameShootData)
 		{
-			Coords shootCoords = ((GameShootData) shootData).getCoords();
+			Coords shootCoords = (Coords) ((GameShootData) shootData).getCoords();
 			game.shootAlly(shootCoords);
 			
-			ArrayList<Coords> coordsArray = new ArrayList<Coords>();
-			ArrayList<CellState> resultStates = new ArrayList<CellState>();
 			game.getPlayEffects(shootCoords, coordsArray, resultStates);
 			boolean endOfGame = game.isEndOfGame();
 			
-			BattleShipData resultData = new GameResultData(coordsArray, resultStates, endOfGame);
+			BattleShipData resultData = new GameResultData(endOfGame);
+			Result r = Result.SINK_BATTLESHIP;
 			try
 			{
 				this.clientSocket.sendBattleShipData(resultData);

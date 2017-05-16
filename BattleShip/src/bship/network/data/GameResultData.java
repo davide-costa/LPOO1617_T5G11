@@ -4,26 +4,13 @@ import java.util.ArrayList;
 
 public class GameResultData extends GameData
 {
-	private ArrayList<Object> coordsArray;
-	private ArrayList<Object> resultStates;
 	private boolean endOfGame;
+	public enum Result { WATER, HIT, SINK_CARRIER, SINK_BATTLESHIP, SINK_DESTROYER, SINK_SUBMARINE, SINK_CRUISER }
 	
 	
-	public GameResultData(ArrayList<Object> coordsArray, ArrayList<Object> resultStates, boolean endOfGame)
+	public GameResultData(boolean endOfGame)
 	{
-		this.coordsArray = coordsArray;
-		this.resultStates = resultStates;
 		this.endOfGame = endOfGame;
-	}
-	
-	public ArrayList<Object> getCoordsArray()
-	{
-		return coordsArray;
-	}
-	
-	public ArrayList<Object> getResultStates()
-	{
-		return resultStates;
 	}
 	
 	public boolean isEndOfGame()

@@ -3,6 +3,8 @@ package bship.logic;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import bship.network.data.GameResultData.Result;
+
 public class Game
 {
 	private static Game gameInstance = null;
@@ -106,7 +108,7 @@ public class Game
 			resultStates.add(resultState);
 			return;
 		}
-		
+		Result r = Result.HIT;
 		Ship ship = state.getShip();
 		if(ship.isDestroyed())
 		{
