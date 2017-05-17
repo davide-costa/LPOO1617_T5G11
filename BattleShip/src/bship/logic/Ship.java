@@ -10,6 +10,13 @@ public abstract class Ship
 	protected String direction;
 	protected String name;
 	
+	public Ship(int size, String name)
+	{
+		this.size = size;
+		health = size;
+		this.name = name;
+	}
+	
 	public Ship(int size, ArrayList<Coords> coords, String direction, String name)
 	{
 		this.size = size;
