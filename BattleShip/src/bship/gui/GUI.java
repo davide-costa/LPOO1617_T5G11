@@ -13,9 +13,7 @@ import java.awt.event.ActionEvent;
 
 public class GUI {
 
-	private JFrame frame;
-	private JTextField txtNewWindowFor;
-	private JPanel panel_1;
+	private static JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -26,6 +24,8 @@ public class GUI {
 				try {
 					GUI window = new GUI();
 					window.frame.setVisible(true);
+					Menu menu = new Menu(frame);
+					System.out.println("passei_aqui");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,38 +55,6 @@ public class GUI {
 //		frame.setVisible(true);
 //		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frame.getContentPane().setLayout(null);
-		
-
-		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "name_160817388610410");
-		panel.setLayout(null);
-		
-		panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, "name_160821879791158");
-		panel_1.setLayout(null);
-		
-		JButton btnChangeWindow = new JButton("Change Window");
-		btnChangeWindow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				System.out.println("stuff");
-				FacebookLogin f = new FacebookLogin();
-				
-			}
-		});
-		btnChangeWindow.setBounds(164, 113, 130, 23);
-		panel.add(btnChangeWindow);
-		
-		
-
-		
-		txtNewWindowFor = new JTextField();
-		txtNewWindowFor.setText("NEW WINDOW FOR THE WIN");
-		txtNewWindowFor.setBounds(81, 80, 261, 53);
-		panel_1.add(txtNewWindowFor);
-		txtNewWindowFor.setColumns(10);
-
+	
 	}
-
 }
