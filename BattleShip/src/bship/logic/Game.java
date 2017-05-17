@@ -97,17 +97,14 @@ public class Game
 		ship.shoot();
 	}
 	
-	public void getPlayEffects(Coords shootCoords, ArrayList<Coords> coordsArray, ArrayList<CellState> resultStates)
+	public Result getPlayEffects(Coords shootCoords)
 	{
+		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		CellState state = getCellState(shootCoords);
 		coordsArray.add(shootCoords);
 		if (!state.hasShip())
-		{
-			CellState resultState = new OpponentCellState(null, false);
-			resultState.setDiscovered(true);
-			resultStates.add(resultState);
-			return;
-		}
+			return Result.WATER;
+	
 		Result r = Result.HIT;
 		Ship ship = state.getShip();
 		if(ship.isDestroyed())
@@ -120,9 +117,7 @@ public class Game
 		}
 		else
 		{
-			CellState resultState = new OpponentCellState(null, true);
-			resultState.setDiscovered(true);
-			resultStates.add(resultState);
+			return Result.HIT;
 		}
 	}
 	

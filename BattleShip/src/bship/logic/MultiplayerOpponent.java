@@ -39,7 +39,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			Coords shootCoords = (Coords) ((GameShootData) shootData).getCoords();
 			game.shootAlly(shootCoords);
 			
-			game.getPlayEffects(shootCoords, coordsArray, resultStates);
+			game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
 			
 			BattleShipData resultData = new GameResultData(endOfGame);
