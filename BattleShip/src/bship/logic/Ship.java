@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class Ship
 {
-
 	protected int size;
 	protected int health;
 	protected ArrayList<Coords> coords;
