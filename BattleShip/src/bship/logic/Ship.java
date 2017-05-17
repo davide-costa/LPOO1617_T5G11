@@ -60,4 +60,9 @@ public abstract class Ship
 	{
 		health = 0;
 	}
+	
+	public void addCoord(Coords coord)
+	{
+		coords.add(coord);
+	}
 }
