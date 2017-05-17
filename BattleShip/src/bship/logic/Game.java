@@ -21,7 +21,6 @@ public class Game
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
 		FillShipNameToResult();
-		FillResultToShip();
 	}
 	
 
@@ -32,16 +31,6 @@ public class Game
 		shipNameToResult.put("Cruiser", Result.SINK_CRUISER);
 		shipNameToResult.put("Submarine", Result.SINK_SUBMARINE);
 		shipNameToResult.put("Destroyer", Result.SINK_DESTROYER);
-	}
-
-	
-	private void FillResultToShip() 
-	{
-		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
-		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
-		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
-		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
-		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
 	}
 	
 	
@@ -186,12 +175,50 @@ public class Game
 		else if(result == Result.HIT)
 			cell = new OpponentCellState(null, true, true);
 		else
-		{
-			
-			cell = new OpponentCellState(null, true, true);
-		}
+			cell = handleOpponentSankShip(lastShootCoords, result);
 		
 		setOpponentCellState(lastShootCoords, cell);
+	}
+
+
+	private CellState handleOpponentSankShip(Coords lastShootCoords, Result result) 
+	{
+		Ship destroyedShip;
+		switch(result)
+		{
+		case SINK_CARRIER:
+			destroyedShip = new Carrier();
+			break;
+		case SINK_BATTLESHIP:
+			destroyedShip = new BattleShip();
+			break;
+		case SINK_CRUISER:
+			destroyedShip = new Cruiser();
+			break;
+		case SINK_DESTROYER:
+			destroyedShip = new Destroyer();
+			break;
+		case SINK_SUBMARINE:
+			destroyedShip = new Submarine();
+			break;
+		default:
+			destroyedShip = null;
+			break;
+		}
+		
+		CellState cell = new OpponentCellState(destroyedShip, true, true);
+		destroyedShip.Destroy();
+		
+		destroyedShip.addCoord(lastShootCoords);
+		discoverCoordsOfSankShip(destroyedShip);
+		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
+		coordsArray = destroyedShip.getCoords();
+		coordsArray.addAll(getSurroundingCoordsOfShip(destroyedShip));
+		ArrayList<CellState> statesArray = new ArrayList<CellState>();
+		getCellStatesOfCoords(true, coordsArray, statesArray);
+		setCellStatesAsDiscovered(statesArray, destroyedShip.getSize() - 1);
+		
+		return cell;
 	}
 	
 }
