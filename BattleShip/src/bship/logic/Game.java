@@ -2,6 +2,7 @@ package bship.logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import bship.network.data.GameResultData.Result;
 
@@ -12,13 +13,24 @@ public class Game
 	private GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
+	final HashMap<String, Result> shipNameToResult = new HashMap<String, Result>();;
 	
 	private Game()
 	{
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
+		FillShipNameToResult(); 
 	}
 	
+	private void FillShipNameToResult() 
+	{
+		shipNameToResult.put("Carrier", Result.SINK_CARRIER);
+		shipNameToResult.put("Battleship", Result.SINK_BATTLESHIP);
+		shipNameToResult.put("Cruiser", Result.SINK_CRUISER);
+		shipNameToResult.put("Submarine", Result.SINK_SUBMARINE);
+		shipNameToResult.put("Destroyer", Result.SINK_DESTROYER);
+	}
+
 	public static Game getInstance()
 	{
 		if(gameInstance == null)
@@ -95,30 +107,29 @@ public class Game
 		
 		Ship ship = state.getShip();
 		ship.shoot();
+		
+		if(!ship.isDestroyed())
+			return;
+		
+		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
+		coordsArray = ship.getCoords();
+		coordsArray.addAll(getSurroundingCoordsOfShip(ship));
+		setSurroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
+		aliveShips--;
 	}
+	
 	
 	public Result getPlayEffects(Coords shootCoords)
 	{
-		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
-		CellState state = getCellState(shootCoords);
-		coordsArray.add(shootCoords);
-		if (!state.hasShip())
+		CellState cell = getCellState(shootCoords);
+		if (!cell.hasShip())
 			return Result.WATER;
 	
-		Result r = Result.HIT;
-		Ship ship = state.getShip();
+		Ship ship = cell.getShip();
 		if(ship.isDestroyed())
-		{
-			coordsArray = ship.getCoords();
-			getCellStatesOfCoords(coordsArray, resultStates);
-			coordsArray.addAll(getSurroundingCoordsOfShip(ship));
-			setSurroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
-			aliveShips--;
-		}
+			return shipNameToResult.get(ship.getName());
 		else
-		{
 			return Result.HIT;
-		}
 	}
 	
 	
