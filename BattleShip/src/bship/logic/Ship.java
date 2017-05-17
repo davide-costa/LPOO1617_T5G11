@@ -56,4 +56,9 @@ public abstract class Ship
 	{
 		return health == size;
 	}
+	
+	public void Destroy()
+	{
+		health = 0;
+	}
 }
