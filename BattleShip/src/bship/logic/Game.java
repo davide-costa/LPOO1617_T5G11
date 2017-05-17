@@ -194,4 +194,39 @@ public class Game
 		setOpponentCellState(lastShootCoords, cell);
 	}
 	
+	private void discoverCoordsOfSankShip(Ship ship)
+	{
+		Coords coords = ship.getCoords().get(0);
+		
+		//Go try catch to get the direction of the ship
+		//Try left coord
+		TryOpponentShipHeadingDirection(ship, coords, "horizontal", -1, 0);
+		//Try right coord
+		TryOpponentShipHeadingDirection(ship, coords, "horizontal", 1, 0);
+		
+		//If the ship has been marked as horizontal, it is not needed to search on the y axis
+		if (ship.getDirection() == "horizontal")
+			return;
+		
+		//Try bottom coord
+		TryOpponentShipHeadingDirection(ship, coords, "vertical", 0, -1);
+		//Try top coord
+		TryOpponentShipHeadingDirection(ship, coords, "vertical", 0, 1);
+	}
+	
+	private void TryOpponentShipHeadingDirection(Ship ship, Coords initCoords, String direction, int xInc, int yInc)
+	{
+		Coords coords = new Coords(initCoords);
+		
+		coords.incrementX(xInc);
+		coords.incrementY(yInc);
+		while (getOpponentCellState(coords).hasShip())
+		{
+			ship.setDirection(direction);
+			ship.addCoord(coords);
+			coords.incrementX(xInc);
+			coords.incrementY(yInc);
+		}
+	}
+	
 }
