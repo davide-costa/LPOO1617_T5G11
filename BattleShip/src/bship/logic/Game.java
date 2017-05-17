@@ -13,15 +13,18 @@ public class Game
 	private GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
-	final HashMap<String, Result> shipNameToResult = new HashMap<String, Result>();;
+	final HashMap<String, Result> shipNameToResult = new HashMap<String, Result>();
+	final HashMap<Result, Ship> ResultToShip = new HashMap<Result, Ship>();	
 	
 	private Game()
 	{
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
-		FillShipNameToResult(); 
+		FillShipNameToResult();
+		FillResultToShip();
 	}
 	
+
 	private void FillShipNameToResult() 
 	{
 		shipNameToResult.put("Carrier", Result.SINK_CARRIER);
@@ -31,6 +34,17 @@ public class Game
 		shipNameToResult.put("Destroyer", Result.SINK_DESTROYER);
 	}
 
+	
+	private void FillResultToShip() 
+	{
+		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
+		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
+		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
+		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
+		ResultToShip.put(Result.SINK_CARRIER, new Carrier());
+	}
+	
+	
 	public static Game getInstance()
 	{
 		if(gameInstance == null)
@@ -39,14 +53,24 @@ public class Game
 		return gameInstance;
 	}
 	
-	public CellState getCellState(Coords coords)
+	public CellState getAllyCellState(Coords coords)
 	{
 		return map.getCellState(coords);
 	}
 	
-	public void setCellState(Coords coords, CellState state)
+	public void setAllyCellState(Coords coords, CellState state)
 	{
 		map.setCellState(coords, state);
+	}
+	
+	public CellState getOpponentCellState(Coords coords)
+	{
+		return opponentMap.getCellState(coords);
+	}
+	
+	public void setOpponentCellState(Coords coords, CellState state)
+	{
+		opponentMap.setCellState(coords, state);
 	}
 	
 	public boolean isEndOfGame()
@@ -54,13 +78,25 @@ public class Game
 		return aliveShips == 0;
 	}
 	
-	public void getCellStatesOfCoords(ArrayList<Coords> coords, ArrayList<CellState> states)
+	public void getCellStatesOfCoords(boolean isAlly, ArrayList<Coords> coords, ArrayList<CellState> states)
 	{
 		states.clear();
-		for (Coords coord : coords)
+		
+		if(isAlly)
 		{
-			states.add(getCellState(coord));
+			for (Coords coord : coords)
+			{
+				states.add(getAllyCellState(coord));
+			}
 		}
+		else
+		{
+			for (Coords coord : coords)
+			{
+				states.add(getOpponentCellState(coord));
+			}
+		}
+	
 	}
 	
 	public ArrayList<Coords> getSurroundingCoordsOfShip(Ship ship) 
@@ -88,7 +124,7 @@ public class Game
 	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
 	public void shootOpponent(Coords coords) throws IOException
 	{
-		if (getCellState(coords).isDiscovered())
+		if (getOpponentCellState(coords).isDiscovered())
 			return;
 		
 		opponent.shoot(coords);
@@ -97,7 +133,7 @@ public class Game
 	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
 	public void shootAlly(Coords shootCoords)
 	{
-		CellState state = getCellState(shootCoords);
+		CellState state = getAllyCellState(shootCoords);
 		
 		if (state.isDiscovered())
 			return;
@@ -114,14 +150,16 @@ public class Game
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		coordsArray = ship.getCoords();
 		coordsArray.addAll(getSurroundingCoordsOfShip(ship));
-		setSurroundingCoordsAsDiscovered(coordsArray, ship.getSize() - 1);
+		ArrayList<CellState> statesArray = new ArrayList<CellState>();
+		getCellStatesOfCoords(true, coordsArray, statesArray);
+		setCellStatesAsDiscovered(statesArray, ship.getSize() - 1);
 		aliveShips--;
 	}
 	
 	
 	public Result getPlayEffects(Coords shootCoords)
 	{
-		CellState cell = getCellState(shootCoords);
+		CellState cell = getAllyCellState(shootCoords);
 		if (!cell.hasShip())
 			return Result.WATER;
 	
@@ -133,15 +171,27 @@ public class Game
 	}
 	
 	
-	public void setSurroundingCoordsAsDiscovered(ArrayList<Coords> coordsArray, int offset)
+	public void setCellStatesAsDiscovered(ArrayList<CellState> statesArray, int offset)
 	{
-		for (int i = offset; i < coordsArray.size(); i++)
+		for (int i = offset; i < statesArray.size(); i++)
+			statesArray.get(i).setDiscovered(true);
+	}
+	
+	public void handleResultData(Coords lastShootCoords, Result result)
+	{
+		CellState cell;
+		
+		if(result == Result.WATER)
+			cell = new OpponentCellState(null, false, true);
+		else if(result == Result.HIT)
+			cell = new OpponentCellState(null, true, true);
+		else
 		{
-			Coords coords = coordsArray.get(i);
-			CellState state = getCellState(coords);
-			state.setDiscovered(true);
+			
+			cell = new OpponentCellState(null, true, true);
 		}
-
+		
+		setOpponentCellState(lastShootCoords, cell);
 	}
 	
 }
