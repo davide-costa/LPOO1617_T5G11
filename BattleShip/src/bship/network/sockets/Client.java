@@ -103,7 +103,6 @@ public class Client extends Observable implements Runnable {
 		try {
 			while (connected && (data = (BattleShipData)socket_input.readObject()) != null)
 			{
-				System.out.println(((GameData)data).stuff);
 				//notify observers//
 				this.setChanged();
 				//notify+send out recieved msg to Observers
@@ -146,7 +145,6 @@ public class Client extends Observable implements Runnable {
 		{
 			msg = br.readLine();
 			BattleShipData data = new GameData();
-			((GameData)data).stuff = msg;
 			c.sendBattleShipData(data);
 		}
 		c.disconnect();
