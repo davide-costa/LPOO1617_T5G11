@@ -100,7 +100,6 @@ public class ClientThread extends Observable implements Runnable
 				//right now it is acting as an ECHO server//
 
 				socket_output.writeObject(data); //response to client//
-				System.out.println(((GameData)data).stuff);
 			}
 			running = false;
 		}
