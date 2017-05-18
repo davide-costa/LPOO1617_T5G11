@@ -54,27 +54,27 @@ public class Client extends Observable implements Runnable {
 	
 	private Observer currObserver;
 	
-	public static Client getInstance(Observer observer) throws IOException
+	public static Client getInstance() throws IOException
 	{
 		if (instance == null)
 		{
-			instance = new Client(observer);
+			instance = new Client();
 		}
 		
 		return instance;
 	}
 
-	private Client(Observer observer) throws IOException
+	private Client() throws IOException
 	{
 		connected = false;
 		connect("dservers.ddns.net", 5555);
-		currObserver = observer;
-		addObserver(observer);
+		currObserver = null;
 	}
 	
 	public void refreshObserver(Observer observer)
 	{
-		deleteObserver(currObserver);
+		if (currObserver != null)
+			deleteObserver(currObserver);
 		currObserver = observer;
 		addObserver(observer);
 	}
@@ -162,7 +162,7 @@ public class Client extends Observable implements Runnable {
 		String msg = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		Client c = new Client(null);
+		Client c = new Client();
 		while (!msg.equalsIgnoreCase("quit"))
 		{
 			msg = br.readLine();

@@ -8,8 +8,8 @@ public class BattleShipServerLogin implements Observer
 {
 	public void requestLogin(String login, String password) throws IOException
 	{
-		Client clientSocket = Client.getInstance(this);
-		client.
+		Client clientSocket = Client.getInstance();
+		clientSocket.refreshObserver(this);
 	}
 
 	@Override
