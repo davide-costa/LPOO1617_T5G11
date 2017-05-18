@@ -34,10 +34,10 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	@Override
 	public void update(Observable clientSocket, Object object)
 	{
-		BattleShipData shootData = (BattleShipData)object;
-		if (shootData instanceof GameShootData)
+		BattleShipData gameData = (BattleShipData)object;
+		if (gameData instanceof GameShootData)
 		{
-			Coords shootCoords = (Coords) ((GameShootData) shootData).getCoords();
+			Coords shootCoords = (Coords) ((GameShootData) gameData).getCoords();
 			game.shootAlly(shootCoords);
 			lastShootCoords = shootCoords;
 			
@@ -56,16 +56,16 @@ public class MultiplayerOpponent extends Opponent implements Observer
 				e.printStackTrace();
 			}
 		}
-		else if (shootData instanceof GameResultData)
+		else if (gameData instanceof GameResultData)
 		{
-			GameResultData resultData = (GameResultData) shootData;
+			GameResultData resultData = (GameResultData) gameData;
 			
 			game.handleResultData(lastShootCoords, resultData.getResult());
 			
 			if(!resultData.isEndOfGame())
 				return;
 			
-			BattleShipData endOfGameData = new EndOfGameData(); 
+			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMap()); 
 	
 			try
 			{
@@ -76,6 +76,12 @@ public class MultiplayerOpponent extends Opponent implements Observer
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else if (gameData instanceof EndOfGameData)
+		{
+			EndOfGameData resultData = (EndOfGameData) gameData;
+			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
+			game.setOpponentMap(winnerGameMap);
 		}
 	}
 

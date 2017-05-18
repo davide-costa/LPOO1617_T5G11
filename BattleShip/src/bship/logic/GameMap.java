@@ -1,7 +1,8 @@
 package bship.logic;
 
+import java.io.Serializable;
 
-public abstract class GameMap
+public abstract class GameMap implements Serializable
 {
 	protected int sizeX;
 	protected int sizeY;

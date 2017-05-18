@@ -42,6 +42,17 @@ public class Game
 		return gameInstance;
 	}
 	
+	public GameMap getAllyMap()
+	{
+		return map;
+	}
+
+	public void setOpponentMap(GameMap winnerGameMap)
+	{
+		this.opponentMap = winnerGameMap;
+	}
+	
+	
 	public CellState getAllyCellState(Coords coords)
 	{
 		return map.getCellState(coords);
@@ -255,5 +266,5 @@ public class Game
 			coords.incrementY(yInc);
 		}
 	}
-	
+
 }
