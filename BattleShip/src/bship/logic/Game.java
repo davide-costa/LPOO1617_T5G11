@@ -20,11 +20,11 @@ public class Game
 	{
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
-		FillShipNameToResult();
+		FillShipNameToResultMap();
 	}
 	
 
-	private void FillShipNameToResult() 
+	private void FillShipNameToResultMap() 
 	{
 		shipNameToResult.put("Carrier", Result.SINK_CARRIER);
 		shipNameToResult.put("Battleship", Result.SINK_BATTLESHIP);
