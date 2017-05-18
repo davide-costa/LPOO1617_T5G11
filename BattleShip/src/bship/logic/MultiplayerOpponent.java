@@ -34,7 +34,6 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	@Override
 	public void update(Observable clientSocket, Object object)
 	{
-		BattleShipData toSendData;
 		BattleShipData shootData = (BattleShipData)object;
 		if (shootData instanceof GameShootData)
 		{
@@ -45,7 +44,17 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			Result result = game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
 			
-			toSendData = new GameResultData(result, endOfGame);
+			BattleShipData resultData = new GameResultData(result, endOfGame);
+			
+			try
+			{
+				this.clientSocket.sendBattleShipData(resultData);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if (shootData instanceof GameResultData)
 		{
@@ -56,21 +65,17 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			if(!resultData.isEndOfGame())
 				return;
 			
-			toSendData = new EndOfGameData(); 
-				
-				
-		}
-		
-		
-		
-		try
-		{
-			this.clientSocket.sendBattleShipData(toSendData);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			BattleShipData endOfGameData = new EndOfGameData(); 
+	
+			try
+			{
+				this.clientSocket.sendBattleShipData(endOfGameData);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
