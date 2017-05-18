@@ -7,7 +7,7 @@ import java.util.Observer;
 import bship.network.data.BattleShipData;
 import bship.network.data.LoginRequestData;
 
-public class BattleShipServerLogin implements Observer
+public class BattleShipServerLoginIntermediate implements Observer
 {
 	
 	public void requestLogin(String login, String password) throws IOException
