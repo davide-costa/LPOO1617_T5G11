@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import bship.network.data.LoginResponseData;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -60,5 +62,10 @@ public class BattleShipServerLogin implements KeyListener
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("battleShipLoginPanel");
+	}
+
+	public void LoginResponse(LoginResponseData response) {
+		// TODO Auto-generated method stub
+		
 	}
 }
