@@ -49,14 +49,36 @@ public class Client extends Observable implements Runnable {
 							 * Host Name or IP address in String form
 							 */
 	private String hostName;
+	
+	private static Client instance;
+	
+	private Observer currObserver;
+	
+	public static Client getInstance(Observer observer) throws IOException
+	{
+		if (instance == null)
+		{
+			instance = new Client(observer);
+		}
+		
+		return instance;
+	}
 
-	public Client(Opponent observer) throws IOException
+	private Client(Observer observer) throws IOException
 	{
 		connected = false;
 		connect("dservers.ddns.net", 5555);
-		addObserver((Observer) observer);
+		currObserver = observer;
+		addObserver(observer);
 	}
-
+	
+	public void refreshObserver(Observer observer)
+	{
+		deleteObserver(currObserver);
+		currObserver = observer;
+		addObserver(observer);
+	}
+	
 	public void connect(String hostName, int port) throws IOException {
 		if (!connected)
 		{

@@ -21,7 +21,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	public MultiplayerOpponent(Game game) throws IOException
 	{
 		super(game);
-		clientSocket = new Client(this);
+		clientSocket = Client.getInstance(this);
 	}
 	
 	@Override
