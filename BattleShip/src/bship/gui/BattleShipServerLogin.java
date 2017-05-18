@@ -64,8 +64,13 @@ public class BattleShipServerLogin implements KeyListener
 		System.out.println("battleShipLoginPanel");
 	}
 
-	public void LoginResponse(LoginResponseData response) {
-		// TODO Auto-generated method stub
+	public void LoginResponse(LoginResponseData response) 
+	{
+		if(response.isSucceeded())
+			new Lobby(frame, battleShipLoginPanel);
+		else
+			//do stuff like abrir um dialogo a dizer que ta mal ou assim
+			return;
 		
 	}
 }
