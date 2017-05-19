@@ -7,6 +7,7 @@ import bship.network.sockets.ClientThread;
 
 public class Player
 {
+	private BattleShipServer battleShipServer;
 	private ClientThread thread;
 	private String username;
 	private String password;
@@ -14,9 +15,9 @@ public class Player
 	private PlayerState state;
 	
 	
-	public Player(String username, String password)
+	public Player(BattleShipServer battleShipServer, String username, String password)
 	{
-		this.state = new InLobby(this);
+		this.battleShipServer = battleShipServer;
 		this.username = new String(username);
 		this.password = new String(password);
 	}
@@ -24,6 +25,11 @@ public class Player
 	public void setThread(ClientThread thread) 
 	{
 		this.thread = thread;
+	}
+	
+	public String getUsername() 
+	{
+		return username;
 	}
 	
 	public String getPassword() 
@@ -49,5 +55,18 @@ public class Player
 	public PlayerState getState() 
 	{
 		return state;
+	}
+	
+	public BattleShipServer getBattleShipServer() 
+	{
+		return battleShipServer;
+	}
+
+	public boolean isBusy() 
+	{
+		if(state instanceof InGame || opponent != null)
+			return false;
+			
+		return true;	
 	}
 }

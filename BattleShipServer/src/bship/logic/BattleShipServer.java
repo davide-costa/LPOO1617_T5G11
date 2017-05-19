@@ -1,10 +1,12 @@
 package bship.logic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
 import bship.network.data.BattleShipData;
+import bship.network.data.LobbyInvitedData;
 import bship.network.data.LoginRequestData;
 import bship.network.data.LoginResponseData;
 import bship.network.sockets.ClientThread;
@@ -13,7 +15,8 @@ import bship.network.sockets.Server;
 public class BattleShipServer
 {
 	private Server server;
-	private ArrayList<Player> onlinePlayers;
+	private ArrayList<Player> inLobbyPlayers;
+	private ArrayList<Player> inGamePlayers;
 	private HashMap<String, Player> battleshipPlayers;
 	
 	public static void main(String argv[])
@@ -26,12 +29,18 @@ public class BattleShipServer
 		server = new Server(this);
 		server.startServer();
 		battleshipPlayers = new HashMap<String, Player>();
-		onlinePlayers = new ArrayList<Player>();
+		inLobbyPlayers = new ArrayList<Player>();
+		inGamePlayers = new ArrayList<Player>();
 	}
 	
-	public ArrayList<Player> getOnlinePlayers()
+	public ArrayList<Player> getInLobbyPlayers()
 	{
-		return onlinePlayers;
+		return inLobbyPlayers;
+	}
+	
+	public ArrayList<Player> getInGamePlayers()
+	{
+		return inGamePlayers;
 	}
 
 	public HashMap<String, Player> getBattleshipPlayers()
@@ -54,14 +63,16 @@ public class BattleShipServer
 		}
 		else
 		{
-			newPlayer = new Player(username, password);
+			newPlayer = new Player(this, username, password);
 			battleshipPlayers.put(username, newPlayer);
 		}
 		
 		newPlayer.setThread(thread);
 		thread.setPlayer(newPlayer);
-		onlinePlayers.add(newPlayer);
+		inLobbyPlayers.add(newPlayer);
 		
+		newPlayer.setState(new InLobby(newPlayer));
+		//TODO:reenviar a todos so online players in lobby a nova informaçao
 		return new LoginResponseData(true);
 	}
 	
@@ -73,12 +84,46 @@ public class BattleShipServer
 		if(player == null)
 			return;
 		player.setState(new Offline(player));
-		onlinePlayers.remove(player);
+		
+		//only is removed from one of the lists, but we dont know in which one the player is, so we need to check in both
+		inLobbyPlayers.remove(player);
+		inGamePlayers.remove(player);
+		
+		//TODO:reenviar a todos so online players in lobby a nova informaçao
 	}
 	
 	public void stopServer()
 	{
 		server.stopServer();
+	}
+
+	public boolean invitePlayer(String invitedPlayerName) 
+	{
+		Player invitedPlayer = battleshipPlayers.get(invitedPlayerName);
+		
+		if(invitedPlayer.isBusy())
+			return false;
+		
+		LobbyInvitedData inviteData = new LobbyInvitedData(invitedPlayer.getUsername());
+		try 
+		{
+			invitedPlayer.sendData(inviteData);
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+
+	public ArrayList<Player> getOnlinePlayers() 
+	{
+		ArrayList<Player> onlinePlayers = new ArrayList<Player>();
+		onlinePlayers.addAll(inLobbyPlayers);
+		onlinePlayers.addAll(inGamePlayers);
+		
+		return onlinePlayers;
 	}
 	
 }
