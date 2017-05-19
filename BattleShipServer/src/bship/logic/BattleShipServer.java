@@ -106,18 +106,19 @@ public class BattleShipServer
 		server.stopServer();
 	}
 
-	public boolean invitePlayer(String invitedPlayerName) 
+	public boolean invitePlayer(String inviterPlayerName, String invitedPlayerName) 
 	{
 		Player invitedPlayer = battleshipPlayers.get(invitedPlayerName);
 		
 		if(invitedPlayer.isBusy())
 			return false;
 		
-		LobbyInvitedData inviteData = new LobbyInvitedData(invitedPlayer.getUsername());
+		LobbyInvitedData inviteData = new LobbyInvitedData(inviterPlayerName);
 		try 
 		{
 			invitedPlayer.sendData(inviteData);
-		} catch (IOException e) 
+		}
+		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
