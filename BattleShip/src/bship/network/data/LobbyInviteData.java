@@ -8,6 +8,9 @@ public class LobbyInviteData extends LobbyData
 	{
 		this.invitedPlayerName = invitedPlayerName;
 	}
- //vai ao servidor e tem de ver se o jogador a que se tenta convidar nao
-	//esta busy ou se convidou ele outro jogador que nao o que esta a convida-lo
+
+	public String getInvitedPlayerName()
+	{
+		return invitedPlayerName;
+	}
 }
