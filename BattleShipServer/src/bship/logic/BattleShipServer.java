@@ -42,6 +42,15 @@ public class BattleShipServer
 	{
 		return inGamePlayers;
 	}
+	
+	public ArrayList<Player> getOnlinePlayers() 
+	{
+		ArrayList<Player> onlinePlayers = new ArrayList<Player>();
+		onlinePlayers.addAll(inLobbyPlayers);
+		onlinePlayers.addAll(inGamePlayers);
+		
+		return onlinePlayers;
+	}
 
 	public HashMap<String, Player> getBattleshipPlayers()
 	{
@@ -115,15 +124,6 @@ public class BattleShipServer
 		}
 		
 		return true;
-	}
-
-	public ArrayList<Player> getOnlinePlayers() 
-	{
-		ArrayList<Player> onlinePlayers = new ArrayList<Player>();
-		onlinePlayers.addAll(inLobbyPlayers);
-		onlinePlayers.addAll(inGamePlayers);
-		
-		return onlinePlayers;
 	}
 	
 }
