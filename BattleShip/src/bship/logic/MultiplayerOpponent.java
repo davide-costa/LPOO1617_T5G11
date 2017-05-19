@@ -10,6 +10,8 @@ import bship.network.data.EndOfGameData;
 import bship.network.data.GameResultData;
 import bship.network.data.GameResultData.Result;
 import bship.network.data.GameShootData;
+import bship.network.data.PlayerDisconnectedData;
+import bship.network.data.ShipPlacementData;
 import bship.network.sockets.Client;
 
 public class MultiplayerOpponent extends Opponent implements Observer
@@ -83,6 +85,16 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			EndOfGameData resultData = (EndOfGameData) gameData;
 			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
 			game.setOpponentMap(winnerGameMap);
+		}
+		else if (gameData instanceof ShipPlacementData)
+		{
+			//avisar que o opponet ta ready
+			
+		}
+		else if (gameData instanceof PlayerDisconnectedData)
+		{
+			
+			//avisar que o opponet desconectou-se
 		}
 	}
 

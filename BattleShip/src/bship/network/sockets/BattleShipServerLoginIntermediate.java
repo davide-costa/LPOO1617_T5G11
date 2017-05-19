@@ -20,6 +20,7 @@ public class BattleShipServerLoginIntermediate implements Observer
 		Client clientSocket = Client.getInstance();
 		clientSocket.refreshObserver(this);
 		BattleShipData loginRequest = new LoginRequestData(login, password);
+		System.out.println("2");
 		clientSocket.sendBattleShipData(loginRequest);
 	}
 
@@ -30,7 +31,7 @@ public class BattleShipServerLoginIntermediate implements Observer
 			return;
 		
 		LoginResponseData response = (LoginResponseData)object;
-		
+		System.out.println(response.isSucceeded());
 		gui.LoginResponse(response);
 	}
 }

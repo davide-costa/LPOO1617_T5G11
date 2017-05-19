@@ -67,7 +67,9 @@ public class Client extends Observable implements Runnable {
 	private Client() throws IOException
 	{
 		connected = false;
+		System.out.println("2te");
 		connect("dservers.ddns.net", 5555);
+		System.out.println("2");
 		currObserver = null;
 	}
 	
@@ -101,6 +103,7 @@ public class Client extends Observable implements Runnable {
 		if (connected)
 		{
 			socket_output.writeObject(data);
+			System.out.println("3");
 		}
 		else throw new IOException("Not connected to server");
 	}
@@ -109,6 +112,7 @@ public class Client extends Observable implements Runnable {
 		if (socket != null && connected)
 		{
 			try {
+				//send a PlayerDisconnectedData
 				socket.close();
 			}
 			catch (IOException ioe) {
