@@ -114,7 +114,7 @@ public class BattleShipServer
 			return false;
 		
 		LobbyInvitedData inviteData = new LobbyInvitedData(inviterPlayerName);
-		try 
+		try
 		{
 			invitedPlayer.sendData(inviteData);
 		}

@@ -12,6 +12,7 @@ public class Player
 	private String username;
 	private String password;
 	private Player opponent;
+
 	private PlayerState state;
 	
 	
@@ -35,6 +36,11 @@ public class Player
 	public String getPassword() 
 	{
 		return password;
+	}
+
+	public Player getOpponent()
+	{
+		return opponent;
 	}
 	
 	public void HandleReceivedData(BattleShipData receivedData) throws IOException

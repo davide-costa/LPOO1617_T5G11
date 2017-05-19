@@ -1,5 +1,6 @@
 package bship.logic;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import bship.network.data.BattleShipData;
@@ -30,8 +31,14 @@ public class InLobby extends PlayerState
 		else if(data instanceof LobbyInviteResponseData)
 		{
 			LobbyInviteResponseData responseData = (LobbyInviteResponseData)data;
-			if(responseData.wasAccepted())
-				return;//inform o jogador que o convite foi aceite
+			try
+			{
+				player.getOpponent().sendData(responseData);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 				
 		
