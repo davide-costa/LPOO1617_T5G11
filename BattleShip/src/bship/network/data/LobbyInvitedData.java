@@ -2,11 +2,16 @@ package bship.network.data;
 
 public class LobbyInvitedData extends LobbyData
 {
-	private String invaterName;
+	private String inviterName;
 	
-	public LobbyInvitedData(String invaterName) 
+	public LobbyInvitedData(String inviterName) 
 	{
-		this.invaterName = invaterName;
+		this.inviterName = inviterName;
+	}
+	
+	public String getInviterName()
+	{
+		return inviterName;
 	}
 
 }

@@ -42,4 +42,14 @@ public class Lobby implements KeyListener
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void handleInvite(String inviterName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handleInviteResponse(boolean wasAccepted) {
+		// TODO Auto-generated method stub
+		
+	}
 }
