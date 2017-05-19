@@ -2,7 +2,7 @@ package bship.network.data;
 
 import java.util.ArrayList;
 
-public class LobbyInfoData 
+public class LobbyInfoData extends LobbyData
 {
 	ArrayList<String> onlinePlayersNames;
 	
