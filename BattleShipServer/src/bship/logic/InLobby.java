@@ -39,6 +39,9 @@ public class InLobby extends PlayerState
 			{
 				e.printStackTrace();
 			}
+			
+			if(responseData.wasAccepted())
+				player.setState(new InShipPlacement(player));
 		}
 				
 		
