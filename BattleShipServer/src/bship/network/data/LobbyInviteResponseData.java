@@ -1,10 +1,10 @@
 package bship.network.data;
 
-public class LobbyInvitedResponseData extends LobbyData
+public class LobbyInviteResponseData extends LobbyData
 {
 	private boolean accepted;
 	
-	public LobbyInvitedResponseData(boolean accepted)
+	public LobbyInviteResponseData(boolean accepted)
 	{
 		this.accepted = accepted;
 	}

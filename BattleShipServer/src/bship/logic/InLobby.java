@@ -5,8 +5,8 @@ import java.util.HashMap;
 import bship.network.data.BattleShipData;
 import bship.network.data.LobbyData;
 import bship.network.data.LobbyInviteData;
+import bship.network.data.LobbyInviteResponseData;
 import bship.network.data.LobbyInvitedData;
-import bship.network.data.LobbyInvitedResponseData;
 
 public class InLobby extends PlayerState
 {
@@ -31,9 +31,9 @@ public class InLobby extends PlayerState
 		{
 			//inform user that a new convite arrived
 		}
-		else if(data instanceof LobbyInvitedResponseData)
+		else if(data instanceof LobbyInviteResponseData)
 		{
-			LobbyInvitedResponseData responseData = (LobbyInvitedResponseData)data;
+			LobbyInviteResponseData responseData = (LobbyInviteResponseData)data;
 			if(responseData.wasAccepted())
 				return;//inform o jogador que o convite foi aceite
 		}
