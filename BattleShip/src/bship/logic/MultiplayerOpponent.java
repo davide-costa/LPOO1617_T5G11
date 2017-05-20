@@ -11,7 +11,9 @@ import bship.network.data.GameResultData;
 import bship.network.data.GameResultData.Result;
 import bship.network.data.GameShootData;
 import bship.network.data.PlayerDisconnectedData;
+import bship.network.data.ReadyForGameData;
 import bship.network.data.ShipPlacementData;
+import bship.network.data.StartGameData;
 import bship.network.sockets.Client;
 
 public class MultiplayerOpponent extends Opponent implements Observer
@@ -86,9 +88,14 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
 			game.setOpponentMap(winnerGameMap);
 		}
-		else if (gameData instanceof ShipPlacementData)
+		else if (gameData instanceof ReadyForGameData)
 		{
 			//avisar que o opponet ta ready
+			
+		}
+		else if (gameData instanceof StartGameData)
+		{
+			//iniciar o jogo...so o servidor é que manda este tipo de Data, os clients apenas a recebem, nunca enviam
 			
 		}
 		else if (gameData instanceof PlayerDisconnectedData)
