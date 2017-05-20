@@ -12,7 +12,6 @@ public class Player
 	private String username;
 	private String password;
 	private Player opponent;
-
 	private PlayerState state;
 	
 	
@@ -74,5 +73,11 @@ public class Player
 			return false;
 			
 		return true;	
+	}
+
+	public boolean isReady() 
+	{
+		
+		return false;
 	}
 }

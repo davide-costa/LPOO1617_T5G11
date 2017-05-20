@@ -127,4 +127,12 @@ public class BattleShipServer
 		return true;
 	}
 	
+	public boolean canGameBeInitiated(Player player1, Player player2)
+	{
+		PlayerState player1State = player1.getState();
+		PlayerState player2State = player2.getState();
+		
+		return (player1State instanceof ReadyForGame) && (player2State instanceof ReadyForGame);
+	}
+	
 }

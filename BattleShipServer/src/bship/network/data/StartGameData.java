@@ -1,6 +1,6 @@
 package bship.network.data;
 
-public class StartGameData extends LobbyData
+public class StartGameData extends ShipPlacementData
 {
 
 }

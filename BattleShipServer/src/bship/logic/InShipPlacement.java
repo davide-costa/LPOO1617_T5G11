@@ -1,8 +1,7 @@
 package bship.logic;
 
-import java.io.IOException;
-
 import bship.network.data.BattleShipData;
+import bship.network.data.ReadyForGameData;
 import bship.network.data.ShipPlacementData;
 
 public class InShipPlacement extends PlayerState
@@ -26,15 +25,13 @@ public class InShipPlacement extends PlayerState
 		if (!(data instanceof ShipPlacementData))
 			return;
 		
-		//informs the opponent that the player this is ready
-		try
+		if(data instanceof ReadyForGameData)
 		{
-			player.getOpponent().sendData(data);
+			player.setState(new ReadyForGame(player));
+			player.getBattleShipServer().canGameBeInitiated(player, player.getOpponent());
+			//sets player state as readyforgame
 		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+
 		
 	}
 }
