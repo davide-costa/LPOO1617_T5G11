@@ -25,7 +25,6 @@ public class GUI {
 					GUI window = new GUI();
 					window.frame.setVisible(true);
 					Menu menu = new Menu(frame);
-					System.out.println("passei_aqui");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

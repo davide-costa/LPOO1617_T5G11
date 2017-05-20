@@ -88,7 +88,6 @@ public class BattleShipServerLogin implements KeyListener
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{
-					System.out.println("1");
 					login.requestLogin(BattleShipServerLogin.this, username, password);
 				} 
 				catch (IOException e1) 
