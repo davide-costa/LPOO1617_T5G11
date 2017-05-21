@@ -23,9 +23,9 @@ public class TestServerLogic
 	BattleShipServer server;
 	Socket socket1;
 	Socket socket2;
-	ObjectInputStream socket1_input;
+	ObjectInputStream socket1Input;
 	ObjectOutputStream socket1_output;
-	ObjectInputStream socket2_input;
+	ObjectInputStream socket2Input;
 	ObjectOutputStream socket2_output;
 	String player1Name;
 	String player2Name;
@@ -54,12 +54,12 @@ public class TestServerLogic
 	
 	private void LoginPlayer1() throws ClassNotFoundException, IOException, InterruptedException
 	{
-		LoginPlayer(player1, "player1", "lpoo", socket1, socket1_input, socket1_output);
+		LoginPlayer(player1, "player1", "lpoo", socket1, socket1Input, socket1_output);
 	}
 	
 	private void LoginPlayer2() throws ClassNotFoundException, IOException, InterruptedException
 	{
-		LoginPlayer(player2, "player2", "lpoo", socket2, socket2_input, socket2_output);
+		LoginPlayer(player2, "player2", "lpoo", socket2, socket2Input, socket2_output);
 	}
 		
 	@Test
@@ -81,7 +81,7 @@ public class TestServerLogic
 		/**
 		* For reading input from server.
 		*/
-		ObjectInputStream socket_input;
+		ObjectInputStream socketInput;
 
 		/**
 		* For writing output to server.
@@ -91,7 +91,7 @@ public class TestServerLogic
 		Socket socket = new Socket("127.0.0.1", 5555);
 		//get I/O from socket
 		socket_output = new ObjectOutputStream(socket.getOutputStream());
-		socket_input = new ObjectInputStream(socket.getInputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
 		BattleShipData data = new LoginRequestData("battleship", "lpoo");
 		socket_output.writeObject(data);
 		
@@ -99,7 +99,7 @@ public class TestServerLogic
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(1, server.getOnlinePlayers().size());
 
-		LoginResponseData response = (LoginResponseData)socket_input.readObject();
+		LoginResponseData response = (LoginResponseData)socketInput.readObject();
 		assertNotNull(response);
 		assertTrue(response.isSucceeded());
 		
@@ -121,7 +121,7 @@ public class TestServerLogic
 		/**
 		* For reading input from server.
 		*/
-		ObjectInputStream socket_input;
+		ObjectInputStream socketInput;
 
 		/**
 		* For writing output to server.
@@ -131,7 +131,7 @@ public class TestServerLogic
 		Socket socket = new Socket("127.0.0.1", 5555);
 		//get I/O from socket
 		socket_output = new ObjectOutputStream(socket.getOutputStream());
-		socket_input = new ObjectInputStream(socket.getInputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
 		
 		//Create account
 		BattleShipData data = new LoginRequestData("battleship", "lpoo");
@@ -144,13 +144,13 @@ public class TestServerLogic
 		//Attempt to log in with wrong password
 		socket = new Socket("127.0.0.1", 5555);
 		socket_output = new ObjectOutputStream(socket.getOutputStream());
-		socket_input = new ObjectInputStream(socket.getInputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
 		data = new LoginRequestData("battleship", "lpoo");
 		socket_output.writeObject(data);
 		
 		Thread.sleep(200); //wait for the other thread to read information from the socket
 
-		LoginResponseData response = (LoginResponseData)socket_input.readObject();
+		LoginResponseData response = (LoginResponseData)socketInput.readObject();
 		//Ensure server responses with login failed
 		assertNotNull(response);
 		assertTrue(response.isSucceeded());
@@ -174,7 +174,7 @@ public class TestServerLogic
 		/**
 		* For reading input from server.
 		*/
-		ObjectInputStream socket_input;
+		ObjectInputStream socketInput;
 
 		/**
 		* For writing output to server.
@@ -184,7 +184,7 @@ public class TestServerLogic
 		Socket socket = new Socket("127.0.0.1", 5555);
 		//get I/O from socket
 		socket_output = new ObjectOutputStream(socket.getOutputStream());
-		socket_input = new ObjectInputStream(socket.getInputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
 		
 		//Create account
 		BattleShipData data = new LoginRequestData("battleship", "lpoo");
@@ -197,13 +197,13 @@ public class TestServerLogic
 		//Attempt to log in with wrong password
 		socket = new Socket("127.0.0.1", 5555);
 		socket_output = new ObjectOutputStream(socket.getOutputStream());
-		socket_input = new ObjectInputStream(socket.getInputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
 		data = new LoginRequestData("battleship", "wrongpwd");
 		socket_output.writeObject(data);
 		
 		Thread.sleep(200); //wait for the other thread to read information from the socket
 
-		LoginResponseData response = (LoginResponseData)socket_input.readObject();
+		LoginResponseData response = (LoginResponseData)socketInput.readObject();
 		//Ensure server responses with login failed
 		assertNotNull(response);
 		assertFalse(response.isSucceeded());
@@ -228,9 +228,9 @@ public class TestServerLogic
 		
 		//get I/O from socket
 		socket1_output = new ObjectOutputStream(socket1.getOutputStream());
-		socket1_input = new ObjectInputStream(socket1.getInputStream());
+		socket1Input = new ObjectInputStream(socket1.getInputStream());
 		socket2_output = new ObjectOutputStream(socket2.getOutputStream());
-		socket2_input = new ObjectInputStream(socket2.getInputStream());
+		socket2Input = new ObjectInputStream(socket2.getInputStream());
 		
 		//Create account
 		BattleShipData data1 = new LoginRequestData("battleship1", "lpoo");
@@ -241,8 +241,8 @@ public class TestServerLogic
 		
 		Thread.sleep(200); //wait for server to acknowledge the logins
 		
-		LoginResponseData response1 = (LoginResponseData)socket1_input.readObject();
-		LoginResponseData response2 = (LoginResponseData)socket2_input.readObject();
+		LoginResponseData response1 = (LoginResponseData)socket1Input.readObject();
+		LoginResponseData response2 = (LoginResponseData)socket2Input.readObject();
 		
 		//Ensure server responses with login failed
 		assertNotNull(response1);
@@ -259,18 +259,18 @@ public class TestServerLogic
 		//try invite to nonexistent player
 		invite = new LobbyInviteData("notfound");
 		socket1_output.writeObject(invite);
-		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
+		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertFalse(inviteResponse.wasAccepted());
 		
 		//try inviting existing player and he responds yes
 		//try inviting existing player and he responds no
 		invite = new LobbyInviteData("battleship2");
 		socket1_output.writeObject(invite);
-		receivedInvite = (LobbyInvitedData) socket2_input.readObject();
+		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
 		assertNotNull(receivedInvite);
 		inviteResponse = new LobbyInviteResponseData(false);
 		socket2_output.writeObject(inviteResponse);
-		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
+		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertFalse(inviteResponse.wasAccepted());
 		Thread.sleep(200);
 		GetCurrentPlayersInfo();
@@ -282,11 +282,11 @@ public class TestServerLogic
 		
 		invite = new LobbyInviteData("battleship2");
 		socket1_output.writeObject(invite);
-		receivedInvite = (LobbyInvitedData) socket2_input.readObject();
+		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
 		assertNotNull(receivedInvite);
 		inviteResponse = new LobbyInviteResponseData(true);
 		socket2_output.writeObject(inviteResponse);
-		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
+		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertTrue(inviteResponse.wasAccepted());
 		Thread.sleep(200);
 		GetCurrentPlayersInfo();
