@@ -2,7 +2,7 @@ package bship.logic;
 
 import java.util.ArrayList;
 
-public class ShipPlacement 
+public abstract class ShipPlacement 
 {
 	private GameMap map;
 	
