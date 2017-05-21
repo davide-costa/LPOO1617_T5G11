@@ -172,6 +172,90 @@ public class TestServerLogic
 		server.stopServer();
 	}
 	
+	@Test
+	public void TestInviteLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
+	{
+		BattleShipServer server = new BattleShipServer();
+		
+		ObjectInputStream socket1_input;
+		ObjectOutputStream socket1_output;
+		ObjectInputStream socket2_input;
+		ObjectOutputStream socket2_output;
+		
+		Socket socket1 = new Socket("127.0.0.1", 5555);
+		Socket socket2 = new Socket("127.0.0.1", 5555);
+		
+		//get I/O from socket
+		socket1_output = new ObjectOutputStream(socket1.getOutputStream());
+		socket1_input = new ObjectInputStream(socket1.getInputStream());
+		socket2_output = new ObjectOutputStream(socket2.getOutputStream());
+		socket2_input = new ObjectInputStream(socket2.getInputStream());
+		
+		//Create account
+		BattleShipData data1 = new LoginRequestData("battleship1", "lpoo");
+		BattleShipData data2 = new LoginRequestData("battleship2", "lpoo");
+		
+		socket1_output.writeObject(data1);
+		socket2_output.writeObject(data2);
+		
+		Thread.sleep(200); //wait for server to acknowledge the logins
+		
+		LoginResponseData response1 = (LoginResponseData)socket1_input.readObject();
+		LoginResponseData response2 = (LoginResponseData)socket2_input.readObject();
+		
+		//Ensure server responses with login failed
+		assertNotNull(response1);
+		assertNotNull(response2);
+		
+		assertTrue(response1.isSucceeded());
+		assertTrue(response2.isSucceeded());
+		
+		LobbyInviteData invite;
+		LobbyInvitedData receivedInvite;
+		LobbyInviteResponseData inviteResponse;
+		
+		//try invite to nonexistent player
+		invite = new LobbyInviteData("notfound");
+		socket1_output.writeObject(invite);
+		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
+		assertFalse(inviteResponse.wasAccepted());
+		
+		//try inviting existing player and he responds yes
+		//try inviting existing player and he responds no
+		invite = new LobbyInviteData("battleship2");
+		socket1_output.writeObject(invite);
+		receivedInvite = (LobbyInvitedData) socket2_input.readObject();
+		assertNotNull(receivedInvite);
+		inviteResponse = new LobbyInviteResponseData(false);
+		socket2_output.writeObject(inviteResponse);
+		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
+		assertFalse(inviteResponse.wasAccepted());
+		
+		invite = new LobbyInviteData("battleship2");
+		socket1_output.writeObject(invite);
+		receivedInvite = (LobbyInvitedData) socket2_input.readObject();
+		assertNotNull(receivedInvite);
+		inviteResponse = new LobbyInviteResponseData(true);
+		socket2_output.writeObject(inviteResponse);
+		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
+		assertTrue(inviteResponse.wasAccepted());
+		
+	
+		
+		
+		
+		
+		//TryInviteToNonexistentPlayer();
+		
+		//Ensure the server does not add the player to the list of online players
+		
+		//disconnect
+		//socket.close();
+		Thread.sleep(200);
+		
+
+		server.stopServer();
+	}
 	
 	
 }
