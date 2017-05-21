@@ -21,6 +21,12 @@ import bship.network.data.*;
 public class TestServerLogic
 {
 	BattleShipServer server;
+	Socket socket1;
+	Socket socket2;
+	ObjectInputStream socket1_input;
+	ObjectOutputStream socket1_output;
+	ObjectInputStream socket2_input;
+	ObjectOutputStream socket2_output;
 	Player player1;
 	Player player2;
 	Player player1Opponent;
@@ -189,16 +195,8 @@ public class TestServerLogic
 	public void TestInviteLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
 		server = new BattleShipServer();
-		
-		ObjectInputStream socket1_input;
-		ObjectOutputStream socket1_output;
-		ObjectInputStream socket2_input;
-		ObjectOutputStream socket2_output;
-	
-
-		
-		Socket socket1 = new Socket("127.0.0.1", 5555);
-		Socket socket2 = new Socket("127.0.0.1", 5555);
+		socket1 = new Socket("127.0.0.1", 5555);
+		socket2 = new Socket("127.0.0.1", 5555);
 		
 		//get I/O from socket
 		socket1_output = new ObjectOutputStream(socket1.getOutputStream());
