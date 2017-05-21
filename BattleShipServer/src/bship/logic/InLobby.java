@@ -25,8 +25,18 @@ public class InLobby extends PlayerState
 		if(data instanceof LobbyInviteData)
 		{
 			LobbyInviteData inviteData = (LobbyInviteData) data;
-			BattleShipServer battleShipServer= player.getBattleShipServer();
-			boolean invitedSucessfully = battleShipServer.invitePlayer(player.getUsername(), inviteData.getInvitedPlayerName());
+			BattleShipServer battleShipServer = player.getBattleShipServer();
+			boolean accepted = battleShipServer.invitePlayer(player.getUsername(), inviteData.getInvitedPlayerName());
+			LobbyInviteResponseData response = new LobbyInviteResponseData(accepted);
+			try
+			{
+				player.sendData(response);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if(data instanceof LobbyInviteResponseData)
 		{
