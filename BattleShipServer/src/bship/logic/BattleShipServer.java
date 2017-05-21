@@ -111,7 +111,7 @@ public class BattleShipServer
 		Player inviterPlayer = battleshipPlayers.get(inviterPlayerName);
 		Player invitedPlayer = battleshipPlayers.get(invitedPlayerName);
 
-
+		
 		if (invitedPlayer == null)
 		{
 			return false;
@@ -124,7 +124,6 @@ public class BattleShipServer
 		LobbyInvitedData inviteData = new LobbyInvitedData(inviterPlayerName);
 		try
 		{
-			System.out.println("sending data to other player");
 			invitedPlayer.sendData(inviteData);
 		}
 		catch (IOException e) 

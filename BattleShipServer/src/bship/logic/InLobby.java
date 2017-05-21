@@ -48,6 +48,8 @@ public class InLobby extends PlayerState
 			try
 			{
 				player.getOpponent().sendData(responseData);
+				if (!responseData.wasAccepted())
+					player.setOpponent(null);
 			}
 			catch (IOException e)
 			{
