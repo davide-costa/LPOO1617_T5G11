@@ -15,29 +15,32 @@ public abstract class ShipPlacement
 	{
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		ArrayList<Coords> shipCoords = ship.getCoords();
-		coordsArray.addAll(shipCoords);
 		coordsArray = Coords.getSurroundingCoords(shipCoords);
 		
-		int mapXSize = map.getMapXSize();
-		int mapYSize = map.getMapYSize();
+		if(!map.areListOfCoordsInMapRange(shipCoords))
+			return false;
+		
 		for(Coords currCoords: coordsArray)
 		{
-			int currCoordsX = currCoords.GetX();
-			if(currCoordsX < 0 || currCoordsX >= mapXSize || map.getCellState(currCoords).hasShip())
-				return false;
+			if(!map.areCoordsInMapRange(currCoords))
+				continue;
 			
-			int currCoordsY = currCoords.GetY();
-			if(currCoordsY < 0 || currCoordsY >= mapYSize || map.getCellState(currCoords).hasShip())
-				return false;
+			System.out.println(currCoords.GetX());
+			if(map.getCellState(currCoords) != null)
+				if(map.getCellState(currCoords).hasShip())
+					return false;
 		}
-		
+		System.out.println("GOOD");
 		return true;
 	}
 	
 	public boolean DropShip(Ship ship)
 	{
 		if(!isShipDropValid(ship))
+		{
+			ship.cleanCoords();
 			return false;
+		}
 			
 		ArrayList<Coords> shipCoords = ship.getCoords();
 		CellState cellState = new AllyCellState(ship);

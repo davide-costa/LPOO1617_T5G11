@@ -14,6 +14,7 @@ public abstract class Ship
 	{
 		this.size = size;
 		health = size;
+		this.coords = new ArrayList<Coords>();
 		this.name = name;
 	}
 	
@@ -69,5 +70,10 @@ public abstract class Ship
 	public void addCoord(Coords coord)
 	{
 		coords.add(coord);
+	}
+
+	public void cleanCoords() 
+	{
+		coords.clear();	
 	}
 }

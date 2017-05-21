@@ -1,6 +1,7 @@
 package bship.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class GameMap implements Serializable
 {
@@ -51,5 +52,27 @@ public abstract class GameMap implements Serializable
 	public CellState getCellState(Coords coords)
 	{
 		return map[coords.GetY()][coords.GetX()];
+	}
+	
+	public boolean areCoordsInMapRange(Coords coords)
+	{
+		int currCoordsX = coords.GetX();
+		if(currCoordsX < 0 || currCoordsX >= sizeX) 
+			return false;
+				
+		int currCoordsY = coords.GetY();
+		if(currCoordsY < 0 || currCoordsY >= sizeY)
+			return false;
+
+		return true;
+	}
+	
+	public boolean areListOfCoordsInMapRange(ArrayList<Coords> coords)
+	{
+		for(Coords currCoords: coords)
+			if(!areCoordsInMapRange(currCoords))
+				return false;
+		
+		return true;
 	}
 }

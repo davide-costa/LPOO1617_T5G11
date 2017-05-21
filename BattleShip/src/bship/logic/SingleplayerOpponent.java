@@ -7,9 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class SingleplayerOpponent extends Opponent 
 {
+	private SingleplayerOpponent opponent;
+	
 	public SingleplayerOpponent(Game game)
 	{
 		super(game);
+		opponent = game.ge
 	}
 	
 	@Override

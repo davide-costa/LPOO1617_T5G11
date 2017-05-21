@@ -14,7 +14,7 @@ import bship.logic.SinglePlayerShipPlacement;
 public class AIOpponent
 {
 	private ShipPlacement shipPlacement;
-	private GameMap map;
+	public GameMap map;
 	private HashMap<Integer, String> generatedDirection = new HashMap<Integer, String>();
 	
 	public AIOpponent()
@@ -39,17 +39,18 @@ public class AIOpponent
 			{
 				GenerateShipPosition(ship);
 			}
-			while(!shipPlacement.isShipDropValid(ship));	
+			while(!shipPlacement.DropShip(ship));
+
 		}
 	}
 
 	private void GenerateShipPosition(Ship ship) 
 	{	
-		int xCoord = ThreadLocalRandom.current().nextInt(0, map.getMapXSize() + 1);
-		int yCoord = ThreadLocalRandom.current().nextInt(0, map.getMapYSize() + 1);
+		int xCoord = ThreadLocalRandom.current().nextInt(0, map.getMapXSize() - 1 + 1);
+		int yCoord = ThreadLocalRandom.current().nextInt(0, map.getMapYSize() - 1 + 1);
 		int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		String direction = generatedDirection.get(randomNum);
-		
+	
 		int xInc, yInc;
 		if(direction.equals("Vertical"))
 		{
@@ -62,15 +63,23 @@ public class AIOpponent
 			yInc = 0;
 		}
 		
-		Coords coords = new Coords(xCoord, yCoord);
+		Coords currCoords = new Coords(xCoord, yCoord);
 		for(int i = 0; i < ship.getSize(); i++)
 		{
-			coords.incrementX(xInc);
-			coords.incrementY(yInc);
+			System.out.println(i);
+			Coords coords = new Coords(currCoords);
 			ship.addCoord(coords);
-			coords.SetX(xCoord);
-			coords.SetY(yCoord);
+			currCoords.incrementX(xInc);
+			currCoords.incrementY(yInc);
+			System.out.println(i);
 		}
+		
+		for(int i = 0; i < ship.getCoords().size();i++)
+		{
+			System.out.println(ship.getCoords().get(i).GetX() + "  " + ship.getCoords().get(i).GetY());
+		}
+		
+		System.out.println("saiu do for");
 			
 	}
 }
