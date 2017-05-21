@@ -20,10 +20,18 @@ import bship.network.data.*;
 
 public class TestServerLogic
 {
+	BattleShipServer server;
+	Player player1;
+	Player player2;
+	Player player1Opponent;
+	Player player2Opponent;
+	PlayerState player1State;
+	PlayerState player2State;
+	
 	@Test
 	public void TestConstructor() throws InterruptedException
 	{
-		BattleShipServer server = new BattleShipServer();
+		server = new BattleShipServer();
 		assertEquals(server.getOnlinePlayers().size(), 0);
 		assertEquals(server.getBattleshipPlayers().size(), 0);
 		
@@ -34,7 +42,7 @@ public class TestServerLogic
 	@Test
 	public void TestAccountCreationLogin() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		BattleShipServer server = new BattleShipServer();
+		server = new BattleShipServer();
 		
 		/**
 		* For reading input from server.
@@ -74,7 +82,7 @@ public class TestServerLogic
 	@Test
 	public void TestLoginWithAccountPreviouslyCreated() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		BattleShipServer server = new BattleShipServer();
+		server = new BattleShipServer();
 		
 		/**
 		* For reading input from server.
@@ -127,7 +135,7 @@ public class TestServerLogic
 	@Test
 	public void TestWrongPasswordLogin() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		BattleShipServer server = new BattleShipServer();
+		server = new BattleShipServer();
 		
 		/**
 		* For reading input from server.
@@ -180,12 +188,14 @@ public class TestServerLogic
 	@Test
 	public void TestInviteLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		BattleShipServer server = new BattleShipServer();
+		server = new BattleShipServer();
 		
 		ObjectInputStream socket1_input;
 		ObjectOutputStream socket1_output;
 		ObjectInputStream socket2_input;
 		ObjectOutputStream socket2_output;
+	
+
 		
 		Socket socket1 = new Socket("127.0.0.1", 5555);
 		Socket socket2 = new Socket("127.0.0.1", 5555);
@@ -218,13 +228,6 @@ public class TestServerLogic
 		LobbyInviteData invite;
 		LobbyInvitedData receivedInvite;
 		LobbyInviteResponseData inviteResponse;
-		Player player1;
-		Player player2;
-		Player player1Opponent;
-		Player player2Opponent;
-		
-		PlayerState player1State;
-		PlayerState player2State;
 		
 		
 		//try invite to nonexistent player
@@ -244,12 +247,7 @@ public class TestServerLogic
 		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
 		assertFalse(inviteResponse.wasAccepted());
 		Thread.sleep(200);
-		player1 = server.getBattleshipPlayers().get("battleship1");
-		player2 = server.getBattleshipPlayers().get("battleship2");
-		player1Opponent = player1.getOpponent();
-		player2Opponent = player2.getOpponent();
-		player1State = player1.getState();
-		player2State = player2.getState();
+		GetCurrentPlayersInfo();
 		assertNull(player1Opponent);
 		assertNull(player2Opponent);
 		assertTrue(player1State instanceof InLobby);
@@ -265,12 +263,7 @@ public class TestServerLogic
 		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
 		assertTrue(inviteResponse.wasAccepted());
 		Thread.sleep(200);
-		player1 = server.getBattleshipPlayers().get("battleship1");
-		player2 = server.getBattleshipPlayers().get("battleship2");
-		player1Opponent = player1.getOpponent();
-		player2Opponent = player2.getOpponent();
-		player1State = player1.getState();
-		player2State = player2.getState();
+		GetCurrentPlayersInfo();
 		assertNotNull(player1Opponent);
 		assertNotNull(player2Opponent);
 		assertSame(player1, player2Opponent);
@@ -285,5 +278,13 @@ public class TestServerLogic
 		server.stopServer();
 	}
 	
-	
+	private void GetCurrentPlayersInfo()
+	{
+		player1 = server.getBattleshipPlayers().get("battleship1");
+		player2 = server.getBattleshipPlayers().get("battleship2");
+		player1Opponent = player1.getOpponent();
+		player2Opponent = player2.getOpponent();
+		player1State = player1.getState();
+		player2State = player2.getState();
+	}
 }
