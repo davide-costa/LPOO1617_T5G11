@@ -12,7 +12,6 @@ public class SingleplayerOpponent extends Opponent
 	public SingleplayerOpponent(Game game)
 	{
 		super(game);
-		opponent = game.ge
 	}
 	
 	@Override
