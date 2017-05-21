@@ -47,8 +47,16 @@ public class InLobby extends PlayerState
 			LobbyInviteResponseData responseData = (LobbyInviteResponseData)data;
 			try
 			{
-				player.getOpponent().sendData(responseData);
-				if (!responseData.wasAccepted())
+				Player opponent = player.getOpponent();
+				if (opponent == null)
+					return;
+				opponent.sendData(responseData);
+				if (responseData.wasAccepted())
+				{
+					player.setState(new InShipPlacement(player));
+					opponent.setState(new InShipPlacement(opponent));
+				}
+				else
 					player.setOpponent(null);
 			}
 			catch (IOException e)
