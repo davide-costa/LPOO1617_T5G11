@@ -110,6 +110,11 @@ public class BattleShipServer
 	{
 		Player invitedPlayer = battleshipPlayers.get(invitedPlayerName);
 		
+		if (invitedPlayer == null)
+		{
+			return false;
+		}
+		
 		if(invitedPlayer.isBusy())
 			return false;
 		
@@ -122,6 +127,7 @@ public class BattleShipServer
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		
 		return true;
