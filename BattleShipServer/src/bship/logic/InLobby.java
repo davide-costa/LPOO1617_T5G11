@@ -53,6 +53,7 @@ public class InLobby extends PlayerState
 				opponent.sendData(responseData);
 				if (responseData.wasAccepted())
 				{
+					opponent.setOpponent(player);
 					player.setState(new InShipPlacement(player));
 					opponent.setState(new InShipPlacement(opponent));
 				}
