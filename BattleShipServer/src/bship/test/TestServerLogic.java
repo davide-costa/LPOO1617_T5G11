@@ -27,6 +27,8 @@ public class TestServerLogic
 	ObjectOutputStream socket1_output;
 	ObjectInputStream socket2_input;
 	ObjectOutputStream socket2_output;
+	String player1Name;
+	String player2Name;
 	Player player1;
 	Player player2;
 	Player player1Opponent;
@@ -34,6 +36,32 @@ public class TestServerLogic
 	PlayerState player1State;
 	PlayerState player2State;
 	
+	private void LoginPlayer(Player player, String playerName, String password, Socket socket, ObjectInputStream socketInput, ObjectOutputStream socketOutput) throws IOException, ClassNotFoundException, InterruptedException
+	{
+		socketOutput = new ObjectOutputStream(socket.getOutputStream());
+		socketInput = new ObjectInputStream(socket.getInputStream());
+		BattleShipData data = new LoginRequestData(playerName, password);
+		socketOutput.writeObject(data);
+		
+		Thread.sleep(200); //wait for the other thread to read information from the socket
+		assertEquals(1, server.getBattleshipPlayers().size());
+		assertEquals(1, server.getOnlinePlayers().size());
+
+		LoginResponseData response = (LoginResponseData)socketInput.readObject();
+		assertNotNull(response);
+		assertTrue(response.isSucceeded());
+	}
+	
+	private void LoginPlayer1() throws ClassNotFoundException, IOException, InterruptedException
+	{
+		LoginPlayer(player1, "player1", "lpoo", socket1, socket1_input, socket1_output);
+	}
+	
+	private void LoginPlayer2() throws ClassNotFoundException, IOException, InterruptedException
+	{
+		LoginPlayer(player2, "player2", "lpoo", socket2, socket2_input, socket2_output);
+	}
+		
 	@Test
 	public void TestConstructor() throws InterruptedException
 	{
