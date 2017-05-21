@@ -24,7 +24,7 @@ public class BattleShipServerLogin implements KeyListener
 	private JPanel menuPanel;
 	private JPanel battleShipLoginPanel;
 	private JTextField usernameTextField;
-	private JTextField PasswordTextField;
+	private JTextField passwordTextField;
 	private String username, password;
 	
 	public BattleShipServerLogin(JFrame frame, JPanel menuPanel)
@@ -48,14 +48,6 @@ public class BattleShipServerLogin implements KeyListener
 		battleShipLoginPanel.add(btnLobby);
 		
 		usernameTextField = new JTextField();
-		usernameTextField.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) 
-			{
-				username = event.getText().toString();
-			}
-		});
 		usernameTextField.setBounds(155, 80, 86, 20);
 		battleShipLoginPanel.add(usernameTextField);
 		usernameTextField.setColumns(10);
@@ -68,18 +60,11 @@ public class BattleShipServerLogin implements KeyListener
 		lblPassword.setBounds(73, 129, 72, 14);
 		battleShipLoginPanel.add(lblPassword);
 		
-		PasswordTextField = new JTextField();
-		PasswordTextField.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) 
-			{
-				password = event.getText().toString();
-			}
-		});
-		PasswordTextField.setColumns(10);
-		PasswordTextField.setBounds(155, 126, 86, 20);
-		battleShipLoginPanel.add(PasswordTextField);
+		passwordTextField = new JTextField();
+
+		passwordTextField.setColumns(10);
+		passwordTextField.setBounds(155, 126, 86, 20);
+		battleShipLoginPanel.add(passwordTextField);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -88,6 +73,8 @@ public class BattleShipServerLogin implements KeyListener
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{
+					username = usernameTextField.getText();
+					password = passwordTextField.getText();
 					login.requestLogin(BattleShipServerLogin.this, username, password);
 				} 
 				catch (IOException e1) 

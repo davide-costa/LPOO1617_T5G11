@@ -14,13 +14,12 @@ public class BattleShipServerLoginIntermediate implements Observer
 
 	private BattleShipServerLogin gui;
 	
-	public void requestLogin(BattleShipServerLogin gui, String login, String password) throws IOException
+	public void requestLogin(BattleShipServerLogin gui, String username, String password) throws IOException
 	{
 		this.gui = gui;
 		Client clientSocket = Client.getInstance();
 		clientSocket.refreshObserver(this);
-		BattleShipData loginRequest = new LoginRequestData(login, password);
-		System.out.println("2");
+		BattleShipData loginRequest = new LoginRequestData(username, password);
 		clientSocket.sendBattleShipData(loginRequest);
 	}
 
