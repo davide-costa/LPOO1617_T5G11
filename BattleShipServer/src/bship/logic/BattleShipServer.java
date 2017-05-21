@@ -108,8 +108,10 @@ public class BattleShipServer
 
 	public boolean invitePlayer(String inviterPlayerName, String invitedPlayerName) 
 	{
+		Player inviterPlayer = battleshipPlayers.get(inviterPlayerName);
 		Player invitedPlayer = battleshipPlayers.get(invitedPlayerName);
-		
+
+
 		if (invitedPlayer == null)
 		{
 			return false;
@@ -118,9 +120,11 @@ public class BattleShipServer
 		if(invitedPlayer.isBusy())
 			return false;
 		
+		invitedPlayer.setOpponent(inviterPlayer);
 		LobbyInvitedData inviteData = new LobbyInvitedData(inviterPlayerName);
 		try
 		{
+			System.out.println("sending data to other player");
 			invitedPlayer.sendData(inviteData);
 		}
 		catch (IOException e) 

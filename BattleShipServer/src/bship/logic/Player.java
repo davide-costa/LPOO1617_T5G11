@@ -41,6 +41,11 @@ public class Player
 	{
 		return opponent;
 	}
+
+	public void setOpponent(Player opponent)
+	{
+		this.opponent = opponent;
+	}
 	
 	public void HandleReceivedData(BattleShipData receivedData) throws IOException
 	{
@@ -69,10 +74,7 @@ public class Player
 
 	public boolean isBusy() 
 	{
-		if(state instanceof InGame || opponent != null)
-			return false;
-			
-		return true;	
+		return (!(state instanceof InLobby) || opponent != null);
 	}
 
 	public boolean isReady() 
@@ -80,4 +82,5 @@ public class Player
 		
 		return false;
 	}
+
 }
