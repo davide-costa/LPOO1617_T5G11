@@ -7,10 +7,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 
 import org.junit.Test;
 
 import bship.logic.BattleShipServer;
+import bship.logic.InLobby;
+import bship.logic.InShipPlacement;
+import bship.logic.Player;
+import bship.logic.PlayerState;
 import bship.network.data.*;
 
 public class TestServerLogic
@@ -213,6 +218,14 @@ public class TestServerLogic
 		LobbyInviteData invite;
 		LobbyInvitedData receivedInvite;
 		LobbyInviteResponseData inviteResponse;
+		Player player1;
+		Player player2;
+		Player player1Opponent;
+		Player player2Opponent;
+		
+		PlayerState player1State;
+		PlayerState player2State;
+		
 		
 		//try invite to nonexistent player
 		invite = new LobbyInviteData("notfound");
@@ -229,7 +242,19 @@ public class TestServerLogic
 		inviteResponse = new LobbyInviteResponseData(false);
 		socket2_output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
-		assertFalse(inviteResponse.wasAccepted());		
+		assertFalse(inviteResponse.wasAccepted());
+		Thread.sleep(200);
+		player1 = server.getBattleshipPlayers().get("battleship1");
+		player2 = server.getBattleshipPlayers().get("battleship2");
+		player1Opponent = player1.getOpponent();
+		player2Opponent = player2.getOpponent();
+		player1State = player1.getState();
+		player2State = player2.getState();
+		assertNull(player1Opponent);
+		assertNull(player2Opponent);
+		assertTrue(player1State instanceof InLobby);
+		assertTrue(player2State instanceof InLobby);
+		
 		
 		invite = new LobbyInviteData("battleship2");
 		socket1_output.writeObject(invite);
@@ -239,6 +264,19 @@ public class TestServerLogic
 		socket2_output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
 		assertTrue(inviteResponse.wasAccepted());
+		Thread.sleep(200);
+		player1 = server.getBattleshipPlayers().get("battleship1");
+		player2 = server.getBattleshipPlayers().get("battleship2");
+		player1Opponent = player1.getOpponent();
+		player2Opponent = player2.getOpponent();
+		player1State = player1.getState();
+		player2State = player2.getState();
+		assertNotNull(player1Opponent);
+		assertNotNull(player2Opponent);
+		assertSame(player1, player2Opponent);
+		assertSame(player2, player1Opponent);
+		assertTrue(player1State instanceof InShipPlacement);
+		assertTrue(player2State instanceof InShipPlacement);
 
 		
 		Thread.sleep(200);
