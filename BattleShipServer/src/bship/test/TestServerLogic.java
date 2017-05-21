@@ -229,7 +229,7 @@ public class TestServerLogic
 		inviteResponse = new LobbyInviteResponseData(false);
 		socket2_output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
-		assertFalse(inviteResponse.wasAccepted());
+		assertFalse(inviteResponse.wasAccepted());		
 		
 		invite = new LobbyInviteData("battleship2");
 		socket1_output.writeObject(invite);
@@ -239,18 +239,8 @@ public class TestServerLogic
 		socket2_output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1_input.readObject();
 		assertTrue(inviteResponse.wasAccepted());
+
 		
-	
-		
-		
-		
-		
-		//TryInviteToNonexistentPlayer();
-		
-		//Ensure the server does not add the player to the list of online players
-		
-		//disconnect
-		//socket.close();
 		Thread.sleep(200);
 		
 
