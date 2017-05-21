@@ -11,7 +11,7 @@ public class ShipPlacement
 		this.map = map;
 	}
 	
-	public boolean isShipDropValid(Ship ship, Coords coords)
+	public boolean isShipDropValid(Ship ship)
 	{
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		ArrayList<Coords> shipCoords = ship.getCoords();
@@ -34,9 +34,9 @@ public class ShipPlacement
 		return true;
 	}
 	
-	public boolean DropShip(Ship ship, Coords coords)
+	public boolean DropShip(Ship ship)
 	{
-		if(!isShipDropValid(ship, coords))
+		if(!isShipDropValid(ship))
 			return false;
 			
 		ArrayList<Coords> shipCoords = ship.getCoords();
