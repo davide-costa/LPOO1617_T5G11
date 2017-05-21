@@ -24,11 +24,13 @@ public class TestServerLogic
 	Socket socket1;
 	Socket socket2;
 	ObjectInputStream socket1Input;
-	ObjectOutputStream socket1_output;
+	ObjectOutputStream socket1Output;
 	ObjectInputStream socket2Input;
-	ObjectOutputStream socket2_output;
+	ObjectOutputStream socket2Output;
 	String player1Name;
 	String player2Name;
+	String player1Password;	
+	String player2Password;	
 	Player player1;
 	Player player2;
 	Player player1Opponent;
@@ -38,6 +40,7 @@ public class TestServerLogic
 	
 	private void LoginPlayer(Player player, String playerName, String password, Socket socket, ObjectInputStream socketInput, ObjectOutputStream socketOutput) throws IOException, ClassNotFoundException, InterruptedException
 	{
+		socket = new Socket("127.0.0.1", 5555);
 		socketOutput = new ObjectOutputStream(socket.getOutputStream());
 		socketInput = new ObjectInputStream(socket.getInputStream());
 		BattleShipData data = new LoginRequestData(playerName, password);
@@ -52,14 +55,42 @@ public class TestServerLogic
 		assertTrue(response.isSucceeded());
 	}
 	
-	private void LoginPlayer1() throws ClassNotFoundException, IOException, InterruptedException
+	private void LoginPlayer1(String player1Name, String player1Password) throws ClassNotFoundException, IOException, InterruptedException
 	{
-		LoginPlayer(player1, "player1", "lpoo", socket1, socket1Input, socket1_output);
+		this.player1Name = player1Name;
+		this.player1Password = player1Password;
+		socket1 = new Socket("127.0.0.1", 5555);
+		socket1Output = new ObjectOutputStream(socket1.getOutputStream());
+		socket1Input = new ObjectInputStream(socket1.getInputStream());
+		BattleShipData data = new LoginRequestData(player1Name, player1Password);
+		socket1Output.writeObject(data);
+		
+		Thread.sleep(200); //wait for the other thread to read information from the socket1
+		assertEquals(1, server.getBattleshipPlayers().size());
+		assertEquals(1, server.getOnlinePlayers().size());
+
+		LoginResponseData response = (LoginResponseData)socket1Input.readObject();
+		assertNotNull(response);
+		assertTrue(response.isSucceeded());
 	}
 	
-	private void LoginPlayer2() throws ClassNotFoundException, IOException, InterruptedException
+	private void LoginPlayer2(String player2Name, String player2Password) throws ClassNotFoundException, IOException, InterruptedException
 	{
-		LoginPlayer(player2, "player2", "lpoo", socket2, socket2Input, socket2_output);
+		this.player2Name = player2Name;
+		this.player2Password = player2Password;
+		socket1 = new Socket("127.0.0.1", 5555);
+		socket1Output = new ObjectOutputStream(socket1.getOutputStream());
+		socket1Input = new ObjectInputStream(socket1.getInputStream());
+		BattleShipData data = new LoginRequestData(player1Name, player1Password);
+		socket1Output.writeObject(data);
+		
+		Thread.sleep(200); //wait for the other thread to read information from the socket1
+		assertEquals(1, server.getBattleshipPlayers().size());
+		assertEquals(1, server.getOnlinePlayers().size());
+
+		LoginResponseData response = (LoginResponseData)socket1Input.readObject();
+		assertNotNull(response);
+		assertTrue(response.isSucceeded());
 	}
 		
 	@Test
@@ -78,33 +109,13 @@ public class TestServerLogic
 	{
 		server = new BattleShipServer();
 		
-		/**
-		* For reading input from server.
-		*/
-		ObjectInputStream socketInput;
-
-		/**
-		* For writing output to server.
-		*/
-		ObjectOutputStream socket_output;
-		
-		Socket socket = new Socket("127.0.0.1", 5555);
-		//get I/O from socket
-		socket_output = new ObjectOutputStream(socket.getOutputStream());
-		socketInput = new ObjectInputStream(socket.getInputStream());
-		BattleShipData data = new LoginRequestData("battleship", "lpoo");
-		socket_output.writeObject(data);
-		
+		LoginPlayer1("battleship", "lpoo");
 		Thread.sleep(200); //wait for the other thread to read information from the socket
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(1, server.getOnlinePlayers().size());
 
-		LoginResponseData response = (LoginResponseData)socketInput.readObject();
-		assertNotNull(response);
-		assertTrue(response.isSucceeded());
-		
 		//disconnect
-		socket.close();
+		socket1.close();
 		Thread.sleep(200);
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(0, server.getOnlinePlayers().size());
