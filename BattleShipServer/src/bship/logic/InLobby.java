@@ -7,6 +7,7 @@ import bship.network.data.BattleShipData;
 import bship.network.data.LobbyData;
 import bship.network.data.LobbyInviteData;
 import bship.network.data.LobbyInviteResponseData;
+import bship.network.data.LobbyInviteResponseData.Response;
 import bship.network.data.LobbyInvitedData;
 
 public class InLobby extends PlayerState
@@ -30,7 +31,7 @@ public class InLobby extends PlayerState
 			LobbyInviteResponseData response;
 			if (!succeeded)
 			{
-				response = new LobbyInviteResponseData(false); //TODO meter o define a dizer unsucceeded
+				response = new LobbyInviteResponseData(Response.UNSUCESSFUL); //TODO meter o define a dizer unsucceeded
 				try
 				{
 					player.sendData(response);
