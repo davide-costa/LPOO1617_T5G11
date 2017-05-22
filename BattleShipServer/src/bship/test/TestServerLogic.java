@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -77,6 +79,7 @@ public class TestServerLogic
 		assertNotNull(response);
 		assertTrue(response.isSucceeded());
 		player1 = server.getBattleshipPlayers().get("player1");
+		ReadInLobbyPlayersFromServer(socket1Input);
 	}
 	
 	private void LoginPlayer2(String player2Name, String player2Password) throws ClassNotFoundException, IOException, InterruptedException
@@ -97,8 +100,26 @@ public class TestServerLogic
 		assertNotNull(response);
 		assertTrue(response.isSucceeded());
 		player2 = server.getBattleshipPlayers().get("player2");
+		ReadInLobbyPlayersFromServer(socket2Input);
 	}
-		
+	
+	private void ReadInLobbyPlayersFromServer(ObjectInputStream socketInput) throws ClassNotFoundException, IOException
+	{
+		LobbyInfoData playersData;
+		playersData  = (LobbyInfoData) socketInput.readObject();
+		ArrayList<Player> actualPlayers = new ArrayList<Player>(server.getInLobbyPlayers());
+		assertNotNull(actualPlayers);
+		ArrayList<String> actualPlayersNames = new ArrayList<String>();
+		for (Player player : actualPlayers)
+		{
+			actualPlayersNames.add(player.getUsername());
+		}
+		ArrayList<String> dataPlayersNames = playersData.getOnlinePlayersNames();
+		assertNotNull(dataPlayersNames);
+		Collections.sort(actualPlayersNames);
+		Collections.sort(dataPlayersNames);
+		assertEquals(actualPlayersNames, dataPlayersNames);
+	}
 	
 	private void GetCurrentPlayersInfo()
 	{
@@ -436,4 +457,6 @@ public class TestServerLogic
 		Thread.sleep(200);
 		server.stopServer();
 	}
+	
+	
 }
