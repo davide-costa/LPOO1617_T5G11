@@ -19,7 +19,7 @@ public class InGame extends PlayerState
 		if(!(data instanceof GameData))
 			return;
 		
-		player.sendData(data);
+		player.getOpponent().sendData(data);
 		
 		if(data instanceof EndOfGameData)
 			player.setState(new InLobby(player));	

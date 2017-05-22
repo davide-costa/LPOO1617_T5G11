@@ -19,6 +19,7 @@ import bship.logic.Player;
 import bship.logic.PlayerState;
 import bship.logic.ReadyForGame;
 import bship.network.data.*;
+import bship.network.data.GameResultData.Result;
 
 public class TestServerLogic
 {
@@ -299,6 +300,13 @@ public class TestServerLogic
 		player2.setState(new InGame(player2));
 		AssertPlayer1AndPlayer2AreOpponents();
 		
+		//Make 50 plays each one in reverse order of the last one and ensure all goes well
+		for (int i = 0; i < 50; i++)
+		{
+			MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output);
+			MakeAPlayerAndReadResults(socket2Input, socket2Output, socket1Input, socket1Output);
+		}
+		
 		Thread.sleep(200);
 		server.stopServer();
 		
@@ -323,5 +331,47 @@ public class TestServerLogic
 		assertNotNull(player2Opponent);
 		assertSame(player1, player2Opponent);
 		assertSame(player2, player1Opponent);
+	}
+	
+	private void AssertPlayersAreInGame()
+	{
+		AssertPlayer1AndPlayer2AreOpponents();
+		assertTrue(player1State instanceof InGame);
+		assertTrue(player2State instanceof InGame);
+	}
+	
+	private void MakeAPlayerAndReadResults(ObjectInputStream socket1Input, ObjectOutputStream socket1Output, ObjectInputStream socket2Input, ObjectOutputStream socket2Output) throws IOException, ClassNotFoundException
+	{
+		//This is not actually a string but since it is an Object inside the GameShootData class, we use a String to test it because it works with any Object if it works with a String
+		//The client currently doesn't send a String inside the class GameShootData but it could send anything without having to modify the server code (maintainable code)
+		String shootCoords1;
+		String shootCoords2;
+		GameShootData shootData1;
+		GameShootData shootData2;
+		GameResultData resultData1;
+		GameResultData resultData2;
+		//Assert shoot coords arrive correctly
+		shootCoords1 = new String("3, 5");
+		shootData1 = new GameShootData(shootCoords1);
+		socket1Output.writeObject(shootData1);
+		shootData2 = (GameShootData) socket2Input.readObject();
+		assertNotNull(shootData2);
+		shootCoords2 = (String) shootData2.getCoords();
+		assertNotNull(shootCoords2);
+		assertEquals(shootCoords1, shootCoords2);
+		AssertPlayersAreInGame();
+
+		// Assert game results arrive correctly
+		resultData1 = new GameResultData(Result.WATER, false);
+		socket1Output.writeObject(resultData1);
+		resultData2 = (GameResultData) socket2Input.readObject();
+		assertNotNull(shootData2);
+		Result result = resultData2.getResult();
+		boolean endOfGame = resultData2.isEndOfGame();
+		assertNotNull(result);
+		assertNotNull(endOfGame);
+		assertEquals(Result.WATER, result);
+		assertEquals(false, endOfGame);
+		AssertPlayersAreInGame();
 	}
 }
