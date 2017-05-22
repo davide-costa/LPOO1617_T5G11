@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import bship.network.data.BattleShipData;
+import bship.network.data.LobbyData;
+import bship.network.data.LobbyInfoData;
 import bship.network.data.LobbyInvitedData;
 import bship.network.data.LoginRequestData;
 import bship.network.data.LoginResponseData;
@@ -81,8 +83,45 @@ public class BattleShipServer
 		inLobbyPlayers.add(newPlayer);
 		
 		newPlayer.setState(new InLobby(newPlayer));
-		//TODO:reenviar a todos so online players in lobby a nova informaçao
+		sendOnlinePlayersInfoToAllPlayers();
 		return new LoginResponseData(true);
+	}
+	
+	public void sendOnlinePlayersInfoToPlayer(Player player)
+	{
+		ArrayList<String> playerNames = new ArrayList<String>();
+		for (Player currPlayer : inLobbyPlayers)
+			playerNames.add(currPlayer.getUsername());
+		
+		LobbyData namesData = new LobbyInfoData(playerNames);
+		try
+		{
+			player.sendData(namesData);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendOnlinePlayersInfoToAllPlayers()
+	{
+		ArrayList<String> playerNames = new ArrayList<String>();
+		for (Player currPlayer : inLobbyPlayers)
+			playerNames.add(currPlayer.getUsername());
+		
+		LobbyData namesData = new LobbyInfoData(playerNames);
+		try
+		{
+			for (Player currPlayer : inLobbyPlayers)
+				currPlayer.sendData(namesData);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void playerDisconnected(ClientThread thread)

@@ -30,6 +30,7 @@ public class InGame extends PlayerState
 			player.setOpponent(null);
 		}
 		opponent.sendData(data);
+		player.getBattleShipServer().sendOnlinePlayersInfoToPlayer(player);
 	}
 
 }
