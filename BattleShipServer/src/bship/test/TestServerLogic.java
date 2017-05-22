@@ -374,6 +374,24 @@ public class TestServerLogic
 		assertEquals(Result.WATER, result);
 		assertEquals(endOfGame, endOfGameResult);
 		AssertPlayersAreInGame();
+		
+		if (!endOfGame)
+			return;
+		
+		EndOfGameData endData1;
+		EndOfGameData endData2;
+		
+		
+		shootCoords1 = new String("3, 5");
+		shootData1 = new GameShootData(shootCoords1);
+		socket1Output.writeObject(shootData1);
+		shootData2 = (GameShootData) socket2Input.readObject();
+		assertNotNull(shootData2);
+		shootCoords2 = (String) shootData2.getCoords();
+		assertNotNull(shootCoords2);
+		assertEquals(shootCoords1, shootCoords2);
+		AssertPlayersAreInGame();
+		
 	}
 	
 	@Test
@@ -389,6 +407,14 @@ public class TestServerLogic
 		player1.setState(new InGame(player1));
 		player2.setState(new InGame(player2));
 		AssertPlayersAreInGame();
+		
+		MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output, true);
+		Thread.sleep(200);
+		GetCurrentPlayersInfo();
+		assertTrue (player1State instanceof InLobby);
+		assertTrue (player1State instanceof InLobby);
+		assertNull(player1Opponent);
+		assertNull(player2Opponent);
 		
 		
 		

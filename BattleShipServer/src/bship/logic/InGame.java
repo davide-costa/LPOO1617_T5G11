@@ -22,7 +22,12 @@ public class InGame extends PlayerState
 		player.getOpponent().sendData(data);
 		
 		if(data instanceof EndOfGameData)
-			player.setState(new InLobby(player));	
+		{
+			player.setState(new InLobby(player));
+			Player opponent = player.getOpponent();
+			opponent.setOpponent(null);
+			player.setOpponent(null);
+		}
 	}
 
 }
