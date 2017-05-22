@@ -432,9 +432,6 @@ public class TestServerLogic
 		assertTrue (player1State instanceof InLobby);
 		assertNull(player1Opponent);
 		assertNull(player2Opponent);
-		
-		
-		
 
 		Thread.sleep(200);
 		server.stopServer();
