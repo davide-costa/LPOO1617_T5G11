@@ -284,14 +284,8 @@ public class TestServerLogic
 		GetCurrentPlayersInfo();
 		assertTrue(player1State instanceof InGame);
 		assertTrue(player2State instanceof InGame);
-		
-		
-		
-
-		
+				
 		Thread.sleep(200);
-		
-
 		server.stopServer();
 	}
 	
