@@ -13,19 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class Menu implements KeyListener
+public class Menu extends BattleShipGui implements KeyListener
 {
-	
-	private JFrame frame;
-	private JPanel menuPanel;
-	
 	public Menu(JFrame frame) 
 	{
 		this.frame = frame;
-		menuPanel = new JPanel();
-		frame.getContentPane().add(menuPanel, "MenuPanel");
-		menuPanel.setLayout(null);
-		menuPanel.addKeyListener(this);
+		currPanel = new JPanel();
+		frame.getContentPane().add(currPanel, "MenuPanel");
+		currPanel.setLayout(null);
+		currPanel.addKeyListener(this);
 		JButton btnChangeWindow = new JButton("Login Facebook");
 		btnChangeWindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -36,7 +32,7 @@ public class Menu implements KeyListener
 			}
 		});
 		btnChangeWindow.setBounds(294, 227, 130, 23);
-		menuPanel.add(btnChangeWindow);
+		currPanel.add(btnChangeWindow);
 
 		JButton btnMultiplayerGame = new JButton("Multiplayer Game");
 		btnMultiplayerGame.addActionListener(new ActionListener() {
@@ -52,14 +48,14 @@ public class Menu implements KeyListener
 					   System.err.println(e.getMessage());
 					  }
 			        
-			         BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, menuPanel);
+			         BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, currPanel, intermediate);
 			
 			}
 		});
 		btnMultiplayerGame.setBounds(135, 90, 175, 23);
-		menuPanel.add(btnMultiplayerGame);
+		currPanel.add(btnMultiplayerGame);
 		
-		menuPanel.requestFocusInWindow();
+		currPanel.requestFocusInWindow();
 	}
 
 	@Override

@@ -6,50 +6,50 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Lobby implements KeyListener
+import bship.network.sockets.SocketIntermediate;
+
+public class Lobby extends BattleShipGui
 {
-	JFrame frame;
-	JPanel battleShipLoginPanel;
-	JPanel lobbyPanel;
-	
-	public Lobby(JFrame frame, JPanel battleShipLoginPanel)
+	public Lobby(JFrame frame, JPanel battleShipLoginPanel, SocketIntermediate intermediate)
 	{
 		this.frame = frame;
-		this.battleShipLoginPanel = battleShipLoginPanel;
-	
-		lobbyPanel = new JPanel();
-		frame.getContentPane().add(lobbyPanel, "Lobby Panel");
-		lobbyPanel.setLayout(null);
+		this.lastPanel = battleShipLoginPanel;
+		this.intermediate = intermediate;
+		
+		currPanel = new JPanel();
+		frame.getContentPane().add(currPanel, "Lobby Panel");
+		currPanel.setLayout(null);
 		battleShipLoginPanel.setVisible(false);
-		lobbyPanel.setVisible(true);
+		currPanel.setVisible(true);
+		currPanel.addKeyListener(this);
 	
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Lobby");
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Lobby");
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Lobby");
 	}
 
 	public void handleInvite(String inviterName) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Lobby");
 	}
 
 	public void handleInviteResponse(boolean wasAccepted) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Lobby");
 	}
 }

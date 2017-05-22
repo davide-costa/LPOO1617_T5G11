@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 
 import bship.network.data.LoginResponseData;
 import bship.network.sockets.BattleShipServerLoginIntermediate;
+import bship.network.sockets.SocketIntermediate;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,53 +17,41 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
-public class BattleShipServerLogin implements KeyListener
+public class BattleShipServerLogin extends BattleShipGui
 {
-	private JFrame frame;
-	private JPanel menuPanel;
-	private JPanel battleShipLoginPanel;
 	private JTextField usernameTextField;
 	private JTextField passwordTextField;
 	private String username, password;
 	
-	public BattleShipServerLogin(JFrame frame, JPanel menuPanel)
+	public BattleShipServerLogin(JFrame frame, JPanel menuPanel, SocketIntermediate intermediate)
 	{
 		this.frame = frame;
-		this.menuPanel = menuPanel;
-		battleShipLoginPanel = new JPanel();
-		frame.getContentPane().add(battleShipLoginPanel, "BattleShip Login Panel");
-		battleShipLoginPanel.setLayout(null);
+		lastPanel = menuPanel;
+		this.intermediate = new BattleShipServerLoginIntermediate();
+		currPanel = new JPanel();
+		frame.getContentPane().add(currPanel, "BattleShip Login Panel");
+		currPanel.setLayout(null);
 		menuPanel.setVisible(false);
-		battleShipLoginPanel.setVisible(true);
-		
-		JButton btnLobby = new JButton("LOBBY");
-		btnLobby.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				Lobby lobby = new Lobby(frame, battleShipLoginPanel);
-			}
-		});
-		btnLobby.setBounds(155, 242, 89, 23);
-		battleShipLoginPanel.add(btnLobby);
+		currPanel.setVisible(true);
 		
 		usernameTextField = new JTextField();
 		usernameTextField.setBounds(155, 80, 86, 20);
-		battleShipLoginPanel.add(usernameTextField);
+		currPanel.add(usernameTextField);
 		usernameTextField.setColumns(10);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(73, 83, 72, 14);
-		battleShipLoginPanel.add(lblUsername);
+		currPanel.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(73, 129, 72, 14);
-		battleShipLoginPanel.add(lblPassword);
+		currPanel.add(lblPassword);
 		
 		passwordTextField = new JTextField();
 
 		passwordTextField.setColumns(10);
 		passwordTextField.setBounds(155, 126, 86, 20);
-		battleShipLoginPanel.add(passwordTextField);
+		currPanel.add(passwordTextField);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -82,13 +71,12 @@ public class BattleShipServerLogin implements KeyListener
 			}
 		});
 		btnLogin.setBounds(155, 172, 89, 23);
-		battleShipLoginPanel.add(btnLogin);
+		currPanel.add(btnLogin);
 		
 		menuPanel.setVisible(false);
-		battleShipLoginPanel.setVisible(true);
-		battleShipLoginPanel.addKeyListener(this);
-		System.out.println("battleShipLoginPanel");
-		battleShipLoginPanel.requestFocusInWindow();
+		currPanel.setVisible(true);
+		currPanel.addKeyListener(this);
+		currPanel.requestFocusInWindow();
 	}
 
 	@Override
@@ -112,7 +100,7 @@ public class BattleShipServerLogin implements KeyListener
 	public void LoginResponse(LoginResponseData response) 
 	{
 		if(response.isSucceeded())
-			new Lobby(frame, battleShipLoginPanel);
+			new Lobby(frame, currPanel, intermediate);
 		else
 			//do stuff like abrir um dialogo a dizer que ta mal ou assim
 			return;

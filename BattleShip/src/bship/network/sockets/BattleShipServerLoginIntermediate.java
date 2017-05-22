@@ -9,9 +9,8 @@ import bship.network.data.BattleShipData;
 import bship.network.data.LoginRequestData;
 import bship.network.data.LoginResponseData;
 
-public class BattleShipServerLoginIntermediate implements Observer
+public class BattleShipServerLoginIntermediate extends SocketIntermediate implements Observer
 {
-
 	private BattleShipServerLogin gui;
 	
 	public void requestLogin(BattleShipServerLogin gui, String username, String password) throws IOException
@@ -32,6 +31,7 @@ public class BattleShipServerLoginIntermediate implements Observer
 		LoginResponseData response = (LoginResponseData)object;
 		//TODO: tirar este print
 		System.out.println(response.isSucceeded());
-		gui.LoginResponse(response);
+		if(response.isSucceeded())
+			gui.LoginResponse(response);
 	}
 }

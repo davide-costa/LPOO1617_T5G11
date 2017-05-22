@@ -11,7 +11,7 @@ import bship.network.data.LobbyInfoData;
 import bship.network.data.LobbyInviteResponseData;
 import bship.network.data.LobbyInvitedData;
 
-public class LobbyIntermediate implements Observer
+public class LobbyIntermediate extends SocketIntermediate implements Observer
 {
 	private Lobby gui;
 	private ArrayList<String> onlinePlayersNames;
@@ -36,6 +36,7 @@ public class LobbyIntermediate implements Observer
 		
 		if (object instanceof LobbyInfoData)
 		{
+			System.out.println("LobbyInfoData");
 			LobbyInfoData info = (LobbyInfoData) object;
 			this.onlinePlayersNames = info.getOnlinePlayersNames();
 		}
