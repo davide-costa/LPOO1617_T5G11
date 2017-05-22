@@ -20,7 +20,7 @@ import bship.logic.PlayerState;
 import bship.logic.ReadyForGame;
 import bship.network.data.*;
 import bship.network.data.GameResultData.Result;
-import bship.network.data.LobbyInviteResponseData.Response;
+import bship.network.data.LobbyInviteResponseData.InviteResponse;
 
 public class TestServerLogic
 {
@@ -249,7 +249,7 @@ public class TestServerLogic
 		socket1Output.writeObject(invite);
 		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
 		assertNotNull(receivedInvite);
-		inviteResponse = new LobbyInviteResponseData(Response.UNACCEPTED);
+		inviteResponse = new LobbyInviteResponseData(InviteResponse.REJECTED);
 		socket2Output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertFalse(inviteResponse.wasAccepted());
@@ -265,7 +265,7 @@ public class TestServerLogic
 		socket1Output.writeObject(invite);
 		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
 		assertNotNull(receivedInvite);
-		inviteResponse = new LobbyInviteResponseData(Response.ACCEPTED);
+		inviteResponse = new LobbyInviteResponseData(InviteResponse.ACCEPTED);
 		socket2Output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertTrue(inviteResponse.wasAccepted());
