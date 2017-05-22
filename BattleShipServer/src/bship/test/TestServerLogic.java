@@ -375,27 +375,40 @@ public class TestServerLogic
 		assertEquals(endOfGame, endOfGameResult);
 		AssertPlayersAreInGame();
 		
-		if (!endOfGame)
-			return;
-		
+		if (endOfGame)
+			PerformEndOfGameProcedure(socket1Input, socket1Output, socket2Input, socket2Output);
+	}
+	
+	private void PerformEndOfGameProcedure(ObjectInputStream socket1Input, ObjectOutputStream socket1Output, ObjectInputStream socket2Input, ObjectOutputStream socket2Output) throws IOException, ClassNotFoundException
+	{
 		EndOfGameData endData1;
 		EndOfGameData endData2;
+		String winnerGameMap1;
+		String winnerGameMap2;
 		
-		
-		shootCoords1 = new String("3, 5");
-		shootData1 = new GameShootData(shootCoords1);
-		socket1Output.writeObject(shootData1);
-		shootData2 = (GameShootData) socket2Input.readObject();
-		assertNotNull(shootData2);
-		shootCoords2 = (String) shootData2.getCoords();
-		assertNotNull(shootCoords2);
-		assertEquals(shootCoords1, shootCoords2);
-		AssertPlayersAreInGame();
-		
+		winnerGameMap1 = new String("6, 4, 2, 4,6 f, sd, 56, 6, d");
+		endData1 = new EndOfGameData(winnerGameMap1);
+		socket1Output.writeObject(endData1);
+		endData2 = (EndOfGameData) socket2Input.readObject();
+		assertNotNull(endData2);
+		winnerGameMap2 = (String) endData2.getWinnerGameMap();
+		assertNotNull(winnerGameMap2);
+		assertEquals(winnerGameMap1, winnerGameMap2);
+		GetCurrentPlayersInfo();
+		assertNull(player1Opponent);
+		assertNull(player2Opponent);
+		assertTrue(player1State instanceof InLobby);
+		assertTrue(player2State instanceof InLobby);
 	}
 	
 	@Test
 	public void TestEndOfGameLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
+	{
+		AssertEndOfGamePerformsCorrectly(false);
+		AssertEndOfGamePerformsCorrectly(true);	
+	}
+	
+	private void AssertEndOfGamePerformsCorrectly(boolean shootFirst) throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
 		server = new BattleShipServer();
 		
@@ -408,7 +421,10 @@ public class TestServerLogic
 		player2.setState(new InGame(player2));
 		AssertPlayersAreInGame();
 		
-		MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output, true);
+		if (shootFirst)
+			MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output, false);
+		
+		MakeAPlayerAndReadResults(socket2Input, socket2Output, socket1Input, socket1Output, true);
 		Thread.sleep(200);
 		GetCurrentPlayersInfo();
 		assertTrue (player1State instanceof InLobby);
