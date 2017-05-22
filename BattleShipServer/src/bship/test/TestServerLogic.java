@@ -12,10 +12,12 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import bship.logic.BattleShipServer;
+import bship.logic.InGame;
 import bship.logic.InLobby;
 import bship.logic.InShipPlacement;
 import bship.logic.Player;
 import bship.logic.PlayerState;
+import bship.logic.ReadyForGame;
 import bship.network.data.*;
 
 public class TestServerLogic
@@ -72,6 +74,7 @@ public class TestServerLogic
 		LoginResponseData response = (LoginResponseData)socket1Input.readObject();
 		assertNotNull(response);
 		assertTrue(response.isSucceeded());
+		player1 = server.getBattleshipPlayers().get("player1");
 	}
 	
 	private void LoginPlayer2(String player2Name, String player2Password) throws ClassNotFoundException, IOException, InterruptedException
@@ -91,6 +94,7 @@ public class TestServerLogic
 		LoginResponseData response = (LoginResponseData)socket2Input.readObject();
 		assertNotNull(response);
 		assertTrue(response.isSucceeded());
+		player2 = server.getBattleshipPlayers().get("player2");
 	}
 		
 	@Test
@@ -243,6 +247,46 @@ public class TestServerLogic
 		assertSame(player2, player1Opponent);
 		assertTrue(player1State instanceof InShipPlacement);
 		assertTrue(player2State instanceof InShipPlacement);
+
+		
+		Thread.sleep(200);
+		
+
+		server.stopServer();
+	}
+	
+	@Test
+	public void TestShipPlacementLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
+	{
+		server = new BattleShipServer();
+		
+		LoginPlayer1("player1", "lpoo");
+		LoginPlayer2("player2", "lpoo");
+		
+		ReadyForGameData data;
+		
+		
+		player1.setOpponent(player2);
+		player2.setOpponent(player1);
+		player1.setState(new InShipPlacement(player1));
+		player2.setState(new InShipPlacement(player2));
+		data = new ReadyForGameData();
+		socket1Output.writeObject(data);
+		data = (ReadyForGameData) socket2Input.readObject();
+		assertNotNull(data);
+		GetCurrentPlayersInfo();
+		assertTrue(player1State instanceof ReadyForGame);
+		assertTrue(player2State instanceof InShipPlacement);
+		data = new ReadyForGameData();
+		socket2Output.writeObject(data);
+		StartGameData startData = (StartGameData) socket1Input.readObject();
+		assertNotNull(startData);
+		GetCurrentPlayersInfo();
+		assertTrue(player1State instanceof InGame);
+		assertTrue(player2State instanceof InGame);
+		
+		
+		
 
 		
 		Thread.sleep(200);
