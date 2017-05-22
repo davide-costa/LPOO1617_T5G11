@@ -332,8 +332,8 @@ public class TestServerLogic
 		//Make 50 plays each one in reverse order of the last one and ensure all goes well
 		for (int i = 0; i < 50; i++)
 		{
-			MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output);
-			MakeAPlayerAndReadResults(socket2Input, socket2Output, socket1Input, socket1Output);
+			MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output, false);
+			MakeAPlayerAndReadResults(socket2Input, socket2Output, socket1Input, socket1Output, false);
 		}
 		
 		Thread.sleep(200);
@@ -341,7 +341,7 @@ public class TestServerLogic
 		
 	}
 	
-	private void MakeAPlayerAndReadResults(ObjectInputStream socket1Input, ObjectOutputStream socket1Output, ObjectInputStream socket2Input, ObjectOutputStream socket2Output) throws IOException, ClassNotFoundException
+	private void MakeAPlayerAndReadResults(ObjectInputStream socket1Input, ObjectOutputStream socket1Output, ObjectInputStream socket2Input, ObjectOutputStream socket2Output, boolean endOfGame) throws IOException, ClassNotFoundException
 	{
 		//This is not actually a string but since it is an Object inside the GameShootData class, we use a String to test it because it works with any Object if it works with a String
 		//The client currently doesn't send a String inside the class GameShootData but it could send anything without having to modify the server code (maintainable code)
@@ -363,16 +363,37 @@ public class TestServerLogic
 		AssertPlayersAreInGame();
 
 		// Assert game results arrive correctly
-		resultData1 = new GameResultData(Result.WATER, false);
+		resultData1 = new GameResultData(Result.WATER, endOfGame);
 		socket1Output.writeObject(resultData1);
 		resultData2 = (GameResultData) socket2Input.readObject();
 		assertNotNull(shootData2);
 		Result result = resultData2.getResult();
-		boolean endOfGame = resultData2.isEndOfGame();
+		boolean endOfGameResult = resultData2.isEndOfGame();
 		assertNotNull(result);
-		assertNotNull(endOfGame);
+		assertNotNull(endOfGameResult);
 		assertEquals(Result.WATER, result);
-		assertEquals(false, endOfGame);
+		assertEquals(endOfGame, endOfGameResult);
 		AssertPlayersAreInGame();
+	}
+	
+	@Test
+	public void TestEndOfGameLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
+	{
+		server = new BattleShipServer();
+		
+		LoginPlayer1("player1", "lpoo");
+		LoginPlayer2("player2", "lpoo");
+		
+		player1.setOpponent(player2);
+		player2.setOpponent(player1);
+		player1.setState(new InGame(player1));
+		player2.setState(new InGame(player2));
+		AssertPlayersAreInGame();
+		
+		
+		
+
+		Thread.sleep(200);
+		server.stopServer();
 	}
 }
