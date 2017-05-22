@@ -7,16 +7,21 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import bship.logic.AllyCellState;
 import bship.logic.Carrier;
+import bship.logic.CellState;
 import bship.logic.Coords;
+import bship.logic.Cruiser;
 import bship.logic.Destroyer;
 import bship.logic.Game;
+import bship.logic.OpponentCellState;
 import bship.logic.Ship;
+import bship.network.data.GameResultData.Result;
 
 public class TestGameLogic
 {
 	@Test
-	public void TestGetInstance()
+	public void testGetInstance()
 	{
 		Game game1 = Game.getInstance();
 		Game game2 = Game.getInstance();
@@ -24,15 +29,15 @@ public class TestGameLogic
 	}
 	
 	@Test
-	public void TestGetSorroundingCoordsOfShip()
+	public void testGetSorroundingCoordsOfShip()
 	{
 		Game game = Game.getInstance();
 		
-		TestVerticalLeftBottomShip(game);
-		TestVerticalRightUpShip(game);
+		testVerticalLeftBottomShip(game);
+		testVerticalRightUpShip(game);
 	}
 	
-	private void TestVerticalLeftBottomShip(Game game)
+	private void testVerticalLeftBottomShip(Game game)
 	{
 		ArrayList<Coords> shipCoords = new ArrayList<Coords>();
 		shipCoords.add(new Coords(0,9));
@@ -57,7 +62,7 @@ public class TestGameLogic
 		assertEquals(correct_coords, returned_coords);
 	}
 	
-	private void TestVerticalRightUpShip(Game game)
+	private void testVerticalRightUpShip(Game game)
 	{
 		ArrayList<Coords> shipCoords = new ArrayList<Coords>();
 		shipCoords.add(new Coords(9,0));
@@ -82,4 +87,86 @@ public class TestGameLogic
 		
 		assertEquals(correct_coords, returned_coords);
 	}	
+	
+	@Test
+	public void testShootAlly()
+	{
+//		Game game = Game.getInstance();
+//		
+//		Coords shootCoords = new Coords(0,0);
+//		game.shootAlly(shootCoords);
+	}
+	
+	@Test
+	public void testGetPlayEffects()
+	{
+		Game game = Game.getInstance();
+		TestsMap map = new TestsMap(false, 10, 10);
+		game.setAllyMap(map);
+		
+		Coords cruiserCoords1 = new Coords(0,0);
+		assertEquals(Result.WATER, game.getPlayEffects(cruiserCoords1));
+		
+		Coords cruiserCoords2 = new Coords(1,0);
+		Coords cruiserCoords3 = new Coords(2,0);
+		ArrayList<Coords> shipCoords = new ArrayList<Coords>();
+		Ship cruiser = new Cruiser(shipCoords, "horizontal");
+		CellState cell1 = new AllyCellState(cruiser);
+		CellState cell2 = new AllyCellState(cruiser);
+		CellState cell3 = new AllyCellState(cruiser);
+		
+		map.setCellState(cruiserCoords1, cell1);
+		map.setCellState(cruiserCoords2, cell2);
+		map.setCellState(cruiserCoords3, cell3);
+		
+		game.shootAlly(cruiserCoords1);
+		assertEquals(Result.HIT, game.getPlayEffects(cruiserCoords1));
+		
+		game.shootAlly(cruiserCoords2);
+		assertEquals(Result.HIT, game.getPlayEffects(cruiserCoords2));
+		
+		game.shootAlly(cruiserCoords3);
+		assertEquals(Result.SINK_CRUISER, game.getPlayEffects(cruiserCoords3));	
+	}
+	
+	
+	@Test
+	public void testHandleOpponentSankShip()
+	{
+		Game game = Game.getInstance();
+		TestsMap map = new TestsMap(false, 10, 10);
+		game.setOpponentMap(map);
+		
+		
+		ArrayList<Coords> shipCoords = new ArrayList<Coords>();
+		Coords cruiserCoords1 = new Coords(5,3);
+		Coords cruiserCoords2 = new Coords(5,4);
+		Coords cruiserCoords3 = new Coords(5,5);
+		Ship cruiser = new Cruiser(shipCoords, "vertical");
+		CellState cell1 = new AllyCellState(cruiser);
+		CellState cell2 = new AllyCellState(cruiser);
+		CellState cell3 = new AllyCellState(cruiser);
+		map.setCellState(cruiserCoords1, cell1);
+		map.setCellState(cruiserCoords2, cell2);
+		map.setCellState(cruiserCoords3, cell3);
+		cruiser.addCoord(cruiserCoords1);
+		cruiser.addCoord(cruiserCoords2);
+		cruiser.addCoord(cruiserCoords3);
+		cruiser.Destroy();
+		
+		CellState destroyedShipCell = new OpponentCellState(cruiser, true, true);
+		assertEquals(game.handleOpponentSankShip(cruiserCoords2, Result.SINK_CRUISER), destroyedShipCell);
+	
+		ArrayList<Coords> sorroundingCoords = game.getSurroundingCoordsOfShip(cruiser);
+		sorroundingCoords.addAll(cruiser.getCoords());
+		
+		for(Coords coords: sorroundingCoords)
+		{
+			System.out.println(coords.GetX() + "  " + coords.GetY());
+			assertTrue(map.getCellState(coords).isDiscovered());
+			
+		}
+			
+	}
+	
 }

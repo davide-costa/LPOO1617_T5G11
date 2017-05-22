@@ -59,7 +59,7 @@ public abstract class Ship
 
 	public boolean isDestroyed()
 	{
-		return health == size;
+		return health == 0;
 	}
 	
 	public void Destroy()
@@ -75,5 +75,51 @@ public abstract class Ship
 	public void cleanCoords() 
 	{
 		coords.clear();	
+	}
+	
+	@Override
+	public boolean equals(Object obj) 
+	{
+		System.out.println(1);
+		if (this == obj)
+			return true;
+		System.out.println(1);
+		if (obj == null)
+			return false;
+		System.out.println(1);
+		if (getClass() != obj.getClass())
+			{System.out.println(2);
+			return false;}
+		System.out.println(3);
+		Ship other = (Ship) obj;
+		if (coords == null) {
+			if (other.coords != null)
+			{
+				System.out.println(4);
+				return false;}
+			System.out.println(5);
+		} else if (!coords.equals(other.coords))
+		{System.out.println(6);
+			return false;}
+		System.out.println(1);
+		if (direction == null) {
+			System.out.println(1);
+			if (other.direction != null)
+				return false;
+			
+		} else if (!direction.equals(other.direction))
+			return false;
+		System.out.println(1);
+		if (health != other.health)
+			return false;
+		System.out.println(1);
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (size != other.size)
+			return false;
+		return true;
 	}
 }

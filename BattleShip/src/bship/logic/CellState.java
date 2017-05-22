@@ -35,4 +35,28 @@ public abstract class CellState
 	
 	public abstract boolean isDiscoveredAndShip();
 	
+
+	@Override
+	public boolean equals(Object obj) 
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CellState other = (CellState) obj;
+		if (discovered != other.discovered)
+			return false;
+		if (ship == null) 
+		{
+			if (other.ship != null)
+				return false;
+		} 
+		else if (!ship.equals(other.ship))
+			return false;
+		
+		return true;
+	}
+	
 }

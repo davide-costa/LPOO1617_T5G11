@@ -2,6 +2,7 @@ package bship.logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import bship.network.data.GameResultData.Result;
@@ -46,10 +47,15 @@ public class Game
 	{
 		return map;
 	}
-
-	public void setOpponentMap(GameMap winnerGameMap)
+	
+	public void setAllyMap(GameMap allyGameMap)
 	{
-		this.opponentMap = winnerGameMap;
+		this.map = allyGameMap;
+	}
+
+	public void setOpponentMap(GameMap opponentGameMap)
+	{
+		this.opponentMap = opponentGameMap;
 	}
 	
 	
@@ -106,16 +112,11 @@ public class Game
 	
 		for(int i = 0; i < surroundingCoords.size(); i++)
 		{
-			if(surroundingCoords.get(i).GetX() < 0 || surroundingCoords.get(i).GetY() < 0)
+			if(!map.areCoordsInMapRange(surroundingCoords.get(i)))
 			{
 				surroundingCoords.remove(i);
 				i--;
-			}
-			else if(surroundingCoords.get(i).GetX() >= map.sizeX || surroundingCoords.get(i).GetY() >= map.sizeY)
-			{
-				surroundingCoords.remove(i);
-				i--;
-			}
+			}		
 		}
 		
 		return surroundingCoords;
@@ -192,7 +193,7 @@ public class Game
 	}
 
 
-	private CellState handleOpponentSankShip(Coords lastShootCoords, Result result) 
+	public CellState handleOpponentSankShip(Coords lastShootCoords, Result result) 
 	{
 		Ship destroyedShip;
 		switch(result)
@@ -222,12 +223,18 @@ public class Game
 		
 		destroyedShip.addCoord(lastShootCoords);
 		discoverCoordsOfSankShip(destroyedShip);
+		Collections.sort(destroyedShip.getCoords());
+
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
-		coordsArray = destroyedShip.getCoords();
+		coordsArray.addAll(destroyedShip.getCoords());
 		coordsArray.addAll(getSurroundingCoordsOfShip(destroyedShip));
+		for(Coords coords:coordsArray )
+		{
+			System.out.println(coords.GetX() + "  " + coords.GetY());
+		}
 		ArrayList<CellState> statesArray = new ArrayList<CellState>();
-		getCellStatesOfCoords(true, coordsArray, statesArray);
-		setCellStatesAsDiscovered(statesArray, destroyedShip.getSize() - 1);
+		getCellStatesOfCoords(false, coordsArray, statesArray);
+		setCellStatesAsDiscovered(statesArray, 0);
 		
 		return cell;
 	}
@@ -238,33 +245,37 @@ public class Game
 		
 		//Go try catch to get the direction of the ship
 		//Try left coord
-		TryOpponentShipHeadingDirection(ship, coords, "horizontal", -1, 0);
+		tryOpponentShipHeadingDirection(ship, coords, "horizontal", -1, 0);
 		//Try right coord
-		TryOpponentShipHeadingDirection(ship, coords, "horizontal", 1, 0);
+		tryOpponentShipHeadingDirection(ship, coords, "horizontal", 1, 0);
 		
 		//If the ship has been marked as horizontal, it is not needed to search on the y axis
 		if (ship.getDirection() == "horizontal")
 			return;
 		
 		//Try bottom coord
-		TryOpponentShipHeadingDirection(ship, coords, "vertical", 0, -1);
+		tryOpponentShipHeadingDirection(ship, coords, "vertical", 0, -1);
 		//Try top coord
-		TryOpponentShipHeadingDirection(ship, coords, "vertical", 0, 1);
+		tryOpponentShipHeadingDirection(ship, coords, "vertical", 0, 1);
 	}
 	
-	private void TryOpponentShipHeadingDirection(Ship ship, Coords initCoords, String direction, int xInc, int yInc)
+	private void tryOpponentShipHeadingDirection(Ship ship, Coords initCoords, String direction, int xInc, int yInc)
 	{
 		Coords coords = new Coords(initCoords);
 		
 		coords.incrementX(xInc);
 		coords.incrementY(yInc);
+		System.out.println("Added");
 		while (getOpponentCellState(coords).hasShip())
 		{
+			System.out.println(coords.GetX() + "  " + coords.GetY());
 			ship.setDirection(direction);
-			ship.addCoord(coords);
+			ship.addCoord(new Coords(coords));
 			coords.incrementX(xInc);
 			coords.incrementY(yInc);
 		}
+		
+		System.out.println("END");
 	}
 
 }

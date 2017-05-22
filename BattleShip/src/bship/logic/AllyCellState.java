@@ -15,6 +15,6 @@ public class AllyCellState extends CellState
 	
 	public boolean isDiscoveredAndShip()
 	{
-		return isDiscovered() && hasShip();
+		return discovered && hasShip();
 	}
 }
