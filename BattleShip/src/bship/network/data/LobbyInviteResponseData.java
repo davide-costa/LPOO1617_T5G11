@@ -1,16 +1,18 @@
 package bship.network.data;
 
+
 public class LobbyInviteResponseData extends LobbyData
 {
-	private boolean accepted;
+	public enum Response {ACCEPTED, UNACCEPTED, UNSUCESSFUL};
+	private Response response;
 	
-	public LobbyInviteResponseData(boolean accepted)
+	public LobbyInviteResponseData(Response response)
 	{
-		this.accepted = accepted;
+		this.response = response;
 	}
 	
 	public boolean wasAccepted()
 	{
-		return accepted;
+		return response == Response.ACCEPTED;
 	}
 }
