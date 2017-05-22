@@ -161,11 +161,8 @@ public class TestGameLogic
 		sorroundingCoords.addAll(cruiser.getCoords());
 		
 		for(Coords coords: sorroundingCoords)
-		{
-			System.out.println(coords.GetX() + "  " + coords.GetY());
 			assertTrue(map.getCellState(coords).isDiscovered());
-			
-		}
+
 			
 	}
 	

@@ -228,10 +228,6 @@ public class Game
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		coordsArray.addAll(destroyedShip.getCoords());
 		coordsArray.addAll(getSurroundingCoordsOfShip(destroyedShip));
-		for(Coords coords:coordsArray )
-		{
-			System.out.println(coords.GetX() + "  " + coords.GetY());
-		}
 		ArrayList<CellState> statesArray = new ArrayList<CellState>();
 		getCellStatesOfCoords(false, coordsArray, statesArray);
 		setCellStatesAsDiscovered(statesArray, 0);
@@ -265,17 +261,13 @@ public class Game
 		
 		coords.incrementX(xInc);
 		coords.incrementY(yInc);
-		System.out.println("Added");
 		while (getOpponentCellState(coords).hasShip())
 		{
-			System.out.println(coords.GetX() + "  " + coords.GetY());
 			ship.setDirection(direction);
 			ship.addCoord(new Coords(coords));
 			coords.incrementX(xInc);
 			coords.incrementY(yInc);
 		}
-		
-		System.out.println("END");
 	}
 
 }
