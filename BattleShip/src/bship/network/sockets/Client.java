@@ -13,7 +13,6 @@ import java.io.ObjectOutputStream;
 import java.util.Observable;
 import java.util.Observer;
 
-import bship.logic.Opponent;
 import bship.network.data.BattleShipData;
 import bship.network.data.GameData;
 

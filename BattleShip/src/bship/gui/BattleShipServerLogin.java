@@ -15,8 +15,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 
 public class BattleShipServerLogin implements KeyListener
 {

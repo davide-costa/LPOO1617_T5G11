@@ -12,11 +12,10 @@ import bship.logic.Carrier;
 import bship.logic.CellState;
 import bship.logic.Coords;
 import bship.logic.Cruiser;
-import bship.logic.Destroyer;
 import bship.logic.Game;
 import bship.logic.OpponentCellState;
 import bship.logic.Ship;
-import bship.network.data.GameResultData.Result;
+import bship.network.data.GameResultData.GameResult;
 
 public class TestGameLogic
 {
@@ -105,7 +104,7 @@ public class TestGameLogic
 		game.setAllyMap(map);
 		
 		Coords cruiserCoords1 = new Coords(0,0);
-		assertEquals(Result.WATER, game.getPlayEffects(cruiserCoords1));
+		assertEquals(GameResult.WATER, game.getPlayEffects(cruiserCoords1));
 		
 		Coords cruiserCoords2 = new Coords(1,0);
 		Coords cruiserCoords3 = new Coords(2,0);
@@ -120,13 +119,13 @@ public class TestGameLogic
 		map.setCellState(cruiserCoords3, cell3);
 		
 		game.shootAlly(cruiserCoords1);
-		assertEquals(Result.HIT, game.getPlayEffects(cruiserCoords1));
+		assertEquals(GameResult.HIT, game.getPlayEffects(cruiserCoords1));
 		
 		game.shootAlly(cruiserCoords2);
-		assertEquals(Result.HIT, game.getPlayEffects(cruiserCoords2));
+		assertEquals(GameResult.HIT, game.getPlayEffects(cruiserCoords2));
 		
 		game.shootAlly(cruiserCoords3);
-		assertEquals(Result.SINK_CRUISER, game.getPlayEffects(cruiserCoords3));	
+		assertEquals(GameResult.SINK_CRUISER, game.getPlayEffects(cruiserCoords3));	
 	}
 	
 	
@@ -155,7 +154,7 @@ public class TestGameLogic
 		cruiser.Destroy();
 		
 		CellState destroyedShipCell = new OpponentCellState(cruiser, true, true);
-		assertEquals(game.handleOpponentSankShip(cruiserCoords2, Result.SINK_CRUISER), destroyedShipCell);
+		assertEquals(game.handleOpponentSankShip(cruiserCoords2, GameResult.SINK_CRUISER), destroyedShipCell);
 	
 		ArrayList<Coords> sorroundingCoords = game.getSurroundingCoordsOfShip(cruiser);
 		sorroundingCoords.addAll(cruiser.getCoords());

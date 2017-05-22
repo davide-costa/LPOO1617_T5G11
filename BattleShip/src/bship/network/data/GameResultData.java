@@ -1,15 +1,14 @@
 package bship.network.data;
 
-import java.util.ArrayList;
 
 public class GameResultData extends GameData
 {
-	public enum Result { WATER, HIT, SINK_CARRIER, SINK_BATTLESHIP, SINK_DESTROYER, SINK_SUBMARINE, SINK_CRUISER };
+	public enum GameResult { WATER, HIT, SINK_CARRIER, SINK_BATTLESHIP, SINK_DESTROYER, SINK_SUBMARINE, SINK_CRUISER };
 	private boolean endOfGame;
-	private Result result;
+	private GameResult result;
 	
 	
-	public GameResultData(Result result, boolean endOfGame)
+	public GameResultData(GameResult result, boolean endOfGame)
 	{
 		this.result = result;
 		this.endOfGame = endOfGame;
@@ -20,7 +19,7 @@ public class GameResultData extends GameData
 		return endOfGame;
 	}
 	
-	public Result getResult()
+	public GameResult getResult()
 	{
 		return result;
 	}

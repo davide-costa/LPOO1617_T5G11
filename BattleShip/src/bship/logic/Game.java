@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import bship.network.data.GameResultData.Result;
+import bship.network.data.GameResultData.GameResult;
 
 public class Game
 {
@@ -14,8 +14,8 @@ public class Game
 	private GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
-	final HashMap<String, Result> shipNameToResult = new HashMap<String, Result>();
-	final HashMap<Result, Ship> ResultToShip = new HashMap<Result, Ship>();	
+	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
+	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
 	
 	private Game()
 	{
@@ -27,11 +27,11 @@ public class Game
 
 	private void FillShipNameToResultMap() 
 	{
-		shipNameToResult.put("Carrier", Result.SINK_CARRIER);
-		shipNameToResult.put("Battleship", Result.SINK_BATTLESHIP);
-		shipNameToResult.put("Cruiser", Result.SINK_CRUISER);
-		shipNameToResult.put("Submarine", Result.SINK_SUBMARINE);
-		shipNameToResult.put("Destroyer", Result.SINK_DESTROYER);
+		shipNameToGameResult.put("Carrier", GameResult.SINK_CARRIER);
+		shipNameToGameResult.put("Battleship", GameResult.SINK_BATTLESHIP);
+		shipNameToGameResult.put("Cruiser", GameResult.SINK_CRUISER);
+		shipNameToGameResult.put("Submarine", GameResult.SINK_SUBMARINE);
+		shipNameToGameResult.put("Destroyer", GameResult.SINK_DESTROYER);
 	}
 	
 	
@@ -158,17 +158,17 @@ public class Game
 	}
 	
 	
-	public Result getPlayEffects(Coords shootCoords)
+	public GameResult getPlayEffects(Coords shootCoords)
 	{
 		CellState cell = getAllyCellState(shootCoords);
 		if (!cell.hasShip())
-			return Result.WATER;
+			return GameResult.WATER;
 	
 		Ship ship = cell.getShip();
 		if(ship.isDestroyed())
-			return shipNameToResult.get(ship.getName());
+			return shipNameToGameResult.get(ship.getName());
 		else
-			return Result.HIT;
+			return GameResult.HIT;
 	}
 	
 	
@@ -178,13 +178,13 @@ public class Game
 			statesArray.get(i).setDiscovered(true);
 	}
 	
-	public void handleResultData(Coords lastShootCoords, Result result)
+	public void handleResultData(Coords lastShootCoords, GameResult result)
 	{
 		CellState cell;
 		
-		if(result == Result.WATER)
+		if(result == GameResult.WATER)
 			cell = new OpponentCellState(null, false, true);
-		else if(result == Result.HIT)
+		else if(result == GameResult.HIT)
 			cell = new OpponentCellState(null, true, true);
 		else
 			cell = handleOpponentSankShip(lastShootCoords, result);
@@ -193,7 +193,7 @@ public class Game
 	}
 
 
-	public CellState handleOpponentSankShip(Coords lastShootCoords, Result result) 
+	public CellState handleOpponentSankShip(Coords lastShootCoords, GameResult result) 
 	{
 		Ship destroyedShip;
 		switch(result)

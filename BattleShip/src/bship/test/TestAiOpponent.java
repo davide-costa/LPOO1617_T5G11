@@ -3,11 +3,9 @@ package bship.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Map;
 
 import bship.ai.AIOpponent;
 import bship.logic.BattleShip;

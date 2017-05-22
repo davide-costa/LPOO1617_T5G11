@@ -1,7 +1,6 @@
 package bship.test;
 
 import bship.logic.AllyCellState;
-import bship.logic.CellState;
 import bship.logic.GameMap;
 
 public class TestsMap extends GameMap
@@ -19,5 +18,4 @@ public class TestsMap extends GameMap
 			for(int j = 0; j < sizeY; j++)
 				map[i][j] = new AllyCellState(null);
 	}
-
 }

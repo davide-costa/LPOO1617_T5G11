@@ -1,18 +1,16 @@
 package bship.logic;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.EndOfGameData;
 import bship.network.data.GameResultData;
-import bship.network.data.GameResultData.Result;
+import bship.network.data.GameResultData.GameResult;
 import bship.network.data.GameShootData;
 import bship.network.data.PlayerDisconnectedData;
 import bship.network.data.ReadyForGameData;
-import bship.network.data.ShipPlacementData;
 import bship.network.data.StartGameData;
 import bship.network.sockets.Client;
 
@@ -46,7 +44,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			game.shootAlly(shootCoords);
 			lastShootCoords = shootCoords;
 			
-			Result result = game.getPlayEffects(shootCoords);
+			GameResult result = game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
 			
 			BattleShipData resultData = new GameResultData(result, endOfGame);
