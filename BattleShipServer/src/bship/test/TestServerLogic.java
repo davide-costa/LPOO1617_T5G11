@@ -213,7 +213,6 @@ public class TestServerLogic
 		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertFalse(inviteResponse.wasAccepted());
 		
-		//try inviting existing player and he responds yes
 		//try inviting existing player and he responds no
 		invite = new LobbyInviteData("player2");
 		socket1Output.writeObject(invite);
@@ -230,7 +229,7 @@ public class TestServerLogic
 		assertTrue(player1State instanceof InLobby);
 		assertTrue(player2State instanceof InLobby);
 		
-		
+		//try inviting existing player and he responds yes
 		invite = new LobbyInviteData("player2");
 		socket1Output.writeObject(invite);
 		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
@@ -240,11 +239,7 @@ public class TestServerLogic
 		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
 		assertTrue(inviteResponse.wasAccepted());
 		Thread.sleep(200);
-		GetCurrentPlayersInfo();
-		assertNotNull(player1Opponent);
-		assertNotNull(player2Opponent);
-		assertSame(player1, player2Opponent);
-		assertSame(player2, player1Opponent);
+		AssertPlayer1AndPlayer2AreOpponents();
 		assertTrue(player1State instanceof InShipPlacement);
 		assertTrue(player2State instanceof InShipPlacement);
 
@@ -270,6 +265,8 @@ public class TestServerLogic
 		player2.setOpponent(player1);
 		player1.setState(new InShipPlacement(player1));
 		player2.setState(new InShipPlacement(player2));
+		AssertPlayer1AndPlayer2AreOpponents();
+		
 		data = new ReadyForGameData();
 		socket1Output.writeObject(data);
 		data = (ReadyForGameData) socket2Input.readObject();
@@ -289,6 +286,24 @@ public class TestServerLogic
 		server.stopServer();
 	}
 	
+	@Test
+	public void TestInGameLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
+	{
+		server = new BattleShipServer();
+		
+		LoginPlayer1("player1", "lpoo");
+		LoginPlayer2("player2", "lpoo");
+		player1.setOpponent(player2);
+		player2.setOpponent(player1);
+		player1.setState(new InGame(player1));
+		player2.setState(new InGame(player2));
+		AssertPlayer1AndPlayer2AreOpponents();
+		
+		Thread.sleep(200);
+		server.stopServer();
+		
+	}
+	
 	private void GetCurrentPlayersInfo()
 	{
 		player1 = server.getBattleshipPlayers().get("player1");
@@ -297,5 +312,16 @@ public class TestServerLogic
 		player2Opponent = player2.getOpponent();
 		player1State = player1.getState();
 		player2State = player2.getState();
+	}
+	
+	private void AssertPlayer1AndPlayer2AreOpponents()
+	{
+		GetCurrentPlayersInfo();
+		assertNotNull(player1);
+		assertNotNull(player2);
+		assertNotNull(player1Opponent);
+		assertNotNull(player2Opponent);
+		assertSame(player1, player2Opponent);
+		assertSame(player2, player1Opponent);
 	}
 }
