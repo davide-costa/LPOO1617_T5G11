@@ -3,21 +3,17 @@ package bship.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.CardLayout;
 import javax.swing.JPanel;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
+import java.awt.BorderLayout;
 import javax.swing.JButton;
+import java.awt.CardLayout;
+import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class BattleShipGui {
 
-	private JFrame frame;
-	/**
-	 * @wbp.nonvisual location=602,239
-	 */
-	private final JTextField textField = new JTextField();
+	private static JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -28,6 +24,7 @@ public class BattleShipGui {
 				try {
 					BattleShipGui window = new BattleShipGui();
 					window.frame.setVisible(true);
+					Menu menu = new Menu(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,38 +42,18 @@ public class BattleShipGui {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() 
-	{
-		textField.setColumns(10);
+	private void initialize() {
 		frame = new JFrame();
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setUndecorated(true);
-		frame.setVisible(true);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 450, 300);
-		frame.getContentPane().add(panel);
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 450, 300);
-		frame.getContentPane().add(panel_1);
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				panel_1.setVisible(true);
-				panel.setVisible(false);
-			}
-		});
-		panel.add(btnNewButton);
-		
-		JCheckBox chckbxAshfkasdhf = new JCheckBox("ashfkasdhf\u00B4~");
-		panel.add(chckbxAshfkasdhf);
-		
+//		frame = new JFrame();
+//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//		frame.setUndecorated(true);
+//		frame.setVisible(true);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.getContentPane().setLayout(null);
 	
-		
-		
 	}
-
 }
