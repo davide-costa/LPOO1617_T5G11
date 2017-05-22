@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class LobbyInfoData extends LobbyData
 {
-	ArrayList<String> onlinePlayersNames;
+	private ArrayList<String> onlinePlayersNames;
 	
 	public LobbyInfoData(ArrayList<String> onlinePlayersNames)
 	{

@@ -30,6 +30,7 @@ public class BattleShipServerLoginIntermediate implements Observer
 			return;
 		
 		LoginResponseData response = (LoginResponseData)object;
+		//TODO: tirar este print
 		System.out.println(response.isSucceeded());
 		gui.LoginResponse(response);
 	}
