@@ -98,6 +98,35 @@ public class TestServerLogic
 		player2 = server.getBattleshipPlayers().get("player2");
 	}
 		
+	
+	private void GetCurrentPlayersInfo()
+	{
+		player1 = server.getBattleshipPlayers().get("player1");
+		player2 = server.getBattleshipPlayers().get("player2");
+		player1Opponent = player1.getOpponent();
+		player2Opponent = player2.getOpponent();
+		player1State = player1.getState();
+		player2State = player2.getState();
+	}
+	
+	private void AssertPlayer1AndPlayer2AreOpponents()
+	{
+		GetCurrentPlayersInfo();
+		assertNotNull(player1);
+		assertNotNull(player2);
+		assertNotNull(player1Opponent);
+		assertNotNull(player2Opponent);
+		assertSame(player1, player2Opponent);
+		assertSame(player2, player1Opponent);
+	}
+	
+	private void AssertPlayersAreInGame()
+	{
+		AssertPlayer1AndPlayer2AreOpponents();
+		assertTrue(player1State instanceof InGame);
+		assertTrue(player2State instanceof InGame);
+	}
+	
 	@Test
 	public void TestConstructor() throws InterruptedException
 	{
@@ -310,34 +339,6 @@ public class TestServerLogic
 		Thread.sleep(200);
 		server.stopServer();
 		
-	}
-	
-	private void GetCurrentPlayersInfo()
-	{
-		player1 = server.getBattleshipPlayers().get("player1");
-		player2 = server.getBattleshipPlayers().get("player2");
-		player1Opponent = player1.getOpponent();
-		player2Opponent = player2.getOpponent();
-		player1State = player1.getState();
-		player2State = player2.getState();
-	}
-	
-	private void AssertPlayer1AndPlayer2AreOpponents()
-	{
-		GetCurrentPlayersInfo();
-		assertNotNull(player1);
-		assertNotNull(player2);
-		assertNotNull(player1Opponent);
-		assertNotNull(player2Opponent);
-		assertSame(player1, player2Opponent);
-		assertSame(player2, player1Opponent);
-	}
-	
-	private void AssertPlayersAreInGame()
-	{
-		AssertPlayer1AndPlayer2AreOpponents();
-		assertTrue(player1State instanceof InGame);
-		assertTrue(player2State instanceof InGame);
 	}
 	
 	private void MakeAPlayerAndReadResults(ObjectInputStream socket1Input, ObjectOutputStream socket1Output, ObjectInputStream socket2Input, ObjectOutputStream socket2Output) throws IOException, ClassNotFoundException
