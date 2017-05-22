@@ -149,7 +149,7 @@ public class Game
 			return;
 		
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
-		coordsArray = ship.getCoords();
+		coordsArray.addAll(ship.getCoords());
 		coordsArray.addAll(getSurroundingCoordsOfShip(ship));
 		ArrayList<CellState> statesArray = new ArrayList<CellState>();
 		getCellStatesOfCoords(true, coordsArray, statesArray);
