@@ -128,7 +128,5 @@ public class ClientThread extends Observable implements Runnable
 	public void sendData(BattleShipData data) throws IOException 
 	{
 		socket_output.writeObject(data);
-		if (data instanceof LobbyInfoData)
-			System.out.println("sending online players to player " + player.getUsername());
 	}
 }
