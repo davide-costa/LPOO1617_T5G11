@@ -64,10 +64,17 @@ public class Client extends Observable implements Runnable {
 		return instance;
 	}
 
-	private Client() throws IOException
+	public Client() throws IOException
 	{
 		connected = false;
 		connect("dservers.ddns.net", 5555);
+		currObserver = null;
+	}
+	
+	public Client(String hostName) throws IOException
+	{
+		connected = false;
+		connect(hostName, 5555);
 		currObserver = null;
 	}
 	
