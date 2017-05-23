@@ -38,7 +38,6 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 		
 		if (object instanceof LobbyInfoData)
 		{
-			System.out.println("LobbyInfoData");
 			LobbyInfoData info = (LobbyInfoData) object;
 			this.onlinePlayersNames = info.getOnlinePlayersNames();
 		}
