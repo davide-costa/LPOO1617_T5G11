@@ -21,7 +21,6 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 		this.gui = gui;
 		Client clientSocket = Client.getInstance();
 		clientSocket.refreshObserver(this);
-		System.out.println("lobby intermediate constructor");
 	}
 	
 	public void setOnlinePlayersNames(ArrayList<String> onlinePlayersNames)

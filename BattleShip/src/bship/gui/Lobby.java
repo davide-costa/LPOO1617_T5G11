@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -14,10 +15,6 @@ import javax.swing.JList;
 
 public class Lobby extends BattleShipGui
 {
-	/**
-	 * @wbp.nonvisual location=654,159
-	 */
-
 	public Lobby(JFrame frame, JPanel battleShipLoginPanel)
 	{
 		this.frame = frame;
@@ -32,22 +29,26 @@ public class Lobby extends BattleShipGui
 		}
 		
 		currPanel = new JPanel();
+		
+		
+		
 		frame.getContentPane().add(currPanel, "Lobby Panel");
-		currPanel.setLayout(null);
 		battleShipLoginPanel.setVisible(false);
 		currPanel.setVisible(true);
 		currPanel.addKeyListener(this);
 		System.out.println("lobby constructor");
 		
-		ArrayList<String> usernames = new ArrayList<String>();
-		usernames.add("Player1");
-		usernames.add("Player1");
-		usernames.add("Player1");
-		usernames.add("Player1");
-		usernames.add("Player1");
-		Object[] listData = usernames.toArray();
-		JList list = new JList(listData);
-		//list.add("Player1", battleShipLoginPanel);
+	    DefaultListModel<String> model = new DefaultListModel<String>();
+	    model.addElement("Player1");
+	    model.addElement("Player1");
+	    model.addElement("Player1");
+	    model.addElement("Player1");
+	    model.addElement("Player1");
+		JList<String> list_1 = new JList<String>(model);
+		currPanel.add(list_1);
+		list_1.setBounds(100, 200, 500, 500);
+		currPanel.setVisible(true);
+		currPanel.requestFocusInWindow();
 	}
 
 	@Override
