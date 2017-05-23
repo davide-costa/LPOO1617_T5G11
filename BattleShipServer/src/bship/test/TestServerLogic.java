@@ -253,6 +253,7 @@ public class TestServerLogic
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
+		ReadInLobbyPlayersFromServer(socket1Input);
 		
 		LobbyInviteData invite;
 		LobbyInvitedData receivedInvite;
@@ -309,6 +310,7 @@ public class TestServerLogic
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
+		ReadInLobbyPlayersFromServer(socket1Input);
 		
 		ReadyForGameData data;
 		
@@ -345,6 +347,10 @@ public class TestServerLogic
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
+		ReadInLobbyPlayersFromServer(socket1Input);
+		
+		
+		
 		player1.setOpponent(player2);
 		player2.setOpponent(player1);
 		player1.setState(new InGame(player1));
@@ -354,6 +360,7 @@ public class TestServerLogic
 		//Make 50 plays each one in reverse order of the last one and ensure all goes well
 		for (int i = 0; i < 50; i++)
 		{
+			System.out.println(i);
 			MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output, false);
 			MakeAPlayerAndReadResults(socket2Input, socket2Output, socket1Input, socket1Output, false);
 		}
@@ -436,6 +443,7 @@ public class TestServerLogic
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
+		ReadInLobbyPlayersFromServer(socket1Input);
 		
 		player1.setOpponent(player2);
 		player2.setOpponent(player1);
