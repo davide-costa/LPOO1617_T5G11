@@ -37,17 +37,17 @@ public class GuiMain
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+//		frame = new JFrame();
+//		frame.setBounds(100, 100, 450, 300);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.getContentPane().setLayout(new CardLayout(0, 0));
+		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setUndecorated(true);
+		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
-		
-//		frame = new JFrame();
-//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-//		frame.setUndecorated(true);
-//		frame.setVisible(true);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().setLayout(null);
 	
 	}
 }

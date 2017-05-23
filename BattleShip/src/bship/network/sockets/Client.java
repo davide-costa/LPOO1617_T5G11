@@ -116,7 +116,6 @@ public class Client extends Observable implements Runnable {
 		if (socket != null && connected)
 		{
 			try {
-				//send a PlayerDisconnectedData
 				socket.close();
 			}
 			catch (IOException ioe) {
