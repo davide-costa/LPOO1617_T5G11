@@ -429,6 +429,8 @@ public class TestServerLogic
 		assertNull(player2Opponent);
 		assertTrue(player1State instanceof InLobby);
 		assertTrue(player2State instanceof InLobby);
+		ReadInLobbyPlayersFromServer(socket1Input);
+		ReadInLobbyPlayersFromServer(socket2Input);
 	}
 	
 	@Test
