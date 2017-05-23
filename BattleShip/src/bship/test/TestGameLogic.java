@@ -88,12 +88,101 @@ public class TestGameLogic
 	}	
 	
 	@Test
-	public void testShootAlly()
+	public void testCellStateConstructor()
 	{
-//		Game game = Game.getInstance();
-//		
-//		Coords shootCoords = new Coords(0,0);
-//		game.shootAlly(shootCoords);
+		AllyCellState allyCell = new AllyCellState(null);
+		assertFalse(allyCell.isDiscovered());
+		assertNull(allyCell.getShip());
+		
+		OpponentCellState opponentCell = new OpponentCellState(null, true);
+		assertFalse(opponentCell.isDiscovered());
+		assertNull(opponentCell.getShip());
+		assertTrue(opponentCell.hasShip());
+	}
+	
+	@Test
+	public void testShootAllyMapLogic()
+	{	
+		//Test shoot in water
+		Game game = Game.getInstance();
+		GameMapTests map = new GameMapTests(false, 10, 10);
+		game.setAllyMap(map);
+		
+		Coords cruiserCoords1 = new Coords(0,0);
+		assertEquals(GameResult.WATER, game.getPlayEffects(cruiserCoords1));
+		
+		Coords cruiserCoords2 = new Coords(1,0);
+		Coords cruiserCoords3 = new Coords(2,0);
+		ArrayList<Coords> shipCoords = new ArrayList<Coords>();
+		Ship cruiser = new Cruiser(shipCoords, "horizontal");
+		CellState cell1 = new AllyCellState(cruiser);
+		CellState cell2 = new AllyCellState(cruiser);
+		CellState cell3 = new AllyCellState(cruiser);
+		
+		map.setCellState(cruiserCoords1, cell1);
+		map.setCellState(cruiserCoords2, cell2);
+		map.setCellState(cruiserCoords3, cell3);
+		
+		CellState cell;
+		int shipInitHealth = cruiser.getHealth();
+		game.shootAlly(cruiserCoords1);
+		cell = map.getCellState(cruiserCoords1);
+		assertNotNull(cell);
+		assertTrue(cell.isDiscovered());
+		assertFalse(map.getCellState(cruiserCoords2).isDiscovered());
+		assertFalse(map.getCellState(cruiserCoords3).isDiscovered());
+		
+		game.shootAlly(cruiserCoords2);
+		cell = map.getCellState(cruiserCoords2);
+		assertNotNull(cell);
+		assertTrue(map.getCellState(cruiserCoords1).isDiscovered());
+		assertTrue(cell.isDiscovered());
+		assertFalse(map.getCellState(cruiserCoords3).isDiscovered());
+		
+		game.shootAlly(cruiserCoords3);
+		cell = map.getCellState(cruiserCoords2);
+		assertNotNull(cell);
+		assertTrue(map.getCellState(cruiserCoords1).isDiscovered());
+		assertTrue(map.getCellState(cruiserCoords2).isDiscovered());
+		assertTrue(cell.isDiscovered());
+	}
+	
+	@Test
+	public void testShootAllyShipLogic()
+	{
+		//Test shoot in water
+		Game game = Game.getInstance();
+		GameMapTests map = new GameMapTests(false, 10, 10);
+		game.setAllyMap(map);
+		
+		Coords cruiserCoords1 = new Coords(0,0);
+		assertEquals(GameResult.WATER, game.getPlayEffects(cruiserCoords1));
+		
+		Coords cruiserCoords2 = new Coords(1,0);
+		Coords cruiserCoords3 = new Coords(2,0);
+		ArrayList<Coords> shipCoords = new ArrayList<Coords>();
+		Ship cruiser = new Cruiser(shipCoords, "horizontal");
+		CellState cell1 = new AllyCellState(cruiser);
+		CellState cell2 = new AllyCellState(cruiser);
+		CellState cell3 = new AllyCellState(cruiser);
+		
+		map.setCellState(cruiserCoords1, cell1);
+		map.setCellState(cruiserCoords2, cell2);
+		map.setCellState(cruiserCoords3, cell3);
+		
+		int currHealth = 3;
+		assertEquals(currHealth, cruiser.getHealth());
+		game.shootAlly(cruiserCoords1);
+		currHealth--;
+		assertEquals(currHealth, cruiser.getHealth());
+		game.shootAlly(cruiserCoords2);
+		currHealth--;
+		assertEquals(currHealth, cruiser.getHealth());
+		
+		game.shootAlly(cruiserCoords3);
+		currHealth--;
+		assertEquals(currHealth, cruiser.getHealth());
+		assertTrue(cruiser.isDestroyed());
 	}
 	
 	@Test

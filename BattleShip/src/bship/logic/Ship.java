@@ -67,6 +67,11 @@ public abstract class Ship
 		health = 0;
 	}
 	
+	public int getHealth()
+	{
+		return health;
+	}
+	
 	public void addCoord(Coords coord)
 	{
 		coords.add(coord);
