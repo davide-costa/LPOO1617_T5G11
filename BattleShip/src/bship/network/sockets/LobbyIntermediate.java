@@ -27,6 +27,7 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 	{
 		this.onlinePlayersNames = onlinePlayersNames;
 	}
+	
 
 	@Override
 	public void update(Observable clientSocket, Object object)
@@ -39,6 +40,7 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 		{
 			LobbyInfoData info = (LobbyInfoData) object;
 			this.onlinePlayersNames = info.getOnlinePlayersNames();
+			gui.setNamesInModel(onlinePlayersNames);
 		}
 		else if (object instanceof LobbyInvitedData)
 		{

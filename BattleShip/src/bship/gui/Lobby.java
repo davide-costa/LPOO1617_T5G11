@@ -15,6 +15,9 @@ import javax.swing.JList;
 
 public class Lobby extends BattleShipGui
 {
+	private DefaultListModel<String> model;
+	private JList<String> inLobbyPlayersList;
+		
 	public Lobby(JFrame frame, JPanel battleShipLoginPanel)
 	{
 		this.frame = frame;
@@ -38,18 +41,20 @@ public class Lobby extends BattleShipGui
 		currPanel.addKeyListener(this);
 		System.out.println("lobby constructor");
 		
-	    DefaultListModel<String> model = new DefaultListModel<String>();
-	    model.addElement("Player1");
-	    model.addElement("Player1");
-	    model.addElement("Player1");
-	    model.addElement("Player1");
-	    model.addElement("Player1");
-		JList<String> list_1 = new JList<String>(model);
-		currPanel.add(list_1);
-		list_1.setBounds(100, 200, 500, 500);
+		model = new DefaultListModel<String>();
+		inLobbyPlayersList = new JList<String>(model);
+		currPanel.add(inLobbyPlayersList);
+		inLobbyPlayersList.setBounds(100, 200, 500, 500);
 		currPanel.setVisible(true);
 		currPanel.requestFocusInWindow();
 	}
+	
+	  @Override
+	  public void repaint() 
+	  {
+	      super.repaint();
+	   }
+
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -77,5 +82,14 @@ public class Lobby extends BattleShipGui
 	public void handleInviteResponse(boolean wasAccepted) {
 		// TODO Auto-generated method stub
 		System.out.println("Lobby");
+	}
+
+
+	public void setNamesInModel(ArrayList<String> playersNames) 
+	{
+		model.removeAllElements();
+		
+		for(String playerName: playersNames)
+			model.addElement(playerName);
 	}
 }
