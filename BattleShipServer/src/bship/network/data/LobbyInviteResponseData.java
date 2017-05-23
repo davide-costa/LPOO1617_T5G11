@@ -1,6 +1,5 @@
 package bship.network.data;
 
-import bship.network.data.LobbyInviteResponseData.InviteResponse;
 
 public class LobbyInviteResponseData extends LobbyData
 {
@@ -21,4 +20,6 @@ public class LobbyInviteResponseData extends LobbyData
 	{
 		return response == InviteResponse.ACCEPTED;
 	}
+	
+	
 }

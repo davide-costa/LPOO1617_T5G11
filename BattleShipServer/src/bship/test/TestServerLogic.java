@@ -21,7 +21,7 @@ import bship.logic.Player;
 import bship.logic.PlayerState;
 import bship.logic.ReadyForGame;
 import bship.network.data.*;
-import bship.network.data.GameResultData.Result;
+import bship.network.data.GameResultData.GameResult;
 import bship.network.data.LobbyInviteResponseData.InviteResponse;
 
 public class TestServerLogic
@@ -393,15 +393,15 @@ public class TestServerLogic
 		AssertPlayersAreInGame();
 
 		// Assert game results arrive correctly
-		resultData1 = new GameResultData(Result.WATER, endOfGame);
+		resultData1 = new GameResultData(GameResult.WATER, endOfGame);
 		socket1Output.writeObject(resultData1);
 		resultData2 = (GameResultData) socket2Input.readObject();
 		assertNotNull(shootData2);
-		Result result = resultData2.getResult();
+		GameResult result = resultData2.getResult();
 		boolean endOfGameResult = resultData2.isEndOfGame();
 		assertNotNull(result);
 		assertNotNull(endOfGameResult);
-		assertEquals(Result.WATER, result);
+		assertEquals(GameResult.WATER, result);
 		assertEquals(endOfGame, endOfGameResult);
 		AssertPlayersAreInGame();
 		
