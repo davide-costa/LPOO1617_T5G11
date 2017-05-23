@@ -2,19 +2,28 @@ package bship.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import bship.network.sockets.LobbyIntermediate;
 import bship.network.sockets.SocketIntermediate;
 
 public class Lobby extends BattleShipGui
 {
-	public Lobby(JFrame frame, JPanel battleShipLoginPanel, SocketIntermediate intermediate)
+	public Lobby(JFrame frame, JPanel battleShipLoginPanel)
 	{
 		this.frame = frame;
 		this.lastPanel = battleShipLoginPanel;
-		this.intermediate = intermediate;
+		try 
+		{
+			this.intermediate = new LobbyIntermediate(this);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		
 		currPanel = new JPanel();
 		frame.getContentPane().add(currPanel, "Lobby Panel");
