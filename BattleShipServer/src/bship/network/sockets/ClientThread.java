@@ -82,16 +82,15 @@ public class ClientThread extends Observable implements Runnable
 
 		try
 		{
-			LoginResponseData response;
+			boolean loginSucceeded;
 			do
 			{
 				data = (BattleShipData)socket_input.readObject();
 				if (!running)
 					break;
 				
-				response = battleShipServer.newPlayerConnected(this, data);
-				socket_output.writeObject(response);
-			} while (response == null || !response.isSucceeded());
+				loginSucceeded = battleShipServer.newPlayerConnected(this, data);
+			} while (!loginSucceeded);
 
 			while ((data = (BattleShipData)socket_input.readObject()) != null && running)
 			{
@@ -129,5 +128,7 @@ public class ClientThread extends Observable implements Runnable
 	public void sendData(BattleShipData data) throws IOException 
 	{
 		socket_output.writeObject(data);
+		if (data instanceof LobbyInfoData)
+			System.out.println("sending online players to player " + player.getUsername());
 	}
 }

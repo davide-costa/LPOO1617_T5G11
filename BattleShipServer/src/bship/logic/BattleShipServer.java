@@ -59,9 +59,10 @@ public class BattleShipServer
 		return battleshipPlayers;
 	}
 
-	public LoginResponseData newPlayerConnected(ClientThread thread, BattleShipData data)
+	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
 		LoginRequestData login = (LoginRequestData) data;
+		LoginResponseData response;
 		String username = login.getUsername();
 		String password = login.getPassword();
 		
@@ -70,7 +71,19 @@ public class BattleShipServer
 		{
 			newPlayer = battleshipPlayers.get(username);
 			if(!password.equals(newPlayer.getPassword()) || !(newPlayer.getState() instanceof Offline))
-				return new LoginResponseData(false);
+			{
+				response = new LoginResponseData(false);
+				try
+				{
+					thread.sendData(response);
+				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return false;
+			}
 		}
 		else
 		{
@@ -83,8 +96,18 @@ public class BattleShipServer
 		inLobbyPlayers.add(newPlayer);
 		
 		newPlayer.setState(new InLobby(newPlayer));
+		response = new LoginResponseData(true);
+		try
+		{
+			newPlayer.sendData(response);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendOnlinePlayersInfoToAllPlayers();
-		return new LoginResponseData(true);
+		return true;
 	}
 	
 	public void sendOnlinePlayersInfoToPlayer(Player player)
