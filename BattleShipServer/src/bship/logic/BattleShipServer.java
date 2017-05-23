@@ -11,6 +11,7 @@ import bship.network.data.LobbyInfoData;
 import bship.network.data.LobbyInvitedData;
 import bship.network.data.LoginRequestData;
 import bship.network.data.LoginResponseData;
+import bship.network.data.PlayerDisconnectedData;
 import bship.network.sockets.ClientThread;
 import bship.network.sockets.Server;
 
@@ -154,13 +155,27 @@ public class BattleShipServer
 		//In case the player failed to log in, the thread will terminate but no PLayer has been assign to it
 		if(player == null)
 			return;
+		PlayerState currState = player.getState();
 		player.setState(new Offline(player));
 		
 		//only is removed from one of the lists, but we dont know in which one the player is, so we need to check in both
 		inLobbyPlayers.remove(player);
 		inGamePlayers.remove(player);
 		
-		//TODO:reenviar a todos so online players in lobby a nova informaçao
+		if (currState instanceof InLobby)
+			sendOnlinePlayersInfoToAllPlayers();
+		else
+		{
+			try
+			{
+				player.getOpponent().sendData(new PlayerDisconnectedData());
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void stopServer()
