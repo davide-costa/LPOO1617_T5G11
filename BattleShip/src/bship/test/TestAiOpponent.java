@@ -51,7 +51,7 @@ public class TestAiOpponent
 			}
 		
 		
-		ArrayList<Coords> aroundCoords = new ArrayList<Coords>();
+		/*ArrayList<Coords> aroundCoords = new ArrayList<Coords>();
 		for(Ship ship: ships)
 		{
 			aroundCoords = Coords.getSurroundingCoords(ship.getCoords());
@@ -61,6 +61,6 @@ public class TestAiOpponent
 					if(aiOpponent.map.getCellState(coords).hasShip())
 						fail();
 			}
-		}
+		}*/
 	}
 }
