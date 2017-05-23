@@ -271,6 +271,7 @@ public class TestServerLogic
 		socket1Output.writeObject(invite);
 		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
 		assertNotNull(receivedInvite);
+		assertEquals("player1", receivedInvite.getInviterName());
 		inviteResponse = new LobbyInviteResponseData(InviteResponse.REJECTED);
 		socket2Output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
@@ -287,6 +288,7 @@ public class TestServerLogic
 		socket1Output.writeObject(invite);
 		receivedInvite = (LobbyInvitedData) socket2Input.readObject();
 		assertNotNull(receivedInvite);
+		assertEquals("player1", receivedInvite.getInviterName());
 		inviteResponse = new LobbyInviteResponseData(InviteResponse.ACCEPTED);
 		socket2Output.writeObject(inviteResponse);
 		inviteResponse = (LobbyInviteResponseData) socket1Input.readObject();
@@ -360,7 +362,6 @@ public class TestServerLogic
 		//Make 50 plays each one in reverse order of the last one and ensure all goes well
 		for (int i = 0; i < 50; i++)
 		{
-			System.out.println(i);
 			MakeAPlayerAndReadResults(socket1Input, socket1Output, socket2Input, socket2Output, false);
 			MakeAPlayerAndReadResults(socket2Input, socket2Output, socket1Input, socket1Output, false);
 		}
