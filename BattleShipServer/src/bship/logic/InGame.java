@@ -28,9 +28,11 @@ public class InGame extends PlayerState
 			player.getOpponent();
 			opponent.setOpponent(null);
 			player.setOpponent(null);
+			player.getBattleShipServer().sendOnlinePlayersInfoToPlayer(player);
 		}
 		opponent.sendData(data);
-		player.getBattleShipServer().sendOnlinePlayersInfoToPlayer(player);
+		if (data instanceof EndOfGameData)
+			opponent.getBattleShipServer().sendOnlinePlayersInfoToPlayer(opponent);
 	}
 
 }
