@@ -3,10 +3,10 @@ package bship.test;
 import bship.logic.AllyCellState;
 import bship.logic.GameMap;
 
-public class TestsMap extends GameMap
+public class GameMapTests extends GameMap
 {
 
-	public TestsMap(boolean isOpponent, int sizeX, int sizeY)
+	public GameMapTests(boolean isOpponent, int sizeX, int sizeY)
 	{
 		super(isOpponent, sizeX, sizeY);
 		fillMap();

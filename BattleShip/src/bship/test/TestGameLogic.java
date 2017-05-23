@@ -100,7 +100,7 @@ public class TestGameLogic
 	public void testGetPlayEffects()
 	{
 		Game game = Game.getInstance();
-		TestsMap map = new TestsMap(false, 10, 10);
+		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
 		Coords cruiserCoords1 = new Coords(0,0);
@@ -133,7 +133,7 @@ public class TestGameLogic
 	public void testHandleOpponentSankShip()
 	{
 		Game game = Game.getInstance();
-		TestsMap map = new TestsMap(false, 10, 10);
+		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setOpponentMap(map);
 		
 		
