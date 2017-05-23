@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -57,6 +58,7 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{

@@ -25,6 +25,7 @@ public class BattleShipServerLoginIntermediate extends SocketIntermediate implem
 	@Override
 	public void update(Observable clientSocket, Object object)
 	{
+		System.out.println("login");
 		if (!(object instanceof LoginResponseData))
 			return;
 		

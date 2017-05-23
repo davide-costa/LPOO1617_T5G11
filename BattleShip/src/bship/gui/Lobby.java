@@ -31,7 +31,7 @@ public class Lobby extends BattleShipGui
 		battleShipLoginPanel.setVisible(false);
 		currPanel.setVisible(true);
 		currPanel.addKeyListener(this);
-	
+		System.out.println("lobby constructor");
 	}
 
 	@Override
