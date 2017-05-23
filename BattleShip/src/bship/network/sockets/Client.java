@@ -15,6 +15,7 @@ import java.util.Observer;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.GameData;
+import bship.network.data.LobbyInfoData;
 
 
 public class Client extends Observable implements Runnable {
@@ -125,6 +126,8 @@ public class Client extends Observable implements Runnable {
 		try {
 			while (connected && (data = (BattleShipData)socket_input.readObject()) != null)
 			{
+				if(data instanceof LobbyInfoData)
+					System.out.println("LobbyInfoData");
 				//notify observers//
 				this.setChanged();
 				//notify+send out recieved msg to Observers
