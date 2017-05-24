@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import bship.network.sockets.LobbyIntermediate;
 import bship.network.sockets.SocketIntermediate;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class Lobby extends BattleShipGui
 {
@@ -125,11 +126,28 @@ public class Lobby extends BattleShipGui
 	{
 		System.out.println("LobbyInvitedData" + inviterName);
 		System.out.println("Lobby");
-		try {
-			((LobbyIntermediate)intermediate).inviteResponse(true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String message = "Player " + inviterName + " invited you to play a game";
+		int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.YES_NO_OPTION);
+		System.out.println("stufffffffffffff");
+		if (option == JOptionPane.YES_OPTION)
+		{
+			System.out.println("accepting");
+			try {
+				((LobbyIntermediate)intermediate).inviteResponse(true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("rejecting");
+			try {
+				((LobbyIntermediate)intermediate).inviteResponse(false);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
