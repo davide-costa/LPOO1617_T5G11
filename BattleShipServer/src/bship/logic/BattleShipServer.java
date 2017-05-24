@@ -137,15 +137,7 @@ public class BattleShipServer
 			if(!password.equals(newPlayer.getPassword()) || !(newPlayer.getState() instanceof Offline))
 			{
 				response = new LoginResponseData(false);
-				try
-				{
-					thread.sendData(response);
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				thread.sendData(response);
 				return false;
 			}
 		}
