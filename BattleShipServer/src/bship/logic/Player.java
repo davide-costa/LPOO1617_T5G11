@@ -32,6 +32,9 @@ public class Player implements Serializable
 		this.battleShipServer = battleShipServer;
 		username = new String(player.getUsername());
 		password = new String(player.getPassword());
+		thread = null;
+		opponent = null;
+		state = new Offline(this);
 	}
 	
 	public void setThread(ClientThread thread) 
