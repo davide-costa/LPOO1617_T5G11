@@ -30,8 +30,8 @@ public class Player implements Serializable
 	public Player(BattleShipServer battleShipServer, StoragePlayer player)
 	{
 		this.battleShipServer = battleShipServer;
-		username = player.getUsername();
-		password = player.getPassword();
+		username = new String(player.getUsername());
+		password = new String(player.getPassword());
 	}
 	
 	public void setThread(ClientThread thread) 
