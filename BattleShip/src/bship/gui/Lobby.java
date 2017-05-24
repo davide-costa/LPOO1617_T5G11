@@ -133,9 +133,9 @@ public class Lobby extends BattleShipGui
 		}
 	}
 
-	public void handleInviteResponse(boolean wasAccepted) {
-		// TODO Auto-generated method stub
-		System.out.println("Lobby");
+	public void handleInviteResponse(boolean wasAccepted) 
+	{
+		System.out.println("Response" + wasAccepted);
 	}
 
 
