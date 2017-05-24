@@ -125,8 +125,16 @@ public class ClientThread extends Observable implements Runnable
 		this.notifyObservers(this);     //inherit from Observable
 	}
 
-	public void sendData(BattleShipData data) throws IOException 
+	public void sendData(BattleShipData data)
 	{
-		socket_output.writeObject(data);
+		try
+		{
+			socket_output.writeObject(data);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
