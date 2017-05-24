@@ -83,7 +83,7 @@ public class BattleShipServer
 
 			FileOutputStream fileOut = new FileOutputStream(battleShipPlayersFileName);
 	        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-	        objOut.writeObject(battleshipPlayers);
+	        objOut.writeObject(players);
 	        objOut.close();
 	        fileOut.close();
 		}
