@@ -1,7 +1,13 @@
 package bship.logic;
 
-public class StoragePlayer
+import java.io.Serializable;
+
+public class StoragePlayer implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5480953916856501872L;
 	private String username;
 	private String password;
 	
