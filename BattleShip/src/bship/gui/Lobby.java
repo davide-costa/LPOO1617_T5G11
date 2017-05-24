@@ -1,7 +1,10 @@
 package bship.gui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,6 +25,7 @@ public class Lobby extends BattleShipGui
 	public Lobby(JFrame frame, JPanel battleShipLoginPanel, String username)
 	{
 		this.frame = frame;
+		
 		this.lastPanel = battleShipLoginPanel;
 		this.username = username;
 		try 
@@ -49,6 +53,47 @@ public class Lobby extends BattleShipGui
 		inLobbyPlayersList.setBounds(100, 200, 500, 500);
 		currPanel.setVisible(true);
 		currPanel.requestFocusInWindow();
+		inLobbyPlayersList.addMouseListener(new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						String selectedPlayer = inLobbyPlayersList.getSelectedValue();
+						System.out.println(selectedPlayer);
+						try {
+							((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						inLobbyPlayersList.setBackground(Color.GRAY);
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						inLobbyPlayersList.setBackground(getForeground());;
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+			
+				});
 	}
 	
 	  @Override
