@@ -95,7 +95,12 @@ public class BattleShipServer
 		{
 			FileInputStream fileIn = new FileInputStream(battleShipPlayersFileName);
 	        ObjectInputStream objIn = new ObjectInputStream(fileIn);
-	        battleshipPlayers = (HashMap<String, Player>) objIn.readObject();
+	        ArrayList<StoragePlayer> storagePlayers = (ArrayList<StoragePlayer>) objIn.readObject();
+	        for (StoragePlayer currStoragePlayer : storagePlayers)
+	        {
+		        Player player = new Player(this, currStoragePlayer);
+		        battleshipPlayers.put(player.getUsername(), player);		        
+	        }
 	        fileIn.close();
 	        objIn.close();
 		}
