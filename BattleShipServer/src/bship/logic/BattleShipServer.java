@@ -101,11 +101,11 @@ public class BattleShipServer
 		}
 		catch (FileNotFoundException | ClassNotFoundException e)
 		{
-            System.out.println("An error ocurered saving the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
+            System.out.println("An error ocurered loading the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
 		}
 		catch (IOException e)
 		{	
-			System.out.println("An error ocurered saving the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
+			System.out.println("An error ocurered loading the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
 		}
 	}
 	
