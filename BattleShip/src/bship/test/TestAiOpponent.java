@@ -38,7 +38,7 @@ public class TestAiOpponent
 		
 		aiOpponent.PlaceShips(ships);
 		
-		CellState cells[][] = aiOpponent.map.getMap();
+		CellState cells[][] = aiOpponent.getGameMap().getMap();
 		
 		for(int i = 0; i < cells.length; i++)
 			{
@@ -57,8 +57,8 @@ public class TestAiOpponent
 			aroundCoords = Coords.getSurroundingCoords(ship.getCoords());
 			for(Coords coords: aroundCoords)
 			{
-				if(aiOpponent.map.areCoordsInMapRange(coords))
-					if(aiOpponent.map.getCellState(coords).hasShip())
+				if(aiOpponent.getGameMap().areCoordsInMapRange(coords))
+					if(aiOpponent.getGameMap().getCellState(coords).hasShip())
 						fail();
 			}
 		}*/

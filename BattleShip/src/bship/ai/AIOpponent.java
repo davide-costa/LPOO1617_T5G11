@@ -14,7 +14,7 @@ import bship.logic.SinglePlayerShipPlacement;
 public class AIOpponent
 {
 	private ShipPlacement shipPlacement;
-	public GameMap map;
+	private GameMap map;
 	private HashMap<Integer, String> generatedDirection = new HashMap<Integer, String>();
 	
 	public AIOpponent()
@@ -29,6 +29,11 @@ public class AIOpponent
 	{
 		generatedDirection.put(0, "Vertical");
 		generatedDirection.put(1, "Horizontal");
+	}
+	
+	public GameMap getGameMap()
+	{
+		return map;
 	}
 	
 	public void PlaceShips(ArrayList<Ship> ships)
