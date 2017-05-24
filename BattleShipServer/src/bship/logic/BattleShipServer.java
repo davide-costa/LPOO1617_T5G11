@@ -74,7 +74,7 @@ public class BattleShipServer
 	{
 		try
 		{
-			ArrayList<Player> players = new ArrayList<Player>();
+			ArrayList<StoragePlayer> players = new ArrayList<StoragePlayer>();
 			for (Player player : battleshipPlayers.values())
 			{
 				StoragePlayer storagePlayer = new StoragePlayer(player);
