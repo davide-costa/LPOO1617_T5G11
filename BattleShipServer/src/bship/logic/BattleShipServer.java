@@ -40,7 +40,7 @@ public class BattleShipServer
 	{
 		server = new Server(this);
 		server.startServer();
-		battleshipPlayers = new HashMap<String, Player>();
+		loadBattleShipPlayersFromFile();
 		inLobbyPlayers = new ArrayList<Player>();
 		inGamePlayers = new ArrayList<Player>();
 	}
@@ -69,7 +69,7 @@ public class BattleShipServer
 		return battleshipPlayers;
 	}
 	
-	public void loadBattleShipPlayersFromFile()
+	public void saveBattleShipPlayersFromFile()
 	{
 		try
 		{
@@ -89,7 +89,7 @@ public class BattleShipServer
 		}
 	}
 	
-	public void saveBattleShipPlayersFromFile()
+	public void loadBattleShipPlayersFromFile()
 	{
 		try
 		{
@@ -157,6 +157,7 @@ public class BattleShipServer
 			e.printStackTrace();
 		}
 		sendOnlinePlayersInfoToAllPlayers();
+		saveBattleShipPlayersFromFile();
 		return true;
 	}
 	
