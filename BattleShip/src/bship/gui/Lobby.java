@@ -62,12 +62,7 @@ public class Lobby extends BattleShipGui
 						// TODO Auto-generated method stub
 						String selectedPlayer = inLobbyPlayersList.getSelectedValue();
 						System.out.println(selectedPlayer);
-						try {
-							((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
 					}
 
 					@Override
@@ -132,22 +127,12 @@ public class Lobby extends BattleShipGui
 		if (option == JOptionPane.YES_OPTION)
 		{
 			System.out.println("accepting");
-			try {
-				((LobbyIntermediate)intermediate).inviteResponse(true);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			((LobbyIntermediate)intermediate).inviteResponse(true);
 		}
 		else
 		{
 			System.out.println("rejecting");
-			try {
-				((LobbyIntermediate)intermediate).inviteResponse(false);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			((LobbyIntermediate)intermediate).inviteResponse(false);
 		}
 	}
 

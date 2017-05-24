@@ -103,13 +103,20 @@ public class Client extends Observable implements Runnable {
 		}
 	}
 
-	public void sendBattleShipData(BattleShipData data) throws IOException
+	public void sendBattleShipData(BattleShipData data)
 	{
 		if (connected)
 		{
-			socket_output.writeObject(data);
+			try
+			{
+				socket_output.writeObject(data);
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		else throw new IOException("Not connected to server");
 	}
 
 	public void disconnect() {
