@@ -12,6 +12,7 @@ import java.util.Objects;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.LobbyData;
@@ -73,6 +74,13 @@ public class BattleShipServer
 	{
 		try
 		{
+			ArrayList<Player> players = new ArrayList<Player>();
+			for (Player player : battleshipPlayers.values())
+			{
+				StoragePlayer storagePlayer = new StoragePlayer(player);
+				players.add(storagePlayer);
+			}
+
 			FileOutputStream fileOut = new FileOutputStream(battleShipPlayersFileName);
 	        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 	        objOut.writeObject(battleshipPlayers);
