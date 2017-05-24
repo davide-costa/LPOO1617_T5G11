@@ -1,9 +1,17 @@
 package bship.logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.LobbyData;
@@ -17,6 +25,7 @@ import bship.network.sockets.Server;
 
 public class BattleShipServer
 {
+	private final String battleShipPlayersFileName = "bshipPlayers.bship";
 	private Server server;
 	private ArrayList<Player> inLobbyPlayers;
 	private ArrayList<Player> inGamePlayers;
@@ -59,7 +68,47 @@ public class BattleShipServer
 	{
 		return battleshipPlayers;
 	}
-
+	
+	public void loadBattleShipPlayersFromFile()
+	{
+		try
+		{
+			FileOutputStream fileOut = new FileOutputStream(battleShipPlayersFileName);
+	        ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+	        objOut.writeObject(battleshipPlayers);
+	        objOut.close();
+	        fileOut.close();
+		}
+		catch (FileNotFoundException e)
+		{
+            System.out.println("An error ocurered saving the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
+		}
+		catch (IOException e)
+		{	
+			System.out.println("An error ocurered saving the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
+		}
+	}
+	
+	public void saveBattleShipPlayersFromFile()
+	{
+		try
+		{
+			FileInputStream fileIn = new FileInputStream(battleShipPlayersFileName);
+	        ObjectInputStream objIn = new ObjectInputStream(fileIn);
+	        battleshipPlayers = (HashMap<String, Player>) objIn.readObject();
+	        fileIn.close();
+	        objIn.close();
+		}
+		catch (FileNotFoundException | ClassNotFoundException e)
+		{
+            System.out.println("An error ocurered saving the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
+		}
+		catch (IOException e)
+		{	
+			System.out.println("An error ocurered saving the file containing your battleshipPlayers. The server will try again on the next change needed to save. Error: " + e.getMessage());
+		}
+	}
+	
 	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
 		LoginRequestData login = (LoginRequestData) data;
