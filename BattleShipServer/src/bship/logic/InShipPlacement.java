@@ -36,30 +36,14 @@ public class InShipPlacement extends PlayerState
 			{
 				player.setState(new InGame(player));
 				opponent.setState(new InGame(opponent));
-				try
-				{
-					player.sendData(new StartGameData());
-					opponent.sendData(new StartGameData());
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				
+				player.sendData(new StartGameData());
+				opponent.sendData(new StartGameData());
 			}
 			else
 			{
 				player.setState(new ReadyForGame(player));
-				try
-				{
-					opponent.sendData(data);
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				opponent.sendData(data);
 			}
 			//sets player state as readyforgame
 		}

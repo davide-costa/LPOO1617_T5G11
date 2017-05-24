@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -153,15 +154,8 @@ public class BattleShipServer
 		
 		newPlayer.setState(new InLobby(newPlayer));
 		response = new LoginResponseData(true);
-		try
-		{
-			newPlayer.sendData(response);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		newPlayer.sendData(response);
 		sendOnlinePlayersInfoToAllPlayers();
 		saveBattleShipPlayersFromFile();
 		return true;
@@ -174,15 +168,7 @@ public class BattleShipServer
 			playerNames.add(currPlayer.getUsername());
 		
 		LobbyData namesData = new LobbyInfoData(playerNames);
-		try
-		{
-			player.sendData(namesData);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		player.sendData(namesData);
 	}
 	
 	public void sendOnlinePlayersInfoToAllPlayers()
@@ -192,16 +178,9 @@ public class BattleShipServer
 			playerNames.add(currPlayer.getUsername());
 		
 		LobbyData namesData = new LobbyInfoData(playerNames);
-		try
-		{
-			for (Player currPlayer : inLobbyPlayers)
-				currPlayer.sendData(namesData);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		for (Player currPlayer : inLobbyPlayers)
+			currPlayer.sendData(namesData);
 	}
 	
 	public void playerDisconnected(ClientThread thread)
@@ -221,17 +200,7 @@ public class BattleShipServer
 		if (currState instanceof InLobby)
 			sendOnlinePlayersInfoToAllPlayers();
 		else
-		{
-			try
-			{
-				player.getOpponent().sendData(new PlayerDisconnectedData());
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			player.getOpponent().sendData(new PlayerDisconnectedData());
 	}
 	
 	public void stopServer()
@@ -255,17 +224,8 @@ public class BattleShipServer
 		
 		invitedPlayer.setOpponent(inviterPlayer);
 		LobbyInvitedData inviteData = new LobbyInvitedData(inviterPlayerName);
-		try
-		{
-			invitedPlayer.sendData(inviteData);
-		}
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		
+		invitedPlayer.sendData(inviteData);
+
 		return true;
 	}
 	

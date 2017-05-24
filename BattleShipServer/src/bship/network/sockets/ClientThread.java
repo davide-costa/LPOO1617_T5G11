@@ -5,6 +5,7 @@
 package bship.network.sockets;
 
 import java.net.Socket;
+import java.net.SocketException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
@@ -130,6 +131,11 @@ public class ClientThread extends Observable implements Runnable
 		try
 		{
 			socket_output.writeObject(data);
+		}
+		catch (SocketException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		catch (IOException e)
 		{

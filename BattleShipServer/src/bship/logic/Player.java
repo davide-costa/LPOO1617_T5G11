@@ -67,7 +67,7 @@ public class Player implements Serializable
 		state.HandleReceivedData(receivedData);
 	}
 
-	public void sendData(BattleShipData data) throws IOException 
+	public void sendData(BattleShipData data)
 	{
 		thread.sendData(data);	
 	}

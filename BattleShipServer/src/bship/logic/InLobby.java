@@ -32,45 +32,29 @@ public class InLobby extends PlayerState
 			if (!succeeded)
 			{
 				response = new LobbyInviteResponseData(InviteResponse.UNSUCESSFUL);
-				try
-				{
-					player.sendData(response);
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				player.sendData(response);
 			}
 		}
 		else if(data instanceof LobbyInviteResponseData)
 		{
 			LobbyInviteResponseData responseData = (LobbyInviteResponseData)data;
-			try
+
+			Player opponent = player.getOpponent();
+			if (opponent == null)
+				return;
+			opponent.sendData(responseData);
+			if (responseData.wasAccepted())
 			{
-				Player opponent = player.getOpponent();
-				if (opponent == null)
-					return;
-				opponent.sendData(responseData);
-				if (responseData.wasAccepted())
-				{
-					opponent.setOpponent(player);
-					player.setState(new InShipPlacement(player));
-					opponent.setState(new InShipPlacement(opponent));
-				}
-				else
-					player.setOpponent(null);
+				opponent.setOpponent(player);
+				player.setState(new InShipPlacement(player));
+				opponent.setState(new InShipPlacement(opponent));
 			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-			
+			else
+				player.setOpponent(null);
+
 			if(responseData.wasAccepted())
 				player.setState(new InShipPlacement(player));
 		}
-				
-		
 	}
 
 }
