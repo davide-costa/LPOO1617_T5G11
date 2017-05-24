@@ -103,6 +103,7 @@ public class BattleShipServer
 		{
 			FileInputStream fileIn = new FileInputStream(battleShipPlayersFileName);
 	        ObjectInputStream objIn = new ObjectInputStream(fileIn);
+	        battleshipPlayers = new HashMap<String, Player>();
 	        ArrayList<StoragePlayer> storagePlayers = (ArrayList<StoragePlayer>) objIn.readObject();
 	        for (StoragePlayer currStoragePlayer : storagePlayers)
 	        {
