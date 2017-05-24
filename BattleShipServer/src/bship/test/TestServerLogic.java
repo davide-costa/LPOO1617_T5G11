@@ -152,7 +152,7 @@ public class TestServerLogic
 	@Test
 	public void TestConstructor() throws InterruptedException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		assertEquals(server.getOnlinePlayers().size(), 0);
 		assertEquals(server.getBattleshipPlayers().size(), 0);
 		
@@ -163,7 +163,7 @@ public class TestServerLogic
 	@Test
 	public void TestAccountCreationLogin() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("battleship", "lpoo");
 		Thread.sleep(200); //wait for the other thread to read information from the socket
@@ -183,7 +183,7 @@ public class TestServerLogic
 	@Test
 	public void TestLoginWithAccountPreviouslyCreated() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("battleship", "lpoo");
 		assertEquals(1, server.getBattleshipPlayers().size());
@@ -210,7 +210,7 @@ public class TestServerLogic
 	@Test
 	public void TestWrongPasswordLogin() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("battleship", "lpoo");
 		assertEquals(1, server.getBattleshipPlayers().size());
@@ -249,7 +249,7 @@ public class TestServerLogic
 	@Test
 	public void TestInviteLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
@@ -308,7 +308,7 @@ public class TestServerLogic
 	@Test
 	public void TestShipPlacementLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
@@ -345,7 +345,7 @@ public class TestServerLogic
 	@Test
 	public void TestInGameLogic() throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");
@@ -442,7 +442,7 @@ public class TestServerLogic
 	
 	private void AssertEndOfGamePerformsCorrectly(boolean shootFirst) throws UnknownHostException, IOException, InterruptedException, ClassNotFoundException
 	{
-		server = new BattleShipServer();
+		server = new BattleShipServerTests();
 		
 		LoginPlayer1("player1", "lpoo");
 		LoginPlayer2("player2", "lpoo");

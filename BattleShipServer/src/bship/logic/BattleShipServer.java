@@ -30,7 +30,7 @@ public class BattleShipServer
 	private Server server;
 	private ArrayList<Player> inLobbyPlayers;
 	private ArrayList<Player> inGamePlayers;
-	private HashMap<String, Player> battleshipPlayers;
+	protected HashMap<String, Player> battleshipPlayers;
 	
 	public static void main(String argv[])
 	{
