@@ -121,9 +121,16 @@ public class Lobby extends BattleShipGui
 		System.out.println("Lobby");
 	}
 
-	public void handleInvite(String inviterName) {
-		// TODO Auto-generated method stub
+	public void handleInvite(String inviterName) 
+	{
+		System.out.println("LobbyInvitedData" + inviterName);
 		System.out.println("Lobby");
+		try {
+			((LobbyIntermediate)intermediate).inviteResponse(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void handleInviteResponse(boolean wasAccepted) {

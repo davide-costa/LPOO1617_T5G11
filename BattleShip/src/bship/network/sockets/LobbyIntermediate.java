@@ -11,6 +11,7 @@ import bship.network.data.LobbyData;
 import bship.network.data.LobbyInfoData;
 import bship.network.data.LobbyInviteData;
 import bship.network.data.LobbyInviteResponseData;
+import bship.network.data.LobbyInviteResponseData.InviteResponse;
 import bship.network.data.LobbyInvitedData;
 
 public class LobbyIntermediate extends SocketIntermediate implements Observer
@@ -49,7 +50,6 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 		{
 			LobbyInvitedData invite = (LobbyInvitedData)object;
 			gui.handleInvite(invite.getInviterName());
-			System.out.println(invite.getInviterName());
 		}
 		else if (object instanceof LobbyInviteResponseData)
 		{
@@ -62,5 +62,17 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 	{
 		LobbyInviteData inviteData = new LobbyInviteData(opponentUsername);
 		socket.sendBattleShipData((BattleShipData) inviteData); 
+	}
+
+	public void inviteResponse(boolean accepted) throws IOException 
+	{
+		InviteResponse response;
+		if(accepted)
+			response = InviteResponse.ACCEPTED;
+		else
+			response = InviteResponse.REJECTED;
+		
+		LobbyInviteResponseData responseData = new LobbyInviteResponseData(response);
+		socket.sendBattleShipData((BattleShipData) responseData);
 	}
 }
