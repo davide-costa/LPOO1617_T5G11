@@ -10,4 +10,14 @@ public class StoragePlayer
 		username = player.getUsername();
 		password = player.getPassword();
 	}
+	
+	public String getUsername()
+	{
+		return username;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
 }

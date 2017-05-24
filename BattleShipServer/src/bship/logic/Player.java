@@ -27,6 +27,13 @@ public class Player implements Serializable
 		this.password = new String(password);
 	}
 	
+	public Player(BattleShipServer battleShipServer, StoragePlayer player)
+	{
+		this.battleShipServer = battleShipServer;
+		username = player.getUsername();
+		password = player.getPassword();
+	}
+	
 	public void setThread(ClientThread thread) 
 	{
 		this.thread = thread;
