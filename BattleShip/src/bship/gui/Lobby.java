@@ -17,11 +17,13 @@ public class Lobby extends BattleShipGui
 {
 	private DefaultListModel<String> model;
 	private JList<String> inLobbyPlayersList;
+	private String username;
 		
-	public Lobby(JFrame frame, JPanel battleShipLoginPanel)
+	public Lobby(JFrame frame, JPanel battleShipLoginPanel, String username)
 	{
 		this.frame = frame;
 		this.lastPanel = battleShipLoginPanel;
+		this.username = username;
 		try 
 		{
 			this.intermediate = new LobbyIntermediate(this);
@@ -91,5 +93,7 @@ public class Lobby extends BattleShipGui
 		
 		for(String playerName: playersNames)
 			model.addElement(playerName);
+		
+		model.removeElement(username);
 	}
 }

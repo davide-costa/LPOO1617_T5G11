@@ -18,7 +18,7 @@ public class GuiMain
 				try {
 					GuiMain window = new GuiMain();
 					window.frame.setVisible(true);
-					Menu menu = new Menu(frame);
+					MenuPanel menu = new MenuPanel(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

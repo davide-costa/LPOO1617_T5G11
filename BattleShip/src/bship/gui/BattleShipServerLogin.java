@@ -102,7 +102,7 @@ public class BattleShipServerLogin extends BattleShipGui
 	public void LoginResponse(LoginResponseData response) 
 	{
 		if(response.isSucceeded())
-			new Lobby(frame, currPanel);
+			new Lobby(frame, currPanel, username);
 		else
 			//do stuff like abrir um dialogo a dizer que ta mal ou assim
 			return;
