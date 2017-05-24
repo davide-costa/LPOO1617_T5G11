@@ -1,12 +1,17 @@
 package bship.logic;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import bship.network.data.BattleShipData;
 import bship.network.sockets.ClientThread;
 
-public class Player
+public class Player implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4859207641846767803L;
 	private BattleShipServer battleShipServer;
 	private ClientThread thread;
 	private String username;
