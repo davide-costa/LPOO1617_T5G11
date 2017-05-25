@@ -27,6 +27,13 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		clientSocket.refreshObserver(this);
 	}
 	
+	public MultiplayerOpponent(Game game, Client clientSocket)
+	{
+		super(game);
+		this.clientSocket = clientSocket;
+		clientSocket.refreshObserver(this);
+	}
+	
 	@Override
 	public void shoot(Coords coords) throws IOException
 	{
