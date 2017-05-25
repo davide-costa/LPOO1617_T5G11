@@ -69,11 +69,10 @@ public class Client extends Observable implements Runnable {
 		currObserver = null;
 	}
 	
-	public Client(String hostName) throws IOException
+	//Constructor used for tests
+	public Client(int unused)
 	{
-		connected = false;
-		connect(hostName, 5555);
-		currObserver = null;
+		connected = true;
 	}
 	
 	public void refreshObserver(Observer observer)
