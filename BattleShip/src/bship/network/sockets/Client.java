@@ -57,9 +57,7 @@ public class Client extends Observable implements Runnable {
 	public static Client getInstance() throws IOException
 	{
 		if (instance == null)
-		{
 			instance = new Client();
-		}
 		
 		return instance;
 	}
@@ -103,44 +101,36 @@ public class Client extends Observable implements Runnable {
 		}
 	}
 
-	public void sendBattleShipData(BattleShipData data)
+	public void sendBattleShipData(BattleShipData data) throws IOException
 	{
 		if (connected)
-		{
-			try
-			{
-				socket_output.writeObject(data);
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			socket_output.writeObject(data);	
 	}
 
-	public void disconnect() {
+	public void disconnect() 
+	{
 		if (socket != null && connected)
 		{
 			try {
 				socket.close();
 			}
-			catch (IOException ioe) {
+			catch (IOException ioe) 
+			{
 				//unable to close, nothing to do...
 			}
-			finally {
+			finally 
+			{
 				this.connected = false;
 			}
 		}
 	}
 
-	public void run() {
+	public void run() 
+	{
 		BattleShipData data;
 		try {
 			while (connected && (data = (BattleShipData)socket_input.readObject()) != null)
 			{
-				if(data instanceof LobbyInfoData)
-					System.out.println("LobbyInfoData");
 				//notify observers//
 				this.setChanged();
 				//notify+send out recieved msg to Observers
@@ -151,7 +141,8 @@ public class Client extends Observable implements Runnable {
 		finally { connected = false; }
 	}
 
-	public boolean isConnected() {
+	public boolean isConnected() 
+	{
 		return connected;
 	}
 
@@ -160,15 +151,18 @@ public class Client extends Observable implements Runnable {
 		return port;
 	}
 
-	public void setPort(int port) {
+	public void setPort(int port)
+	{
 		this.port = port;
 	}
 
-	public String getHostName() {
+	public String getHostName() 
+	{
 		return hostName;
 	}
 
-	public void setHostName(String hostName) {
+	public void setHostName(String hostName) 
+	{
 		this.hostName = hostName;
 	}
 
