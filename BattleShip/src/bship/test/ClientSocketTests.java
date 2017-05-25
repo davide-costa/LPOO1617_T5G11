@@ -17,6 +17,7 @@ public class ClientSocketTests extends Client
 
 	public void simulateReceptionOfData(BattleShipData data)
 	{
+		this.setChanged();
 		this.notifyObservers(data);
 	}
 	

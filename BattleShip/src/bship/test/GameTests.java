@@ -28,8 +28,7 @@ public class GameTests extends Game
 	
 	public boolean isEndOfGame()
 	{
-		return false;
-		
+		return endOfGame;
 	}
 	
 	public void handleResultData()

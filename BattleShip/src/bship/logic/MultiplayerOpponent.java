@@ -94,6 +94,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
 			game.setOpponentMap(winnerGameMap);
 		}
+		//TODO meter estes dois no ShipPlacementIntermediate (quando existir)
 		else if (gameData instanceof ReadyForGameData)
 		{
 			//avisar que o opponet ta ready
