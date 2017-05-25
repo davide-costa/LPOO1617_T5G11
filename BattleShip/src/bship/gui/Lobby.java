@@ -35,7 +35,7 @@ public class Lobby extends BattleShipGui
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			BattleShipExceptionHandler.handleBattleShipException();
 		}
 		
 		currPanel = new JPanel();
@@ -68,8 +68,7 @@ public class Lobby extends BattleShipGui
 						} 
 						catch (IOException e) 
 						{
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							BattleShipExceptionHandler.handleBattleShipException();
 						}
 					}
 
@@ -142,8 +141,7 @@ public class Lobby extends BattleShipGui
 		} 
 		catch (IOException e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			BattleShipExceptionHandler.handleBattleShipException();
 		}
 	}
 
