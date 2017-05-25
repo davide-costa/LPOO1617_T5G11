@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class BattleShipServer
 	private Server server;
 	private ArrayList<Player> inLobbyPlayers;
 	private ArrayList<Player> inGamePlayers;
-	private HashMap<String, Player> battleshipPlayers;
+	protected HashMap<String, Player> battleshipPlayers;
 	
 	public static void main(String argv[])
 	{
@@ -49,6 +50,22 @@ public class BattleShipServer
 	public ArrayList<Player> getInLobbyPlayers()
 	{
 		return inLobbyPlayers;
+	}
+	
+	public synchronized ArrayList<Player> getInLobbyPlayersSynchronized()
+	{
+		ArrayList<Player> playersInLobby = new ArrayList<Player>();
+		playersInLobby.addAll(inLobbyPlayers);
+		return playersInLobby;
+	}
+	
+	public ArrayList<String> getInLobbyPlayersNames()
+	{
+		ArrayList<String> playerNames = new ArrayList<String>();
+		for (Player currPlayer : getInLobbyPlayersSynchronized())
+			playerNames.add(currPlayer.getUsername());
+		
+		return playerNames;
 	}
 	
 	public ArrayList<Player> getInGamePlayers()
@@ -137,15 +154,7 @@ public class BattleShipServer
 			if(!password.equals(newPlayer.getPassword()) || !(newPlayer.getState() instanceof Offline))
 			{
 				response = new LoginResponseData(false);
-				try
-				{
-					thread.sendData(response);
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				thread.sendData(response);
 				return false;
 			}
 		}
@@ -161,15 +170,8 @@ public class BattleShipServer
 		
 		newPlayer.setState(new InLobby(newPlayer));
 		response = new LoginResponseData(true);
-		try
-		{
-			newPlayer.sendData(response);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		newPlayer.sendData(response);
 		sendOnlinePlayersInfoToAllPlayers();
 		saveBattleShipPlayersFromFile();
 		return true;
@@ -177,39 +179,19 @@ public class BattleShipServer
 	
 	public void sendOnlinePlayersInfoToPlayer(Player player)
 	{
-		ArrayList<String> playerNames = new ArrayList<String>();
-		for (Player currPlayer : inLobbyPlayers)
-			playerNames.add(currPlayer.getUsername());
+		ArrayList<String> inLobbyPlayersNames = getInLobbyPlayersNames();
+		LobbyData namesData = new LobbyInfoData(inLobbyPlayersNames);
 		
-		LobbyData namesData = new LobbyInfoData(playerNames);
-		try
-		{
-			player.sendData(namesData);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		player.sendData(namesData);
 	}
 	
 	public void sendOnlinePlayersInfoToAllPlayers()
 	{
-		ArrayList<String> playerNames = new ArrayList<String>();
+		ArrayList<String> inLobbyPlayersNames = getInLobbyPlayersNames();
+		LobbyData namesData = new LobbyInfoData(inLobbyPlayersNames);
+
 		for (Player currPlayer : inLobbyPlayers)
-			playerNames.add(currPlayer.getUsername());
-		
-		LobbyData namesData = new LobbyInfoData(playerNames);
-		try
-		{
-			for (Player currPlayer : inLobbyPlayers)
-				currPlayer.sendData(namesData);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			currPlayer.sendData(namesData);
 	}
 	
 	public void playerDisconnected(ClientThread thread)
@@ -229,17 +211,7 @@ public class BattleShipServer
 		if (currState instanceof InLobby)
 			sendOnlinePlayersInfoToAllPlayers();
 		else
-		{
-			try
-			{
-				player.getOpponent().sendData(new PlayerDisconnectedData());
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+			player.getOpponent().sendData(new PlayerDisconnectedData());
 	}
 	
 	public void stopServer()
@@ -263,17 +235,8 @@ public class BattleShipServer
 		
 		invitedPlayer.setOpponent(inviterPlayer);
 		LobbyInvitedData inviteData = new LobbyInvitedData(inviterPlayerName);
-		try
-		{
-			invitedPlayer.sendData(inviteData);
-		}
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		
+		invitedPlayer.sendData(inviteData);
+
 		return true;
 	}
 	
