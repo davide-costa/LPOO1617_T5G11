@@ -15,7 +15,7 @@ public class ClientSocketTests extends Client
 		lastBattleShipDataSent = null;
 	}
 
-	public void notifyOfData(BattleShipData data)
+	public void simulateReceptionOfData(BattleShipData data)
 	{
 		this.notifyObservers(data);
 	}
