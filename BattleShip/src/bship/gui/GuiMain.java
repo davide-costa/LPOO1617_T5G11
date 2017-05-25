@@ -12,16 +12,14 @@ public class GuiMain
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuiMain window = new GuiMain();
-					window.frame.setVisible(true);
-					MenuPanel menu = new MenuPanel(frame);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 	{
+			public void run() 
+			{
+				GuiMain window = new GuiMain();
+				window.frame.setVisible(true);
+				MenuPanel menu = new MenuPanel(frame);
 			}
 		});
 	}

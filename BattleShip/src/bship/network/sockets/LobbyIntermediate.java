@@ -58,13 +58,13 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 		}
 	}
 	
-	public void invitePlayer(String opponentUsername)
+	public void invitePlayer(String opponentUsername) throws IOException
 	{
 		LobbyInviteData inviteData = new LobbyInviteData(opponentUsername);
 		socket.sendBattleShipData((BattleShipData) inviteData);
 	}
 
-	public void inviteResponse(boolean accepted)
+	public void inviteResponse(boolean accepted) throws IOException
 	{
 		InviteResponse response;
 		if(accepted)

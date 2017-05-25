@@ -56,7 +56,15 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			
 			BattleShipData resultData = new GameResultData(result, endOfGame);
 			
-			this.clientSocket.sendBattleShipData(resultData);
+			try 
+			{
+				this.clientSocket.sendBattleShipData(resultData);
+			} 
+			catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if (gameData instanceof GameResultData)
 		{
@@ -69,7 +77,16 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			
 			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMap()); 
 	
-			this.clientSocket.sendBattleShipData(endOfGameData);
+			try 
+			{
+				this.clientSocket.sendBattleShipData(endOfGameData);
+			} 
+			catch (IOException e) 
+			{
+				System.exit(0);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if (gameData instanceof EndOfGameData)
 		{

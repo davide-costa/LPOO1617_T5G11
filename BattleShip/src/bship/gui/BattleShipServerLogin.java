@@ -68,7 +68,7 @@ public class BattleShipServerLogin extends BattleShipGui
 				} 
 				catch (IOException e1) 
 				{
-					e1.printStackTrace();
+					BattleShipExceptionHandler.handleBattleShipException();
 				}
 			}
 		});

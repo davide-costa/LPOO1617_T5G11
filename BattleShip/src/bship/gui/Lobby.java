@@ -35,7 +35,7 @@ public class Lobby extends BattleShipGui
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			BattleShipExceptionHandler.handleBattleShipException();
 		}
 		
 		currPanel = new JPanel();
@@ -62,7 +62,14 @@ public class Lobby extends BattleShipGui
 						// TODO Auto-generated method stub
 						String selectedPlayer = inLobbyPlayersList.getSelectedValue();
 						System.out.println(selectedPlayer);
-						((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
+						try 
+						{
+							((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
+						} 
+						catch (IOException e) 
+						{
+							BattleShipExceptionHandler.handleBattleShipException();
+						}
 					}
 
 					@Override
@@ -119,20 +126,22 @@ public class Lobby extends BattleShipGui
 
 	public void handleInvite(String inviterName) 
 	{
-		System.out.println("LobbyInvitedData" + inviterName);
-		System.out.println("Lobby");
 		String message = "Player " + inviterName + " invited you to play a game";
-		int option = JOptionPane.showConfirmDialog(null, message, "KeepMap size", JOptionPane.YES_NO_OPTION);
-		System.out.println("stufffffffffffff");
+		int option = JOptionPane.showConfirmDialog(null, message, "Invite Response", JOptionPane.YES_NO_OPTION);
+
+		boolean response;
 		if (option == JOptionPane.YES_OPTION)
-		{
-			System.out.println("accepting");
-			((LobbyIntermediate)intermediate).inviteResponse(true);
-		}
+			response = true;
 		else
+			response = false;
+
+		try 
 		{
-			System.out.println("rejecting");
-			((LobbyIntermediate)intermediate).inviteResponse(false);
+			((LobbyIntermediate) intermediate).inviteResponse(false);
+		} 
+		catch (IOException e) 
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
 		}
 	}
 

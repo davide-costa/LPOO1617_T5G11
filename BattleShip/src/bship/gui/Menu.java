@@ -35,7 +35,7 @@ public class Menu extends BattleShipGui implements KeyListener
 			backgroundImage = ImageIO.read(new File("menuBackground.jpg"));
 		} catch (IOException e1) 
 		{
-			e1.printStackTrace();
+			BattleShipExceptionHandler.handleBattleShipException();
 		}
 	
 		this.frame = frame;
@@ -59,18 +59,21 @@ public class Menu extends BattleShipGui implements KeyListener
 		btnMultiplayerGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				  try {
-					   File file = new File("cartoon001" + ".wav");
-					   Clip clip = AudioSystem.getClip();
-					   clip.open(AudioSystem.getAudioInputStream(file));
-					   clip.start();
-					   
-					  } catch (Exception e) {
-					   System.err.println(e.getMessage());
-					  }
-			        
-			         BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, currPanel, intermediate);
-			
+				try 
+				{
+					File file = new File("cartoon001" + ".wav");
+					Clip clip = AudioSystem.getClip();
+					clip.open(AudioSystem.getAudioInputStream(file));
+					clip.start();
+
+				} 
+				catch (Exception e) 
+				{
+					BattleShipExceptionHandler.handleBattleShipException();
+				}
+
+				BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, currPanel, intermediate);
+
 			}
 		});
 		btnMultiplayerGame.setBounds(597, 226, 630, 154);
