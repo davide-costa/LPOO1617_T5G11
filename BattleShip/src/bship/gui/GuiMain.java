@@ -20,6 +20,7 @@ public class GuiMain
 				GuiMain window = new GuiMain();
 				window.frame.setVisible(true);
 				MenuPanel menu = new MenuPanel(frame);
+				BattleShipExceptionHandler.handleBattleShipException();
 			}
 		});
 	}
