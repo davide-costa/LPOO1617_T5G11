@@ -8,6 +8,7 @@ public class GameTests extends Game
 {
 	private Coords lastReceivedCoords;
 	private GameResult currResult;
+	private boolean endOfGame;
 	
 	public GameTests()
 	{
@@ -54,5 +55,10 @@ public class GameTests extends Game
 	public void setCurrResult(GameResult currResult)
 	{
 		this.currResult = currResult;
+	}
+	
+	public void setEndOfGame(boolean endOfGame)
+	{
+		this.endOfGame = endOfGame;
 	}
 }
