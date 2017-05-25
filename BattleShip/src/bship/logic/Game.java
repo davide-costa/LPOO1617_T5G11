@@ -17,7 +17,7 @@ public class Game
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
 	
-	private Game()
+	protected Game()
 	{
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
