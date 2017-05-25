@@ -36,15 +36,33 @@ public class TestMultiplayerOpponent
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
 		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
-		Coords shootCoords = new Coords(3, 5);
-		GameShootData shootData = new GameShootData(shootCoords);
-		GameResult result = GameResult.HIT;
-		GameResultData resultData = new GameResultData(result, false);
+		Coords shootCoords; 
+		GameShootData shootData;
+		GameResult result;
+		GameResultData sentData;
+		
+		shootCoords = new Coords(3, 5);
+		shootData = new GameShootData(shootCoords);
+		result = GameResult.HIT;
 		game.setCurrResult(result);
 		game.setEndOfGame(false);
 		clientSocket.simulateReceptionOfData(shootData);
 		
 		assertEquals(shootCoords, game.getLastReceivedCoords());
-		assertEquals(resultData, clientSocket.getLastBattleShipDataSent());
+		sentData = (GameResultData) clientSocket.getLastBattleShipDataSent();
+		assertEquals(result, sentData.getResult());
+		assertEquals(false, sentData.isEndOfGame());
+		
+		shootCoords = new Coords(1, 7);
+		shootData = new GameShootData(shootCoords);
+		result = GameResult.WATER;
+		game.setCurrResult(result);
+		game.setEndOfGame(true);
+		clientSocket.simulateReceptionOfData(shootData);
+		
+		assertEquals(shootCoords, game.getLastReceivedCoords());
+		sentData = (GameResultData) clientSocket.getLastBattleShipDataSent();
+		assertEquals(result, sentData.getResult());
+		assertEquals(true, sentData.isEndOfGame());
 	}
 }
