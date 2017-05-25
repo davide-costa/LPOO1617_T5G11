@@ -5,9 +5,9 @@ import java.io.IOException;
 import bship.network.data.BattleShipData;
 import bship.network.sockets.Client;
 
-public class ClientTests extends Client
+public class ClientSocketTests extends Client
 {
-	public ClientTests()
+	public ClientSocketTests()
 	{
 		super(0);
 	}
