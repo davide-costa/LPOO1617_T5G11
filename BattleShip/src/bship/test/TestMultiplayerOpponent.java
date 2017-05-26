@@ -65,4 +65,40 @@ public class TestMultiplayerOpponent
 		assertEquals(result, sentData.getResult());
 		assertEquals(true, sentData.isEndOfGame());
 	}
+	
+	@Test
+	public void TestUpdateGameResultData() throws IOException
+	{
+		GameTests game = new GameTests();
+		ClientSocketTests clientSocket = new ClientSocketTests();
+		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		Coords shootCoords; 
+		GameResultData resultData;
+		GameResult result;
+		GameResultData sentData;
+		
+		shootCoords = new Coords(3, 5);
+		result = GameResult.HIT;
+		resultData = new GameResultData(result, false);
+		//game.setCurrResult(result);
+		game.setEndOfGame(false);
+		clientSocket.simulateReceptionOfData(shootData);
+		
+		assertEquals(shootCoords, game.getLastReceivedCoords());
+		sentData = (GameResultData) clientSocket.getLastBattleShipDataSent();
+		assertEquals(result, sentData.getResult());
+		assertEquals(false, sentData.isEndOfGame());
+		
+		shootCoords = new Coords(1, 7);
+		shootData = new GameShootData(shootCoords);
+		result = GameResult.WATER;
+		game.setCurrResult(result);
+		game.setEndOfGame(true);
+		clientSocket.simulateReceptionOfData(shootData);
+		
+		assertEquals(shootCoords, game.getLastReceivedCoords());
+		sentData = (GameResultData) clientSocket.getLastBattleShipDataSent();
+		assertEquals(result, sentData.getResult());
+		assertEquals(true, sentData.isEndOfGame());
+	}
 }
