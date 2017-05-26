@@ -80,7 +80,6 @@ public class TestMultiplayerOpponent
 		GameResult result;
 		EndOfGameData sentData;
 		
-		shootCoords = new Coords(3, 5);
 		result = GameResult.HIT;
 		resultData = new GameResultData(result, false);
 		game.setEndOfGame(false);
@@ -90,7 +89,6 @@ public class TestMultiplayerOpponent
 		sentData = (EndOfGameData) clientSocket.getLastBattleShipDataSent();
 		assertNull(sentData);
 		
-		shootCoords = new Coords(3, 5);
 		result = GameResult.HIT;
 		resultData = new GameResultData(result, true);
 		game.setEndOfGame(true);
