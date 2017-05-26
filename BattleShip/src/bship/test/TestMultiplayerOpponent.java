@@ -76,7 +76,6 @@ public class TestMultiplayerOpponent
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
 		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
-		Coords shootCoords; 
 		GameResultData resultData;
 		GameResult result;
 		EndOfGameData sentData;
@@ -109,9 +108,6 @@ public class TestMultiplayerOpponent
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
 		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
-		Coords shootCoords; 
-		GameResultData resultData;
-		GameResult result;
 		EndOfGameData endData;
 		
 		GameMap map = new DefaultMap(true);
