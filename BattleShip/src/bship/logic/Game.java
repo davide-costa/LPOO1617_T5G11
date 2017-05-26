@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import bship.gui.GameGui;
 import bship.network.data.GameResultData.GameResult;
 
 public class Game
@@ -14,17 +15,19 @@ public class Game
 	protected GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
+	private GameGui gui;
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
 	
-	protected Game()
+	public Game(Opponent opponent, GameGui gui)
 	{
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
+		this.opponent = opponent;
+		this.gui = gui;
 		FillShipNameToResultMap();
 	}
 	
-
 	private void FillShipNameToResultMap() 
 	{
 		shipNameToGameResult.put("Carrier", GameResult.SINK_CARRIER);
@@ -32,15 +35,6 @@ public class Game
 		shipNameToGameResult.put("Cruiser", GameResult.SINK_CRUISER);
 		shipNameToGameResult.put("Submarine", GameResult.SINK_SUBMARINE);
 		shipNameToGameResult.put("Destroyer", GameResult.SINK_DESTROYER);
-	}
-	
-	
-	public static Game getInstance()
-	{
-		if(gameInstance == null)
-			gameInstance = new Game();
-
-		return gameInstance;
 	}
 	
 	public GameMap getAllyMap()

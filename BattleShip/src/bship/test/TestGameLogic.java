@@ -18,19 +18,11 @@ import bship.logic.Ship;
 import bship.network.data.GameResultData.GameResult;
 
 public class TestGameLogic
-{
-	@Test
-	public void testGetInstance()
-	{
-		Game game1 = Game.getInstance();
-		Game game2 = Game.getInstance();
-		assertEquals(game1, game2);
-	}
-	
+{	
 	@Test
 	public void testGetSorroundingCoordsOfShip()
 	{
-		Game game = Game.getInstance();
+		Game game = new Game(null, null);
 		
 		testVerticalLeftBottomShip(game);
 		testVerticalRightUpShip(game);
@@ -104,7 +96,7 @@ public class TestGameLogic
 	public void testShootAllyMapLogic()
 	{	
 		//Test shoot in water
-		Game game = Game.getInstance();
+		Game game = new Game(null, null);
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
@@ -151,7 +143,7 @@ public class TestGameLogic
 	public void testShootAllyShipLogic()
 	{
 		//Test shoot in water
-		Game game = Game.getInstance();
+		Game game = new Game(null, null);
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
@@ -188,7 +180,7 @@ public class TestGameLogic
 	@Test
 	public void testGetPlayEffects()
 	{
-		Game game = Game.getInstance();
+		Game game = new Game(null, null);
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
@@ -221,7 +213,7 @@ public class TestGameLogic
 	@Test
 	public void testHandleOpponentSankShip()
 	{
-		Game game = Game.getInstance();
+		Game game = new Game(null, null);
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setOpponentMap(map);
 		

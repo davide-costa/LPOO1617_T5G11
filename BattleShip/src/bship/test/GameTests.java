@@ -13,7 +13,7 @@ public class GameTests extends Game
 	
 	public GameTests()
 	{
-		super();
+		super(null, null);
 	}
 
 	public void shootAlly(Coords coords)
