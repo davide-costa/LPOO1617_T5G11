@@ -7,7 +7,9 @@ import java.io.IOException;
 import org.junit.Test;
 
 import bship.logic.Coords;
+import bship.logic.DefaultMap;
 import bship.logic.Game;
+import bship.logic.GameMap;
 import bship.logic.MultiplayerOpponent;
 import bship.network.data.GameShootData;
 import bship.network.data.EndOfGameData;
@@ -98,5 +100,23 @@ public class TestMultiplayerOpponent
 		sentData = (EndOfGameData) clientSocket.getLastBattleShipDataSent();
 		assertNotNull(sentData);
 		assertNotNull(sentData.getWinnerGameMap());
+	}
+	
+	@Test
+	public void TestUpdateEndOfGameData() throws IOException
+	{
+		GameTests game = new GameTests();
+		ClientSocketTests clientSocket = new ClientSocketTests();
+		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		Coords shootCoords; 
+		GameResultData resultData;
+		GameResult result;
+		EndOfGameData endData;
+		
+		GameMap map = new DefaultMap(true);
+		endData = new EndOfGameData(map);
+		game.setOpponentMap(null);
+		clientSocket.simulateReceptionOfData(endData);
+		assertNotNull(game.getOpponentMap());
 	}
 }

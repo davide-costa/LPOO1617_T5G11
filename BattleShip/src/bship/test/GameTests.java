@@ -67,4 +67,9 @@ public class GameTests extends Game
 	{
 		this.endOfGame = endOfGame;
 	}
+
+	public Object getOpponentMap()
+	{
+		return opponentMap;
+	}
 }
