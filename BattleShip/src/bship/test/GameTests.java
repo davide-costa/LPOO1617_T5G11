@@ -2,6 +2,7 @@ package bship.test;
 
 import bship.logic.Coords;
 import bship.logic.Game;
+import bship.logic.GameMap;
 import bship.network.data.GameResultData.GameResult;
 
 public class GameTests extends Game
@@ -35,6 +36,11 @@ public class GameTests extends Game
 	{
 		lastReceivedCoords = lastShootCoords;
 		currResult = result;
+	}
+	
+	public void setOpponentMap(GameMap opponentGameMap)
+	{
+		this.opponentMap = opponentGameMap;
 	}
 	
 	public Coords getLastReceivedCoords()

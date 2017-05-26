@@ -11,7 +11,7 @@ public class Game
 {
 	private static Game gameInstance = null;
 	private GameMap map;
-	private GameMap opponentMap;
+	protected GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
