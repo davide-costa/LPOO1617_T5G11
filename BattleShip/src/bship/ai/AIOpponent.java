@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
+import bship.logic.AllyCellState;
 import bship.logic.Coords;
 import bship.logic.DefaultMap;
 import bship.logic.GameMap;
@@ -20,11 +21,24 @@ public class AIOpponent
 	public AIOpponent()
 	{
 		map = new DefaultMap(false);
+		initializeAllCellsToWater();
 		shipPlacement = new SinglePlayerShipPlacement(map);
 		fillGeneratedDirection();
 	}
 	
 	
+	private void initializeAllCellsToWater()
+	{
+		for (int y = 0; y < map.getMapXSize(); y++)
+		{
+			for (int x = 0; x < map.getMapYSize(); x++)
+			{
+				map.setCellState(new Coords(x, y), new AllyCellState(null));
+			}
+		}
+	}
+
+
 	private void fillGeneratedDirection()
 	{
 		generatedDirection.put(0, "Vertical");

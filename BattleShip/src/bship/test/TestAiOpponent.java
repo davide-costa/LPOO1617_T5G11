@@ -43,7 +43,7 @@ public class TestAiOpponent
 		for(int i = 0; i < cells.length; i++)
 			{
 				for(int j = 0; j < cells[i].length; j++)
-					if(cells[i][j] == null)
+					if(cells[i][j].getShip() == null)
 						System.out.print("null  ");
 					else
 						System.out.print(cells[i][j].getShip().getName() + "  ");
@@ -51,7 +51,7 @@ public class TestAiOpponent
 			}
 		
 		
-		/*ArrayList<Coords> aroundCoords = new ArrayList<Coords>();
+		ArrayList<Coords> aroundCoords = new ArrayList<Coords>();
 		for(Ship ship: ships)
 		{
 			aroundCoords = Coords.getSurroundingCoords(ship.getCoords());
@@ -61,6 +61,6 @@ public class TestAiOpponent
 					if(aiOpponent.getGameMap().getCellState(coords).hasShip())
 						fail();
 			}
-		}*/
+		}
 	}
 }
