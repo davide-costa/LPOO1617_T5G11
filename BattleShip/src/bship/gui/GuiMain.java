@@ -1,6 +1,7 @@
 package bship.gui;
 
 import java.awt.EventQueue;
+import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 import java.awt.CardLayout;
@@ -17,6 +18,15 @@ public class GuiMain
 		EventQueue.invokeLater(new Runnable() 	{
 			public void run() 
 			{
+				System.out.println(System.getProperty("user.name")); //platform independent
+				java.net.InetAddress localMachine = null;
+				try {
+					localMachine = java.net.InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Hostname of local machine: " + localMachine.getHostName());
 				GuiMain window = new GuiMain();
 				window.frame.setVisible(true);
 				MenuPanel menu = new MenuPanel(frame);
