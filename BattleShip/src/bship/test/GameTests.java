@@ -31,9 +31,10 @@ public class GameTests extends Game
 		return endOfGame;
 	}
 	
-	public void handleResultData()
+	public void handleResultData(Coords lastShootCoords, GameResult result)
 	{
-		
+		lastReceivedCoords = lastShootCoords;
+		currResult = result;
 	}
 	
 	public Coords getLastReceivedCoords()

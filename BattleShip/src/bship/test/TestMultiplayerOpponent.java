@@ -10,6 +10,7 @@ import bship.logic.Coords;
 import bship.logic.Game;
 import bship.logic.MultiplayerOpponent;
 import bship.network.data.GameShootData;
+import bship.network.data.EndOfGameData;
 import bship.network.data.GameResultData;
 import bship.network.data.GameResultData.GameResult;
 import bship.network.sockets.Client;
@@ -64,5 +65,40 @@ public class TestMultiplayerOpponent
 		sentData = (GameResultData) clientSocket.getLastBattleShipDataSent();
 		assertEquals(result, sentData.getResult());
 		assertEquals(true, sentData.isEndOfGame());
+	}
+	
+	@Test
+	public void TestUpdateGameResultData() throws IOException
+	{
+		GameTests game = new GameTests();
+		ClientSocketTests clientSocket = new ClientSocketTests();
+		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		Coords shootCoords; 
+		GameResultData resultData;
+		GameResult result;
+		EndOfGameData sentData;
+		
+		shootCoords = new Coords(3, 5);
+		result = GameResult.HIT;
+		resultData = new GameResultData(result, false);
+		game.setEndOfGame(false);
+		clientSocket.simulateReceptionOfData(resultData);
+		
+		assertEquals(result, game.getCurrResult());
+		sentData = (EndOfGameData) clientSocket.getLastBattleShipDataSent();
+		assertNull(sentData);
+//		assertEquals(result, sentData.getResult());
+//		assertEquals(false, sentData.isEndOfGame());
+		
+		shootCoords = new Coords(3, 5);
+		result = GameResult.HIT;
+		resultData = new GameResultData(result, true);
+		game.setEndOfGame(true);
+		clientSocket.simulateReceptionOfData(resultData);
+		
+		assertEquals(result, game.getCurrResult());
+		sentData = (EndOfGameData) clientSocket.getLastBattleShipDataSent();
+		assertNotNull(sentData);
+		assertNotNull(sentData.getWinnerGameMap());
 	}
 }
