@@ -87,8 +87,6 @@ public class TestMultiplayerOpponent
 		assertEquals(result, game.getCurrResult());
 		sentData = (EndOfGameData) clientSocket.getLastBattleShipDataSent();
 		assertNull(sentData);
-//		assertEquals(result, sentData.getResult());
-//		assertEquals(false, sentData.isEndOfGame());
 		
 		shootCoords = new Coords(3, 5);
 		result = GameResult.HIT;
