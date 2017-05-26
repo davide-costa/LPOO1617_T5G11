@@ -12,6 +12,7 @@ import bship.logic.Game;
 import bship.logic.GameMap;
 import bship.logic.MultiplayerOpponent;
 import bship.network.data.GameShootData;
+import bship.network.data.PlayerDisconnectedData;
 import bship.network.data.EndOfGameData;
 import bship.network.data.GameResultData;
 import bship.network.data.GameResultData.GameResult;
@@ -118,5 +119,16 @@ public class TestMultiplayerOpponent
 		game.setOpponentMap(null);
 		clientSocket.simulateReceptionOfData(endData);
 		assertNotNull(game.getOpponentMap());
+	}
+	
+	@Test
+	public void TestUpdatePlayerDisconnected() throws IOException
+	{
+		GameTests game = new GameTests();
+		ClientSocketTests clientSocket = new ClientSocketTests();
+		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		PlayerDisconnectedData data = new PlayerDisconnectedData(); 
+
+		clientSocket.simulateReceptionOfData(data);
 	}
 }
