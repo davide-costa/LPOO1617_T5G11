@@ -170,6 +170,9 @@ public class BattleShipServer
 		
 		newPlayer.setState(new InLobby(newPlayer));
 		response = new LoginResponseData(true);
+		//TODO:
+		if(!battleshipPlayers.containsKey(username))
+			response.setAccountAsNew();
 
 		newPlayer.sendData(response);
 		sendOnlinePlayersInfoToAllPlayers();
