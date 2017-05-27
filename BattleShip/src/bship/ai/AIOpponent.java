@@ -14,15 +14,12 @@ import bship.logic.SinglePlayerShipPlacement;
 
 public class AIOpponent
 {
-	private ShipPlacement shipPlacement;
 	private GameMap map;
 	private HashMap<Integer, String> generatedDirection = new HashMap<Integer, String>();
 	
 	public AIOpponent()
 	{
 		map = new DefaultMap(false);
-		initializeAllCellsToWater();
-		shipPlacement = new SinglePlayerShipPlacement(map);
 		fillGeneratedDirection();
 	}
 	
@@ -50,7 +47,14 @@ public class AIOpponent
 		return map;
 	}
 	
-	public void PlaceShips(ArrayList<Ship> ships)
+	public void PerformShipPlacement(ArrayList<Ship> ships)
+	{
+		initializeAllCellsToWater();
+		SinglePlayerShipPlacement shipPlacement = new SinglePlayerShipPlacement(map);
+		PlaceShips(shipPlacement, ships);
+	}
+	
+	public void PlaceShips(SinglePlayerShipPlacement shipPlacement, ArrayList<Ship> ships)
 	{
 		for(Ship ship: ships)
 		{

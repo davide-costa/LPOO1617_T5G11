@@ -36,7 +36,7 @@ public class TestAiOpponent
 		ships.add(submarine);
 		ships.add(cruiser);
 		
-		aiOpponent.PlaceShips(ships);
+		aiOpponent.PerformShipPlacement(ships);
 		
 		CellState cells[][] = aiOpponent.getGameMap().getMap();
 		
