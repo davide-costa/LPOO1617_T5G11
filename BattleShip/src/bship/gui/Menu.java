@@ -26,9 +26,10 @@ import java.awt.Color;
 public class Menu extends BattleShipGui
 {
 	private JPanel menuPanel;
-	private JButton btnMultiplayerGame;
-	private JButton btnSingleplayerGame;
-	private	JButton btnFcebookLogin;
+	private JButton btnMultiplayer;
+	private JButton btnSingleplayer;
+	private	JButton btnFacebookLogin;
+	private	JButton btnExit;
 	private Image backgroundImage;
 
 	public Menu(JFrame frame) 
@@ -46,12 +47,12 @@ public class Menu extends BattleShipGui
 		frame.getContentPane().add(menuPanel);
 		menuPanel.setLayout(null);
 		
-		JButton btnSingleplayer = new JButton("SinglePlayer");
+		btnSingleplayer = new JButton("SinglePlayer");
 		btnSingleplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		btnSingleplayer.setBounds(701, 236, 459, 70);
 		menuPanel.add(btnSingleplayer);
 		
-		JButton btnMultiplayer = new JButton("MultiPlayer");
+		btnMultiplayer = new JButton("MultiPlayer");
 		btnMultiplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		btnMultiplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
@@ -62,12 +63,18 @@ public class Menu extends BattleShipGui
 		btnMultiplayer.setBounds(701, 382, 459, 70);
 		menuPanel.add(btnMultiplayer);
 		
-		JButton btnExit = new JButton("Exit");
+		btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				
+			}
+		});
 		btnExit.setBounds(701, 524, 459, 70);
 		menuPanel.add(btnExit);
 		
-		JButton btnFacebookLogin = new JButton("Facebook Login");
+		btnFacebookLogin = new JButton("Facebook Login");
 		btnFacebookLogin.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -87,6 +94,11 @@ public class Menu extends BattleShipGui
 		}
 
 		menuPanel.requestFocusInWindow();
+	}
+	
+	private void exitDialog()
+	{
+		
 	}
 
 	@Override
