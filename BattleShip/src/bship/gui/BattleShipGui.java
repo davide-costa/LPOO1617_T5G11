@@ -60,6 +60,15 @@ public class BattleShipGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		JPanel battleShipPlacementPanel = new JPanel();
+		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(battleShipPlacementPanel);
+		battleShipPlacementPanel.setLayout(null);
+		
+		JPanel gameMapArea = new JPanel();
+		gameMapArea.setBounds(400, 200, 600, 600);
+		battleShipPlacementPanel.add(gameMapArea);
+		
 		JPanel gamePanel = new JPanel();
 		gamePanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(gamePanel);
@@ -70,9 +79,9 @@ public class BattleShipGui {
 		JPanel opponentGameArea = new JPanel();
 		gamePanel.add(opponentGameArea);
 		
-		JPanel endOfGamePaanel = new JPanel();
-		endOfGamePaanel.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().add(endOfGamePaanel);
+		JPanel endOfGamePanel = new JPanel();
+		endOfGamePanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(endOfGamePanel);
 		
 		JPanel lobbyPanel = new JPanel();
 		lobbyPanel.setBounds(0, 0, 1920, 1080);
