@@ -35,13 +35,6 @@ public class Menu extends BattleShipGui
 	public Menu(JFrame frame) 
 	{
 		this.frame = frame;
-		frame.setResizable(false);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setBounds(0, 0, 1920, 1080);
-		frame.setUndecorated(true);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		menuPanel = new JPanel();
 		menuPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(menuPanel);
@@ -57,7 +50,7 @@ public class Menu extends BattleShipGui
 		btnMultiplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, menuPanel, intermediate);
+				new BattleShipServerLogin(frame, menuPanel, intermediate);
 			}
 		});
 		btnMultiplayer.setBounds(701, 382, 459, 70);
@@ -68,7 +61,7 @@ public class Menu extends BattleShipGui
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				new ExitPanel(frame, menuPanel);
 			}
 		});
 		btnExit.setBounds(701, 524, 459, 70);
@@ -79,7 +72,7 @@ public class Menu extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				FacebookLogin f = new FacebookLogin();
+				new FacebookLogin();
 			}
 		});
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
@@ -93,6 +86,8 @@ public class Menu extends BattleShipGui
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 
+		lastPanel.setVisible(false);
+		menuPanel.setVisible(true);
 		menuPanel.requestFocusInWindow();
 	}
 	
