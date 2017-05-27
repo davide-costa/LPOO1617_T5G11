@@ -60,6 +60,35 @@ public class BattleShipGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		JPanel exitPanel = new JPanel();
+		exitPanel.setBounds(610, 340, 700, 400);
+		frame.getContentPane().add(exitPanel);
+		exitPanel.setLayout(null);
+		
+		JPanel menuPanel = new JPanel();
+		menuPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(menuPanel);
+		menuPanel.setLayout(null);
+		
+		JButton btnSingleplayer = new JButton("SinglePlayer");
+		btnSingleplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnSingleplayer.setBounds(701, 236, 459, 70);
+		menuPanel.add(btnSingleplayer);
+		
+		JButton btnMultiplayer = new JButton("MultiPlayer");
+		btnMultiplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnMultiplayer.setBounds(701, 382, 459, 70);
+		menuPanel.add(btnMultiplayer);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnExit.setBounds(701, 524, 459, 70);
+		menuPanel.add(btnExit);
+		
+		JButton btnFacebookLogin = new JButton("Facebook Login");
+		btnFacebookLogin.setBounds(192, 917, 123, 57);
+		menuPanel.add(btnFacebookLogin);
+		
 		JPanel battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(battleShipPlacementPanel);
@@ -72,16 +101,20 @@ public class BattleShipGui {
 		JPanel gamePanel = new JPanel();
 		gamePanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(gamePanel);
+		gamePanel.setLayout(null);
 		
 		JPanel allyGameArea = new JPanel();
+		allyGameArea.setBounds(947, 5, 10, 10);
 		gamePanel.add(allyGameArea);
 		
 		JPanel opponentGameArea = new JPanel();
+		opponentGameArea.setBounds(962, 5, 10, 10);
 		gamePanel.add(opponentGameArea);
 		
 		JPanel endOfGamePanel = new JPanel();
 		endOfGamePanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(endOfGamePanel);
+		endOfGamePanel.setLayout(null);
 		
 		JPanel lobbyPanel = new JPanel();
 		lobbyPanel.setBounds(0, 0, 1920, 1080);
@@ -126,28 +159,9 @@ public class BattleShipGui {
 		passwordTextArea.setBounds(645, 510, 119, 37);
 		battleShipServerLoginPanel.add(passwordTextArea);
 		
-		JPanel menuPanel = new JPanel();
-		menuPanel.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().add(menuPanel);
-		menuPanel.setLayout(null);
-		
-		JButton btnSingleplayer = new JButton("SinglePlayer");
-		btnSingleplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-		btnSingleplayer.setBounds(701, 236, 459, 70);
-		menuPanel.add(btnSingleplayer);
-		
-		JButton btnMultiplayer = new JButton("MultiPlayer");
-		btnMultiplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-		btnMultiplayer.setBounds(701, 382, 459, 70);
-		menuPanel.add(btnMultiplayer);
-		
-		JButton btnExit = new JButton("Exit");
-		btnExit.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-		btnExit.setBounds(701, 524, 459, 70);
-		menuPanel.add(btnExit);
-		
-		JButton btnFacebookLogin = new JButton("Facebook Login");
-		btnFacebookLogin.setBounds(192, 917, 123, 57);
-		menuPanel.add(btnFacebookLogin);
+		JPanel singlePlayerDifficultyPanel = new JPanel();
+		singlePlayerDifficultyPanel.setBounds(610, 340, 700, 400);
+		frame.getContentPane().add(singlePlayerDifficultyPanel);
+		singlePlayerDifficultyPanel.setLayout(null);
 	}
 }
