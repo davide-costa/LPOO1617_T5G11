@@ -18,7 +18,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
-public class BattleShipServerLogin extends BattleShipGui
+public class BattleShipServerLogin extends GuiMain
 {
 	private JTextField usernameTextField;
 	private JTextField passwordTextField;

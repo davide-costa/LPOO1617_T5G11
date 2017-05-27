@@ -22,7 +22,7 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 
 
-public class Menu extends BattleShipGui implements KeyListener
+public class Menu extends GuiMain implements KeyListener
 {
 	private JButton btnMultiplayerGame;
 	private JButton btnSingleplayerGame;
@@ -40,18 +40,8 @@ public class Menu extends BattleShipGui implements KeyListener
 	
 		this.frame = frame;
 		
-		JPanel panella = new JPanel();
-		currPanel = panella;
-		getContentPane().add(panella);
-		
-		JButton btnFsddfs = new JButton("fsddfs");
-		panella.add(btnFsddfs);
-		currPanel.addKeyListener(this);
-		currPanel.setBounds(0, 0, 1920, 1080);
-		setResizable(false);
-		
-		//JPanel panella = new JPanel();
-		//getContentPane().add(panella, BorderLayout.NORTH);
+
+	
 		
 		
 		btnMultiplayerGame = new JButton("Multiplayer");

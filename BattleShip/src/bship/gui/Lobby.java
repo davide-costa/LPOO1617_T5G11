@@ -17,7 +17,7 @@ import bship.network.sockets.SocketIntermediate;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-public class Lobby extends BattleShipGui
+public class Lobby extends GuiMain
 {
 	private DefaultListModel<String> model;
 	private JList<String> inLobbyPlayersList;
