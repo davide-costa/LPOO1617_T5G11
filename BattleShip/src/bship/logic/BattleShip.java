@@ -14,4 +14,11 @@ public class BattleShip extends Ship
 		super(4, coords, direction, "BattleShip");
 	}
 
+	@Override
+	public Ship getCopy()
+	{
+		Ship newShip = new BattleShip(coords, direction);
+		return newShip;
+	}
+
 }

@@ -27,6 +27,8 @@ public abstract class Ship
 		this.name = new String(name);
 	}
 	
+	public abstract Ship getCopy();
+	
 	public ArrayList<Coords> getCoords()
 	{
 		return coords;

@@ -13,5 +13,11 @@ public class Cruiser extends Ship
 	{
 		super(3, coords, direction, "Cruiser");
 	}
+	@Override
+	public Ship getCopy()
+	{
+		Ship newShip = new Cruiser(coords, direction);
+		return newShip;
+	}
 
 }

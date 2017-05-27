@@ -29,4 +29,11 @@ public class OpponentCellState extends CellState
 		return hasShip && discovered;
 	}
 
+	@Override
+	public CellState getCopy()
+	{
+		CellState cell = new OpponentCellState(ship.getCopy(), hasShip, discovered);
+		return cell;
+	}
+
 }

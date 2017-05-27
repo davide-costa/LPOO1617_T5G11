@@ -10,7 +10,9 @@ public abstract class CellState
 		this.setShip(ship);
 		this.discovered = false;
 	}
-
+	
+	public abstract CellState getCopy();
+	
 	public boolean isDiscovered()
 	{
 		return discovered;

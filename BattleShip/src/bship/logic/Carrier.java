@@ -14,4 +14,11 @@ public class Carrier extends Ship
 		super(5, coords, direction, "Carrier");
 	}
 
+	@Override
+	public Ship getCopy()
+	{
+		Ship newShip = new Carrier(coords, direction);
+		return newShip;
+	}
+
 }

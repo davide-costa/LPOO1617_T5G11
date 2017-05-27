@@ -8,6 +8,12 @@ public class AllyCellState extends CellState
 		super(ship);
 	}
 	
+	public AllyCellState(Ship ship, boolean discovered)
+	{
+		super(ship);
+		this.discovered = discovered;
+	}
+	
 	public boolean hasShip()
 	{
 		return ship != null;
@@ -16,5 +22,12 @@ public class AllyCellState extends CellState
 	public boolean isDiscoveredAndShip()
 	{
 		return discovered && hasShip();
+	}
+
+	@Override
+	public CellState getCopy()
+	{
+		CellState cell = new AllyCellState(ship.getCopy(), discovered);
+		return cell;
 	}
 }
