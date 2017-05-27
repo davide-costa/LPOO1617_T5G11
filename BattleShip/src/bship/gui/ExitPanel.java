@@ -59,7 +59,8 @@ public class ExitPanel extends BattleShipGui
 		btnNo.setBounds(480, 243, 93, 37);
 		exitPanel.add(btnNo);
 		
-		backToPreviousPanel();
+		this.setVisible(true);
+		lastPanel.setVisible(false);
 		exitPanel.addKeyListener(this);
 		exitPanel.requestFocusInWindow();
 	}

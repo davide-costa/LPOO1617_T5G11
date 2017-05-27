@@ -90,7 +90,8 @@ public class Lobby extends BattleShipGui
 
 				});
 
-		
+		this.setVisible(true);
+		lastPanel.setVisible(false);
 		lobbyPanel.addKeyListener(this);
 		lobbyPanel.requestFocusInWindow();
 	}

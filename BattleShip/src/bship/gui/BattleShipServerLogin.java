@@ -70,7 +70,6 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{
@@ -87,7 +86,8 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.setBounds(155, 172, 89, 23);
 		battleShipServerLoginPanel.add(btnLogin);
 		
-		backToPreviousPanel();
+		this.setVisible(true);
+		lastPanel.setVisible(false);
 		battleShipServerLoginPanel.addKeyListener(this);
 		battleShipServerLoginPanel.requestFocusInWindow();
 	}
