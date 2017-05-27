@@ -26,6 +26,7 @@ public class Game
 		this.opponent = opponent;
 		this.gui = gui;
 		FillShipNameToResultMap();
+		InitializeOpponentGameMap();
 	}
 	
 	private void FillShipNameToResultMap() 
@@ -35,6 +36,11 @@ public class Game
 		shipNameToGameResult.put("Cruiser", GameResult.SINK_CRUISER);
 		shipNameToGameResult.put("Submarine", GameResult.SINK_SUBMARINE);
 		shipNameToGameResult.put("Destroyer", GameResult.SINK_DESTROYER);
+	}
+	
+	private void InitializeOpponentGameMap()
+	{
+		opponentMap.fill(new OpponentCellState(null, false));
 	}
 	
 	public GameMap getAllyMap()

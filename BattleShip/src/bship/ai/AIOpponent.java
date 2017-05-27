@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import bship.logic.AllyCellState;
 import bship.logic.Coords;
 import bship.logic.DefaultMap;
+import bship.logic.Game;
 import bship.logic.GameMap;
 import bship.logic.Ship;
 import bship.logic.ShipPlacement;
@@ -14,6 +15,7 @@ import bship.logic.SinglePlayerShipPlacement;
 
 public class AIOpponent
 {
+	private Game game;
 	private GameMap map;
 	private HashMap<Integer, String> generatedDirection = new HashMap<Integer, String>();
 	
@@ -25,13 +27,7 @@ public class AIOpponent
 	
 	private void initializeAllCellsToWater()
 	{
-		for (int y = 0; y < map.getMapXSize(); y++)
-		{
-			for (int x = 0; x < map.getMapYSize(); x++)
-			{
-				map.setCellState(new Coords(x, y), new AllyCellState(null));
-			}
-		}
+		map.fill(new AllyCellState(null));
 	}
 
 
@@ -46,12 +42,15 @@ public class AIOpponent
 		return map;
 	}
 	
-	public void PerformShipPlacement(ArrayList<Ship> ships)
+	public void PerformShipPlacement(Game game, ArrayList<Ship> ships)
 	{
 		fillGeneratedDirection();
 		initializeAllCellsToWater();
 		SinglePlayerShipPlacement shipPlacement = new SinglePlayerShipPlacement(map);
 		PlaceShips(shipPlacement, ships);
+		this.game = game;
+		game.setAllyMap(map);
+		
 	}
 	
 	public void PlaceShips(SinglePlayerShipPlacement shipPlacement, ArrayList<Ship> ships)
