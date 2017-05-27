@@ -20,10 +20,12 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Font;
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 
-public class Menu extends GuiMain implements KeyListener
+public class Menu extends BattleShipGui
 {
+	private JPanel menuPanel;
 	private JButton btnMultiplayerGame;
 	private JButton btnSingleplayerGame;
 	private	JButton btnFcebookLogin;
@@ -31,59 +33,60 @@ public class Menu extends GuiMain implements KeyListener
 
 	public Menu(JFrame frame) 
 	{
+		this.frame = frame;
+		frame.setResizable(false);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setBounds(0, 0, 1920, 1080);
+		frame.setUndecorated(true);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		menuPanel = new JPanel();
+		menuPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(menuPanel);
+		menuPanel.setLayout(null);
+		
+		JButton btnSingleplayer = new JButton("SinglePlayer");
+		btnSingleplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnSingleplayer.setBounds(701, 236, 459, 70);
+		menuPanel.add(btnSingleplayer);
+		
+		JButton btnMultiplayer = new JButton("MultiPlayer");
+		btnMultiplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnMultiplayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, menuPanel, intermediate);
+			}
+		});
+		btnMultiplayer.setBounds(701, 382, 459, 70);
+		menuPanel.add(btnMultiplayer);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		btnExit.setBounds(701, 524, 459, 70);
+		menuPanel.add(btnExit);
+		
+		JButton btnFacebookLogin = new JButton("Facebook Login");
+		btnFacebookLogin.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				FacebookLogin f = new FacebookLogin();
+			}
+		});
+		btnFacebookLogin.setBounds(192, 917, 123, 57);
+		menuPanel.add(btnFacebookLogin);
+		
+		
 	try {
 			backgroundImage = ImageIO.read(new File("menuBackground.jpg"));
 		} catch (IOException e1) 
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-	
-		this.frame = frame;
-		
 
-	
-		
-		
-		btnMultiplayerGame = new JButton("Multiplayer");
-		btnMultiplayerGame.setFont(new Font("Comic Sans MS", Font.BOLD, 37));
-		btnMultiplayerGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				try 
-				{
-					File file = new File("cartoon001" + ".wav");
-					Clip clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(file));
-					clip.start();
-
-				} 
-				catch (Exception e) 
-				{
-					BattleShipExceptionHandler.handleBattleShipException();
-				}
-
-				BattleShipServerLogin serverLogin = new BattleShipServerLogin(frame, currPanel, intermediate);
-
-			}
-		});
-		btnMultiplayerGame.setBounds(597, 226, 630, 154);
-		currPanel.add(btnMultiplayerGame);
-
-	
-		btnFcebookLogin = new JButton("Login Facebook");
-		btnFcebookLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO
-				System.out.println("lanching chrome");
-				FacebookLogin f = new FacebookLogin();
-
-			}
-		});
-		btnFcebookLogin.setBounds(294, 227, 130, 23);
-		currPanel.add(btnFcebookLogin);
-		
-		
-		currPanel.requestFocusInWindow();
+		menuPanel.requestFocusInWindow();
 	}
 
 	@Override
@@ -104,11 +107,12 @@ public class Menu extends GuiMain implements KeyListener
 		// TODO Auto-generated method stub
 		System.out.println("Menu");
 	}
-	
+
 	@Override
-	public void paintComponents(Graphics graphics) 
+	protected void paintComponent(Graphics g) 
 	{
-		super.paintComponents(graphics);
-		graphics.drawImage(backgroundImage, 0, 0, this);
+		super.paintComponent(g);
+		//g.drawOval(0, 0, 50, 500);
+		g.drawImage(backgroundImage, 0, 0, 1920, 1080, this.frame);
 	}
 }
