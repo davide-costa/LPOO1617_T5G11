@@ -90,20 +90,24 @@ public class Menu extends BattleShipGui
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) 
+	public void keyPressed(KeyEvent event) 
 	{
-		System.out.println("Menu");
-		
+		switch(event.getKeyCode())
+		{
+		case KeyEvent.VK_ESCAPE:
+			//TODO: launch are you sure you want t quit 
+			break;
+		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent event) {
 		// TODO Auto-generated method stub
 		System.out.println("Menu");
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent event) {
 		// TODO Auto-generated method stub
 		System.out.println("Menu");
 	}
