@@ -1,8 +1,7 @@
 package bship.gui;
 
-import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -11,17 +10,21 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import bship.network.sockets.LobbyIntermediate;
-import bship.network.sockets.SocketIntermediate;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-public class Lobby extends GuiMain
+public class Lobby extends BattleShipGui
 {
+	private JPanel lobbyPanel;
+	private JTextField txtOnlinePlayers;
 	private DefaultListModel<String> model;
 	private JList<String> inLobbyPlayersList;
 	private String username;
+	private String invitedPlayerUsername;
+	private JOptionPane waitingForResponse;
 		
 	public Lobby(JFrame frame, JPanel battleShipLoginPanel, String username)
 	{
@@ -38,30 +41,31 @@ public class Lobby extends GuiMain
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 		
-		currPanel = new JPanel();
+		lobbyPanel = new JPanel();
+		lobbyPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(lobbyPanel);
+		lobbyPanel.setLayout(null);
 		
+		txtOnlinePlayers = new JTextField();
+		txtOnlinePlayers.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
+		txtOnlinePlayers.setText("Online Players");
+		txtOnlinePlayers.setBounds(870, 100, 180, 50);
+		lobbyPanel.add(txtOnlinePlayers);
+		txtOnlinePlayers.setColumns(10);
 		
-		
-		frame.getContentPane().add(currPanel, "Lobby Panel");
-		battleShipLoginPanel.setVisible(false);
-		currPanel.setVisible(true);
-		currPanel.addKeyListener(this);
-		System.out.println("lobby constructor");
 		
 		model = new DefaultListModel<String>();
 		inLobbyPlayersList = new JList<String>(model);
-		currPanel.add(inLobbyPlayersList);
-		inLobbyPlayersList.setBounds(100, 200, 500, 500);
-		currPanel.setVisible(true);
-		currPanel.requestFocusInWindow();
+		inLobbyPlayersList.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		inLobbyPlayersList.setBounds(870, 250, 180, 750);
+		lobbyPanel.add(inLobbyPlayersList);
 		inLobbyPlayersList.addMouseListener(new MouseListener()
 				{
 
 					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						// TODO Auto-generated method stub
+					public void mouseClicked(MouseEvent event) 
+					{
 						String selectedPlayer = inLobbyPlayersList.getSelectedValue();
-						System.out.println(selectedPlayer);
 						try 
 						{
 							((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
@@ -73,60 +77,43 @@ public class Lobby extends GuiMain
 					}
 
 					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						inLobbyPlayersList.setBackground(Color.GRAY);
-					}
+					public void mouseEntered(MouseEvent event) {}
 
 					@Override
-					public void mouseExited(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						inLobbyPlayersList.setBackground(getForeground());;
-					}
+					public void mouseExited(MouseEvent event) {}
 
 					@Override
-					public void mousePressed(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
+					public void mousePressed(MouseEvent event) {}	
 
 					@Override
-					public void mouseReleased(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-			
+					public void mouseReleased(MouseEvent event) {}
+
 				});
+
+		
+		lobbyPanel.addKeyListener(this);
+		lobbyPanel.requestFocusInWindow();
 	}
 	
-	  @Override
-	  public void repaint() 
-	  {
-	      super.repaint();
-	   }
-
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Lobby");
+	public void keyPressed(KeyEvent event) 
+	{
+		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
+			backToPreviousPanel();
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Lobby");
-	}
+	public void keyReleased(KeyEvent e) {}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Lobby");
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	public void handleInvite(String inviterName) 
 	{
-		String message = "Player " + inviterName + " invited you to play a game";
+		invitedPlayerUsername = inviterName;
+		
+		String message = "Player " + invitedPlayerUsername + " invited you to play a game";
 		int option = JOptionPane.showConfirmDialog(null, message, "Invite Response", JOptionPane.YES_NO_OPTION);
 
 		boolean response;
@@ -137,17 +124,34 @@ public class Lobby extends GuiMain
 
 		try 
 		{
-			((LobbyIntermediate) intermediate).inviteResponse(false);
+			((LobbyIntermediate) intermediate).inviteResponse(response);
 		} 
 		catch (IOException e) 
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
+		
+		message = "Wating for player" + invitedPlayerUsername + " response...";
+		waitingForResponse = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.NO_OPTION);
+		lobbyPanel.add(waitingForResponse);
+		waitingForResponse.setEnabled(true);
 	}
+	
+	private void InviteRejectedMessage() 
+	{
+		String message = "Player " + invitedPlayerUsername + " has rejected your invitation";
+		JOptionPane.showMessageDialog(null, message, "Invite Response", JOptionPane.OK_OPTION);	
+	}
+
 
 	public void handleInviteResponse(boolean wasAccepted) 
 	{
-		System.out.println("Response" + wasAccepted);
+		waitingForResponse.setEnabled(false);
+		
+		if(wasAccepted)
+			new ShipPlacementPanel();
+		else
+			InviteRejectedMessage();
 	}
 
 
