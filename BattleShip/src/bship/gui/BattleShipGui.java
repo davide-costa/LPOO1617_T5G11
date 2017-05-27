@@ -60,11 +60,6 @@ public class BattleShipGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel exitPanel = new JPanel();
-		exitPanel.setBounds(610, 340, 700, 400);
-		frame.getContentPane().add(exitPanel);
-		exitPanel.setLayout(null);
-		
 		JPanel menuPanel = new JPanel();
 		menuPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(menuPanel);
