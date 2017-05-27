@@ -86,8 +86,8 @@ public class Menu extends BattleShipGui
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 
-		lastPanel.setVisible(false);
 		menuPanel.setVisible(true);
+		menuPanel.addKeyListener(this);
 		menuPanel.requestFocusInWindow();
 	}
 

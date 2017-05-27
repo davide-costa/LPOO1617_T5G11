@@ -87,29 +87,23 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.setBounds(155, 172, 89, 23);
 		battleShipServerLoginPanel.add(btnLogin);
 		
-		lastPanel.setVisible(false);
-		battleShipServerLoginPanel.setVisible(true);
+		backToPreviousPanel();
 		battleShipServerLoginPanel.addKeyListener(this);
 		battleShipServerLoginPanel.requestFocusInWindow();
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("battleShipLoginPanel");
+	public void keyPressed(KeyEvent event) 
+	{
+		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
+			backToPreviousPanel();
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("battleShipLoginPanel");
-	}
+	public void keyReleased(KeyEvent event) {}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("battleShipLoginPanel");
-	}
+	public void keyTyped(KeyEvent event) {}
 
 	private void loginFailedMessage()
 	{

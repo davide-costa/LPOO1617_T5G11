@@ -53,28 +53,22 @@ public class ExitPanel extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				backToMenu();
+				backToPreviousPanel();
 			}
 		});
 		btnNo.setBounds(480, 243, 93, 37);
 		exitPanel.add(btnNo);
 		
-		lastPanel.setVisible(false);
-		exitPanel.setVisible(true);
+		backToPreviousPanel();
+		exitPanel.addKeyListener(this);
 		exitPanel.requestFocusInWindow();
-	}
-	
-	private void backToMenu()
-	{
-		exitPanel.setVisible(false);
-		lastPanel.setVisible(true);
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-			backToMenu();
+			backToPreviousPanel();
 	}
 
 	@Override
