@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import java.awt.FlowLayout;
 
 public class GuiMain 
 {
@@ -22,6 +23,7 @@ public class GuiMain
 	private JPasswordField passwordField;
 	private JTextField usernameField;
 	private JTextField txtOnlinePlayers;
+	private JTextField txtAreYouSure;
 
 	/**
 	 * Launch the application.
@@ -69,6 +71,29 @@ public class GuiMain
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JPanel exitPanel = new JPanel();
+		exitPanel.setBounds(610, 340, 700, 400);
+		frame.getContentPane().add(exitPanel);
+		exitPanel.setLayout(null);
+		
+		txtAreYouSure = new JTextField();
+		txtAreYouSure.setHorizontalAlignment(SwingConstants.CENTER);
+		txtAreYouSure.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		txtAreYouSure.setText("Are you sure you want to quit?");
+		txtAreYouSure.setBounds(0, 64, 700, 69);
+		exitPanel.add(txtAreYouSure);
+		txtAreYouSure.setColumns(10);
+		
+		JButton btnYes = new JButton("Yes");
+		btnYes.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnYes.setBounds(123, 243, 93, 37);
+		exitPanel.add(btnYes);
+		
+		JButton btnNo = new JButton("No");
+		btnNo.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnNo.setBounds(480, 243, 93, 37);
+		exitPanel.add(btnNo);
 		
 		JPanel menuPanel = new JPanel();
 		menuPanel.setBounds(0, 0, 1920, 1080);

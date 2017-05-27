@@ -2,6 +2,8 @@ package bship.gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import bship.network.data.LoginResponseData;
@@ -14,47 +16,57 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-public class BattleShipServerLogin extends GuiMain
+public class BattleShipServerLogin extends BattleShipGui
 {
-	private JTextField usernameTextField;
-	private JTextField passwordTextField;
+	private JPanel battleShipServerLoginPanel;
+	private JTextArea usernameTextArea;
+	private JTextField usernameField;
+	private JTextArea passwordTextArea;
+	private JPasswordField passwordField;
+	private JButton btnLogin;
 	private String username, password;
 	
 	public BattleShipServerLogin(JFrame frame, JPanel menuPanel, SocketIntermediate intermediate)
 	{
 		this.frame = frame;
-		lastPanel = menuPanel;
+		this.lastPanel = menuPanel;
 		this.intermediate = new BattleShipServerLoginIntermediate();
-		currPanel = new JPanel();
-		frame.getContentPane().add(currPanel, "BattleShip Login Panel");
-		currPanel.setLayout(null);
-		menuPanel.setVisible(false);
-		currPanel.setVisible(true);
 		
-		usernameTextField = new JTextField();
-		usernameTextField.setBounds(155, 80, 86, 20);
-		currPanel.add(usernameTextField);
-		usernameTextField.setColumns(10);
+		battleShipServerLoginPanel = new JPanel();
+		battleShipServerLoginPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(battleShipServerLoginPanel);
+		battleShipServerLoginPanel.setLayout(null);
 		
-		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(73, 83, 72, 14);
-		currPanel.add(lblUsername);
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		passwordField.setBounds(798, 510, 227, 50);
+		battleShipServerLoginPanel.add(passwordField);
 		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(73, 129, 72, 14);
-		currPanel.add(lblPassword);
+		usernameField = new JTextField();
+		usernameField.setBounds(774, 438, 251, 50);
+		battleShipServerLoginPanel.add(usernameField);
+		usernameField.setColumns(10);
 		
-		passwordTextField = new JTextField();
-
-		passwordTextField.setColumns(10);
-		passwordTextField.setBounds(155, 126, 86, 20);
-		currPanel.add(passwordTextField);
+		usernameTextArea = new JTextArea();
+		usernameTextArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		usernameTextArea.setText("Username");
+		usernameTextArea.setBounds(645, 443, 119, 37);
+		battleShipServerLoginPanel.add(usernameTextArea);
 		
-		JButton btnLogin = new JButton("Login");
+		passwordTextArea = new JTextArea();
+		passwordTextArea.setText("Password");
+		passwordTextArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		passwordTextArea.setBounds(645, 510, 119, 37);
+		battleShipServerLoginPanel.add(passwordTextArea);
+		
+		
+		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -62,8 +74,8 @@ public class BattleShipServerLogin extends GuiMain
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{
-					username = usernameTextField.getText();
-					password = passwordTextField.getText();
+					username = usernameField.getText();
+					password = passwordField.getPassword().toString();
 					login.requestLogin(BattleShipServerLogin.this, username, password);
 				} 
 				catch (IOException e1) 
@@ -73,12 +85,12 @@ public class BattleShipServerLogin extends GuiMain
 			}
 		});
 		btnLogin.setBounds(155, 172, 89, 23);
-		currPanel.add(btnLogin);
+		battleShipServerLoginPanel.add(btnLogin);
 		
-		menuPanel.setVisible(false);
-		currPanel.setVisible(true);
-		currPanel.addKeyListener(this);
-		currPanel.requestFocusInWindow();
+		lastPanel.setVisible(false);
+		battleShipServerLoginPanel.setVisible(true);
+		battleShipServerLoginPanel.addKeyListener(this);
+		battleShipServerLoginPanel.requestFocusInWindow();
 	}
 
 	@Override
@@ -99,13 +111,27 @@ public class BattleShipServerLogin extends GuiMain
 		System.out.println("battleShipLoginPanel");
 	}
 
+	private void loginFailedMessage()
+	{
+		String message = "Username and password don't match. Please verify them.";
+		JOptionPane.showMessageDialog(null, message, "Login Failed", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	private void newAccountCreatedMessage()
+	{
+		String message = "New account created sucessfully";
+		JOptionPane.showMessageDialog(null, message, "New account created", JOptionPane.INFORMATION_MESSAGE);
+	
+	}
+	
 	public void LoginResponse(LoginResponseData response) 
 	{
 		if(response.isSucceeded())
-			new Lobby(frame, currPanel, username);
+			if(response.newAcoountCreated())
+				newAccountCreatedMessage();
+			else
+				new Lobby(frame, battleShipServerLoginPanel, username);
 		else
-			//do stuff like abrir um dialogo a dizer que ta mal ou assim
-			return;
-		
+			loginFailedMessage();
 	}
 }

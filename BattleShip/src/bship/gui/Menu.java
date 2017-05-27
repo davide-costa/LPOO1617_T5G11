@@ -90,11 +90,6 @@ public class Menu extends BattleShipGui
 		menuPanel.setVisible(true);
 		menuPanel.requestFocusInWindow();
 	}
-	
-	private void exitDialog()
-	{
-		
-	}
 
 	@Override
 	public void keyPressed(KeyEvent event) 
