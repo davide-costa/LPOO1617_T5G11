@@ -19,6 +19,17 @@ public abstract class GameMap implements Serializable
 			map = new AllyCellState[sizeX][sizeY];
 	}
 	
+	public void fill(CellState cell)
+	{
+		for (int y = 0; y < sizeX; y++)
+		{
+			for (int x = 0; x < sizeY; x++)
+			{
+				setCellState(new Coords(x, y), cell.getCopy());
+			}
+		}
+	}
+	
 	public CellState[][] getMap()
 	{
 		return map;
