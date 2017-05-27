@@ -20,7 +20,6 @@ public class AIOpponent
 	public AIOpponent()
 	{
 		map = new DefaultMap(false);
-		fillGeneratedDirection();
 	}
 	
 	
@@ -49,6 +48,7 @@ public class AIOpponent
 	
 	public void PerformShipPlacement(ArrayList<Ship> ships)
 	{
+		fillGeneratedDirection();
 		initializeAllCellsToWater();
 		SinglePlayerShipPlacement shipPlacement = new SinglePlayerShipPlacement(map);
 		PlaceShips(shipPlacement, ships);
