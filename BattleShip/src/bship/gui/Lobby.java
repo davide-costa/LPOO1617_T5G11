@@ -26,11 +26,9 @@ public class Lobby extends BattleShipGui
 	private String invitedPlayerUsername;
 	private JOptionPane waitingForResponse;
 		
-	public Lobby(JFrame frame, JPanel battleShipLoginPanel, String username)
+	public Lobby(JFrame frame, String username)
 	{
 		this.frame = frame;
-		
-		this.lastPanel = battleShipLoginPanel;
 		this.username = username;
 		try 
 		{
@@ -91,7 +89,6 @@ public class Lobby extends BattleShipGui
 				});
 
 		this.setVisible(true);
-		lastPanel.setVisible(false);
 		lobbyPanel.addKeyListener(this);
 		lobbyPanel.requestFocusInWindow();
 	}
@@ -101,7 +98,7 @@ public class Lobby extends BattleShipGui
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-			backToPreviousPanel();
+			new Menu(this.frame);
 	}
 
 	@Override
@@ -150,7 +147,7 @@ public class Lobby extends BattleShipGui
 		waitingForResponse.setEnabled(false);
 		
 		if(wasAccepted)
-			new ShipPlacementPanel();
+			new ShipPlacementPanel(this.frame);
 		else
 			InviteRejectedMessage();
 	}

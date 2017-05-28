@@ -50,7 +50,7 @@ public class Menu extends BattleShipGui
 		btnMultiplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				new BattleShipServerLogin(frame, menuPanel, intermediate);
+				new BattleShipServerLogin(frame, intermediate);
 			}
 		});
 		btnMultiplayer.setBounds(701, 382, 459, 70);
@@ -61,7 +61,7 @@ public class Menu extends BattleShipGui
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				new ExitPanel(frame, menuPanel);
+				new ExitPanel(frame);
 			}
 		});
 		btnExit.setBounds(701, 524, 459, 70);

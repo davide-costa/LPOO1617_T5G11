@@ -32,10 +32,9 @@ public class BattleShipServerLogin extends BattleShipGui
 	private JButton btnLogin;
 	private String username, password;
 	
-	public BattleShipServerLogin(JFrame frame, JPanel menuPanel, SocketIntermediate intermediate)
+	public BattleShipServerLogin(JFrame frame, SocketIntermediate intermediate)
 	{
-		this.frame = frame;
-		this.lastPanel = menuPanel;
+		this.frame = frame;;
 		this.intermediate = new BattleShipServerLoginIntermediate();
 		
 		battleShipServerLoginPanel = new JPanel();
@@ -89,7 +88,6 @@ public class BattleShipServerLogin extends BattleShipGui
 		battleShipServerLoginPanel.add(btnLogin);
 		
 		this.setVisible(true);
-		lastPanel.setVisible(false);
 		battleShipServerLoginPanel.addKeyListener(this);
 		battleShipServerLoginPanel.requestFocusInWindow();
 	}
@@ -98,7 +96,7 @@ public class BattleShipServerLogin extends BattleShipGui
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-			backToPreviousPanel();
+			new Menu(this.frame);
 	}
 
 	@Override
@@ -132,7 +130,7 @@ public class BattleShipServerLogin extends BattleShipGui
 			}
 				
 			System.out.println("Lobby");
-			new Lobby(frame, battleShipServerLoginPanel, username);
+			new Lobby(frame, username);
 		} 
 		else
 		{
