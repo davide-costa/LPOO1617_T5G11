@@ -36,7 +36,6 @@ public class LobbyIntermediate extends SocketIntermediate implements Observer
 	@Override
 	public void update(Observable clientSocket, Object object)
 	{
-		System.out.println("update");
 		if (!(object instanceof LobbyData))
 			return;
 		
