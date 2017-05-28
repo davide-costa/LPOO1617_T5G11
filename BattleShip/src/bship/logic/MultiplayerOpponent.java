@@ -34,6 +34,13 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		clientSocket.refreshObserver(this);
 	}
 	
+	public MultiplayerOpponent() throws IOException 
+	{
+		super();
+		this.clientSocket = Client.getInstance();
+		clientSocket.refreshObserver(this);
+	}
+
 	@Override
 	public void shoot(Coords coords) throws IOException
 	{

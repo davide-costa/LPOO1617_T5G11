@@ -1,8 +1,11 @@
 package bship.network.sockets;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import bship.gui.Lobby;
+import bship.gui.ShipPlacementPanel;
 import bship.network.data.LobbyData;
 import bship.network.data.LobbyInfoData;
 import bship.network.data.LobbyInvitedData;
@@ -12,9 +15,14 @@ import bship.network.data.StartGameData;
 
 public class ShipPlacementIntermediate extends SocketIntermediate implements Observer
 {
-	public ShipPlacementIntermediate()
+	private ShipPlacementPanel gui;
+	private Client socket;
+	
+	public ShipPlacementIntermediate(ShipPlacementPanel gui) throws IOException
 	{
-		
+		this.gui = gui;
+		socket = Client.getInstance();
+		socket.refreshObserver(this);
 	}
 	
 	@Override

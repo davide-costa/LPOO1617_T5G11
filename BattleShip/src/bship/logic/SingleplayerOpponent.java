@@ -6,6 +6,8 @@ public class SingleplayerOpponent extends Opponent
 {
 	private SingleplayerOpponent opponent;
 	
+	public SingleplayerOpponent() {}
+	
 	public SingleplayerOpponent(Game game)
 	{
 		super(game);
