@@ -81,6 +81,8 @@ public class BattleShipServerLogin extends BattleShipGui
 				{
 					BattleShipExceptionHandler.handleBattleShipException();
 				}
+				
+				battleShipServerLoginPanel.requestFocusInWindow();
 			}
 		});
 		btnLogin.setBounds(155, 172, 89, 23);
@@ -120,12 +122,23 @@ public class BattleShipServerLogin extends BattleShipGui
 	
 	public void LoginResponse(LoginResponseData response) 
 	{
-		if(response.isSucceeded())
-			if(response.newAcoountCreated())
+		System.out.println("LoginResponse");
+		if (response.isSucceeded()) 
+		{
+			if (response.newAcoountCreated())
+			{
+				System.out.println("newAcoountCreated");
 				newAccountCreatedMessage();
-			else
-				new Lobby(frame, battleShipServerLoginPanel, username);
+			}
+				
+			System.out.println("Lobby");
+			new Lobby(frame, battleShipServerLoginPanel, username);
+		} 
 		else
+		{
+			System.out.println("loginFailedMessage");
 			loginFailedMessage();
+		}
+			
 	}
 }
