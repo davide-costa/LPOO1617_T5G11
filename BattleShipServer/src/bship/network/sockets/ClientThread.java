@@ -134,8 +134,8 @@ public class ClientThread extends Observable implements Runnable
 		}
 		catch (SocketException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (e.getMessage() != "Socket closed")
+				e.printStackTrace();
 		}
 		catch (IOException e)
 		{
