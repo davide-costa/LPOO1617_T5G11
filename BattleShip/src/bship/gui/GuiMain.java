@@ -7,9 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JCheckBox;
 import javax.swing.JMenuItem;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Component;
+
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -90,13 +93,30 @@ public class GuiMain
 		gameMapArea.setBounds(400, 240, 600, 600);
 		battleShipPlacementPanel.add(gameMapArea);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(1078, 240, 60, 60);
-		battleShipPlacementPanel.add(lblNewLabel);
+		JLabel labelCarrier = new JLabel();
+		labelCarrier.setBounds(1100, 760, 300, 60);
+		battleShipPlacementPanel.add(labelCarrier);
 		
-		JLabel label = new JLabel("New label");
-		label.setBounds(1078, 340, 60, 60);
-		battleShipPlacementPanel.add(label);
+		JLabel labelBattleShip = new JLabel();
+		labelBattleShip.setBounds(1100, 630, 240, 60);
+		battleShipPlacementPanel.add(labelBattleShip);
+		
+		JLabel labelSubmarine = new JLabel();
+		labelSubmarine.setBounds(1100, 500, 180, 60);
+		battleShipPlacementPanel.add(labelSubmarine);
+		
+		JLabel labelCruiser1 = new JLabel();
+		labelCruiser1.setBounds(1100, 370, 180, 60);
+		battleShipPlacementPanel.add(labelCruiser1);
+		
+		JLabel labelCruiser2 = new JLabel();
+		labelCruiser2.setBounds(1350, 370, 180, 60);
+		battleShipPlacementPanel.add(labelCruiser2);
+		
+		JLabel labelDestroyer = new JLabel();
+		labelDestroyer.setBounds(1100, 240, 120, 60);
+		battleShipPlacementPanel.add(labelDestroyer);
+		
 		
 		JPanel battleShipServerLoginPanel = new JPanel();
 		battleShipServerLoginPanel.setBounds(0, 0, 1920, 1080);
