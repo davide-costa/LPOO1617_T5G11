@@ -40,6 +40,7 @@ public class GuiMain
 			{
 				try 
 				{
+					ImagesData.loadImages();
 					JFrame frame = new JFrame();
 					frame.setResizable(false);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -83,6 +84,7 @@ public class GuiMain
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
 		
 		JPanel battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);

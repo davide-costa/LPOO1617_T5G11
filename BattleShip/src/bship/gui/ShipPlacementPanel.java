@@ -20,9 +20,10 @@ public class ShipPlacementPanel extends BattleShipGui
 	private JLabel labelCruiser2;
 	private JLabel labelDestroyer;
 	
-	public ShipPlacementPanel(JFrame frame)
+	public ShipPlacementPanel(JFrame frame, JPanel menuPanel)
 	{
 		this.frame = frame;
+		this.lastPanel = menuPanel;
 		try 
 		{
 			this.intermediate = new ShipPlacementIntermediate(this);
@@ -70,6 +71,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.setVisible(true);
 		battleShipPlacementPanel.addKeyListener(this);
 		battleShipPlacementPanel.requestFocusInWindow();
+		System.out.println("battleShipPlacementPanel");
 	}
 	
 	@Override

@@ -21,13 +21,13 @@ public class ImagesData
 	{
 		try 
 		{
-			carrierImage = new ImageIcon(ImageIO.read(new File("res/images/Carrier.jpg")));
-			battleShipImage = new ImageIcon(ImageIO.read(new File("res/images/BattleShip.jpg")));
-			submarineImage = new ImageIcon(ImageIO.read(new File("res/images/Submarine.jpg")));
-			cruiserImage = new ImageIcon(ImageIO.read(new File("res/images/Cruiser.jpg")));
-			destroyerImage = new ImageIcon(ImageIO.read(new File("res/images/Destroyer.jpg")));
+			carrierImage = new ImageIcon(ImageIO.read(new File("res/images/Carrier.png")));
+			battleShipImage = new ImageIcon(ImageIO.read(new File("res/images/BattleShip.png")));
+			submarineImage = new ImageIcon(ImageIO.read(new File("res/images/Submarine.png")));
+			cruiserImage = new ImageIcon(ImageIO.read(new File("res/images/Cruiser.png")));
+			destroyerImage = new ImageIcon(ImageIO.read(new File("res/images/Destroyer.png")));
 			menuBackgroundImage = new ImageIcon(ImageIO.read(new File("res/images/menuBackground.jpg")));
-			boardImage = new ImageIcon(ImageIO.read(new File("res/images/board.jpg")));
+			boardImage = new ImageIcon(ImageIO.read(new File("res/images/board.png")));
 		} 
 		catch (IOException e) 
 		{

@@ -149,10 +149,10 @@ public class Lobby extends BattleShipGui
 
 	public void handleInviteResponse(boolean wasAccepted) 
 	{
-		waitingForResponse.setEnabled(false);
-		
+		//waitingForResponse.setEnabled(false);
+		System.out.println(wasAccepted);
 		if(wasAccepted)
-			new ShipPlacementPanel(this.frame);
+			new ShipPlacementPanel(this.frame, this.lastPanel);
 		else
 			InviteRejectedMessage();
 	}
