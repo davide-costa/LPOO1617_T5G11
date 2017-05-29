@@ -49,7 +49,7 @@ public class BattleShipServer
 	
 	public ArrayList<Player> getInLobbyPlayers()
 	{
-		return inLobbyPlayers;
+		return getInLobbyPlayersSynchronized();
 	}
 	
 	public synchronized ArrayList<Player> getInLobbyPlayersSynchronized()
@@ -193,7 +193,7 @@ public class BattleShipServer
 		ArrayList<String> inLobbyPlayersNames = getInLobbyPlayersNames();
 		LobbyData namesData = new LobbyInfoData(inLobbyPlayersNames);
 
-		for (Player currPlayer : inLobbyPlayers)
+		for (Player currPlayer : getInLobbyPlayers())
 			currPlayer.sendData(namesData);
 	}
 	
