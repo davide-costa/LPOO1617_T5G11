@@ -11,4 +11,5 @@ public abstract class BattleShipGui extends JPanel implements KeyListener
 {
 	protected JFrame frame;
 	protected SocketIntermediate intermediate;
+	protected JPanel lastPanel;
 }

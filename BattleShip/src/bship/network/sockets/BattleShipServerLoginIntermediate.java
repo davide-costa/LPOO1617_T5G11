@@ -16,10 +16,12 @@ public class BattleShipServerLoginIntermediate extends SocketIntermediate implem
 	public void requestLogin(BattleShipServerLogin gui, String username, String password) throws IOException
 	{
 		this.gui = gui;
+		Client.cleanInstance();
 		Client clientSocket = Client.getInstance();
 		clientSocket.refreshObserver(this);
 		BattleShipData loginRequest = new LoginRequestData(username, password);
 		clientSocket.sendBattleShipData(loginRequest);
+		System.out.println("SEND REQUEST TO LOGIN");
 	}
 
 	@Override

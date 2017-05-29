@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import bship.network.data.LoginResponseData;
 import bship.network.sockets.BattleShipServerLoginIntermediate;
+import bship.network.sockets.Client;
 import bship.network.sockets.SocketIntermediate;
 
 import java.awt.event.KeyEvent;
@@ -32,9 +33,10 @@ public class BattleShipServerLogin extends BattleShipGui
 	private JButton btnLogin;
 	private String username, password;
 	
-	public BattleShipServerLogin(JFrame frame, SocketIntermediate intermediate)
+	public BattleShipServerLogin(JFrame frame, SocketIntermediate intermediate, JPanel menuPanel)
 	{
-		this.frame = frame;;
+		this.frame = frame;
+		this.lastPanel = menuPanel;
 		this.intermediate = new BattleShipServerLoginIntermediate();
 		
 		battleShipServerLoginPanel = new JPanel();
@@ -69,6 +71,7 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				System.out.println("TRY TO LOGIN");
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{
@@ -87,7 +90,8 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.setBounds(155, 172, 89, 23);
 		battleShipServerLoginPanel.add(btnLogin);
 		
-		this.setVisible(true);
+		lastPanel.setVisible(false);
+		battleShipServerLoginPanel.setVisible(true);
 		battleShipServerLoginPanel.addKeyListener(this);
 		battleShipServerLoginPanel.requestFocusInWindow();
 	}
@@ -96,7 +100,10 @@ public class BattleShipServerLogin extends BattleShipGui
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-			new Menu(this.frame);
+		{
+			intermediate.closeConnection();
+			new Menu(this.frame, this.battleShipServerLoginPanel);
+		}
 	}
 
 	@Override
@@ -115,7 +122,6 @@ public class BattleShipServerLogin extends BattleShipGui
 	{
 		String message = "New account created sucessfully";
 		JOptionPane.showMessageDialog(null, message, "New account created", JOptionPane.INFORMATION_MESSAGE);
-	
 	}
 	
 	public void LoginResponse(LoginResponseData response) 
@@ -130,7 +136,7 @@ public class BattleShipServerLogin extends BattleShipGui
 			}
 				
 			System.out.println("Lobby");
-			new Lobby(frame, username);
+			new Lobby(frame, this.battleShipServerLoginPanel, username);
 		} 
 		else
 		{

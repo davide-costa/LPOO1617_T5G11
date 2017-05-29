@@ -18,9 +18,10 @@ public class ExitPanel extends BattleShipGui
 	private JButton btnYes;
 	private JButton btnNo;
 	
-	public ExitPanel(JFrame frame)
+	public ExitPanel(JFrame frame, JPanel menuPanel)
 	{
 		this.frame = frame;
+		this.lastPanel = menuPanel;
 		exitPanel = new JPanel();
 		exitPanel.setBounds(610, 340, 700, 400);
 		frame.getContentPane().add(exitPanel);
@@ -52,13 +53,14 @@ public class ExitPanel extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				new Menu(ExitPanel.this.frame);
+				new Menu(ExitPanel.this.frame, ExitPanel.this.exitPanel);
 			}
 		});
 		btnNo.setBounds(480, 243, 93, 37);
 		exitPanel.add(btnNo);
 		
-		this.setVisible(true);
+		lastPanel.setVisible(false);
+		exitPanel.setVisible(true);
 		exitPanel.addKeyListener(this);
 		exitPanel.requestFocusInWindow();
 	}
@@ -67,7 +69,7 @@ public class ExitPanel extends BattleShipGui
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-			new Menu(this.frame);
+			new Menu(this.frame, this.exitPanel);
 	}
 
 	@Override

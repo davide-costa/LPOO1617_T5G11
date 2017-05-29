@@ -69,6 +69,13 @@ public class Client extends Observable implements Runnable {
 		currObserver = null;
 	}
 	
+	public static void cleanInstance() 
+	{
+		if(instance != null)
+			instance.disconnect();
+		instance = null;
+	}
+	
 	//Constructor used for tests
 	public Client(int unused)
 	{

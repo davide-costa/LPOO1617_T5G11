@@ -44,7 +44,7 @@ public class GuiMain
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.getContentPane().setLayout(null);
-					Menu m = new Menu(frame);
+					Menu m = new Menu(frame, null);
 					m.setVisible(true);
 					//Thread.sleep(10000);
 					

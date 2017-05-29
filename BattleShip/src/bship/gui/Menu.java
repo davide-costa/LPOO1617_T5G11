@@ -32,9 +32,10 @@ public class Menu extends BattleShipGui
 	private	JButton btnExit;
 	private Image backgroundImage;
 
-	public Menu(JFrame frame) 
+	public Menu(JFrame frame, JPanel lastPanel) 
 	{
 		this.frame = frame;
+		this.lastPanel = lastPanel;
 		menuPanel = new JPanel();
 		menuPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(menuPanel);
@@ -50,7 +51,7 @@ public class Menu extends BattleShipGui
 		btnMultiplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				new BattleShipServerLogin(frame, intermediate);
+				new BattleShipServerLogin(frame, intermediate, menuPanel);
 			}
 		});
 		btnMultiplayer.setBounds(701, 382, 459, 70);
@@ -61,7 +62,7 @@ public class Menu extends BattleShipGui
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				new ExitPanel(frame);
+				new ExitPanel(frame, Menu.this.menuPanel);	
 			}
 		});
 		btnExit.setBounds(701, 524, 459, 70);
@@ -86,9 +87,12 @@ public class Menu extends BattleShipGui
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 
+		if(lastPanel != null)
+			lastPanel.setVisible(false);
 		menuPanel.setVisible(true);
 		menuPanel.addKeyListener(this);
 		menuPanel.requestFocusInWindow();
+		repaint();
 	}
 
 	@Override
