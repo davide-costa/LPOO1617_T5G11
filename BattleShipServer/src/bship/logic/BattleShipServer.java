@@ -52,14 +52,14 @@ public class BattleShipServer
 		return getInLobbyPlayersSynchronized();
 	}
 	
-	public synchronized ArrayList<Player> getInLobbyPlayersSynchronized()
+	private synchronized ArrayList<Player> getInLobbyPlayersSynchronized()
 	{
 		ArrayList<Player> playersInLobby = new ArrayList<Player>();
 		playersInLobby.addAll(inLobbyPlayers);
 		return playersInLobby;
 	}
 	
-	public ArrayList<String> getInLobbyPlayersNames()
+	private ArrayList<String> getInLobbyPlayersNames()
 	{
 		ArrayList<String> playerNames = new ArrayList<String>();
 		for (Player currPlayer : getInLobbyPlayersSynchronized())
