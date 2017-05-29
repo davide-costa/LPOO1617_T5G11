@@ -22,7 +22,7 @@ public class FacebookLogin {
 	
 	public FacebookLogin()
 	{
-		System.setProperty("webdirver.chrome.driver", "chromedriver.exe");
+		System.setProperty("webdirver.chrome.driver", "res/chromedriver.exe");
 
 		WebDriver driver = new ChromeDriver();
 		driver.get(authUrl);

@@ -40,20 +40,20 @@ public class GuiMain
 			{
 				try 
 				{
-//					JFrame frame = new JFrame();
-//					frame.setResizable(false);
-//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//					frame.setBounds(0, 0, 1920, 1080);
-//					frame.setUndecorated(true);
-//					frame.setVisible(true);
-//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//					frame.getContentPane().setLayout(null);
-//					Menu m = new Menu(frame, null);
-//					m.setVisible(true);
+					JFrame frame = new JFrame();
+					frame.setResizable(false);
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					frame.setBounds(0, 0, 1920, 1080);
+					frame.setUndecorated(true);
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.getContentPane().setLayout(null);
+					Menu m = new Menu(frame, null);
+					m.setVisible(true);
 					//Thread.sleep(10000);
 					
-					GuiMain window = new GuiMain();
-					window.frame.setVisible(true);
+//					GuiMain window = new GuiMain();
+//					window.frame.setVisible(true);
 				} 
 				catch (Exception e) 
 				{

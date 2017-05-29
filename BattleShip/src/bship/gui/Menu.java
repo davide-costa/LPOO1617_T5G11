@@ -82,35 +82,15 @@ public class Menu extends BattleShipGui
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
 		menuPanel.add(btnFacebookLogin);
 		
-		label = new JLabel("");
+		label = new JLabel(ImagesData.menuBackgroundImage);
 		label.setBounds(0, 0, 1920, 1080);
 		menuPanel.add(label);
-		Image photo = null;
-		try
-		{
-			photo = new ImageIcon(ImageIO.read(new File("res/menuBackground.jpg"))).getImage();
-		}
-		catch (IOException e2)
-		{
-			BattleShipExceptionHandler.handleBattleShipException();
-		}
-		label.setIcon(new ImageIcon(photo));
-//		
-//	try {
-//			backgroundImage = ImageIO.read(new File("menuBackground.jpg"));
-//		} catch (IOException e1) 
-//		{
-//			
-//		}
 	
-	System.out.println(backgroundImage);
-
 		if(lastPanel != null)
 			lastPanel.setVisible(false);
 		menuPanel.setVisible(true);
 		menuPanel.addKeyListener(this);
 		menuPanel.requestFocusInWindow();
-		repaint();
 	}
 
 	@Override

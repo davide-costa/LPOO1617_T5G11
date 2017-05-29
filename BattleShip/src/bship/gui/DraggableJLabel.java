@@ -5,15 +5,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class DraggableJLabel extends JLabel
 {
 	Point initClick;
 	
-	public DraggableJLabel(String text)
+	public DraggableJLabel(ImageIcon image)
 	{
-		super(text);
+		super(image);
 		this.addMouseMotionListener(new MouseMotionListener(){
 
 			@Override

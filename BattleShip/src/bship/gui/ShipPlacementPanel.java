@@ -41,47 +41,51 @@ public class ShipPlacementPanel extends BattleShipGui
 		gameMapArea.setBounds(400, 240, 600, 600);
 		battleShipPlacementPanel.add(gameMapArea);
 		
-		labelCarrier = new JLabel();
+		labelCarrier = new JLabel(ImagesData.carrierImage);
 		labelCarrier.setBounds(1100, 760, 300, 60);
 		battleShipPlacementPanel.add(labelCarrier);
 		
-		labelBattleShip = new JLabel();
+		labelBattleShip = new JLabel(ImagesData.battleShipImage);
 		labelBattleShip.setBounds(1100, 630, 240, 60);
 		battleShipPlacementPanel.add(labelBattleShip);
 		
-		labelSubmarine = new JLabel();
+		labelSubmarine = new JLabel(ImagesData.submarineImage);
 		labelSubmarine.setBounds(1100, 500, 180, 60);
 		battleShipPlacementPanel.add(labelSubmarine);
 		
-		labelCruiser1 = new JLabel();
+		labelCruiser1 = new JLabel(ImagesData.cruiserImage);
 		labelCruiser1.setBounds(1100, 370, 180, 60);
 		battleShipPlacementPanel.add(labelCruiser1);
 		
-		labelCruiser2 = new JLabel();
+		labelCruiser2 = new JLabel(ImagesData.cruiserImage);
 		labelCruiser2.setBounds(1350, 370, 180, 60);
 		battleShipPlacementPanel.add(labelCruiser2);
 		
-		labelDestroyer = new JLabel();
+		labelDestroyer = new JLabel(ImagesData.destroyerImage);
 		labelDestroyer.setBounds(1100, 240, 120, 60);
 		battleShipPlacementPanel.add(labelDestroyer);
+		
+		
+		lastPanel.setVisible(false);
+		battleShipPlacementPanel.setVisible(true);
+		battleShipPlacementPanel.addKeyListener(this);
+		battleShipPlacementPanel.requestFocusInWindow();
 	}
 	
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyPressed(KeyEvent event) 
+	{
+		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
+		{
+			intermediate.closeConnection();
+			new Menu(this.frame, this.battleShipPlacementPanel);
+		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent event) {}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent event) {}
 
 }
