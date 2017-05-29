@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import bship.network.data.LoginResponseData;
 import bship.network.sockets.BattleShipServerLoginIntermediate;
@@ -26,9 +27,9 @@ import javax.swing.JOptionPane;
 public class BattleShipServerLogin extends BattleShipGui
 {
 	private JPanel battleShipServerLoginPanel;
-	private JTextArea usernameTextArea;
+	private JLabel lblUsername;
 	private JTextField usernameField;
-	private JTextArea passwordTextArea;
+	private JLabel lblPassword;
 	private JPasswordField passwordField;
 	private JButton btnLogin;
 	private String username, password;
@@ -45,27 +46,29 @@ public class BattleShipServerLogin extends BattleShipGui
 		battleShipServerLoginPanel.setLayout(null);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		passwordField.setBounds(798, 510, 227, 50);
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		passwordField.setBounds(985, 525, 250, 50);
 		battleShipServerLoginPanel.add(passwordField);
 		
 		usernameField = new JTextField();
-		usernameField.setBounds(774, 438, 251, 50);
+		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
+		usernameField.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		usernameField.setBounds(985, 425, 250, 50);
 		battleShipServerLoginPanel.add(usernameField);
 		usernameField.setColumns(10);
 		
-		usernameTextArea = new JTextArea();
-		usernameTextArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		usernameTextArea.setText("Username");
-		usernameTextArea.setBounds(645, 443, 119, 37);
-		battleShipServerLoginPanel.add(usernameTextArea);
+		lblUsername = new JLabel("Username");
+		lblUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsername.setBounds(685, 425, 250, 50);
+		battleShipServerLoginPanel.add(lblUsername);
 		
-		passwordTextArea = new JTextArea();
-		passwordTextArea.setText("Password");
-		passwordTextArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		passwordTextArea.setBounds(645, 510, 119, 37);
-		battleShipServerLoginPanel.add(passwordTextArea);
-		
+		lblPassword = new JLabel("Password");
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblPassword.setBounds(685, 525, 250, 50);
+		battleShipServerLoginPanel.add(lblPassword);
 		
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -87,8 +90,10 @@ public class BattleShipServerLogin extends BattleShipGui
 				battleShipServerLoginPanel.requestFocusInWindow();
 			}
 		});
-		btnLogin.setBounds(155, 172, 89, 23);
+		btnLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		btnLogin.setBounds(910, 625, 100, 30);
 		battleShipServerLoginPanel.add(btnLogin);
+		
 		
 		lastPanel.setVisible(false);
 		battleShipServerLoginPanel.setVisible(true);

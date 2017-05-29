@@ -23,15 +23,16 @@ public class ExitPanel extends BattleShipGui
 		this.frame = frame;
 		this.lastPanel = menuPanel;
 		exitPanel = new JPanel();
-		exitPanel.setBounds(610, 340, 700, 400);
+		exitPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(exitPanel);
 		exitPanel.setLayout(null);
 		
 		txtAreYouSure = new JTextField();
+		txtAreYouSure.setEditable(false);
 		txtAreYouSure.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAreYouSure.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		txtAreYouSure.setText("Are you sure you want to quit?");
-		txtAreYouSure.setBounds(0, 64, 700, 69);
+		txtAreYouSure.setBounds(610, 450, 700, 65);
 		exitPanel.add(txtAreYouSure);
 		txtAreYouSure.setColumns(10);
 		
@@ -44,7 +45,7 @@ public class ExitPanel extends BattleShipGui
 				System.exit(0);
 			}
 		});
-		btnYes.setBounds(123, 243, 93, 37);
+		btnYes.setBounds(745, 580, 90, 35);
 		exitPanel.add(btnYes);
 		
 		btnNo = new JButton("No");
@@ -56,7 +57,7 @@ public class ExitPanel extends BattleShipGui
 				new Menu(ExitPanel.this.frame, ExitPanel.this.exitPanel);
 			}
 		});
-		btnNo.setBounds(480, 243, 93, 37);
+		btnNo.setBounds(1085, 580, 90, 35);
 		exitPanel.add(btnNo);
 		
 		lastPanel.setVisible(false);

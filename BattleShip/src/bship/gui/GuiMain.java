@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JList;
 import java.awt.FlowLayout;
+import javax.swing.JLabel;
 
 public class GuiMain 
 {
@@ -48,8 +49,8 @@ public class GuiMain
 					m.setVisible(true);
 					//Thread.sleep(10000);
 					
-					//GuiMain window = new GuiMain();
-					//window.frame.setVisible(true);
+//					GuiMain window = new GuiMain();
+//					window.frame.setVisible(true);
 				} 
 				catch (Exception e) 
 				{
@@ -80,27 +81,63 @@ public class GuiMain
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		JPanel battleShipServerLoginPanel = new JPanel();
+		battleShipServerLoginPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(battleShipServerLoginPanel);
+		battleShipServerLoginPanel.setLayout(null);
+		
+		passwordField = new JPasswordField();
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		passwordField.setBounds(985, 525, 250, 50);
+		battleShipServerLoginPanel.add(passwordField);
+		
+		usernameField = new JTextField();
+		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
+		usernameField.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		usernameField.setBounds(985, 425, 250, 50);
+		battleShipServerLoginPanel.add(usernameField);
+		usernameField.setColumns(10);
+		
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsername.setBounds(685, 425, 250, 50);
+		battleShipServerLoginPanel.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblPassword.setBounds(685, 525, 250, 50);
+		battleShipServerLoginPanel.add(lblPassword);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		btnLogin.setBounds(910, 625, 100, 30);
+		battleShipServerLoginPanel.add(btnLogin);
+		
 		JPanel exitPanel = new JPanel();
-		exitPanel.setBounds(610, 340, 700, 400);
+		exitPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(exitPanel);
 		exitPanel.setLayout(null);
 		
 		txtAreYouSure = new JTextField();
+		txtAreYouSure.setEditable(false);
 		txtAreYouSure.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAreYouSure.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		txtAreYouSure.setText("Are you sure you want to quit?");
-		txtAreYouSure.setBounds(0, 64, 700, 69);
+		txtAreYouSure.setBounds(610, 450, 700, 65);
 		exitPanel.add(txtAreYouSure);
 		txtAreYouSure.setColumns(10);
 		
 		JButton btnYes = new JButton("Yes");
 		btnYes.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		btnYes.setBounds(123, 243, 93, 37);
+		btnYes.setBounds(745, 580, 90, 35);
 		exitPanel.add(btnYes);
 		
 		JButton btnNo = new JButton("No");
 		btnNo.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		btnNo.setBounds(480, 243, 93, 37);
+		btnNo.setBounds(1085, 580, 90, 35);
 		exitPanel.add(btnNo);
 		
 		JPanel menuPanel = new JPanel();
@@ -169,33 +206,6 @@ public class GuiMain
 		txtOnlinePlayers.setBounds(875, 104, 172, 50);
 		lobbyPanel.add(txtOnlinePlayers);
 		txtOnlinePlayers.setColumns(10);
-		
-		JPanel battleShipServerLoginPanel = new JPanel();
-		battleShipServerLoginPanel.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().add(battleShipServerLoginPanel);
-		battleShipServerLoginPanel.setLayout(null);
-		
-		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		passwordField.setBounds(798, 510, 227, 50);
-		battleShipServerLoginPanel.add(passwordField);
-		
-		usernameField = new JTextField();
-		usernameField.setBounds(774, 438, 251, 50);
-		battleShipServerLoginPanel.add(usernameField);
-		usernameField.setColumns(10);
-		
-		JTextArea userrnameTextArea = new JTextArea();
-		userrnameTextArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		userrnameTextArea.setText("Username");
-		userrnameTextArea.setBounds(645, 443, 119, 37);
-		battleShipServerLoginPanel.add(userrnameTextArea);
-		
-		JTextArea passwordTextArea = new JTextArea();
-		passwordTextArea.setText("Password");
-		passwordTextArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		passwordTextArea.setBounds(645, 510, 119, 37);
-		battleShipServerLoginPanel.add(passwordTextArea);
 		
 		JPanel singlePlayerDifficultyPanel = new JPanel();
 		singlePlayerDifficultyPanel.setBounds(610, 340, 700, 400);
