@@ -37,20 +37,20 @@ public class GuiMain
 			{
 				try 
 				{
-					JFrame frame = new JFrame();
-					frame.setResizable(false);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setBounds(0, 0, 1920, 1080);
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					frame.getContentPane().setLayout(null);
-					Menu m = new Menu(frame, null);
-					m.setVisible(true);
+//					JFrame frame = new JFrame();
+//					frame.setResizable(false);
+//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//					frame.setBounds(0, 0, 1920, 1080);
+//					frame.setUndecorated(true);
+//					frame.setVisible(true);
+//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					frame.getContentPane().setLayout(null);
+//					Menu m = new Menu(frame, null);
+//					m.setVisible(true);
 					//Thread.sleep(10000);
 					
-//					GuiMain window = new GuiMain();
-//					window.frame.setVisible(true);
+					GuiMain window = new GuiMain();
+					window.frame.setVisible(true);
 				} 
 				catch (Exception e) 
 				{
@@ -80,6 +80,23 @@ public class GuiMain
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JPanel battleShipPlacementPanel = new JPanel();
+		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(battleShipPlacementPanel);
+		battleShipPlacementPanel.setLayout(null);
+		
+		JPanel gameMapArea = new JPanel();
+		gameMapArea.setBounds(400, 240, 600, 600);
+		battleShipPlacementPanel.add(gameMapArea);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(1078, 240, 60, 60);
+		battleShipPlacementPanel.add(lblNewLabel);
+		
+		JLabel label = new JLabel("New label");
+		label.setBounds(1078, 340, 60, 60);
+		battleShipPlacementPanel.add(label);
 		
 		JPanel battleShipServerLoginPanel = new JPanel();
 		battleShipServerLoginPanel.setBounds(0, 0, 1920, 1080);
@@ -163,15 +180,6 @@ public class GuiMain
 		JButton btnFacebookLogin = new JButton("Facebook Login");
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
 		menuPanel.add(btnFacebookLogin);
-		
-		JPanel battleShipPlacementPanel = new JPanel();
-		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().add(battleShipPlacementPanel);
-		battleShipPlacementPanel.setLayout(null);
-		
-		JPanel gameMapArea = new JPanel();
-		gameMapArea.setBounds(400, 200, 600, 600);
-		battleShipPlacementPanel.add(gameMapArea);
 		
 		JPanel gamePanel = new JPanel();
 		gamePanel.setBounds(0, 0, 1920, 1080);

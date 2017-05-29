@@ -86,6 +86,8 @@ public class Menu extends BattleShipGui
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
+	
+	System.out.println(backgroundImage);
 
 		if(lastPanel != null)
 			lastPanel.setVisible(false);
@@ -109,6 +111,6 @@ public class Menu extends BattleShipGui
 	{
 		super.paintComponent(g);
 		//g.drawOval(0, 0, 50, 500);
-		g.drawImage(backgroundImage, 0, 0, 1920, 1080, this.frame);
+		g.drawImage(backgroundImage, 0, 0, null);
 	}
 }
