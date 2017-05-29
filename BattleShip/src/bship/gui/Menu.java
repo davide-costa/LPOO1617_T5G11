@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import java.awt.Rectangle;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.JLabel;
 
 
 public class Menu extends BattleShipGui
@@ -31,6 +33,7 @@ public class Menu extends BattleShipGui
 	private	JButton btnFacebookLogin;
 	private	JButton btnExit;
 	private Image backgroundImage;
+	private JLabel label;
 
 	public Menu(JFrame frame, JPanel lastPanel) 
 	{
@@ -79,13 +82,26 @@ public class Menu extends BattleShipGui
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
 		menuPanel.add(btnFacebookLogin);
 		
-		
-	try {
-			backgroundImage = ImageIO.read(new File("menuBackground.jpg"));
-		} catch (IOException e1) 
+		label = new JLabel("");
+		label.setBounds(0, 0, 1920, 1080);
+		menuPanel.add(label);
+		Image photo = null;
+		try
+		{
+			photo = new ImageIcon(ImageIO.read(new File("res/menuBackground.jpg"))).getImage();
+		}
+		catch (IOException e2)
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
+		label.setIcon(new ImageIcon(photo));
+//		
+//	try {
+//			backgroundImage = ImageIO.read(new File("menuBackground.jpg"));
+//		} catch (IOException e1) 
+//		{
+//			
+//		}
 	
 	System.out.println(backgroundImage);
 
@@ -105,12 +121,4 @@ public class Menu extends BattleShipGui
 
 	@Override
 	public void keyTyped(KeyEvent event) {}
-
-	@Override
-	protected void paintComponent(Graphics g) 
-	{
-		super.paintComponent(g);
-		//g.drawOval(0, 0, 50, 500);
-		g.drawImage(backgroundImage, 0, 0, null);
-	}
 }
