@@ -64,17 +64,14 @@ public class ShipPlacementPanel extends BattleShipGui
 		labelCarrier.setBounds(1100, 760, 300, 60);
 		battleShipPlacementPanel.add(labelCarrier);
 		
-		
 		gameMapArea = new JLabel(ImagesData.boardImage);
 		gameMapArea.setBounds(400, 240, 600, 600);
 		battleShipPlacementPanel.add(gameMapArea);
-		
 		
 		lastPanel.setVisible(false);
 		battleShipPlacementPanel.setVisible(true);
 		battleShipPlacementPanel.addKeyListener(this);
 		battleShipPlacementPanel.requestFocusInWindow();
-		System.out.println("battleShipPlacementPanel");
 	}
 	
 	@Override

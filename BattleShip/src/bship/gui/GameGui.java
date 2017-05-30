@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import bship.logic.Game;
@@ -14,13 +15,13 @@ import bship.logic.SingleplayerOpponent;
 public class GameGui extends BattleShipGui
 {
 	private JPanel gamePanel;
-	private JPanel allyGameArea;
-	private JPanel opponentGameArea;
+	private JLabel allyGameArea;
+	private JLabel opponentGameArea;
 	
-	public GameGui(JFrame frame, boolean isSinglePlayer)
+	public GameGui(JFrame frame, JPanel menuPanel, boolean isSinglePlayer)
 	{
 		this.frame = frame;
-		
+		this.lastPanel = menuPanel;
 		Opponent opponent = null;
 		try 
 		{
@@ -42,30 +43,35 @@ public class GameGui extends BattleShipGui
 		frame.getContentPane().add(gamePanel);
 		gamePanel.setLayout(null);
 		
-		allyGameArea = new JPanel();
+		allyGameArea = new JLabel(ImagesData.battleShipImage);
 		allyGameArea.setBounds(947, 5, 10, 10);
 		gamePanel.add(allyGameArea);
 		
-		opponentGameArea = new JPanel();
+		opponentGameArea = new JLabel(ImagesData.battleShipImage);
 		opponentGameArea.setBounds(962, 5, 10, 10);
 		gamePanel.add(opponentGameArea);	
+		
+		
+		lastPanel.setVisible(false);
+		gamePanel.setVisible(true);
+		gamePanel.addKeyListener(this);
+		gamePanel.requestFocusInWindow();
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyPressed(KeyEvent event) 
+	{
+		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
+		{
+			intermediate.closeConnection();
+			new Menu(this.frame, this.gamePanel);
+		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent event) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent event) {}
+	
 }
