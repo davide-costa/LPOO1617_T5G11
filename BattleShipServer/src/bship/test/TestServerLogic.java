@@ -198,6 +198,7 @@ public class TestServerLogic
 		LoginPlayer1("battleship", "lpoo");
 		assertEquals(1, server.getBattleshipPlayers().size());
 		assertEquals(1, server.getOnlinePlayers().size());
+		assertEquals(1, server.getInLobbyPlayers().size());
 		
 		//disconnect
 		socket1.close();
@@ -282,6 +283,8 @@ public class TestServerLogic
 		assertNull(player2Opponent);
 		assertTrue(player1State instanceof InLobby);
 		assertTrue(player2State instanceof InLobby);
+		assertTrue(server.getInLobbyPlayers().contains(player1));
+		assertTrue(server.getInLobbyPlayers().contains(player2));
 		
 		//try inviting existing player and he responds yes
 		invite = new LobbyInviteData("player2");
@@ -297,7 +300,8 @@ public class TestServerLogic
 		AssertPlayer1AndPlayer2AreOpponents();
 		assertTrue(player1State instanceof InShipPlacement);
 		assertTrue(player2State instanceof InShipPlacement);
-
+		assertFalse(server.getInLobbyPlayers().contains(player1));
+		assertFalse(server.getInLobbyPlayers().contains(player2));
 		
 		Thread.sleep(200);
 		
