@@ -63,21 +63,7 @@ public class Lobby extends BattleShipGui
 					@Override
 					public void mouseClicked(MouseEvent event) 
 					{
-						String selectedPlayer = inLobbyPlayersList.getSelectedValue();
-						try 
-						{
-							invitedPlayerUsername = selectedPlayer;
-							((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
-		
-							String message = "Wating for player" + invitedPlayerUsername + " response...";
-							waitingForResponse = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.NO_OPTION);
-							waitingForResponse.setEnabled(true);
-							lobbyPanel.add(waitingForResponse);	
-						} 
-						catch (IOException e) 
-						{
-							BattleShipExceptionHandler.handleBattleShipException();
-						}
+						invitePlayer(inLobbyPlayersList.getSelectedValue());
 					}
 
 					@Override
@@ -116,12 +102,28 @@ public class Lobby extends BattleShipGui
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
+	
+	private void invitePlayer(String playerUsername)
+	{
+		try 
+		{
+			invitedPlayerUsername = playerUsername;
+			String message = "Wating for player" + invitedPlayerUsername + " response...";
+			waitingForResponse = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.NO_OPTION);
+			waitingForResponse.setEnabled(true);
+			lobbyPanel.add(waitingForResponse);
+			
+			((LobbyIntermediate) intermediate).invitePlayer(playerUsername);
+		} 
+		catch (IOException e) 
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
+		}
+	}
 
 	public void handleInvite(String inviterName) 
 	{
-		invitedPlayerUsername = inviterName;
-		
-		String message = "Player " + invitedPlayerUsername + " invited you to play a game";
+		String message = "Player " + inviterName + " invited you to play a game";
 		int option = JOptionPane.showConfirmDialog(null, message, "Invite Response", JOptionPane.YES_NO_OPTION);
 
 		boolean response;
