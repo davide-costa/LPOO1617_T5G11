@@ -85,6 +85,21 @@ public class GuiMain
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		JPanel gamePanel = new JPanel();
+		gamePanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(gamePanel);
+		gamePanel.setLayout(null);
+		
+		JPanel allyGameArea = new JPanel();
+		allyGameArea.setBounds(210, 250, 600, 600);
+		gamePanel.add(allyGameArea);
+		allyGameArea.setLayout(null);
+		
+		JPanel opponentGameArea = new JPanel();
+		opponentGameArea.setBounds(1110, 250, 600, 600);
+		gamePanel.add(opponentGameArea);
+		opponentGameArea.setLayout(null);
+		
 		
 		JPanel battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
@@ -202,19 +217,6 @@ public class GuiMain
 		JButton btnFacebookLogin = new JButton("Facebook Login");
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
 		menuPanel.add(btnFacebookLogin);
-		
-		JPanel gamePanel = new JPanel();
-		gamePanel.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().add(gamePanel);
-		gamePanel.setLayout(null);
-		
-		JPanel allyGameArea = new JPanel();
-		allyGameArea.setBounds(947, 5, 10, 10);
-		gamePanel.add(allyGameArea);
-		
-		JPanel opponentGameArea = new JPanel();
-		opponentGameArea.setBounds(962, 5, 10, 10);
-		gamePanel.add(opponentGameArea);
 		
 		JPanel endOfGamePanel = new JPanel();
 		endOfGamePanel.setBounds(0, 0, 1920, 1080);

@@ -1,5 +1,6 @@
 package bship.logic;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -32,6 +33,16 @@ public class Coords implements Serializable, Comparable<Coords>
 	{
 		x = coords.x;
 		y = coords.y;
+	}
+	/**  
+	 * Constructor of Coords class. Creates a new instance of Coords from an instance of Point.
+     * @param x The x (i. e. the abcissa) coord of the point.
+	 * @param y The y (i. e. the ordinate) coord of the point.
+	 */ 
+	public Coords(Point point)
+	{
+		x = point.x;
+		y = point.y;
 	}
 	/**  
 	 * Returns the x (i. e. the abcissa) coord of the point
