@@ -59,6 +59,11 @@ public class BattleShipServer
 		return playersInLobby;
 	}
 	
+	public synchronized void playerLeftFromLobby(Player player)
+	{
+		inLobbyPlayers.remove(player);
+	}
+	
 	private ArrayList<String> getInLobbyPlayersNames()
 	{
 		ArrayList<String> playerNames = new ArrayList<String>();
@@ -256,6 +261,5 @@ public class BattleShipServer
 		PlayerState player2State = player2.getState();
 		
 		return (player1State instanceof ReadyForGame) && (player2State instanceof ReadyForGame);
-	}
-	
+	}	
 }

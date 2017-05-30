@@ -48,12 +48,11 @@ public class InLobby extends PlayerState
 				opponent.setOpponent(player);
 				player.setState(new InShipPlacement(player));
 				opponent.setState(new InShipPlacement(opponent));
+				player.getBattleShipServer().playerLeftFromLobby(player);
+				player.getBattleShipServer().playerLeftFromLobby(opponent);
 			}
 			else
 				player.setOpponent(null);
-
-			if(responseData.wasAccepted())
-				player.setState(new InShipPlacement(player));
 		}
 	}
 
