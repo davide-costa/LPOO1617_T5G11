@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
 public class Lobby extends BattleShipGui
 {
 	private JPanel lobbyPanel;
-	private JTextField txtOnlinePlayers;
+	private JLabel txtOnlinePlayers;
 	private DefaultListModel<String> model;
 	private JList<String> inLobbyPlayersList;
 	private String username;
@@ -45,12 +46,10 @@ public class Lobby extends BattleShipGui
 		frame.getContentPane().add(lobbyPanel);
 		lobbyPanel.setLayout(null);
 		
-		txtOnlinePlayers = new JTextField();
+		txtOnlinePlayers = new JLabel("Online Players");
 		txtOnlinePlayers.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
-		txtOnlinePlayers.setText("Online Players");
 		txtOnlinePlayers.setBounds(870, 100, 180, 50);
 		lobbyPanel.add(txtOnlinePlayers);
-		txtOnlinePlayers.setColumns(10);
 		
 		
 		model = new DefaultListModel<String>();

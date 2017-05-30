@@ -12,7 +12,7 @@ import bship.network.sockets.ShipPlacementIntermediate;
 public class ShipPlacementPanel extends BattleShipGui
 {
 	private JPanel battleShipPlacementPanel;
-	private JPanel gameMapArea;
+	private JLabel gameMapArea;
 	private JLabel labelCarrier;
 	private JLabel labelBattleShip;
 	private JLabel labelSubmarine;
@@ -65,7 +65,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.add(labelCarrier);
 		
 		
-		gameMapArea = new JPanel();
+		gameMapArea = new JLabel(ImagesData.boardImage);
 		gameMapArea.setBounds(400, 240, 600, 600);
 		battleShipPlacementPanel.add(gameMapArea);
 		
