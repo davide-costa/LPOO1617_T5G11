@@ -129,7 +129,7 @@ public class Lobby extends BattleShipGui
 		boolean response;
 		if (option == JOptionPane.YES_OPTION)
 		{
-			new ShipPlacementPanel(this.frame, this.lobbyPanel);
+			new ShipPlacementPanel(this.frame, this.lobbyPanel, false);
 			response = true;
 		}
 		else
@@ -156,7 +156,7 @@ public class Lobby extends BattleShipGui
 	{
 		waitingForResponse.setEnabled(false);
 		if(wasAccepted)
-			new ShipPlacementPanel(this.frame, this.lobbyPanel);
+			new ShipPlacementPanel(this.frame, this.lobbyPanel, false);
 		else
 			InviteRejectedMessage();
 	}
