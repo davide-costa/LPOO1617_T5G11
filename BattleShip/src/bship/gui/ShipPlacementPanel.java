@@ -35,7 +35,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private DraggableShip labelCruiser1;
 	private DraggableShip labelCruiser2;
 	private DraggableShip labelDestroyer;
-	private HashMap<DraggableShip, Ship> ships;
+	private HashMap<DraggableShip, String> ships;
 	public final static int boardXStartPos = 400;
 	public final static int boardYStartPos = 240;
 	public final static int boardSize = 600;
@@ -102,12 +102,13 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	private void FillShips() 
 	{
-		ships.put(labelBattleShip, new BattleShip());
-		ships.put(labelCarrier, new Carrier());
-		ships.put(labelCruiser1, new Cruiser());
-		ships.put(labelCruiser2, new Cruiser());
-		ships.put(labelDestroyer, new Destroyer());
-		ships.put(labelSubmarine, new Submarine());
+		ships = new HashMap<DraggableShip, String>();
+		ships.put(labelBattleShip, "BattleShip");
+		ships.put(labelCarrier, "Carrier");
+		ships.put(labelCruiser1, "Cruiser1");
+		ships.put(labelCruiser2, "Cruiser2");
+		ships.put(labelDestroyer, "Destroyer");
+		ships.put(labelSubmarine, "Submarine");
 	}
 
 	@Override
