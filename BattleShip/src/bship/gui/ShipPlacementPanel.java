@@ -133,7 +133,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		Coords dropCoords = new Coords(event.getX(), event.getY());
 		
 		if(isDropInBoardRange(dropCoords))
-			if(shipPlacement.DropShip(ships.get(event.getComponent())))
+			if(shipPlacement.dropShip(ships.get(event.getComponent())))
 				return;
 				
 		event.getComponent().setLocation(clickPoint);

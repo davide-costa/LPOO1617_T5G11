@@ -1,16 +1,29 @@
 package bship.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class ShipPlacement 
 {
 	private GameMap map;
+	private HashMap<String, Ship> shipsByName;
 	
 	public ShipPlacement(GameMap map)
 	{
 		this.map = map;
+		fillShipsByName();
 	}
 	
+	private void fillShipsByName() 
+	{
+		shipsByName.put("BattleShip", new BattleShip());
+		shipsByName.put("Carrier", new Carrier());
+		shipsByName.put("Cruiser1", new Cruiser());
+		shipsByName.put("Cruiser2", new Cruiser());
+		shipsByName.put("Destroyer", new Destroyer());
+		shipsByName.put("Submarine", new Submarine());
+	}
+
 	public boolean isShipDropValid(Ship ship)
 	{
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
@@ -34,8 +47,9 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
-	public boolean DropShip(Ship ship)
+	public boolean dropShip(String shipName)
 	{
+		Ship ship = shipsByName.get(shipName);
 		if(!isShipDropValid(ship))
 		{
 			ship.cleanCoords();
