@@ -14,6 +14,8 @@ import bship.network.sockets.SocketIntermediate;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -80,6 +82,8 @@ public class BattleShipServerLogin extends BattleShipGui
 				{
 					username = usernameField.getText();
 					password = passwordField.getPassword().toString();
+					if(username.isEmpty() || password.isEmpty())
+						return;
 					login.requestLogin(BattleShipServerLogin.this, username, password);
 				} 
 				catch (IOException e1) 

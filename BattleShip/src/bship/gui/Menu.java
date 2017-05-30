@@ -33,7 +33,7 @@ public class Menu extends BattleShipGui
 	private	JButton btnFacebookLogin;
 	private	JButton btnExit;
 	private Image backgroundImage;
-	private JLabel label;
+	private JLabel background;
 
 	public Menu(JFrame frame, JPanel lastPanel) 
 	{
@@ -82,9 +82,9 @@ public class Menu extends BattleShipGui
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
 		menuPanel.add(btnFacebookLogin);
 		
-		label = new JLabel(ImagesData.menuBackgroundImage);
-		label.setBounds(0, 0, 1920, 1080);
-		menuPanel.add(label);
+		background = new JLabel(ImagesData.menuBackgroundImage);
+		background.setBounds(0, 0, 1920, 1080);
+		menuPanel.add(background);
 	
 		if(lastPanel != null)
 			lastPanel.setVisible(false);
