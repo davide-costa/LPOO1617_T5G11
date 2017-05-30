@@ -57,9 +57,7 @@ public class ShipPlacementPanel extends BattleShipGui
 			shipPlacement = new SinglePlayerShipPlacement(new DefaultMap(false));
 		else
 			shipPlacement = new MultiplayerShipPlacement(new DefaultMap(false));
-		
-		FiilShips();
-		
+			
 		
 		battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
@@ -90,6 +88,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		labelCarrier = new DraggableShip(ImagesData.carrierImage, this);
 		labelCarrier.setBounds(1100, 760, 300, 60);
 		battleShipPlacementPanel.add(labelCarrier);
+		FillShips();
 		
 		gameMapArea = new JLabel(ImagesData.boardImage);
 		gameMapArea.setBounds(400, 240, 600, 600);
@@ -101,7 +100,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.requestFocusInWindow();
 	}
 	
-	private void FiilShips() 
+	private void FillShips() 
 	{
 		ships.put(labelBattleShip, new BattleShip());
 		ships.put(labelCarrier, new Carrier());
