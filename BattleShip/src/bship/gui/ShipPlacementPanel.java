@@ -33,38 +33,41 @@ public class ShipPlacementPanel extends BattleShipGui
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 		
+		
 		battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(battleShipPlacementPanel);
 		battleShipPlacementPanel.setLayout(null);
 		
-		gameMapArea = new JPanel();
-		gameMapArea.setBounds(400, 240, 600, 600);
-		battleShipPlacementPanel.add(gameMapArea);
+	
+		labelDestroyer = new DraggableJLabel(ImagesData.destroyerImage);
+		labelDestroyer.setBounds(1100, 240, 120, 60);
+		battleShipPlacementPanel.add(labelDestroyer);
 		
-		labelCarrier = new JLabel(ImagesData.carrierImage);
-		labelCarrier.setBounds(1100, 760, 300, 60);
-		battleShipPlacementPanel.add(labelCarrier);
-		
-		labelBattleShip = new JLabel(ImagesData.battleShipImage);
-		labelBattleShip.setBounds(1100, 630, 240, 60);
-		battleShipPlacementPanel.add(labelBattleShip);
-		
-		labelSubmarine = new JLabel(ImagesData.submarineImage);
-		labelSubmarine.setBounds(1100, 500, 180, 60);
-		battleShipPlacementPanel.add(labelSubmarine);
-		
-		labelCruiser1 = new JLabel(ImagesData.cruiserImage);
+		labelCruiser1 = new DraggableJLabel(ImagesData.cruiserImage);
 		labelCruiser1.setBounds(1100, 370, 180, 60);
 		battleShipPlacementPanel.add(labelCruiser1);
 		
-		labelCruiser2 = new JLabel(ImagesData.cruiserImage);
+		labelCruiser2 = new DraggableJLabel(ImagesData.cruiserImage);
 		labelCruiser2.setBounds(1350, 370, 180, 60);
 		battleShipPlacementPanel.add(labelCruiser2);
 		
-		labelDestroyer = new JLabel(ImagesData.destroyerImage);
-		labelDestroyer.setBounds(1100, 240, 120, 60);
-		battleShipPlacementPanel.add(labelDestroyer);
+		labelSubmarine = new DraggableJLabel(ImagesData.submarineImage);
+		labelSubmarine.setBounds(1100, 500, 180, 60);
+		battleShipPlacementPanel.add(labelSubmarine);
+		
+		labelBattleShip = new DraggableJLabel(ImagesData.battleShipImage);
+		labelBattleShip.setBounds(1100, 630, 240, 60);
+		battleShipPlacementPanel.add(labelBattleShip);
+		
+		labelCarrier = new DraggableJLabel(ImagesData.carrierImage);
+		labelCarrier.setBounds(1100, 760, 300, 60);
+		battleShipPlacementPanel.add(labelCarrier);
+		
+		
+		gameMapArea = new JPanel();
+		gameMapArea.setBounds(400, 240, 600, 600);
+		battleShipPlacementPanel.add(gameMapArea);
 		
 		
 		lastPanel.setVisible(false);

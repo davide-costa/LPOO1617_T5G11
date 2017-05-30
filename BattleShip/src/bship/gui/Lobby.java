@@ -67,7 +67,13 @@ public class Lobby extends BattleShipGui
 						String selectedPlayer = inLobbyPlayersList.getSelectedValue();
 						try 
 						{
+							invitedPlayerUsername = selectedPlayer;
 							((LobbyIntermediate) intermediate).invitePlayer(selectedPlayer);
+		
+							String message = "Wating for player" + invitedPlayerUsername + " response...";
+							waitingForResponse = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.NO_OPTION);
+							waitingForResponse.setEnabled(true);
+							lobbyPanel.add(waitingForResponse);	
 						} 
 						catch (IOException e) 
 						{
@@ -133,11 +139,6 @@ public class Lobby extends BattleShipGui
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-		
-		message = "Wating for player" + invitedPlayerUsername + " response...";
-		waitingForResponse = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.NO_OPTION);
-		lobbyPanel.add(waitingForResponse);
-		waitingForResponse.setEnabled(true);
 	}
 	
 	private void InviteRejectedMessage() 
@@ -149,10 +150,10 @@ public class Lobby extends BattleShipGui
 
 	public void handleInviteResponse(boolean wasAccepted) 
 	{
-		//waitingForResponse.setEnabled(false);
+		waitingForResponse.setEnabled(false);
 		System.out.println(wasAccepted);
 		if(wasAccepted)
-			new ShipPlacementPanel(this.frame, this.lastPanel);
+			new ShipPlacementPanel(this.frame, this.lobbyPanel);
 		else
 			InviteRejectedMessage();
 	}
