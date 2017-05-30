@@ -6,7 +6,7 @@ import java.util.HashMap;
 public abstract class ShipPlacement 
 {
 	private GameMap map;
-	private HashMap<String, Ship> shipsByName;
+	private HashMap<String, Ship> shipsByName = new HashMap<String, Ship>();
 	
 	public ShipPlacement(GameMap map)
 	{
