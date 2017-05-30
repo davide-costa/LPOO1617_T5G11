@@ -1,5 +1,6 @@
 package bship.gui;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,7 +11,7 @@ import javax.swing.JLabel;
 
 public class DraggableJLabel extends JLabel
 {
-	Point initClick;
+	private Point initClick;
 	
 	public DraggableJLabel(ImageIcon image)
 	{
@@ -55,6 +56,15 @@ public class DraggableJLabel extends JLabel
 			{
 				System.out.println("mouseClicked called");
 				initClick = event.getLocationOnScreen();
+				
+				Dimension labelSize = DraggableJLabel.this.getSize();
+				
+				//Move picture to this position
+				int newX = initClick.x - labelSize.height / 2;
+				int newY = initClick.x - labelSize.width / 2;
+				
+				DraggableJLabel.this.setLocation(newX, newY);
+				DraggableJLabel.this.repaint();
 			}
 
 			@Override
