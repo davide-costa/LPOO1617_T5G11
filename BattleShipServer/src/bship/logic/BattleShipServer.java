@@ -147,6 +147,13 @@ public class BattleShipServer
 		String username = login.getUsername();
 		String password = login.getPassword();
 		
+		if(username.isEmpty() || password.isEmpty())
+		{
+			response = new LoginResponseData(false);
+			thread.sendData(response);
+			return false;
+		}
+		
 		Player newPlayer;
 		if(battleshipPlayers.containsKey(username))
 		{
