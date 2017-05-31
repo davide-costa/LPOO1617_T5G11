@@ -27,9 +27,9 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mouseDragged(MouseEvent event) 
 			{
+				System.out.println("mouseDragged of DraggableShip");
 				if(pickUpPoint == null)
-					pickUpPoint = event.getPoint();
-				
+					pickUpPoint = new Point(event.getX(), event.getY());
 			}
 
 			@Override
@@ -68,7 +68,7 @@ public class DraggableShip extends DraggableJLabel
 				if(SwingUtilities.isRightMouseButton(event))
 					rotate(event.getPoint());
 				else if(SwingUtilities.isLeftMouseButton(event))
-					pickUpPoint = event.getPoint();
+					pickUpPoint = new Point(event.getX(), event.getY());
 			}
 
 			@Override

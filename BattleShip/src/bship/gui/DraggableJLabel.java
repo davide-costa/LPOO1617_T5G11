@@ -36,12 +36,8 @@ public class DraggableJLabel extends JLabel
 				int yMoved = (labelLocation.y + mouseLocation.y) - (labelLocation.y + initClick.y);
 
 				//Move picture to this position
-//				int newX = labelLocation.x + xMoved;
-//				int newY = labelLocation.y + yMoved;
-
-				Dimension labelSize = DraggableJLabel.this.getSize();
-				int newX = mouseLocation.x - labelSize.height / 2;
-				int newY = mouseLocation.y - labelSize.width / 2;
+				int newX = labelLocation.x + xMoved;
+				int newY = labelLocation.y + yMoved;
 				
 				DraggableJLabel.this.setLocation(newX, newY);
 				DraggableJLabel.this.repaint();
