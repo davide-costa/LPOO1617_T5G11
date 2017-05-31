@@ -16,9 +16,10 @@ public class DraggableShip extends DraggableJLabel
 	private ShipPlacementPanel shipPlacementPanel;
 	private Point initLocation;
 	
-	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel) 
+	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel, Point initLocation) 
 	{
 		super(image);
+		this.initLocation = initLocation;
 		this.shipPlacementPanel = shipPlacementPanel;
 		
 		this.addMouseMotionListener(new MouseMotionListener()
@@ -27,15 +28,12 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mouseDragged(MouseEvent event) 
 			{
-				System.out.println("mouseDragged of DraggableShip");
-				if(initLocation == null)
-					initLocation = DraggableShip.this.getLocation();
+				
 			}
 
 			@Override
 			public void mouseMoved(MouseEvent event) 
 			{
-				// TODO Auto-generated method stub
 				
 			}
 	
@@ -67,8 +65,6 @@ public class DraggableShip extends DraggableJLabel
 				System.out.println("mouseClicked of DraggableShip");
 				if(SwingUtilities.isRightMouseButton(event))
 					rotate(event.getPoint());
-				else if(SwingUtilities.isLeftMouseButton(event) && initLocation == null)
-					initLocation = DraggableShip.this.getLocation();
 			}
 
 			@Override
