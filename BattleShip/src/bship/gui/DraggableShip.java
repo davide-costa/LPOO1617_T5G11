@@ -67,7 +67,7 @@ public class DraggableShip extends DraggableJLabel
 				System.out.println("mouseClicked of DraggableShip");
 				if(SwingUtilities.isRightMouseButton(event))
 					rotate(event.getPoint());
-				else if(SwingUtilities.isLeftMouseButton(event))
+				else if(SwingUtilities.isLeftMouseButton(event) && initLocation == null)
 					initLocation = DraggableShip.this.getLocation();
 			}
 
