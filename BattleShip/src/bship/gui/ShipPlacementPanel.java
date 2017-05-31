@@ -68,27 +68,27 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.setLayout(null);
 		
 	
-		labelDestroyer = new DraggableShip(ImagesData.destroyerImage, this);
+		labelDestroyer = new DraggableShip(ImagesData.destroyerImage, this, new Point(1100, 240));
 		labelDestroyer.setBounds(1100, 240, 120, 60);
 		battleShipPlacementPanel.add(labelDestroyer);
 		
-		labelCruiser1 = new DraggableShip(ImagesData.cruiserImage, this);
+		labelCruiser1 = new DraggableShip(ImagesData.cruiserImage, this, new Point(1100, 370));
 		labelCruiser1.setBounds(1100, 370, 180, 60);
 		battleShipPlacementPanel.add(labelCruiser1);
 		
-		labelCruiser2 = new DraggableShip(ImagesData.cruiserImage, this);
+		labelCruiser2 = new DraggableShip(ImagesData.cruiserImage, this, new Point(1350, 370));
 		labelCruiser2.setBounds(1350, 370, 180, 60);
 		battleShipPlacementPanel.add(labelCruiser2);
 		
-		labelSubmarine = new DraggableShip(ImagesData.submarineImage, this);
+		labelSubmarine = new DraggableShip(ImagesData.submarineImage, this, new Point(1100, 500));
 		labelSubmarine.setBounds(1100, 500, 180, 60);
 		battleShipPlacementPanel.add(labelSubmarine);
 		
-		labelBattleShip = new DraggableShip(ImagesData.battleShipImage, this);
+		labelBattleShip = new DraggableShip(ImagesData.battleShipImage, this, new Point(1100, 630));
 		labelBattleShip.setBounds(1100, 630, 240, 60);
 		battleShipPlacementPanel.add(labelBattleShip);
 		
-		labelCarrier = new DraggableShip(ImagesData.carrierImage, this);
+		labelCarrier = new DraggableShip(ImagesData.carrierImage, this, new Point(1100, 760));
 		labelCarrier.setBounds(1100, 760, 300, 60);
 		battleShipPlacementPanel.add(labelCarrier);
 		FillShips();
