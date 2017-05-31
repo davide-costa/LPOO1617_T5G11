@@ -134,7 +134,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	protected void tryDropShip(MouseEvent event, Point initLocation) 
 	{
 		Point dropLocation = event.getComponent().getLocation();
-		
+		MapToBoardReferencial(dropLocation);
 		AdjustDropPosition(dropLocation);
 		if(isDropInBoardRange(event.getComponent().getSize(), dropLocation))
 		{
@@ -145,6 +145,12 @@ public class ShipPlacementPanel extends BattleShipGui
 		}
 				
 		event.getComponent().setLocation(initLocation);
+	}
+	
+	private void MapToBoardReferencial(Point position)
+	{
+		position.x -= boardXStartPos;
+		position.y -= boardYStartPos;
 	}
 	
 	private void AdjustDropPosition(Point position)
