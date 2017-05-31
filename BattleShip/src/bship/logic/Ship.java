@@ -84,7 +84,7 @@ public abstract class Ship
 		coords.add(coord);
 	}
 
-	public void cleanCoords() 
+	public void clearCoords() 
 	{
 		coords.clear();	
 	}

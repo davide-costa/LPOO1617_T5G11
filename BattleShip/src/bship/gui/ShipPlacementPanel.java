@@ -178,12 +178,10 @@ public class ShipPlacementPanel extends BattleShipGui
 	{
 		int width = (int)shipDimension.getWidth();
 		int height = (int)shipDimension.getHeight();
-		int boardXEndPos = boardXStartPos + boardSize;
-		int boardYEndPos = boardYStartPos + boardSize;
 		
-		if(dropLocation.getX() < boardXStartPos || dropLocation.getX() + width > boardXEndPos)
+		if(dropLocation.getX() < 0 || dropLocation.getX() + width > boardSize)
 			return false;
-		if(dropLocation.getY() < boardYStartPos || dropLocation.getY() + height > boardYEndPos)
+		if(dropLocation.getY() < 0 || dropLocation.getY() + height > boardSize)
 			return false;
 		
 		return true;

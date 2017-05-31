@@ -8,21 +8,36 @@ public abstract class ShipPlacement
 {
 	private GameMap map;
 	private HashMap<String, Ship> shipsByName = new HashMap<String, Ship>();
+	private HashMap<String, Boolean> shipIsAleadyPlaced = new HashMap<String, Boolean>();
+	
 	
 	public ShipPlacement(GameMap map)
 	{
 		this.map = map;
-		fillShipsByName();
+		fillShipsHashMaps();
 	}
-	
-	private void fillShipsByName() 
+
+	private void fillShipsHashMaps() 
 	{
-		shipsByName.put("BattleShip", new BattleShip());
-		shipsByName.put("Carrier", new Carrier());
-		shipsByName.put("Cruiser1", new Cruiser());
-		shipsByName.put("Cruiser2", new Cruiser());
-		shipsByName.put("Destroyer", new Destroyer());
-		shipsByName.put("Submarine", new Submarine());
+		ArrayList<String> shipsNames  = new ArrayList<String>();
+		shipsNames.add("BattleShip");
+		shipsNames.add("Carrier");
+		shipsNames.add("Cruiser1");
+		shipsNames.add("Cruiser2");
+		shipsNames.add("Destroyer");
+		shipsNames.add("Submarine");
+		
+		shipsByName.put(shipsNames.get(0), new BattleShip());
+		shipsByName.put(shipsNames.get(1), new Carrier());
+		shipsByName.put(shipsNames.get(2), new Cruiser());
+		shipsByName.put(shipsNames.get(3), new Cruiser());
+		shipsByName.put(shipsNames.get(4), new Destroyer());
+		shipsByName.put(shipsNames.get(5),new Submarine());
+		
+		for (String shipName : shipsNames)
+		{
+			shipIsAleadyPlaced.put(shipName, false);
+		}		
 	}
 
 	public boolean isShipDropValid(Ship ship)
@@ -47,6 +62,20 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
+	public void pickUpShip(String shipName)
+	{
+		if (shipIsAleadyPlaced.get(shipName))
+		{
+			Ship ship = shipsByName.get(shipName);
+			for(Coords currCoords: ship.getCoords())
+			{
+				map.setCellState(currCoords, null);
+			}
+			ship.clearCoords();
+			shipIsAleadyPlaced.put(shipName, false);
+		}
+	}
+	
 	public boolean dropShip(Coords initCoord, String shipName)
 	{
 		Ship ship = shipsByName.get(shipName);
@@ -54,17 +83,18 @@ public abstract class ShipPlacement
 		
 		if(!isShipDropValid(ship))
 		{
-			ship.cleanCoords();
+			ship.clearCoords();
 			return false;
 		}
-			
+		
 		ArrayList<Coords> shipCoords = ship.getCoords();
 		CellState cellState = new AllyCellState(ship);
 		for(Coords currCoords: shipCoords)
 		{
 			map.setCellState(currCoords, cellState);
 		}
-			
-		return true;	
+		
+		shipIsAleadyPlaced.put(shipName, true);
+		return true;
 	}
 }
