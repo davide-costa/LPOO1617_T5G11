@@ -139,16 +139,23 @@ public class ShipPlacementPanel extends BattleShipGui
 	protected void tryDropShip(MouseEvent event, Point initLocation) 
 	{
 		DraggableShip shipJLabel = (DraggableShip)event.getComponent();
-		Point dropLocation = shipJLabel.getLocation();
-		MapToBoardReferencial(dropLocation);
-		AdjustDropPosition(dropLocation);
-		if(isDropInBoardRange(shipJLabel.getSize(), dropLocation))
+		Point screenDropLocation = shipJLabel.getLocation();
+		Point boardDropLocation = new Point(screenDropLocation);
+		MapToBoardReferencial(boardDropLocation);
+		AdjustDropPosition(boardDropLocation);
+		if(isDropInBoardRange(shipJLabel.getSize(), boardDropLocation))
 		{
-			dropLocation.x /= cellSize;
-			dropLocation.y /= cellSize;
+			boardDropLocation.x /= cellSize;
+			boardDropLocation.y /= cellSize;
 			System.out.println(ships.get(shipJLabel));
-			if(shipPlacement.dropShip(new Coords(dropLocation), ships.get(shipJLabel), shipJLabel.getDirection()))
+			if(shipPlacement.dropShip(new Coords(boardDropLocation), ships.get(shipJLabel), shipJLabel.getDirection()))
+			{
+				MapToBoardReferencial(screenDropLocation);
+				AdjustDropPosition(screenDropLocation);
+				MapToScreenReferencial(screenDropLocation);
+				shipJLabel.setLocation(screenDropLocation);
 				return;
+			}
 		}
 				
 		shipJLabel.setLocation(initLocation);
@@ -158,6 +165,12 @@ public class ShipPlacementPanel extends BattleShipGui
 	{
 		position.x -= boardXStartPos;
 		position.y -= boardYStartPos;
+	}
+	
+	private void MapToScreenReferencial(Point position)
+	{
+		position.x += boardXStartPos;
+		position.y += boardYStartPos;
 	}
 	
 	public ShipPlacement getShipPlacement()
