@@ -32,7 +32,10 @@ public class OpponentCellState extends CellState
 	@Override
 	public CellState getCopy()
 	{
-		CellState cell = new OpponentCellState(ship.getCopy(), hasShip, discovered);
+		Ship ship = null;
+		if(this.ship != null)
+			ship = this.ship.getCopy();
+		CellState cell = new OpponentCellState(ship, hasShip, discovered);
 		return cell;
 	}
 

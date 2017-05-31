@@ -8,7 +8,7 @@ public abstract class ShipPlacement
 {
 	private GameMap map;
 	private HashMap<String, Ship> shipsByName = new HashMap<String, Ship>();
-	private HashMap<String, Boolean> shipIsAleadyPlaced = new HashMap<String, Boolean>();
+	private HashMap<String, Boolean> shipIsAlreadyPlaced = new HashMap<String, Boolean>();
 	
 	
 	public ShipPlacement(GameMap map)
@@ -36,8 +36,13 @@ public abstract class ShipPlacement
 		
 		for (String shipName : shipsNames)
 		{
-			shipIsAleadyPlaced.put(shipName, false);
+			shipIsAlreadyPlaced.put(shipName, false);
 		}		
+	}
+	
+	public boolean isShipsAlreadyPlaced(String shipName)
+	{
+		return shipIsAlreadyPlaced.get(shipName);
 	}
 
 	public boolean isShipDropValid(Ship ship)
@@ -53,7 +58,6 @@ public abstract class ShipPlacement
 			if(!map.areCoordsInMapRange(currCoords))
 				continue;
 			
-			System.out.println(currCoords.GetX());
 			if(map.getCellState(currCoords) != null)
 				if(map.getCellState(currCoords).hasShip())
 					return false;
@@ -64,7 +68,7 @@ public abstract class ShipPlacement
 	
 	public void pickUpShip(String shipName)
 	{
-		if (shipIsAleadyPlaced.get(shipName))
+		if (shipIsAlreadyPlaced.get(shipName))
 		{
 			Ship ship = shipsByName.get(shipName);
 			for(Coords currCoords: ship.getCoords())
@@ -72,13 +76,14 @@ public abstract class ShipPlacement
 				map.setCellState(currCoords, null);
 			}
 			ship.clearCoords();
-			shipIsAleadyPlaced.put(shipName, false);
+			shipIsAlreadyPlaced.put(shipName, false);
 		}
 	}
 	
-	public boolean dropShip(Coords initCoord, String shipName)
+	public boolean dropShip(Coords initCoord, String shipName, String direction)
 	{
 		Ship ship = shipsByName.get(shipName);
+		ship.setDirection(direction);
 		ship.fillCoordsByInitCoord(initCoord, ship.getDirection());
 		
 		if(!isShipDropValid(ship))
@@ -94,7 +99,7 @@ public abstract class ShipPlacement
 			map.setCellState(currCoords, cellState);
 		}
 		
-		shipIsAleadyPlaced.put(shipName, true);
+		shipIsAlreadyPlaced.put(shipName, true);
 		return true;
 	}
 }

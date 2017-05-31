@@ -16,6 +16,7 @@ public abstract class Ship
 		health = size;
 		this.coords = new ArrayList<Coords>();
 		this.name = name;
+		this.direction = new String();
 	}
 	
 	public Ship(int size, ArrayList<Coords> coords, String direction, String name)
@@ -95,12 +96,15 @@ public abstract class Ship
 		
 		if(direction == "vertical")
 			yInc = 1;
-		else
+		else if(direction == "horizontal")
 			xInc = 1;
+		else
+			throw new IllegalArgumentException();
 		
 		coords.clear();
 		int initX = initCoord.GetX();
 		int initY = initCoord.GetY();
+		coords.add(initCoord);
 		for(int i = 0; i < size; i++)
 		{
 			coords.add(new Coords(initX + xInc, initY + yInc));
