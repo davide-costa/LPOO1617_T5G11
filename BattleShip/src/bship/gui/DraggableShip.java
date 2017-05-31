@@ -11,16 +11,18 @@ import javax.swing.SwingUtilities;
 
 import bship.logic.Coords;
 
-public class DraggableShip extends DraggableJLabel 
+public class DraggableShip extends DraggableJLabel
 {
 	private ShipPlacementPanel shipPlacementPanel;
 	private Point initLocation;
+	private String direction;
 	
 	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel, Point initLocation) 
 	{
 		super(image);
 		this.initLocation = initLocation;
 		this.shipPlacementPanel = shipPlacementPanel;
+		this.direction = "horizontal";
 		
 		this.addMouseMotionListener(new MouseMotionListener()
 		{
@@ -64,7 +66,10 @@ public class DraggableShip extends DraggableJLabel
 			{
 				System.out.println("mouseClicked of DraggableShip");
 				if(SwingUtilities.isRightMouseButton(event))
+				{
+					toggleDirection();
 					rotate(event.getPoint());
+				}
 			}
 
 			@Override
@@ -76,7 +81,20 @@ public class DraggableShip extends DraggableJLabel
 			}
 		});
 	}
+	
+	public String getDirection()
+	{
+		return direction;
+	}
 
+	private void toggleDirection()
+	{
+		if (direction == "vertical")
+			direction = "horizontal";
+		else if (direction == "horizontal")
+			direction = "vertical";
+	}
+	
 	protected void rotate(Point clickPoint) 
 	{
 		int newWidth = this.getSize().height;
