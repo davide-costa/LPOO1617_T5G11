@@ -14,7 +14,7 @@ import bship.logic.Coords;
 public class DraggableShip extends DraggableJLabel 
 {
 	private ShipPlacementPanel shipPlacementPanel;
-	private Point pickUpPoint;
+	private Point initLocation;
 	
 	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel) 
 	{
@@ -28,8 +28,8 @@ public class DraggableShip extends DraggableJLabel
 			public void mouseDragged(MouseEvent event) 
 			{
 				System.out.println("mouseDragged of DraggableShip");
-				if(pickUpPoint == null)
-					pickUpPoint = DraggableShip.this.getLocation();
+				if(initLocation == null)
+					initLocation = DraggableShip.this.getLocation();
 			}
 
 			@Override
@@ -68,7 +68,7 @@ public class DraggableShip extends DraggableJLabel
 				if(SwingUtilities.isRightMouseButton(event))
 					rotate(event.getPoint());
 				else if(SwingUtilities.isLeftMouseButton(event))
-					pickUpPoint = DraggableShip.this.getLocation();
+					initLocation = DraggableShip.this.getLocation();
 			}
 
 			@Override
@@ -76,7 +76,7 @@ public class DraggableShip extends DraggableJLabel
 			{
 				System.out.println("mouseReleased of DraggableShip");
 				if(SwingUtilities.isLeftMouseButton(event))
-					shipPlacementPanel.tryDropShip(event, pickUpPoint);
+					shipPlacementPanel.tryDropShip(event, initLocation);
 			}
 		});
 	}

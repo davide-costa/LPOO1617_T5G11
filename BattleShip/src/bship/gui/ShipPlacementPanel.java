@@ -1,5 +1,6 @@
 package bship.gui;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -128,30 +129,29 @@ public class ShipPlacementPanel extends BattleShipGui
 	public void keyTyped(KeyEvent event) {}
 	
 	
-	protected void tryDropShip(MouseEvent event, Point clickPoint) 
+	protected void tryDropShip(MouseEvent event, Point initLocation) 
 	{
-		Coords dropCoords = new Coords(event.getX(), event.getY());
-		
-		if(isDropInBoardRange(dropCoords))
+		if(isDropInBoardRange(event.getComponent().getSize(), event.getComponent().getLocation()))
 			if(shipPlacement.dropShip(ships.get(event.getComponent())))
 				return;
 				
-		event.getComponent().setLocation(clickPoint);
+		event.getComponent().setLocation(initLocation);
 	}
 
-	private boolean isDropInBoardRange(Coords dropCoords) 
+	private boolean isDropInBoardRange(Dimension shipDimension, Point dropLocation) 
 	{
-		int halfWidth = this.getWidth() / 2;
-		int halfHeight = this.getHeight() / 2;
+		int width = (int)shipDimension.getWidth();
+		int height = (int)shipDimension.getHeight();
 		int boardXEndPos = boardXStartPos + boardSize;
 		int boardYEndPos = boardYStartPos + boardSize;
 		
-		if(dropCoords.GetX() - halfWidth < boardXStartPos || dropCoords.GetX() + halfWidth > boardXEndPos)
+		if(dropLocation.getX() < boardXStartPos || dropLocation.getX() + width > boardXEndPos)
 			return false;
-		if(dropCoords.GetY() - halfHeight < boardYStartPos || dropCoords.GetY() + halfHeight > boardYEndPos)
+		if(dropLocation.getY() < boardYStartPos || dropLocation.getY() + height > boardYEndPos)
 			return false;
 		
 		return true;
 	}
+
 
 }
