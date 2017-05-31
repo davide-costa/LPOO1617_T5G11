@@ -117,7 +117,8 @@ public class TestShip
 		submarineCoords.add(new Coords(1,0));
 		submarineCoords.add(new Coords(2,0));
 		
-		ship.fillCoordsByInitCoord(new Coords(0,0), "horizontal");
+		ship.setDirection("horizontal");
+		ship.fillCoordsByInitCoord(new Coords(0,0));
 		assertEquals(submarineCoords, ship.getCoords());
 	}
 	
@@ -128,7 +129,8 @@ public class TestShip
 		submarineCoords.add(new Coords(0,1));
 		submarineCoords.add(new Coords(0,2));
 		
-		ship.fillCoordsByInitCoord(new Coords(0,0), "vertical");
+		ship.setDirection("vertical");
+		ship.fillCoordsByInitCoord(new Coords(0,0));
 		assertEquals(submarineCoords, ship.getCoords());
 	}
 }
