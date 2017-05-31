@@ -102,12 +102,14 @@ public abstract class Ship
 			throw new IllegalArgumentException();
 		
 		coords.clear();
-		int initX = initCoord.GetX();
-		int initY = initCoord.GetY();
+		int currX = initCoord.GetX();
+		int currY = initCoord.GetY();
 		coords.add(initCoord);
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < size - 1; i++)
 		{
-			coords.add(new Coords(initX + xInc, initY + yInc));
+			coords.add(new Coords(currX + xInc, currY + yInc));
+			currX += xInc;
+			currY += yInc;
 		}
 	}
 	

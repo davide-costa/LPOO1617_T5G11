@@ -11,7 +11,7 @@ public class Submarine extends Ship
 	
 	public Submarine(ArrayList<Coords> coords,  String direction)
 	{
-		super(3, coords, direction, "Submarine");
+		super(3, coords, direction, "Submarine"); 
 	}
 	
 	@Override
