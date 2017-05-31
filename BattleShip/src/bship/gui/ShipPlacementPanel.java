@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -129,7 +130,11 @@ public class ShipPlacementPanel extends BattleShipGui
 
 	@Override
 	public void keyTyped(KeyEvent event) {}
-	
+
+	public void pickUpShip(DraggableShip ship)
+	{
+		shipPlacement.pickUpShip(ships.get(ship));
+	}
 	
 	protected void tryDropShip(MouseEvent event, Point initLocation) 
 	{
@@ -141,6 +146,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		{
 			dropLocation.x /= cellSize;
 			dropLocation.y /= cellSize;
+			System.out.println(ships.get(shipJLabel));
 			if(shipPlacement.dropShip(new Coords(dropLocation), ships.get(shipJLabel), shipJLabel.getDirection()))
 				return;
 		}
@@ -154,6 +160,11 @@ public class ShipPlacementPanel extends BattleShipGui
 		position.y -= boardYStartPos;
 	}
 	
+	public ShipPlacement getShipPlacement()
+	{
+		return shipPlacement;
+	}
+
 	private void AdjustDropPosition(Point position)
 	{
 //		//get the drop position relative to the cell where it was dropped
@@ -187,6 +198,4 @@ public class ShipPlacementPanel extends BattleShipGui
 		
 		return true;
 	}
-
-
 }

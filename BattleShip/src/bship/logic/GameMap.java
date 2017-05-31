@@ -56,9 +56,10 @@ public abstract class GameMap implements Serializable
 			setAllyCellState(coords, (AllyCellState) state);
 		else if(state instanceof OpponentCellState)
 			setAllyCellState(coords, (OpponentCellState) state);
+		else if (state == null)
+			map[coords.GetY()][coords.GetX()] = state;
 		else
 			throw new IllegalArgumentException();
-			
 	}
 	
 	private void setAllyCellState(Coords coords, AllyCellState state)

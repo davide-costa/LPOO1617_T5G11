@@ -53,6 +53,7 @@ public abstract class ShipPlacement
 		
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		coordsArray = Coords.getSurroundingCoords(shipCoords);
+		coordsArray.addAll(shipCoords);
 		for(Coords currCoords: coordsArray)
 		{
 			if(!map.areCoordsInMapRange(currCoords))
@@ -93,10 +94,9 @@ public abstract class ShipPlacement
 		}
 		
 		ArrayList<Coords> shipCoords = ship.getCoords();
-		CellState cellState = new AllyCellState(ship);
 		for(Coords currCoords: shipCoords)
 		{
-			map.setCellState(currCoords, cellState);
+			map.setCellState(currCoords, new AllyCellState(ship));
 		}
 		
 		shipIsAlreadyPlaced.put(shipName, true);
