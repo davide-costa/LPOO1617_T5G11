@@ -40,6 +40,8 @@ public class ShipPlacementPanel extends BattleShipGui
 	public final static int boardXStartPos = 400;
 	public final static int boardYStartPos = 240;
 	public final static int boardSize = 600;
+	public final static int boardDivisions = 10;
+	public final static int cellSize = boardSize / boardDivisions;
 	
 	public ShipPlacementPanel(JFrame frame, JPanel menuPanel, boolean isSinglePlayer)
 	{
@@ -131,11 +133,34 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	protected void tryDropShip(MouseEvent event, Point initLocation) 
 	{
-		if(isDropInBoardRange(event.getComponent().getSize(), event.getComponent().getLocation()))
-			if(shipPlacement.dropShip(ships.get(event.getComponent())))
+		Point dropLocation = event.getComponent().getLocation();
+		AdjustDropPosition(dropLocation);
+		if(isDropInBoardRange(event.getComponent().getSize(), dropLocation))
+			if(shipPlacement.dropShip(dropLocation, ships.get(event.getComponent())))
 				return;
 				
 		event.getComponent().setLocation(initLocation);
+	}
+	
+	private void AdjustDropPosition(Point position)
+	{
+//		//get the drop position relative to the cell where it was dropped
+//		Point cellPosition = new Point(position.x % cellSize, position.y % cellSize);
+//		
+//		int halfCellSize = cellSize / 2;
+//		if (cellPosition.x > halfCellSize)
+//		{
+//			int nextCellStartPos = position.x / cellSize + cellSize;
+//			position.x = nextCellStartPos;
+//		}
+//		if (cellPosition.y > halfCellSize)
+//		{
+//			int nextCellStartPos = position.y / cellSize + cellSize;
+//			position.y = nextCellStartPos;
+//		}
+		
+		position.x = Math.round((float)position.x / cellSize);
+		position.y = Math.round((float)position.y / cellSize);
 	}
 
 	private boolean isDropInBoardRange(Dimension shipDimension, Point dropLocation) 

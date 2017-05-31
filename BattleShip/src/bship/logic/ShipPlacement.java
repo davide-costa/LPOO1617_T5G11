@@ -47,9 +47,10 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
-	public boolean dropShip(String shipName)
+	public boolean dropShip(Point initCoord, String shipName)
 	{
 		Ship ship = shipsByName.get(shipName);
+		ship.fillCoordsByInitCoord(initCoord, direction);
 		if(!isShipDropValid(ship))
 		{
 			ship.cleanCoords();
