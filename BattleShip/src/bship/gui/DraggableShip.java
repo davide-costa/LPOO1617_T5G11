@@ -25,6 +25,7 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mouseClicked(MouseEvent event)
 			{
+				System.out.println("mouseClicked of DraggableShip");
 				if(SwingUtilities.isRightMouseButton(event))
 					rotate(event.getPoint());
 				else if(SwingUtilities.isLeftMouseButton(event))
@@ -52,6 +53,7 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mouseReleased(MouseEvent event)
 			{
+				System.out.println("mouseReleased of DraggableShip");
 				if(SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.tryDropShip(event, pickUpPoint);
 			}

@@ -34,6 +34,7 @@ public class BattleShipServerLogin extends BattleShipGui
 	private JLabel lblPassword;
 	private JPasswordField passwordField;
 	private JButton btnLogin;
+	private JLabel background;
 	private String username, password;
 	
 	public BattleShipServerLogin(JFrame frame, SocketIntermediate intermediate, JPanel menuPanel)
@@ -98,6 +99,9 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.setBounds(910, 625, 100, 30);
 		battleShipServerLoginPanel.add(btnLogin);
 		
+		background = new JLabel(ImagesData.menuBackgroundImage);
+		background.setBounds(0, 0, 1920, 1080);
+		battleShipServerLoginPanel.add(background);
 		
 		lastPanel.setVisible(false);
 		battleShipServerLoginPanel.setVisible(true);

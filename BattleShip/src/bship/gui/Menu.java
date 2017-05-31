@@ -32,7 +32,6 @@ public class Menu extends BattleShipGui
 	private JButton btnSingleplayer;
 	private	JButton btnFacebookLogin;
 	private	JButton btnExit;
-	private Image backgroundImage;
 	private JLabel background;
 
 	public Menu(JFrame frame, JPanel lastPanel) 

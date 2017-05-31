@@ -7,22 +7,23 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.Version;
+import com.restfb.exception.FacebookException;
 import com.restfb.types.FacebookType;
 import com.restfb.types.User;
 
-public class FacebookLogin {
-
-	public static final Version version = Version.VERSION_2_9;
+public class FacebookLogin 
+{
+	private static final Version version = Version.VERSION_2_9;
 	String domain = "http://google.com";
 	String appId = "1286325254748169";
 	String accessToken;
 	String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domain + "&scope=user_about_me,"
-		+ "user_birthday,user_photos, ads_read,email,publish_actions";
+		+ "publish_actions";
 
 	
 	public FacebookLogin()
 	{
-		System.setProperty("webdirver.chrome.driver", "res/chromedriver.exe");
+		System.setProperty("webdirver.chrome.driver", "chromedriver.exe");
 
 		WebDriver driver = new ChromeDriver();
 		driver.get(authUrl);
@@ -39,7 +40,14 @@ public class FacebookLogin {
 				FacebookClient fbClient = new DefaultFacebookClient(accessToken, version);
 				
 				//Post
-				fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", "Test post4"));
+				try
+				{
+					fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", "Test post4"));
+				}
+				catch (FacebookException e)
+				{
+					BattleShipExceptionHandler.handleBattleShipException();
+				}
 				
 				//Get user info
 				User user = (User)fbClient.fetchObject("me", User.class);
@@ -48,10 +56,6 @@ public class FacebookLogin {
 				System.out.println(user.getBirthday());
 				return;
 			}
-
 		}
-
-
 	}
-
 }

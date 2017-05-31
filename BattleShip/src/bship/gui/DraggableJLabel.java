@@ -21,6 +21,7 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mouseDragged(MouseEvent event)
 			{
+				System.out.println("mouseDragged of DraggableJLabel");
 				Point mouseLocation = new Point(event.getX(), event.getY());
 				
 				if (initClick == null)
@@ -58,7 +59,7 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mouseClicked(MouseEvent event)
 			{
-				System.out.println("mouseClicked called");
+				System.out.println("mouseClicked of DraggableJLabel");
 				initClick = event.getLocationOnScreen();
 				
 				Dimension labelSize = DraggableJLabel.this.getSize();

@@ -21,11 +21,12 @@ public class Lobby extends BattleShipGui
 {
 	private JPanel lobbyPanel;
 	private JLabel txtOnlinePlayers;
+	private JOptionPane waitingForResponse;
+	private JLabel background;
 	private DefaultListModel<String> model;
 	private JList<String> inLobbyPlayersList;
 	private String username;
 	private String invitedPlayerUsername;
-	private JOptionPane waitingForResponse;
 		
 	public Lobby(JFrame frame, JPanel loginPanel, String username)
 	{
@@ -79,6 +80,10 @@ public class Lobby extends BattleShipGui
 					public void mouseReleased(MouseEvent event) {}
 
 				});
+		
+		background = new JLabel(ImagesData.menuBackgroundImage);
+		background.setBounds(0, 0, 1920, 1080);
+		lobbyPanel.add(background);
 
 		lastPanel.setVisible(false);
 		lobbyPanel.setVisible(true);
