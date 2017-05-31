@@ -43,7 +43,7 @@ public abstract class ShipPlacement
 				if(map.getCellState(currCoords).hasShip())
 					return false;
 		}
-		System.out.println("GOOD");
+		
 		return true;
 	}
 	
