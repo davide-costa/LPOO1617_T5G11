@@ -90,7 +90,7 @@ public abstract class Ship
 		coords.clear();	
 	}
 	
-	public void fillCoordsByInitCoord(Coords initCoord, String direction)
+	public void fillCoordsByInitCoord(Coords initCoord)
 	{
 		int xInc = 0, yInc = 0;
 		

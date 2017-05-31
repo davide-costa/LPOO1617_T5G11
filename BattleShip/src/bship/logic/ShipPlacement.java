@@ -84,7 +84,7 @@ public abstract class ShipPlacement
 	{
 		Ship ship = shipsByName.get(shipName);
 		ship.setDirection(direction);
-		ship.fillCoordsByInitCoord(initCoord, ship.getDirection());
+		ship.fillCoordsByInitCoord(initCoord);
 		
 		if(!isShipDropValid(ship))
 		{
