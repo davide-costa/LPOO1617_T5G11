@@ -27,13 +27,12 @@ public abstract class ShipPlacement
 
 	public boolean isShipDropValid(Ship ship)
 	{
-		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		ArrayList<Coords> shipCoords = ship.getCoords();
-		coordsArray = Coords.getSurroundingCoords(shipCoords);
-		
 		if(!map.areListOfCoordsInMapRange(shipCoords))
 			return false;
 		
+		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
+		coordsArray = Coords.getSurroundingCoords(shipCoords);
 		for(Coords currCoords: coordsArray)
 		{
 			if(!map.areCoordsInMapRange(currCoords))
@@ -48,10 +47,11 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
-	public boolean dropShip(Point initCoord, String shipName)
+	public boolean dropShip(Coords initCoord, String shipName)
 	{
 		Ship ship = shipsByName.get(shipName);
-		ship.fillCoordsByInitCoord(initCoord, direction);
+		ship.fillCoordsByInitCoord(initCoord, ship.getDirection());
+		
 		if(!isShipDropValid(ship))
 		{
 			ship.cleanCoords();

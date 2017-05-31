@@ -44,14 +44,19 @@ public abstract class Ship
 		return direction;
 	}
 	
+	public String getName()
+	{
+		return name;
+	}
+	
 	public void setDirection(String direction)
 	{
 		this.direction = direction;
 	}
 	
-	public String getName()
+	public void setCoords(ArrayList<Coords> coords)
 	{
-		return name;
+		this.coords = coords;
 	}
 
 	public void shoot()

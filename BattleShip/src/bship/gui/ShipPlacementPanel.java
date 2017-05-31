@@ -134,9 +134,10 @@ public class ShipPlacementPanel extends BattleShipGui
 	protected void tryDropShip(MouseEvent event, Point initLocation) 
 	{
 		Point dropLocation = event.getComponent().getLocation();
+		
 		AdjustDropPosition(dropLocation);
 		if(isDropInBoardRange(event.getComponent().getSize(), dropLocation))
-			if(shipPlacement.dropShip(dropLocation, ships.get(event.getComponent())))
+			if(shipPlacement.dropShip(new Coords(dropLocation), ships.get(event.getComponent())))
 				return;
 				
 		event.getComponent().setLocation(initLocation);
