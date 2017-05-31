@@ -84,6 +84,24 @@ public abstract class Ship
 		coords.clear();	
 	}
 	
+	public void fillCoordsByInitCoord(Coords initCoord, String direction)
+	{
+		int xInc = 0, yInc = 0;
+		
+		if(direction == "vertical")
+			yInc = 1;
+		else
+			xInc = 1;
+		
+		coords.clear();
+		int initX = initCoord.GetX();
+		int initY = initCoord.GetY();
+		for(int i = 0; i < size; i++)
+		{
+			coords.add(new Coords(initX + xInc, initY + yInc));
+		}
+	}
+	
 	@Override
 	public boolean equals(Object obj) 
 	{
