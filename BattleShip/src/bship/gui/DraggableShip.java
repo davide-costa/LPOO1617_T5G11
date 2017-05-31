@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
@@ -20,16 +21,32 @@ public class DraggableShip extends DraggableJLabel
 		super(image);
 		this.shipPlacementPanel = shipPlacementPanel;
 		
+		this.addMouseMotionListener(new MouseMotionListener()
+		{
+
+			@Override
+			public void mouseDragged(MouseEvent event) 
+			{
+				if(pickUpPoint == null)
+					pickUpPoint = event.getPoint();
+				
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent event) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+	
+			
+		});
 		this.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent event)
 			{
-				System.out.println("mouseClicked of DraggableShip");
-				if(SwingUtilities.isRightMouseButton(event))
-					rotate(event.getPoint());
-				else if(SwingUtilities.isLeftMouseButton(event))
-					pickUpPoint = event.getPoint();
+		
 			}
 
 			@Override
@@ -47,7 +64,11 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mousePressed(MouseEvent event)
 			{
-				
+				System.out.println("mouseClicked of DraggableShip");
+				if(SwingUtilities.isRightMouseButton(event))
+					rotate(event.getPoint());
+				else if(SwingUtilities.isLeftMouseButton(event))
+					pickUpPoint = event.getPoint();
 			}
 
 			@Override
