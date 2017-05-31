@@ -137,8 +137,12 @@ public class ShipPlacementPanel extends BattleShipGui
 		
 		AdjustDropPosition(dropLocation);
 		if(isDropInBoardRange(event.getComponent().getSize(), dropLocation))
+		{
+			dropLocation.x /= cellSize;
+			dropLocation.y /= cellSize;
 			if(shipPlacement.dropShip(new Coords(dropLocation), ships.get(event.getComponent())))
 				return;
+		}
 				
 		event.getComponent().setLocation(initLocation);
 	}
@@ -160,8 +164,8 @@ public class ShipPlacementPanel extends BattleShipGui
 //			position.y = nextCellStartPos;
 //		}
 		
-		position.x = Math.round((float)position.x / cellSize);
-		position.y = Math.round((float)position.y / cellSize);
+		position.x = Math.round((float)position.x / cellSize) * cellSize;
+		position.y = Math.round((float)position.y / cellSize) * cellSize;
 	}
 
 	private boolean isDropInBoardRange(Dimension shipDimension, Point dropLocation) 
