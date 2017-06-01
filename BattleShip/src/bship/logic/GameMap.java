@@ -86,6 +86,17 @@ public abstract class GameMap extends Observable implements Serializable
 		return map[coords.GetY()][coords.GetX()];
 	}
 	
+	/**
+	 * Returns the state (i.e. representation or symbol) of a the given coords in the map.
+	 * @param xCoord the x coord of the cell we want to get the state.
+	 * @param yCoord the y coord of the cell we want to get the state.
+	 * @return the state of the cell.
+	 */
+	public CellState getCellState(int xCoord, int yCoord)
+	{
+		return map[xCoord][yCoord];
+	}
+	
 	public boolean areCoordsInMapRange(Coords coords)
 	{
 		int currCoordsX = coords.GetX();
