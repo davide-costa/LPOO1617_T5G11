@@ -1,7 +1,10 @@
 package bship.gui;
 
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,11 +16,12 @@ import bship.logic.MultiplayerOpponent;
 import bship.logic.Opponent;
 import bship.logic.SingleplayerOpponent;
 
-public class GameGui extends BattleShipGui
+public class GameGui extends BattleShipGui implements Observer
 {
 	private JPanel gamePanel;
 	private JLabel allyGameArea;
 	private JLabel opponentGameArea;
+	private Game game;
 	
 	public GameGui(JFrame frame, JPanel shipPlacementPanel, GameMap map, boolean isSinglePlayer)
 	{
@@ -35,7 +39,7 @@ public class GameGui extends BattleShipGui
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-		Game game = new Game(opponent, this);
+		game = new Game(opponent, this);
 		opponent.setGame(game);
 		
 		gamePanel = new JPanel();
@@ -74,4 +78,30 @@ public class GameGui extends BattleShipGui
 	@Override
 	public void keyTyped(KeyEvent event) {}
 	
+	@Override
+	protected void paintComponent(Graphics graphics) 
+	{
+		super.paintComponent(graphics);
+		
+		paintAllyGameArea();
+		paintOpponentGameArea();
+	}
+
+	private void paintAllyGameArea() 
+	{
+		GameMap map = game.getAllyMap();
+		
+		for(int i = 0; i < map.getMapYSize(); i++)
+			for(int j = 0; j < map.getMapXSize(); j++)
+			{
+				
+			}
+		
+	}
+
+	@Override
+	public void update(Observable gameMap, Object object) 
+	{
+		repaint();
+	}
 }

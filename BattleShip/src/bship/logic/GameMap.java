@@ -2,8 +2,9 @@ package bship.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public abstract class GameMap implements Serializable
+public abstract class GameMap extends Observable implements Serializable
 {
 	protected int sizeX;
 	protected int sizeY;
@@ -60,6 +61,9 @@ public abstract class GameMap implements Serializable
 			map[coords.GetY()][coords.GetX()] = state;
 		else
 			throw new IllegalArgumentException();
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	private void setAllyCellState(Coords coords, AllyCellState state)
