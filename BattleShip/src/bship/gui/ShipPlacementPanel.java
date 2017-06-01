@@ -52,10 +52,10 @@ public class ShipPlacementPanel extends BattleShipGui
 	public final static int boardDivisions = 10;
 	public final static int cellSize = boardSize / boardDivisions;
 	
-	public ShipPlacementPanel(JFrame frame, JPanel menuPanel, boolean isSinglePlayer)
+	public ShipPlacementPanel(JFrame frame, JPanel battleShipServerPanel, boolean isSinglePlayer)
 	{
 		this.frame = frame;
-		this.lastPanel = menuPanel;
+		this.lastPanel = battleShipServerPanel;
 		this.isSinglePlayer = isSinglePlayer;
 		try 
 		{
@@ -255,7 +255,6 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	public void startGame()
 	{
-		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.lastPanel, ShipPlacementPanel.this,
-				shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
+		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this, shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
 	}
 }

@@ -19,10 +19,10 @@ public class GameGui extends BattleShipGui
 	private JLabel allyGameArea;
 	private JLabel opponentGameArea;
 	
-	public GameGui(JFrame frame, JPanel menuPanel, JPanel lastPanel, GameMap map, boolean isSinglePlayer)
+	public GameGui(JFrame frame, JPanel shipPlacementPanel, GameMap map, boolean isSinglePlayer)
 	{
 		this.frame = frame;
-		this.lastPanel = menuPanel;
+		this.lastPanel = shipPlacementPanel;
 		Opponent opponent = null;
 		try 
 		{

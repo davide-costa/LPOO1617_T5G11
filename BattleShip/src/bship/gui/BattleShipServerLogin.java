@@ -77,7 +77,6 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("TRY TO LOGIN");
 				BattleShipServerLoginIntermediate login = new BattleShipServerLoginIntermediate();
 				try 
 				{
