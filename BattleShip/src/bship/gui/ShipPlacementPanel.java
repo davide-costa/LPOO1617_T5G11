@@ -36,7 +36,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private boolean isSinglePlayer;
 	private ShipPlacement shipPlacement;
 	private JLabel gameMapArea;
-	private JButton btnStartGame;
+	private JButton btnReady;
 	private DraggableShip labelCarrier;
 	private DraggableShip labelBattleShip;
 	private DraggableShip labelSubmarine;
@@ -101,11 +101,11 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.add(labelCarrier);
 		FillShips();
 		
-		btnStartGame = new JButton("Start Game");
-		btnStartGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		btnStartGame.setBounds(963, 908, 150, 35);
-		battleShipPlacementPanel.add(btnStartGame);
-		btnStartGame.addActionListener(new ActionListener()
+		btnReady = new JButton("Ready");
+		btnReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnReady.setBounds(963, 908, 150, 35);
+		battleShipPlacementPanel.add(btnReady);
+		btnReady.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
