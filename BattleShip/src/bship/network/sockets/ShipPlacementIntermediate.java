@@ -37,6 +37,7 @@ public class ShipPlacementIntermediate extends SocketIntermediate implements Obs
 		}
 		else if (object instanceof StartGameData)
 		{
+			System.out.println("StartGameData");
 			gui.startGame();
 		}
 		

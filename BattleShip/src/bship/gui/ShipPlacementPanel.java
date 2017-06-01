@@ -14,6 +14,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import bship.logic.BattleShip;
@@ -111,6 +112,13 @@ public class ShipPlacementPanel extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				if(!shipPlacement.verifyAllShipsArePlaced())
+				{
+					String message = "Place all ships before start game";
+					JOptionPane.showConfirmDialog(null, message, "Invalid start game", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				
 				try
 				{
 					((ShipPlacementIntermediate)intermediate).playerIsReady();
