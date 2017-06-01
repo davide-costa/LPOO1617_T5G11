@@ -78,7 +78,7 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mouseReleased(MouseEvent event)
 			{
-				
+				initClick = null;
 			}
 		});
 	}
