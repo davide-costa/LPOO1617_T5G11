@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import bship.logic.Game;
+import bship.logic.GameMap;
 import bship.logic.MultiplayerOpponent;
 import bship.logic.Opponent;
 import bship.logic.SingleplayerOpponent;
@@ -18,7 +19,7 @@ public class GameGui extends BattleShipGui
 	private JLabel allyGameArea;
 	private JLabel opponentGameArea;
 	
-	public GameGui(JFrame frame, JPanel menuPanel, boolean isSinglePlayer)
+	public GameGui(JFrame frame, JPanel menuPanel, GameMap map, boolean isSinglePlayer)
 	{
 		this.frame = frame;
 		this.lastPanel = menuPanel;

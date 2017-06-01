@@ -122,6 +122,10 @@ public class GuiMain
 		battleShipPlacementPanel.add(labelDestroyer);
 		
 		JButton btnStartGame= new JButton("Start Game");
+		btnStartGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnStartGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		btnStartGame.setBounds(963, 908, 150, 35);
 		battleShipPlacementPanel.add(btnStartGame);

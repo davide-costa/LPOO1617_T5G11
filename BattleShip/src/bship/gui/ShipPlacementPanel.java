@@ -3,6 +3,8 @@ package bship.gui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -31,6 +33,7 @@ import bship.network.sockets.ShipPlacementIntermediate;
 public class ShipPlacementPanel extends BattleShipGui
 {
 	private JPanel battleShipPlacementPanel;
+	private boolean isSinglePlayer;
 	private ShipPlacement shipPlacement;
 	private JLabel gameMapArea;
 	private JButton btnStartGame;
@@ -51,6 +54,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	{
 		this.frame = frame;
 		this.lastPanel = menuPanel;
+		this.isSinglePlayer = isSinglePlayer;
 		try 
 		{
 			this.intermediate = new ShipPlacementIntermediate(this);
@@ -101,6 +105,12 @@ public class ShipPlacementPanel extends BattleShipGui
 		btnStartGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		btnStartGame.setBounds(963, 908, 150, 35);
 		battleShipPlacementPanel.add(btnStartGame);
+		btnStartGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.lastPanel, shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer)
+			}
+		});
 		
 		gameMapArea = new JLabel(ImagesData.boardImage);
 		gameMapArea.setBounds(400, 240, 600, 600);
