@@ -44,6 +44,8 @@ public class ShipPlacementPanel extends BattleShipGui
 	private DraggableShip labelCruiser2;
 	private DraggableShip labelDestroyer;
 	private HashMap<DraggableShip, String> ships;
+	private boolean playerReady;
+	private boolean opponentReady;
 	public final static int boardXStartPos = 400;
 	public final static int boardYStartPos = 240;
 	public final static int boardSize = 600;
@@ -109,8 +111,9 @@ public class ShipPlacementPanel extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.lastPanel, ShipPlacementPanel.this,
-						shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
+				playerReady = true;
+				if (opponentReady)
+					startGame();
 			}
 		});
 		
@@ -122,6 +125,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.setVisible(true);
 		battleShipPlacementPanel.addKeyListener(this);
 		battleShipPlacementPanel.requestFocusInWindow();
+		playerReady = false;
 	}
 	
 	private void FillShips() 
@@ -230,5 +234,19 @@ public class ShipPlacementPanel extends BattleShipGui
 			return false;
 		
 		return true;
+	}
+	
+	//This functions is called by the intermediate to inform this class that the opponent is ready
+	public void opponentIsReady()
+	{
+		opponentReady = true;
+		if (playerReady)
+			startGame();
+	}
+	
+	private void startGame()
+	{
+		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.lastPanel, ShipPlacementPanel.this,
+				shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
 	}
 }
