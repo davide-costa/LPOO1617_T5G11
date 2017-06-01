@@ -13,15 +13,11 @@ import bship.logic.Coords;
 
 public class DraggableShip extends DraggableJLabel
 {
-	private ShipPlacementPanel shipPlacementPanel;
-	private Point initLocation;
 	private String direction;
 	
 	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel, Point initLocation) 
 	{
 		super(image);
-		this.initLocation = initLocation;
-		this.shipPlacementPanel = shipPlacementPanel;
 		this.direction = "horizontal";
 		
 		this.addMouseMotionListener(new MouseMotionListener()
