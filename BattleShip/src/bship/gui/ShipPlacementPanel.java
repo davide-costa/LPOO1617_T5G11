@@ -46,8 +46,6 @@ public class ShipPlacementPanel extends BattleShipGui
 	private DraggableShip labelCruiser2;
 	private DraggableShip labelDestroyer;
 	private HashMap<DraggableShip, String> ships;
-	private boolean playerReady;
-	private boolean opponentReady;
 	public final static int boardXStartPos = 400;
 	public final static int boardYStartPos = 240;
 	public final static int boardSize = 600;
@@ -113,9 +111,14 @@ public class ShipPlacementPanel extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				playerReady = true;
-				if (opponentReady)
-					startGame();
+				try
+				{
+					((ShipPlacementIntermediate)intermediate).playerIsReady();
+				}
+				catch (IOException e1)
+				{
+					BattleShipExceptionHandler.handleBattleShipException();
+				}
 			}
 		});
 		
@@ -134,7 +137,6 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.setVisible(true);
 		battleShipPlacementPanel.addKeyListener(this);
 		battleShipPlacementPanel.requestFocusInWindow();
-		playerReady = false;
 	}
 	
 	private void FillShips() 
@@ -248,13 +250,10 @@ public class ShipPlacementPanel extends BattleShipGui
 	//This function is called by the intermediate to inform this class that the opponent is ready
 	public void opponentIsReady()
 	{
-		opponentReady = true;
 		lblOpponentReady.setVisible(true);
-		if (playerReady)
-			startGame();
 	}
 	
-	private void startGame()
+	public void startGame()
 	{
 		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.lastPanel, ShipPlacementPanel.this,
 				shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);

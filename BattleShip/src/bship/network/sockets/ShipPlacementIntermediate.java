@@ -33,13 +33,19 @@ public class ShipPlacementIntermediate extends SocketIntermediate implements Obs
 		
 		if (object instanceof ReadyForGameData)
 		{
-		
+			gui.opponentIsReady();
 		}
 		else if (object instanceof StartGameData)
 		{
-			
+			gui.startGame();
 		}
 		
+	}
+
+	public void playerIsReady() throws IOException
+	{
+		ReadyForGameData data = new ReadyForGameData();
+		socket.sendBattleShipData(data);
 	}
 
 }
