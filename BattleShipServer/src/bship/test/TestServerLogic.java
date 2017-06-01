@@ -336,8 +336,10 @@ public class TestServerLogic
 		assertTrue(player2State instanceof InShipPlacement);
 		data = new ReadyForGameData();
 		socket2Output.writeObject(data);
-		StartGameData startData = (StartGameData) socket1Input.readObject();
-		assertNotNull(startData);
+		StartGameData startData1 = (StartGameData) socket1Input.readObject();
+		assertNotNull(startData1);
+		StartGameData startData2 = (StartGameData) socket2Input.readObject();
+		assertNotNull(startData2);
 		GetCurrentPlayersInfo();
 		assertTrue(player1State instanceof InGame);
 		assertTrue(player2State instanceof InGame);
