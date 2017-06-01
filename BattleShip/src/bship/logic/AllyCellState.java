@@ -27,7 +27,10 @@ public class AllyCellState extends CellState
 	@Override
 	public CellState getCopy()
 	{
-		CellState cell = new AllyCellState(ship.getCopy(), discovered);
+		Ship ship = null;
+		if(this.ship != null)
+			ship = this.ship.getCopy();
+		CellState cell = new AllyCellState(ship, discovered);
 		return cell;
 	}
 }
