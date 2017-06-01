@@ -255,6 +255,6 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	public void startGame()
 	{
-		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this, shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
+		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.battleShipPlacementPanel, shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
 	}
 }
