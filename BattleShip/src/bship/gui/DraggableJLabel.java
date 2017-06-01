@@ -54,7 +54,6 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mouseClicked(MouseEvent event)
 			{
-				initClick = new Point(event.getX(), event.getY());
 			}
 
 			@Override
@@ -72,7 +71,7 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mousePressed(MouseEvent event)
 			{
-				
+				initClick = new Point(event.getX(), event.getY());
 			}
 
 			@Override
