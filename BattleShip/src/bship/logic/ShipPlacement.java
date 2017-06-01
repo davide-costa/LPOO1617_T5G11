@@ -3,6 +3,8 @@ package bship.logic;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public abstract class ShipPlacement 
 {
@@ -105,6 +107,20 @@ public abstract class ShipPlacement
 		}
 		
 		shipIsAlreadyPlaced.put(shipName, true);
+		return true;
+	}
+
+	public boolean verifyAllShipsArePlaced() 
+	{
+		Iterator it = shipIsAlreadyPlaced.entrySet().iterator();
+		
+		while (it.hasNext())
+		{
+			Map.Entry pair = (Map.Entry) it.next();
+			if (pair.getValue().equals(false))
+				return false;
+		}
+
 		return true;
 	}
 }
