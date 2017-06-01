@@ -19,6 +19,17 @@ public class Game
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
 	
+	public Game(GameMap allyMap, Opponent opponent, GameGui gui)
+	{
+		this.aliveShips = 5;
+		this.map = allyMap;
+		this.opponentMap = new DefaultMap(true);
+		this.opponent = opponent;
+		this.gui = gui;
+		FillShipNameToResultMap();
+		InitializeOpponentGameMap();
+	}
+	
 	public Game(Opponent opponent, GameGui gui)
 	{
 		this.aliveShips = 5;

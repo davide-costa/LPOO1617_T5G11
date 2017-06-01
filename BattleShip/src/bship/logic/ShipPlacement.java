@@ -17,6 +17,11 @@ public abstract class ShipPlacement
 		fillShipsHashMaps();
 	}
 
+	public GameMap getMap()
+	{
+		return map;
+	}
+
 	private void fillShipsHashMaps() 
 	{
 		ArrayList<String> shipsNames  = new ArrayList<String>();
