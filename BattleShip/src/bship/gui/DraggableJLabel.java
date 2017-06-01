@@ -54,7 +54,7 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mouseClicked(MouseEvent event)
 			{
-				initClick = event.getLocationOnScreen();
+				initClick = new Point(event.getX(), event.getY());
 			}
 
 			@Override
