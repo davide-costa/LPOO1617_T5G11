@@ -29,6 +29,7 @@ import bship.logic.ShipPlacement;
 import bship.logic.SinglePlayerShipPlacement;
 import bship.logic.Submarine;
 import bship.network.sockets.ShipPlacementIntermediate;
+import java.awt.Color;
 
 public class ShipPlacementPanel extends BattleShipGui
 {
@@ -37,6 +38,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private ShipPlacement shipPlacement;
 	private JLabel gameMapArea;
 	private JButton btnReady;
+	private JLabel lblOpponentReady;
 	private DraggableShip labelCarrier;
 	private DraggableShip labelBattleShip;
 	private DraggableShip labelSubmarine;
@@ -116,6 +118,13 @@ public class ShipPlacementPanel extends BattleShipGui
 					startGame();
 			}
 		});
+		
+		lblOpponentReady = new JLabel("Opponent Ready");
+		lblOpponentReady.setForeground(Color.RED);
+		lblOpponentReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+		lblOpponentReady.setBounds(1610, 376, 230, 35);
+		battleShipPlacementPanel.add(lblOpponentReady);
+		lblOpponentReady.setVisible(false);
 		
 		gameMapArea = new JLabel(ImagesData.boardImage);
 		gameMapArea.setBounds(400, 240, 600, 600);
@@ -236,10 +245,11 @@ public class ShipPlacementPanel extends BattleShipGui
 		return true;
 	}
 	
-	//This functions is called by the intermediate to inform this class that the opponent is ready
+	//This function is called by the intermediate to inform this class that the opponent is ready
 	public void opponentIsReady()
 	{
 		opponentReady = true;
+		lblOpponentReady.setVisible(true);
 		if (playerReady)
 			startGame();
 	}
