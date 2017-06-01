@@ -43,11 +43,11 @@ public class GameGui extends BattleShipGui
 		frame.getContentPane().add(gamePanel);
 		gamePanel.setLayout(null);
 		
-		allyGameArea = new JLabel(ImagesData.battleShipImage);
+		allyGameArea = new JLabel(ImagesData.boardImage);
 		allyGameArea.setBounds(210, 250, 600, 600);
 		gamePanel.add(allyGameArea);
 		
-		opponentGameArea = new JLabel(ImagesData.battleShipImage);
+		opponentGameArea = new JLabel(ImagesData.boardImage);
 		opponentGameArea.setBounds(1110, 250, 600, 600);
 		gamePanel.add(opponentGameArea);	
 		
