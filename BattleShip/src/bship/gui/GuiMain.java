@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JList;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GuiMain 
 {
@@ -40,21 +42,21 @@ public class GuiMain
 			{
 				try 
 				{
-					ImagesData.loadImages();
-					JFrame frame = new JFrame();
-					frame.setResizable(false);
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setBounds(0, 0, 1920, 1080);
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					frame.getContentPane().setLayout(null);
-					Menu m = new Menu(frame, null);
-					m.setVisible(true);
+//					ImagesData.loadImages();
+//					JFrame frame = new JFrame();
+//					frame.setResizable(false);
+//					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//					frame.setBounds(0, 0, 1920, 1080);
+//					frame.setUndecorated(true);
+//					frame.setVisible(true);
+//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					frame.getContentPane().setLayout(null);
+//					Menu m = new Menu(frame, null);
+//					m.setVisible(true);
 					//Thread.sleep(10000);
 					
-//					GuiMain window = new GuiMain();
-//					window.frame.setVisible(true);
+					GuiMain window = new GuiMain();
+					window.frame.setVisible(true);
 				} 
 				catch (Exception e) 
 				{
@@ -84,21 +86,6 @@ public class GuiMain
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JPanel gamePanel = new JPanel();
-		gamePanel.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().add(gamePanel);
-		gamePanel.setLayout(null);
-		
-		JPanel allyGameArea = new JPanel();
-		allyGameArea.setBounds(210, 250, 600, 600);
-		gamePanel.add(allyGameArea);
-		allyGameArea.setLayout(null);
-		
-		JPanel opponentGameArea = new JPanel();
-		opponentGameArea.setBounds(1110, 250, 600, 600);
-		gamePanel.add(opponentGameArea);
-		opponentGameArea.setLayout(null);
 		
 		
 		JPanel battleShipPlacementPanel = new JPanel();
@@ -133,6 +120,26 @@ public class GuiMain
 		JLabel labelDestroyer = new JLabel();
 		labelDestroyer.setBounds(1100, 240, 120, 60);
 		battleShipPlacementPanel.add(labelDestroyer);
+		
+		JButton btnStartGame= new JButton("Start Game");
+		btnStartGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnStartGame.setBounds(963, 908, 150, 35);
+		battleShipPlacementPanel.add(btnStartGame);
+		
+		JPanel gamePanel = new JPanel();
+		gamePanel.setBounds(0, 0, 1920, 1080);
+		frame.getContentPane().add(gamePanel);
+		gamePanel.setLayout(null);
+		
+		JPanel allyGameArea = new JPanel();
+		allyGameArea.setBounds(210, 250, 600, 600);
+		gamePanel.add(allyGameArea);
+		allyGameArea.setLayout(null);
+		
+		JPanel opponentGameArea = new JPanel();
+		opponentGameArea.setBounds(1110, 250, 600, 600);
+		gamePanel.add(opponentGameArea);
+		opponentGameArea.setLayout(null);
 		
 		
 		JPanel battleShipServerLoginPanel = new JPanel();

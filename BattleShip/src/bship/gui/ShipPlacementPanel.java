@@ -1,6 +1,7 @@
 package bship.gui;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +33,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private JPanel battleShipPlacementPanel;
 	private ShipPlacement shipPlacement;
 	private JLabel gameMapArea;
+	private JButton btnStartGame;
 	private DraggableShip labelCarrier;
 	private DraggableShip labelBattleShip;
 	private DraggableShip labelSubmarine;
@@ -93,6 +96,11 @@ public class ShipPlacementPanel extends BattleShipGui
 		labelCarrier.setBounds(1100, 760, 300, 60);
 		battleShipPlacementPanel.add(labelCarrier);
 		FillShips();
+		
+		btnStartGame = new JButton("Start Game");
+		btnStartGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnStartGame.setBounds(963, 908, 150, 35);
+		battleShipPlacementPanel.add(btnStartGame);
 		
 		gameMapArea = new JLabel(ImagesData.boardImage);
 		gameMapArea.setBounds(400, 240, 600, 600);
