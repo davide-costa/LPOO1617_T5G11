@@ -105,7 +105,8 @@ public class ShipPlacementPanel extends BattleShipGui
 		btnStartGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		btnStartGame.setBounds(963, 908, 150, 35);
 		battleShipPlacementPanel.add(btnStartGame);
-		btnStartGame.addActionListener(new ActionListener() {
+		btnStartGame.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.lastPanel, ShipPlacementPanel.this,
