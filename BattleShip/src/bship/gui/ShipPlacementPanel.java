@@ -165,6 +165,7 @@ public class ShipPlacementPanel extends BattleShipGui
 
 	private void fillShipRotatedImage() 
 	{
+		shipRotatedImage = new HashMap<ImageIcon, ImageIcon>();
 		shipRotatedImage.put(ImagesData.battleShipIcon, ImagesData.battleShipVerticalIcon);
 		shipRotatedImage.put(ImagesData.cruiserIcon, ImagesData.cruiserVerticalIcon);
 		shipRotatedImage.put(ImagesData.carrierIcon, ImagesData.carrierVerticalIcon);
