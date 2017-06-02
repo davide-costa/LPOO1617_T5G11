@@ -51,7 +51,7 @@ public class GameGui extends BattleShipGui implements Observer
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-		game = new Game(shipPlacement, opponent, this);
+		game = new Game(shipPlacement.getMap(), opponent, this);
 		opponent.setGame(game);
 		
 //		gamePanel = new JPanel();

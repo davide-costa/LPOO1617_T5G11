@@ -15,17 +15,14 @@ public class Game
 	protected GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
-	private ArrayList<Ship> allyShips;
-	private ArrayList<Ship> opponentShips;
 	private GameGui gui;
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
 	
-	public Game(ShipPlacement shipPlacement, Opponent opponent, GameGui gui)
+	public Game(GameMap allyMap, Opponent opponent, GameGui gui)
 	{
 		this.aliveShips = 5;
-		this.map = shipPlacement.getMap();
-		this.allyShips = shipPlacement.getPlacedShips();
+		this.map = allyMap;
 		this.opponentMap = new DefaultMap(true);
 		this.opponent = opponent;
 		this.gui = gui;
