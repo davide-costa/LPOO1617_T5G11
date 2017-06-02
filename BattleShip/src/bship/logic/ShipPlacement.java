@@ -123,4 +123,18 @@ public abstract class ShipPlacement
 
 		return true;
 	}
+	
+	public ArrayList<Ship> getPlacedShips()
+	{
+		ArrayList<Ship> ships = new ArrayList<Ship>();
+		Iterator it = shipsByName.entrySet().iterator();
+		
+		while (it.hasNext())
+		{
+			Map.Entry pair = (Map.Entry) it.next();
+			ships.add((Ship) pair.getValue());
+		}
+		
+		return ships;
+	}
 }
