@@ -40,7 +40,7 @@ public class ImagesData
 			destroyerImage = ImageIO.read(new File("res/images/Destroyer.png"));
 			menuBackgroundImage = ImageIO.read(new File("res/images/menuBackgound.jpg"));
 			boardImage = ImageIO.read(new File("res/images/board.png"));
-			destroyedCellImage = ImageIO.read(new File("res/images/atackedCellImage.png"));
+			destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
 			discoveredWaterCellImage = ImageIO.read(new File("res/images/discoveredWaterCellImage.png"));
 			
 			carrierIcon = new ImageIcon(carrierImage);
