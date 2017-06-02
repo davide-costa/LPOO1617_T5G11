@@ -1,6 +1,7 @@
 package bship.gui;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,6 +34,11 @@ public class ImagesData
 	public static ImageIcon boardIcon;
 	public static ImageIcon destroyedCellIcon;
 	public static ImageIcon discoveredWaterCellIcon;
+	public static BufferedImage carrierVerticalImage;
+	public static BufferedImage battleShipVerticalImage;
+	public static BufferedImage cruiserVerticalImage;
+	public static BufferedImage destroyerVerticalImage;
+	public static BufferedImage submarineVerticalImage;
 
 	
 	public static void loadImages()
@@ -44,6 +50,11 @@ public class ImagesData
 			submarineImage = ImageIO.read(new File("res/images/Submarine.png"));
 			cruiserImage = ImageIO.read(new File("res/images/Cruiser.png"));
 			destroyerImage = ImageIO.read(new File("res/images/Destroyer.png"));
+			carrierVerticalImage = ImageIO.read(new File("res/images/Carrier.png"));
+			battleShipVerticalImage = ImageIO.read(new File("res/images/BattleShip.png"));
+			submarineVerticalImage = ImageIO.read(new File("res/images/Submarine.png"));
+			cruiserVerticalImage = ImageIO.read(new File("res/images/Cruiser.png"));
+			destroyerVerticalImage = ImageIO.read(new File("res/images/Destroyer.png"));
 			menuBackgroundImage = ImageIO.read(new File("res/images/menuBackground.jpg"));
 			boardImage = ImageIO.read(new File("res/images/board.png"));
 			destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
