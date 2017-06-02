@@ -108,7 +108,9 @@ public class GameGui extends BattleShipGui implements Observer
 	{
 		GameMap map = game.getAllyMap();
 		graphics.drawImage(ImagesData.boardImage, allyBoardXStartPos, allyBoardYStartPos, null);
-				
+		
+		//TODO draw ships
+		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
@@ -117,17 +119,16 @@ public class GameGui extends BattleShipGui implements Observer
 				allyBoardCoordsToScreenCoords(coords);
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(coords, cell, graphics);
+				//draw X on cells of ships that are destroyed (but not fully destroyed)
 			}
-		
-		//TODO draw ships
-		//draw X on cells of ships that are destroyed (but not fully destroyed)
-
 	}
 	
 	private void paintOpponentGameArea(Graphics graphics) 
 	{
 		GameMap map = game.getOpponentMap();
 		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, allyBoardXStartPos, null);
+		
+		//TODO draw ships that are already fully destroyed
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
@@ -140,10 +141,8 @@ public class GameGui extends BattleShipGui implements Observer
 				else
 					if(cell.isDiscoveredAndShip())
 						if (cell.getShip() == null); //draw ships that have been hit but are still not totally discovered
-							//drawCellDestroyed(coords, cell, graphics);
+							drawCellDestroyed(coords, cell, graphics);
 			}
-		
-		//TODO draw ships that are already destroyed
 	}
 
 	private void drawCellDestroyed(Coords screenCoords, CellState cell, Graphics graphics) 
@@ -151,14 +150,9 @@ public class GameGui extends BattleShipGui implements Observer
 		graphics.drawImage(ImagesData.destroyedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
 	}
 
-	private void paintShipCell(Coords screenCoords, CellState state, Graphics graphics) 
-	{
-//		graphics.drawImage(ImagesData.atackedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
-	}
-
 	private void drawDiscoveredWaterCell(Coords screenCoords, CellState state, Graphics graphics) 
 	{
-//		graphics.drawImage(ImagesData.discoveredWaterCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
+		graphics.drawImage(ImagesData.discoveredWaterCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
 	}
 
 	private Coords allyBoardCoordsToScreenCoords(Coords boardcoords)
