@@ -1,7 +1,9 @@
 package bship.gui;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -14,10 +16,12 @@ import bship.logic.Coords;
 public class DraggableShip extends DraggableJLabel
 {
 	private String direction;
+	private ImageIcon image;
 	
 	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel, Point initLocation) 
 	{
 		super(image);
+		this.image = image;
 		this.direction = "horizontal";
 		
 		this.addMouseMotionListener(new MouseMotionListener()
@@ -63,7 +67,8 @@ public class DraggableShip extends DraggableJLabel
 				if(SwingUtilities.isRightMouseButton(event))
 				{
 					toggleDirection();
-					rotate(event.getPoint());
+					Point middlePoint = DraggableShip.this.getMiddlePoint();
+					rotate(middlePoint);
 				}
 				else if(SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.pickUpShip(DraggableShip.this);
@@ -78,6 +83,14 @@ public class DraggableShip extends DraggableJLabel
 		});
 	}
 	
+	protected Point getMiddlePoint() 
+	{
+		Rectangle bounds = this.getBounds();
+		Point middlePoint = new Point((int)bounds.getCenterX(), (int)bounds.getCenterY());
+
+		return middlePoint;
+	}
+
 	public String getDirection()
 	{
 		return direction;
@@ -91,13 +104,14 @@ public class DraggableShip extends DraggableJLabel
 			direction = "vertical";
 	}
 	
-	protected void rotate(Point clickPoint) 
+	protected void rotate(Point middlePoint) 
 	{
 		int newWidth = this.getSize().height;
 		int newHeight = this.getSize().width;
 		
 		this.setSize(newWidth, newHeight);
-		((Graphics2D)this.getGraphics()).rotate(3.14, clickPoint.getX(), clickPoint.getY());
+		((Graphics2D)this.getGraphics()).rotate(Math.PI / 2, middlePoint.getX(), middlePoint.getY());
+		//((Graphics2D)this.getGraphics()).drawImage(this., this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
 	}
 
 }
