@@ -15,6 +15,7 @@ public class Game
 	protected GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
+	private ArrayList<Ship> opponentShips;
 	private GameGui gui;
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
@@ -23,6 +24,7 @@ public class Game
 	{
 		this.aliveShips = 5;
 		this.map = allyMap;
+		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
 		this.opponent = opponent;
 		this.gui = gui;

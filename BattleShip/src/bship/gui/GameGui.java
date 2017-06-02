@@ -28,6 +28,8 @@ public class GameGui extends BattleShipGui implements Observer
 	private JLabel allyGameArea;
 	private JLabel opponentGameArea;
 	private Game game;
+	private ArrayList<Ship> allyShips;
+	private ArrayList<Ship> opponentShips;
 	public final static int cellSize = 60;
 	public final static int allyBoardXStartPos = 210;
 	public final static int allyBoardYStartPos = 250;
@@ -39,6 +41,8 @@ public class GameGui extends BattleShipGui implements Observer
 	{
 		this.frame = frame;
 		this.lastPanel = shipPlacementPanel;
+		allyShips = shipPlacement.getPlacedShips();
+		opponentShips = new ArrayList<Ship>();
 		Opponent opponent = null;
 		try 
 		{
