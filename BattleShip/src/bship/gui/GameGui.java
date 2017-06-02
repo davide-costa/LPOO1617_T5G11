@@ -146,6 +146,11 @@ public class GameGui extends BattleShipGui implements Observer
 		//TODO draw ships that are already destroyed
 	}
 
+	private void drawCellDestroyed(Coords screenCoords, CellState cell, Graphics graphics) 
+	{
+		graphics.drawImage(ImagesData.destroyedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
+	}
+
 	private void paintShipCell(Coords screenCoords, CellState state, Graphics graphics) 
 	{
 //		graphics.drawImage(ImagesData.atackedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
