@@ -55,11 +55,11 @@ public class ImagesData
 			submarineImage = ImageIO.read(new File("res/images/Submarine.png"));
 			cruiserImage = ImageIO.read(new File("res/images/Cruiser.png"));
 			destroyerImage = ImageIO.read(new File("res/images/Destroyer.png"));
-			carrierVerticalImage = ImageIO.read(new File("res/images/Carrier.png"));
-			battleShipVerticalImage = ImageIO.read(new File("res/images/BattleShip.png"));
-			submarineVerticalImage = ImageIO.read(new File("res/images/Submarine.png"));
-			cruiserVerticalImage = ImageIO.read(new File("res/images/Cruiser.png"));
-			destroyerVerticalImage = ImageIO.read(new File("res/images/Destroyer.png"));
+			carrierVerticalImage = ImageIO.read(new File("res/images/CarrierVertical.png"));
+			battleShipVerticalImage = ImageIO.read(new File("res/images/BattleShipVertical.png"));
+			submarineVerticalImage = ImageIO.read(new File("res/images/SubmarineVertical.png"));
+			cruiserVerticalImage = ImageIO.read(new File("res/images/CruiserVertical.png"));
+			destroyerVerticalImage = ImageIO.read(new File("res/images/DestroyerVertical.png"));
 			menuBackgroundImage = ImageIO.read(new File("res/images/menuBackground.jpg"));
 			boardImage = ImageIO.read(new File("res/images/board.png"));
 			destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
