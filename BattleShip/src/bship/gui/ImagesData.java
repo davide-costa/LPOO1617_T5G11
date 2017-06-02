@@ -18,6 +18,11 @@ public class ImagesData
 	public static Image boardImage;
 	public static Image destroyedCellImage;
 	public static Image discoveredWaterCellImage;
+	public static Image cruiserSunkenImage;
+	public static Image carrierSunkenImage;
+	public static Image battleShipSunkenImage;
+	public static Image submarineSunkenImage;
+	public static Image destroyerSunkenImage;
 	
 	public static ImageIcon carrierIcon;
 	public static ImageIcon battleShipIcon;
@@ -28,6 +33,7 @@ public class ImagesData
 	public static ImageIcon boardIcon;
 	public static ImageIcon destroyedCellIcon;
 	public static ImageIcon discoveredWaterCellIcon;
+
 	
 	public static void loadImages()
 	{
@@ -42,6 +48,11 @@ public class ImagesData
 			boardImage = ImageIO.read(new File("res/images/board.png"));
 			destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
 			discoveredWaterCellImage = ImageIO.read(new File("res/images/discoveredWaterCellImage.png"));
+			cruiserSunkenImage = ImageIO.read(new File("res/images/CruiserDestroyed.png"));
+			carrierSunkenImage = ImageIO.read(new File("res/images/CarrierDestroyed.png"));
+			battleShipSunkenImage = ImageIO.read(new File("res/images/BattleShipDestroyed.png"));
+			submarineSunkenImage = ImageIO.read(new File("res/images/SubmarineDestroyed.png"));
+			destroyerSunkenImage = ImageIO.read(new File("res/images/DestroyerDestroyed.png"));
 			
 			carrierIcon = new ImageIcon(carrierImage);
 			battleShipIcon = new ImageIcon(battleShipImage);
@@ -50,8 +61,6 @@ public class ImagesData
 			destroyerIcons = new ImageIcon(destroyerImage);
 			menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
 			boardIcon = new ImageIcon(boardImage);
-			destroyedCellIcon = new ImageIcon(destroyedCellImage);
-			discoveredWaterCellIcon = new ImageIcon(discoveredWaterCellImage); 
 		} 
 		catch (IOException e) 
 		{
