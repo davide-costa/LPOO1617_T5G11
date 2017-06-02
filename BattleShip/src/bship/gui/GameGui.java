@@ -144,10 +144,10 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private void paintShipCell(Coords screenCoords, CellState state, Graphics graphics) 
 	{
-			if(state.getShip().isDestroyed())
-				paintShip();
-			else
-				graphics.drawImage(ImagesData.atackedCellImage, x, y, cellSize, cellSize, null);
+		if(state.getShip().isDestroyed())
+			paintShip();
+		else
+			graphics.drawImage(ImagesData.atackedCellImage, x, y, cellSize, cellSize, null);
 	}
 
 	private void paintWaterCell(Coords cellCoords, CellState state, Graphics graphics) 
