@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -263,6 +264,6 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	public void startGame()
 	{
-		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.battleShipPlacementPanel, shipPlacement.getMap(),  ShipPlacementPanel.this.isSinglePlayer);
+		new GameGui(ShipPlacementPanel.this.frame, ShipPlacementPanel.this.battleShipPlacementPanel, shipPlacement, ShipPlacementPanel.this.isSinglePlayer);
 	}
 }

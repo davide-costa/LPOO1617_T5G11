@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +18,8 @@ import bship.logic.Game;
 import bship.logic.GameMap;
 import bship.logic.MultiplayerOpponent;
 import bship.logic.Opponent;
+import bship.logic.Ship;
+import bship.logic.ShipPlacement;
 import bship.logic.SingleplayerOpponent;
 
 public class GameGui extends BattleShipGui implements Observer
@@ -32,7 +35,7 @@ public class GameGui extends BattleShipGui implements Observer
 	public final static int opponentBoardYStartPos = 250;
 	
 	
-	public GameGui(JFrame frame, JPanel shipPlacementPanel, GameMap map, boolean isSinglePlayer)
+	public GameGui(JFrame frame, JPanel shipPlacementPanel, ShipPlacement shipPlacement, boolean isSinglePlayer)
 	{
 		this.frame = frame;
 		this.lastPanel = shipPlacementPanel;
@@ -48,7 +51,7 @@ public class GameGui extends BattleShipGui implements Observer
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-		game = new Game(map, opponent, this);
+		game = new Game(shipPlacement, opponent, this);
 		opponent.setGame(game);
 		
 //		gamePanel = new JPanel();
