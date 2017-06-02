@@ -177,8 +177,7 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private Image getAliveShipImage(Ship ship) 
 	{
-		
-		return null;
+		return aliveShipsImages.get(ship.getName());
 	}
 
 	private void paintOpponentGameArea(Graphics graphics) 
@@ -221,8 +220,7 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private Image getDestroyedShipImage(Ship ship) 
 	{
-		
-		return null;
+		return destroyedShipsImages.get(ship.getName());
 	}
 
 	private void drawCellDestroyed(Coords screenCoords, CellState cell, Graphics graphics) 
