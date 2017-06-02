@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,6 +49,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private DraggableShip labelCruiser2;
 	private DraggableShip labelDestroyer;
 	private HashMap<DraggableShip, String> ships;
+	private HashMap<ImageIcon, ImageIcon> shipRotatedImage;
 	public final static int boardXStartPos = 400;
 	public final static int boardYStartPos = 240;
 	public final static int boardSize = 600;
@@ -73,6 +75,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		else
 			shipPlacement = new MultiplayerShipPlacement(new DefaultMap(false));
 			
+		fillShipRotatedImage();
 		
 		battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
@@ -80,7 +83,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.setLayout(null);
 		
 	
-		labelDestroyer = new DraggableShip(ImagesData.destroyerIcons, this, new Point(1100, 240));
+		labelDestroyer = new DraggableShip(ImagesData.destroyerIcon, this, new Point(1100, 240));
 		labelDestroyer.setBounds(1100, 240, 120, 60);
 		battleShipPlacementPanel.add(labelDestroyer);
 		
@@ -158,6 +161,27 @@ public class ShipPlacementPanel extends BattleShipGui
 		ships.put(labelDestroyer, "Destroyer");
 		ships.put(labelSubmarine, "Submarine");
 	}
+	
+
+	private void fillShipRotatedImage() 
+	{
+		shipRotatedImage.put(ImagesData.battleShipIcon, ImagesData.battleShipVerticalIcon);
+		shipRotatedImage.put(ImagesData.cruiserIcon, ImagesData.cruiserVerticalIcon);
+		shipRotatedImage.put(ImagesData.carrierIcon, ImagesData.carrierVerticalIcon);
+		shipRotatedImage.put(ImagesData.submarineIcon, ImagesData.submarineVerticalIcon);
+		shipRotatedImage.put(ImagesData.destroyerIcon, ImagesData.destroyerVerticalIcon);
+		shipRotatedImage.put(ImagesData.battleShipVerticalIcon, ImagesData.battleShipVerticalIcon);
+		shipRotatedImage.put(ImagesData.cruiserVerticalIcon, ImagesData.cruiserIcon);
+		shipRotatedImage.put(ImagesData.carrierVerticalIcon, ImagesData.carrierIcon);
+		shipRotatedImage.put(ImagesData.submarineVerticalIcon, ImagesData.submarineIcon);
+		shipRotatedImage.put(ImagesData.destroyerVerticalIcon, ImagesData.destroyerIcon);
+	}
+	
+	public ImageIcon getRotatedImage(ImageIcon imageIcon)
+	{
+		return shipRotatedImage.get(imageIcon);
+	}
+
 
 	@Override
 	public void keyPressed(KeyEvent event) 

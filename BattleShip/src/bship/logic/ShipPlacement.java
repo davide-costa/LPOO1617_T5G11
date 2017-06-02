@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
+
+import bship.gui.ImagesData;
+
 public abstract class ShipPlacement 
 {
 	private GameMap map;

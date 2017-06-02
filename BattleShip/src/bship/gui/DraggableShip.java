@@ -16,12 +16,12 @@ import bship.logic.Coords;
 public class DraggableShip extends DraggableJLabel
 {
 	private String direction;
-	private ImageIcon image;
+	private ImageIcon imageIcon;
 	
 	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel, Point initLocation) 
 	{
 		super(image);
-		this.image = image;
+		this.imageIcon = image;
 		this.direction = "horizontal";
 		
 		this.addMouseMotionListener(new MouseMotionListener()
@@ -67,6 +67,7 @@ public class DraggableShip extends DraggableJLabel
 				if(SwingUtilities.isRightMouseButton(event))
 				{
 					toggleDirection();
+					DraggableShip.this.imageIcon = shipPlacementPanel.getRotatedImage(DraggableShip.this.imageIcon);
 					Point middlePoint = DraggableShip.this.getMiddlePoint();
 					rotate(middlePoint);
 				}
@@ -105,13 +106,13 @@ public class DraggableShip extends DraggableJLabel
 	}
 	
 	protected void rotate(Point middlePoint) 
-	{
+	{ 
 		int newWidth = this.getSize().height;
 		int newHeight = this.getSize().width;
 		
 		this.setSize(newWidth, newHeight);
 		((Graphics2D)this.getGraphics()).rotate(Math.PI / 2, middlePoint.getX(), middlePoint.getY());
-		//((Graphics2D)this.getGraphics()).drawImage(this., this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+		((Graphics2D)this.getGraphics()).drawImage(imageIcon.getImage(), this.getX(), this.getY(), newWidth, newHeight, null);
 	}
 
 }

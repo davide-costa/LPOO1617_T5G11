@@ -24,21 +24,26 @@ public class ImagesData
 	public static Image battleShipSunkenImage;
 	public static Image submarineSunkenImage;
 	public static Image destroyerSunkenImage;
+	public static Image carrierVerticalImage;
+	public static Image battleShipVerticalImage;
+	public static Image cruiserVerticalImage;
+	public static Image destroyerVerticalImage;
+	public static Image submarineVerticalImage;
 	
 	public static ImageIcon carrierIcon;
 	public static ImageIcon battleShipIcon;
 	public static ImageIcon submarineIcon;
 	public static ImageIcon cruiserIcon;
-	public static ImageIcon destroyerIcons;
+	public static ImageIcon destroyerIcon;
 	public static ImageIcon menuBackgroundIcon;
 	public static ImageIcon boardIcon;
 	public static ImageIcon destroyedCellIcon;
 	public static ImageIcon discoveredWaterCellIcon;
-	public static BufferedImage carrierVerticalImage;
-	public static BufferedImage battleShipVerticalImage;
-	public static BufferedImage cruiserVerticalImage;
-	public static BufferedImage destroyerVerticalImage;
-	public static BufferedImage submarineVerticalImage;
+	public static ImageIcon carrierVerticalIcon;
+	public static ImageIcon battleShipVerticalIcon;
+	public static ImageIcon submarineVerticalIcon;
+	public static ImageIcon cruiserVerticalIcon;
+	public static ImageIcon destroyerVerticalIcon;
 
 	
 	public static void loadImages()
@@ -69,7 +74,12 @@ public class ImagesData
 			battleShipIcon = new ImageIcon(battleShipImage);
 			submarineIcon = new ImageIcon(submarineImage);
 			cruiserIcon = new ImageIcon(cruiserImage);
-			destroyerIcons = new ImageIcon(destroyerImage);
+			destroyerIcon = new ImageIcon(destroyerImage);
+			carrierVerticalIcon = new ImageIcon(carrierVerticalImage);
+			battleShipVerticalIcon = new ImageIcon(battleShipVerticalImage);
+			submarineVerticalIcon = new ImageIcon(submarineVerticalImage);
+			cruiserVerticalIcon = new ImageIcon(cruiserVerticalImage);
+			destroyerVerticalIcon = new ImageIcon(destroyerVerticalImage);
 			menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
 			boardIcon = new ImageIcon(boardImage);
 		} 
