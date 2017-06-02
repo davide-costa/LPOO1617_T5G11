@@ -81,7 +81,7 @@ public class Menu extends BattleShipGui
 		btnFacebookLogin.setBounds(192, 917, 123, 57);
 		menuPanel.add(btnFacebookLogin);
 		
-		background = new JLabel(ImagesData.menuBackgroundImage);
+		background = new JLabel(ImagesData.menuBackgroundIcon);
 		background.setBounds(0, 0, 1920, 1080);
 		menuPanel.add(background);
 	
