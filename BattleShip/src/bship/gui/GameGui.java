@@ -120,7 +120,7 @@ public class GameGui extends BattleShipGui implements Observer
 			}
 		
 		//TODO draw ships
-		//draw X on cells of ships that are destroyed
+		//draw X on cells of ships that are destroyed (but not fully destroyed)
 
 	}
 	
@@ -134,28 +134,26 @@ public class GameGui extends BattleShipGui implements Observer
 			{
 				Coords coords = new Coords(j, i);
 				opponentBoardCoordsToScreenCoords(coords);
-				CellState state = map.getCellState(coords);
-				if(state.isDiscoveredAndShip())
-					paintShipCell(coords, state, graphics);
+				CellState cell = map.getCellState(coords);
+				if(cell.isDiscoveredAndWater())
+					drawDiscoveredWaterCell(coords, cell, graphics);
 				else
-					paintWaterCell(coords, state, graphics);
+					if(cell.isDiscoveredAndShip())
+						if (cell.getShip() == null); //draw ships that have been hit but are still not totally discovered
+							//drawCellDestroyed(coords, cell, graphics);
 			}
 		
-		//TODO draw ships
-		//draw X on cells of ships that are destroyed
+		//TODO draw ships that are already destroyed
 	}
 
 	private void paintShipCell(Coords screenCoords, CellState state, Graphics graphics) 
 	{
-		graphics.drawImage(ImagesData.atackedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
+//		graphics.drawImage(ImagesData.atackedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
 	}
 
-	private void drawDiscoveredWaterCell(Coords cellCoords, CellState state, Graphics graphics) 
+	private void drawDiscoveredWaterCell(Coords screenCoords, CellState state, Graphics graphics) 
 	{
-		if(state.isDiscovered())
-			graphics.drawImage(ImagesData.discoveredWaterCellImage, x, y, cellSize, cellSize, null);
-		else
-			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
+//		graphics.drawImage(ImagesData.discoveredWaterCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
 	}
 
 	private Coords allyBoardCoordsToScreenCoords(Coords boardcoords)
