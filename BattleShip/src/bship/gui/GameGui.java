@@ -113,14 +113,12 @@ public class GameGui extends BattleShipGui implements Observer
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
 				Coords coords = new Coords(j, i);
+				CellState cell = map.getCellState(coords);
 				allyBoardCoordsToScreenCoords(coords);
-				CellState state = map.getCellState(coords);
-				if(state.hasShip())
-					paintShipCell(coords, state, graphics);
-				else
-					paintWaterCell(coords, state, graphics);
+				if(cell.isDiscoveredAndWater())
+					drawDiscoveredWaterCell(coords, cell, graphics);
 			}
-				
+
 	}
 	
 	private void paintOpponentGameArea(Graphics graphics) 
@@ -144,13 +142,10 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private void paintShipCell(Coords screenCoords, CellState state, Graphics graphics) 
 	{
-		if(state.getShip().isDestroyed())
-			paintShip();
-		else
-			graphics.drawImage(ImagesData.atackedCellImage, x, y, cellSize, cellSize, null);
+		graphics.drawImage(ImagesData.atackedCellImage, screenCoords.GetX(), screenCoords.GetY(), cellSize, cellSize, null);
 	}
 
-	private void paintWaterCell(Coords cellCoords, CellState state, Graphics graphics) 
+	private void drawDiscoveredWaterCell(Coords cellCoords, CellState state, Graphics graphics) 
 	{
 		if(state.isDiscovered())
 			graphics.drawImage(ImagesData.discoveredWaterCellImage, x, y, cellSize, cellSize, null);
