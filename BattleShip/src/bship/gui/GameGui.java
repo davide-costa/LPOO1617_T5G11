@@ -113,11 +113,12 @@ public class GameGui extends BattleShipGui implements Observer
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
 				Coords coords = new Coords(j, i);
+				allyBoardCoordsToScreenCoords(coords);
 				CellState state = map.getCellState(coords);
 				if(state.hasShip())
-					paintShipCell(state, graphics);
+					paintShipCell(coords, state, graphics);
 				else
-					paintWaterCell(state, graphics);
+					paintWaterCell(coords, state, graphics);
 			}
 				
 	}
@@ -130,11 +131,13 @@ public class GameGui extends BattleShipGui implements Observer
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
-				CellState state = map.getCellState(j, i);
+				Coords coords = new Coords(j, i);
+				opponentBoardCoordsToScreenCoords(coords);
+				CellState state = map.getCellState(coords);
 				if(state.isDiscoveredAndShip())
-					paintShipCell(state, graphics);
+					paintShipCell(coords, state, graphics);
 				else
-					paintWaterCell(state, graphics);
+					paintWaterCell(coords, state, graphics);
 			}
 		
 	}
