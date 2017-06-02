@@ -149,6 +149,8 @@ public class GameGui extends BattleShipGui implements Observer
 			{
 				Coords coords = new Coords(j, i);
 				CellState cell = map.getCellState(coords);
+				if(cell == null)
+					return;
 				allyBoardCoordsToScreenCoords(coords);
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(coords, cell, graphics);
@@ -195,6 +197,8 @@ public class GameGui extends BattleShipGui implements Observer
 				Coords coords = new Coords(j, i);
 				opponentBoardCoordsToScreenCoords(coords);
 				CellState cell = map.getCellState(coords);
+				if(cell == null)
+					return;
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(coords, cell, graphics);
 				else
