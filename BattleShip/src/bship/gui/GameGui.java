@@ -125,7 +125,7 @@ public class GameGui extends BattleShipGui implements Observer
 	private void paintOpponentGameArea(Graphics graphics) 
 	{
 		GameMap map = game.getOpponentMap();
-		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, opponentBoardYStartPos, null);
+		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, allyBoardXStartPos, null);
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
@@ -160,6 +160,24 @@ public class GameGui extends BattleShipGui implements Observer
 			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
 	}
 
+	private Coords allyBoardCoordsToScreenCoords(Coords boardcoords)
+	{
+		return boardCoordsToScreenCoords(boardcoords, allyBoardXStartPos, allyBoardYStartPos);
+	}
+	
+	private Coords opponentBoardCoordsToScreenCoords(Coords boardcoords)
+	{
+		return boardCoordsToScreenCoords(boardcoords, opponentBoardXStartPos, opponentBoardYStartPos);
+	}
+	
+	private Coords boardCoordsToScreenCoords(Coords boardcoords, int boardXStartPos, int boardYStartPos)
+	{
+		int xCoord = boardXStartPos + boardcoords.GetX() * cellSize; 
+		int yCoord = boardYStartPos + boardcoords.GetY() * cellSize; 
+	
+		return new Coords(xCoord, yCoord);
+	}
+	
 	@Override
 	public void update(Observable gameMap, Object object) 
 	{
