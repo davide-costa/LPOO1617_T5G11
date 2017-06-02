@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,6 +32,8 @@ public class GameGui extends BattleShipGui implements Observer
 	private JLabel opponentGameArea;
 	private Game game;
 	private ArrayList<Ship> allyShips;
+	private HashMap<String, Image> aliveShipsImages;
+	private HashMap<String, Image> destroyedShipsImages;
 	public final static int cellSize = 60;
 	public final static int allyBoardXStartPos = 210;
 	public final static int allyBoardYStartPos = 250;
@@ -43,6 +46,8 @@ public class GameGui extends BattleShipGui implements Observer
 		this.frame = frame;
 		this.lastPanel = shipPlacementPanel;
 		allyShips = shipPlacement.getPlacedShips();
+		fillAliveShipsImages();
+		fillOpponentShipsImages();
 		
 		Opponent opponent = null;
 		try 
@@ -84,6 +89,24 @@ public class GameGui extends BattleShipGui implements Observer
 //		gamePanel.setVisible(true);
 //		gamePanel.addKeyListener(this);
 //		gamePanel.requestFocusInWindow();
+	}
+
+	private void fillAliveShipsImages() 
+	{
+		aliveShipsImages.put("Cruiser", ImagesData.cruiserImage);
+		aliveShipsImages.put("Carrier", ImagesData.carrierImage);
+		aliveShipsImages.put("BattleShip", ImagesData.battleShipImage);
+		aliveShipsImages.put("Submarine", ImagesData.submarineImage);
+		aliveShipsImages.put("Destroyer", ImagesData.destroyerImage);
+	}
+	
+	private void fillOpponentShipsImages() 
+	{
+		aliveShipsImages.put("Cruiser", ImagesData.cruiserSunkenImage);
+		aliveShipsImages.put("Carrier", ImagesData.carrierSunkenImage);
+		aliveShipsImages.put("BattleShip", ImagesData.battleShipSunkenImage);
+		aliveShipsImages.put("Submarine", ImagesData.submarineSunkenImage);
+		aliveShipsImages.put("Destroyer", ImagesData.destroyerSunkenImage);
 	}
 
 	@Override
@@ -154,6 +177,7 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private Image getAliveShipImage(Ship ship) 
 	{
+		
 		return null;
 	}
 
@@ -189,14 +213,15 @@ public class GameGui extends BattleShipGui implements Observer
 			{
 				Coords screenCoords = opponentBoardCoordsToScreenCoords(ship.getInitCoords());
 
-				Image shipImage = getDestroyedShipImage();
+				Image shipImage = getDestroyedShipImage(ship);
 				graphics.drawImage(shipImage, screenCoords.GetX(), screenCoords.GetY(),	shipImage.getWidth(null), shipImage.getHeight(null), null);
 			}
 		}
 	}
 
-	private Image getDestroyedShipImage() 
+	private Image getDestroyedShipImage(Ship ship) 
 	{
+		
 		return null;
 	}
 
