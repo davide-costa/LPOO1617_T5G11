@@ -105,12 +105,25 @@ public class GameGui extends BattleShipGui implements Observer
 			}
 		
 	}
+	
+	private void paintOpponentGameArea(Graphics graphics) 
+	{
+		GameMap map = game.getAllyMap();
+		
+		for(int i = 0; i < map.getMapYSize(); i++)
+			for(int j = 0; j < map.getMapXSize(); j++)
+			{
+				CellState state = map.getCellState(i, j);
+				if(state.isDiscoveredAndShip())
+					paintShipCell(state, graphics);
+				else
+					paintWaterCell(state, graphics);
+			}
+		
+	}
 
 	private void paintOpponentShipCell(Coords cellCoords, CellState state, Graphics graphics) 
 	{
-		if(!state.isDiscovered())
-			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
-		else
 			if(state.getShip().isDestroyed())
 				paintShip();
 			else
@@ -119,13 +132,7 @@ public class GameGui extends BattleShipGui implements Observer
 	
 	private void paintAllyShipCell(Coords cellCoords, CellState state, Graphics graphics) 
 	{
-		if(!state.isDiscovered())
-			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
-		else
-			if(state.getShip().isDestroyed())
-				paintShip();
-			else
-				graphics.drawImage(ImagesData.atackedCellImage, x, y, cellSize, cellSize, null);
+
 	}
 
 	private void paintWaterCell(Coords cellCoords, CellState state, Graphics graphics) 
