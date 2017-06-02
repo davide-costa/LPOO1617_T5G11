@@ -191,7 +191,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		{
 			boardDropLocation.x /= cellSize;
 			boardDropLocation.y /= cellSize;
-			System.out.println(ships.get(shipJLabel));
+			
 			if(shipPlacement.dropShip(new Coords(boardDropLocation), ships.get(shipJLabel), shipJLabel.getDirection()))
 			{
 				MapToBoardReferencial(screenDropLocation);

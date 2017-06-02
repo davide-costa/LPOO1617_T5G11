@@ -2,9 +2,11 @@ package bship.gui;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -29,7 +31,6 @@ public class GameGui extends BattleShipGui implements Observer
 	private JLabel opponentGameArea;
 	private Game game;
 	private ArrayList<Ship> allyShips;
-	private ArrayList<Ship> opponentShips;
 	public final static int cellSize = 60;
 	public final static int allyBoardXStartPos = 210;
 	public final static int allyBoardYStartPos = 250;
@@ -42,7 +43,7 @@ public class GameGui extends BattleShipGui implements Observer
 		this.frame = frame;
 		this.lastPanel = shipPlacementPanel;
 		allyShips = shipPlacement.getPlacedShips();
-		opponentShips = new ArrayList<Ship>();
+		
 		Opponent opponent = null;
 		try 
 		{
@@ -116,7 +117,7 @@ public class GameGui extends BattleShipGui implements Observer
 		GameMap map = game.getAllyMap();
 		graphics.drawImage(ImagesData.boardImage, allyBoardXStartPos, allyBoardYStartPos, null);
 		
-		//TODO draw ships
+		drawAliveAllyShips(graphics);
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
@@ -126,16 +127,42 @@ public class GameGui extends BattleShipGui implements Observer
 				allyBoardCoordsToScreenCoords(coords);
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(coords, cell, graphics);
+				else
+					if(!cell.hasShipDestroyed())
+						drawXInCell(coords, graphics);
 				//draw X on cells of ships that are destroyed (but not fully destroyed)
 			}
 	}
 	
+	private void drawXInCell(Coords screenCoords, Graphics graphics) 
+	{
+		graphics.drawImage(ImagesData.destroyedCellImage, screenCoords.GetX(), screenCoords.GetY(), null);
+	}
+
+	private void drawAliveAllyShips(Graphics graphics) 
+	{
+		for(Ship ship: allyShips)
+		{
+			if(ship.isDestroyed())
+				continue;
+
+			Coords screenCoords = allyBoardCoordsToScreenCoords(ship.getInitCoords());
+			Image shipImage = getAliveShipImage(ship);
+			graphics.drawImage(shipImage, screenCoords.GetX(), screenCoords.GetY(), shipImage.getWidth(null), shipImage.getHeight(null), null);
+		}
+	}
+
+	private Image getAliveShipImage(Ship ship) 
+	{
+		return null;
+	}
+
 	private void paintOpponentGameArea(Graphics graphics) 
 	{
 		GameMap map = game.getOpponentMap();
 		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, allyBoardXStartPos, null);
 		
-		//TODO draw ships that are already fully destroyed
+		drawOpponentFullyDestroyedShips(graphics);
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
@@ -150,6 +177,27 @@ public class GameGui extends BattleShipGui implements Observer
 						if (cell.getShip() == null); //draw ships that have been hit but are still not totally discovered
 							drawCellDestroyed(coords, cell, graphics);
 			}
+	}
+
+	private void drawOpponentFullyDestroyedShips(Graphics graphics) 
+	{
+		ArrayList<Ship> fullyDestroyedShips = game.getOpponentShips();
+		
+		for(Ship ship: fullyDestroyedShips)
+		{
+			if(ship.isDestroyed())
+			{
+				Coords screenCoords = opponentBoardCoordsToScreenCoords(ship.getInitCoords());
+
+				Image shipImage = getDestroyedShipImage();
+				graphics.drawImage(shipImage, screenCoords.GetX(), screenCoords.GetY(),	shipImage.getWidth(null), shipImage.getHeight(null), null);
+			}
+		}
+	}
+
+	private Image getDestroyedShipImage() 
+	{
+		return null;
 	}
 
 	private void drawCellDestroyed(Coords screenCoords, CellState cell, Graphics graphics) 
