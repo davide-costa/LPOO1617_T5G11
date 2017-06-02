@@ -26,6 +26,11 @@ public class GameGui extends BattleShipGui implements Observer
 	private JLabel opponentGameArea;
 	private Game game;
 	public final static int cellSize = 60;
+	public final static int allyBoardXStartPos = 210;
+	public final static int allyBoardYStartPos = 250;
+	public final static int opponentBoardXStartPos = 1110;
+	public final static int opponentBoardYStartPos = 250;
+	
 	
 	public GameGui(JFrame frame, JPanel shipPlacementPanel, GameMap map, boolean isSinglePlayer)
 	{
@@ -96,38 +101,36 @@ public class GameGui extends BattleShipGui implements Observer
 		super.paintComponent(graphics);
 		
 		paintAllyGameArea(graphics);
-		paintOpponentGameArea();
+		paintOpponentGameArea(graphics);
 	}
 
 	private void paintAllyGameArea(Graphics graphics) 
 	{
 		GameMap map = game.getAllyMap();
-		graphics.drawImage(ImagesData.board, 200, 200, null);
-		graphics.drawImage(ImagesData.carrier, 220, 220, null);
-		
-		
-		
+		graphics.drawImage(ImagesData.boardImage, allyBoardXStartPos, allyBoardYStartPos, null);
+				
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
-				CellState state = map.getCellState(i, j);
+				Coords coords = new Coords(j, i);
+				CellState state = map.getCellState(coords);
 				if(state.hasShip())
 					paintShipCell(state, graphics);
 				else
 					paintWaterCell(state, graphics);
 			}
 				
-			}
-		
 	}
+	
 	private void paintOpponentGameArea(Graphics graphics) 
 	{
-		GameMap map = game.getAllyMap();
+		GameMap map = game.getOpponentMap();
+		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, opponentBoardYStartPos, null);
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
-				CellState state = map.getCellState(i, j);
+				CellState state = map.getCellState(j, i);
 				if(state.isDiscoveredAndShip())
 					paintShipCell(state, graphics);
 				else

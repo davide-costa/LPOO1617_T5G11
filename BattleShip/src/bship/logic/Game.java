@@ -65,6 +65,11 @@ public class Game
 		this.map = allyGameMap;
 	}
 
+	public GameMap getOpponentMap()
+	{
+		return opponentMap;
+	}
+	
 	public void setOpponentMap(GameMap opponentGameMap)
 	{
 		this.opponentMap = opponentGameMap;
@@ -281,5 +286,4 @@ public class Game
 			coords.incrementY(yInc);
 		}
 	}
-
 }

@@ -16,6 +16,9 @@ public class ImagesData
 	public static Image destroyerImage;
 	public static Image menuBackgroundImage;
 	public static Image boardImage;
+//	public static ImageIcon atackedCellImage;
+//	public static ImageIcon discoveredWaterCellImage;
+	
 	public static ImageIcon carrierIcon;
 	public static ImageIcon battleShipIcon;
 	public static ImageIcon submarineIcon;
