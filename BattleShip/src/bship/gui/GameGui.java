@@ -118,6 +118,9 @@ public class GameGui extends BattleShipGui implements Observer
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(coords, cell, graphics);
 			}
+		
+		//TODO draw ships
+		//draw X on cells of ships that are destroyed
 
 	}
 	
@@ -138,6 +141,8 @@ public class GameGui extends BattleShipGui implements Observer
 					paintWaterCell(coords, state, graphics);
 			}
 		
+		//TODO draw ships
+		//draw X on cells of ships that are destroyed
 	}
 
 	private void paintShipCell(Coords screenCoords, CellState state, Graphics graphics) 
