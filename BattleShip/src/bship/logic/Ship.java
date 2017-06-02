@@ -35,6 +35,11 @@ public abstract class Ship
 		return coords;
 	}
 	
+	public Coords getInitCoords()
+	{
+		return coords.get(0);
+	}
+	
 	public int getSize()
 	{
 		return size;
