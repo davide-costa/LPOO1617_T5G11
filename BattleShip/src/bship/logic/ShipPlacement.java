@@ -2,6 +2,7 @@ package bship.logic;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -105,6 +106,7 @@ public abstract class ShipPlacement
 		{
 			map.setCellState(currCoords, new AllyCellState(ship));
 		}
+		Collections.sort(ship.getCoords());
 		
 		shipIsAlreadyPlaced.put(shipName, true);
 		return true;
