@@ -93,6 +93,7 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private void fillAliveShipsImages() 
 	{
+		aliveShipsImages = new HashMap<String, Image>();
 		aliveShipsImages.put("Cruiser", ImagesData.cruiserImage);
 		aliveShipsImages.put("Carrier", ImagesData.carrierImage);
 		aliveShipsImages.put("BattleShip", ImagesData.battleShipImage);
@@ -102,6 +103,7 @@ public class GameGui extends BattleShipGui implements Observer
 	
 	private void fillOpponentShipsImages() 
 	{
+		aliveShipsImages = new HashMap<String, Image>();
 		aliveShipsImages.put("Cruiser", ImagesData.cruiserSunkenImage);
 		aliveShipsImages.put("Carrier", ImagesData.carrierSunkenImage);
 		aliveShipsImages.put("BattleShip", ImagesData.battleShipSunkenImage);
