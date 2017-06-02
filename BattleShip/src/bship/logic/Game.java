@@ -250,6 +250,7 @@ public class Game
 		ArrayList<CellState> statesArray = new ArrayList<CellState>();
 		getCellStatesOfCoords(false, coordsArray, statesArray);
 		setCellStatesAsDiscovered(statesArray, 0);
+		opponentShips.add(destroyedShip);
 		
 		return cell;
 	}
