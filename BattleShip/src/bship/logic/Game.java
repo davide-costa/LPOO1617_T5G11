@@ -57,6 +57,11 @@ public class Game
 		opponentMap.fill(new OpponentCellState(null, false));
 	}
 	
+	public ArrayList<Ship> getOpponentShips()
+	{
+		return opponentShips;
+	}
+	
 	public GameMap getAllyMap()
 	{
 		return map;
@@ -254,7 +259,7 @@ public class Game
 		
 		return cell;
 	}
-	
+
 	private void discoverCoordsOfSankShip(Ship ship)
 	{
 		Coords coords = ship.getCoords().get(0);
