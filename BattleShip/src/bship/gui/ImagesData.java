@@ -23,6 +23,8 @@ public class ImagesData
 	public static ImageIcon destroyerIcons;
 	public static ImageIcon menuBackgroundIcon;
 	public static ImageIcon boardIcon;
+	public static ImageIcon atackedCellImage;
+	public static ImageIcon discoveredWaterCellImage;
 	
 	public static void loadImages()
 	{
@@ -43,6 +45,8 @@ public class ImagesData
 			destroyerIcons = new ImageIcon(destroyerImage);
 			menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
 			boardIcon = new ImageIcon(boardImage);
+			atackedCellImage = new ImageIcon(ImageIO.read(new File("res/images/atackedCellImage.png")));
+			discoveredWaterCellImage = new ImageIcon(ImageIO.read(new File("res/images/discoveredWaterCellImage.png"))); 
 		} 
 		catch (IOException e) 
 		{

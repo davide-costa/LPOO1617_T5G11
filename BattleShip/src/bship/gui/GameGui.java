@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import bship.logic.CellState;
+import bship.logic.Coords;
 import bship.logic.Game;
 import bship.logic.GameMap;
 import bship.logic.MultiplayerOpponent;
@@ -23,6 +25,7 @@ public class GameGui extends BattleShipGui implements Observer
 	private JLabel allyGameArea;
 	private JLabel opponentGameArea;
 	private Game game;
+	public final static int cellSize = 60;
 	
 	public GameGui(JFrame frame, JPanel shipPlacementPanel, GameMap map, boolean isSinglePlayer)
 	{
@@ -40,7 +43,7 @@ public class GameGui extends BattleShipGui implements Observer
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-		game = new Game(opponent, this);
+		game = new Game(map, opponent, this);
 		opponent.setGame(game);
 		
 //		gamePanel = new JPanel();
@@ -107,17 +110,45 @@ public class GameGui extends BattleShipGui implements Observer
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
+				CellState state = map.getCellState(i, j);
+				if(state.hasShip())
+					paintShipCell(state, graphics);
+				else
+					paintWaterCell(state, graphics);
+			}
 				
 			}
 		
+	private void paintOpponentShipCell(Coords cellCoords, CellState state, Graphics graphics) 
+	{
+		if(!state.isDiscovered())
+			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
+		else
+			if(state.getShip().isDestroyed())
+				paintShip();
+			else
+				graphics.drawImage(ImagesData.atackedCellImage, x, y, cellSize, cellSize, null);
 	}
 
-	private void paintOpponentGameArea()
+	private void paintAllyShipCell(Coords cellCoords, CellState state, Graphics graphics) 
 	{
-		// TODO Auto-generated method stub
-		
+		if(!state.isDiscovered())
+			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
+		else
+			if(state.getShip().isDestroyed())
+				paintShip();
+			else
+				graphics.drawImage(ImagesData.atackedCellImage, x, y, cellSize, cellSize, null);
 	}
-	
+
+	private void paintWaterCell(Coords cellCoords, CellState state, Graphics graphics) 
+	{
+		if(state.isDiscovered())
+			graphics.drawImage(ImagesData.discoveredWaterCellImage, x, y, cellSize, cellSize, null);
+		else
+			graphics.drawImage(ImagesData.WaterCellImage, x, y, cellSize, cellSize, null);
+	}
+
 	@Override
 	public void update(Observable gameMap, Object object) 
 	{
