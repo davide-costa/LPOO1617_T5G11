@@ -37,6 +37,11 @@ public abstract class CellState
 	
 	public abstract boolean isDiscoveredAndShip();
 	
+	public boolean isDiscoveredAndWater()
+	{
+		return isDiscovered() && !hasShip();
+	}
+	
 
 	@Override
 	public boolean equals(Object obj) 
