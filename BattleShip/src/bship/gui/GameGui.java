@@ -151,12 +151,12 @@ public class GameGui extends BattleShipGui implements Observer
 				CellState cell = map.getCellState(coords);
 				if(cell == null)
 					return;
-				allyBoardCoordsToScreenCoords(coords);
+				Coords screenCoords = allyBoardCoordsToScreenCoords(coords);
 				if(cell.isDiscoveredAndWater())
-					drawDiscoveredWaterCell(coords, cell, graphics);
+					drawDiscoveredWaterCell(screenCoords, cell, graphics);
 				else
 					if(!cell.hasShipDestroyed())
-						drawXInCell(coords, graphics);
+						drawXInCell(screenCoords, graphics);
 				//draw X on cells of ships that are destroyed (but not fully destroyed)
 			}
 	}
@@ -195,16 +195,16 @@ public class GameGui extends BattleShipGui implements Observer
 			for(int j = 0; j < map.getMapXSize(); j++)
 			{
 				Coords coords = new Coords(j, i);
-				opponentBoardCoordsToScreenCoords(coords);
+				Coords screenCoords = opponentBoardCoordsToScreenCoords(coords);
 				CellState cell = map.getCellState(coords);
 				if(cell == null)
 					return;
 				if(cell.isDiscoveredAndWater())
-					drawDiscoveredWaterCell(coords, cell, graphics);
+					drawDiscoveredWaterCell(screenCoords, cell, graphics);
 				else
 					if(cell.isDiscoveredAndShip())
 						if (cell.getShip() == null); //draw ships that have been hit but are still not totally discovered
-							drawCellDestroyed(coords, cell, graphics);
+							drawCellDestroyed(screenCoords, cell, graphics);
 			}
 	}
 
