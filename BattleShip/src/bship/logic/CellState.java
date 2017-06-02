@@ -42,7 +42,8 @@ public abstract class CellState
 		return isDiscovered() && !hasShip();
 	}
 	
-
+	public abstract boolean hasShipDestroyed();
+	
 	@Override
 	public boolean equals(Object obj) 
 	{

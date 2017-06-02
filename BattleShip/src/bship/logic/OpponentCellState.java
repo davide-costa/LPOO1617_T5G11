@@ -30,6 +30,12 @@ public class OpponentCellState extends CellState
 	}
 
 	@Override
+	public boolean hasShipDestroyed()
+	{
+		return ship != null;
+	}
+	
+	@Override
 	public CellState getCopy()
 	{
 		Ship ship = null;
@@ -38,5 +44,6 @@ public class OpponentCellState extends CellState
 		CellState cell = new OpponentCellState(ship, hasShip, discovered);
 		return cell;
 	}
+
 
 }

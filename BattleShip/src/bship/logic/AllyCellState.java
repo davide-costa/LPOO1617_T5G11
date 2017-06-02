@@ -23,6 +23,16 @@ public class AllyCellState extends CellState
 	{
 		return discovered && hasShip();
 	}
+	
+	@Override
+	public boolean hasShipDestroyed()
+	{
+		if (hasShip())
+			if (ship.isDestroyed())
+				return true;
+		
+		return false;
+	}
 
 	@Override
 	public CellState getCopy()
@@ -33,4 +43,5 @@ public class AllyCellState extends CellState
 		CellState cell = new AllyCellState(ship, discovered);
 		return cell;
 	}
+
 }
