@@ -98,7 +98,7 @@ public class BattleShipServerLogin extends BattleShipGui
 		btnLogin.setBounds(910, 625, 100, 30);
 		battleShipServerLoginPanel.add(btnLogin);
 		
-		background = new JLabel(ImagesData.menuBackgroundImage);
+		background = new JLabel(ImagesData.menuBackgroundIcon);
 		background.setBounds(0, 0, 1920, 1080);
 		battleShipServerLoginPanel.add(background);
 		

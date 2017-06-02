@@ -81,7 +81,7 @@ public class Lobby extends BattleShipGui
 
 				});
 		
-		background = new JLabel(ImagesData.menuBackgroundImage);
+		background = new JLabel(ImagesData.menuBackgroundIcon);
 		background.setBounds(0, 0, 1920, 1080);
 		lobbyPanel.add(background);
 
