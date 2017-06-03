@@ -32,8 +32,6 @@ import bship.logic.SingleplayerOpponent;
 public class GameGui extends BattleShipGui implements Observer
 {
 	private JPanel gamePanel;
-	private JLabel allyGameArea;
-	private JLabel opponentGameArea;
 	private Game game;
 	private ArrayList<Ship> allyShips;
 	private HashMap<String, Image> aliveShipsHorizontalImages;
@@ -74,18 +72,7 @@ public class GameGui extends BattleShipGui implements Observer
 		game = new Game(shipPlacement.getMap(), opponent, this);
 		opponent.setGame(game);
 		
-//		gamePanel = new JPanel();
-//		gamePanel.setBounds(0, 0, 1920, 1080);
-//		frame.getContentPane().add(gamePanel);
-//		gamePanel.setLayout(null);
-		
-//		allyGameArea = new JLabel(ImagesData.boardImage);
-//		allyGameArea.setBounds(210, 250, 600, 600);
-//		gamePanel.add(allyGameArea);
-//		
-//		opponentGameArea = new JLabel(ImagesData.boardImage);
-//		opponentGameArea.setBounds(1110, 250, 600, 600);
-//		gamePanel.add(opponentGameArea);	
+
 		
 		
 		lastPanel.setVisible(false);
@@ -93,12 +80,7 @@ public class GameGui extends BattleShipGui implements Observer
 		setBounds(0, 0, 1920, 1080);
 		this.setLayout(new FlowLayout());
 		frame.getContentPane().add(this);
-//		allyGameArea = new JLabel(ImagesData.boardImage);
-//		allyGameArea.setBounds(210, 250, 600, 600);
-//		this.add(allyGameArea);
-//		gamePanel.setVisible(true);
-//		gamePanel.addKeyListener(this);
-//		gamePanel.requestFocusInWindow();
+
 		
 		this.addMouseListener(new MouseListener()
 		{
