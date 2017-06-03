@@ -186,7 +186,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private void drawShip(String shipName, DraggableShip draggableShip)
 	{
 		Ship ship = shipPlacement.getShipName(shipName);
-		if(draggableShip.getDirection().equals("vertical"))
+		if(!draggableShip.getDirection().equals(ship.getDirection()))
 			draggableShip.rotate();
 		
 		int xCoord = boardXStartPos + ship.getInitCoords().GetX() * cellSize;
