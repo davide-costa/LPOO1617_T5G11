@@ -117,4 +117,10 @@ public class DraggableShip extends DraggableJLabel
 		setIcon(imageIcon);
 	}
 
+	public void resetDirection()
+	{
+		if (direction == "vertical")
+			rotate();
+	}
+
 }

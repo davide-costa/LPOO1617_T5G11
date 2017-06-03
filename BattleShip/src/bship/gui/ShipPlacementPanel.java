@@ -264,6 +264,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		}
 				
 		shipJLabel.setLocation(initLocation);
+		shipJLabel.resetDirection();
 	}
 	
 	private void MapToBoardReferencial(Point position)
