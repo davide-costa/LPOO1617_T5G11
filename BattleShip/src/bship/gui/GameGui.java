@@ -106,15 +106,8 @@ public class GameGui extends BattleShipGui implements Observer
 					if(SwingUtilities.isLeftMouseButton(event))
 					{
 						Coords screenShootCoords = new Coords(event.getPoint());
-						Coords boardShootCoords = opponentScreenCoordsToBoardCoords(screenShootCoords);
-						try 
-						{	
-							game.shootOpponent(boardShootCoords);
-						} 
-						catch (IOException e) 
-						{
-							BattleShipExceptionHandler.handleBattleShipException();
-						}
+						if(areCoordsInOpponentMapRange(screenShootCoords))
+							shootOpponent(screenShootCoords);
 					}
 				}
 
@@ -131,7 +124,26 @@ public class GameGui extends BattleShipGui implements Observer
 				public void mouseReleased(MouseEvent event) {}
 		});
 	}
+	
+	protected void shootOpponent(Coords screenShootCoords) 
+	{
+		Coords boardShootCoords = opponentScreenCoordsToBoardCoords(screenShootCoords);
+		try 
+		{	
+			game.shootOpponent(boardShootCoords);
+		} 
+		catch (IOException e) 
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
+		}
 
+	}
+	
+	private boolean areCoordsInOpponentMapRange(Coords screenCoords) 
+	{
+		return opponentGameArea.contains(screenCoords.GetX(), screenCoords.GetY());
+	}
+	
 	private void fillAliveShipsHorizontalImages() 
 	{
 		aliveShipsHorizontalImages = new HashMap<String, Image>();
