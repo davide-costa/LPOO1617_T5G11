@@ -28,7 +28,7 @@ public class Game
 		this.opponentMap = new DefaultMap(true);
 		this.opponent = opponent;
 		this.gui = gui;
-		//FillShipNameToResultMap();
+		FillShipNameToResultMap();
 		InitializeOpponentGameMap();
 	}
 	
@@ -36,6 +36,7 @@ public class Game
 	{
 		this.aliveShips = 5;
 		this.map = new DefaultMap(false);
+		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
 		this.opponent = opponent;
 		this.gui = gui;
