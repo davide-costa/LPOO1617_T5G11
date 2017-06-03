@@ -42,9 +42,10 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	}
 
 	@Override
-	public void shoot(Coords coords) throws IOException
+	public void shoot(Coords shootCoords) throws IOException
 	{
-		BattleShipData data = new GameShootData(coords.GetX(), coords.GetY());
+		lastShootCoords = shootCoords;
+		BattleShipData data = new GameShootData(shootCoords.GetX(), shootCoords.GetY());
 		clientSocket.sendBattleShipData(data);
 	}
 
@@ -56,8 +57,8 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		{
 			GameShootData shootData = (GameShootData) gameData;
 			Coords shootCoords = new Coords(shootData.getX(), shootData.getY());
+			System.out.println(shootCoords);
 			game.shootAlly(shootCoords);
-			lastShootCoords = shootCoords;
 			
 			GameResult result = game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
@@ -77,9 +78,9 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		else if (gameData instanceof GameResultData)
 		{
 			GameResultData resultData = (GameResultData) gameData;
-			
+			System.out.println(lastShootCoords);
 			game.handleResultData(lastShootCoords, resultData.getResult());
-			
+			System.out.println(lastShootCoords);
 			if(!resultData.isEndOfGame())
 				return;
 			
