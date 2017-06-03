@@ -44,7 +44,6 @@ public class AIShipPlacer
 		ship.setDirection(direction);
 	
 		int xInc, yInc;
-		direction = "horizontal";
 		if(direction.equals("vertical"))
 		{
 			xInc = 0;
