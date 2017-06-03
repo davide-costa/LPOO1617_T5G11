@@ -2,16 +2,23 @@ package bship.network.data;
 
 public class GameShootData extends GameData
 {
-	private Object coords;
+	private int x;
+	private int y;
 	
-	public GameShootData(Object coords)
+	public GameShootData(int x, int y)
 	{
-		this.coords = coords;
+		this.x = x;
+		this.y = y;
 	}
 	
-	public Object getCoords()
+	public int getX()
 	{
-		return coords;
+		return x;
+	}
+	
+	public int getY()
+	{
+		return y;
 	}
 	
 }
