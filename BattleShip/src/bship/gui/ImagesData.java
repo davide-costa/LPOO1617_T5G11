@@ -19,11 +19,11 @@ public class ImagesData
 	public static Image boardImage;
 	public static Image destroyedCellImage;
 	public static Image discoveredWaterCellImage;
-	public static Image cruiserSunkenImage;
-	public static Image carrierSunkenImage;
-	public static Image battleShipSunkenImage;
-	public static Image submarineSunkenImage;
-	public static Image destroyerSunkenImage;
+	public static Image cruiserDestroyedImage;
+	public static Image carrierDestroyedImage;
+	public static Image battleShipDestroyedImage;
+	public static Image submarineDestroyedImage;
+	public static Image destroyerDestroyedImage;
 	public static Image carrierVerticalImage;
 	public static Image battleShipVerticalImage;
 	public static Image cruiserVerticalImage;
@@ -64,11 +64,11 @@ public class ImagesData
 			boardImage = ImageIO.read(new File("res/images/board.png"));
 			destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
 			discoveredWaterCellImage = ImageIO.read(new File("res/images/discoveredWaterCellImage.png"));
-			cruiserSunkenImage = ImageIO.read(new File("res/images/CruiserDestroyed.png"));
-			carrierSunkenImage = ImageIO.read(new File("res/images/CarrierDestroyed.png"));
-			battleShipSunkenImage = ImageIO.read(new File("res/images/BattleShipDestroyed.png"));
-			submarineSunkenImage = ImageIO.read(new File("res/images/SubmarineDestroyed.png"));
-			destroyerSunkenImage = ImageIO.read(new File("res/images/DestroyerDestroyed.png"));
+			cruiserDestroyedImage = ImageIO.read(new File("res/images/CruiserDestroyed.png"));
+			carrierDestroyedImage = ImageIO.read(new File("res/images/CarrierDestroyed.png"));
+			battleShipDestroyedImage = ImageIO.read(new File("res/images/BattleShipDestroyed.png"));
+			submarineDestroyedImage = ImageIO.read(new File("res/images/SubmarineDestroyed.png"));
+			destroyerDestroyedImage = ImageIO.read(new File("res/images/DestroyerDestroyed.png"));
 			
 			carrierIcon = new ImageIcon(carrierImage);
 			battleShipIcon = new ImageIcon(battleShipImage);
