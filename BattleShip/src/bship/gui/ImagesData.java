@@ -29,6 +29,11 @@ public class ImagesData
 	public static Image cruiserVerticalImage;
 	public static Image destroyerVerticalImage;
 	public static Image submarineVerticalImage;
+	public static Image cruiserDestroyedVerticalImage;
+	public static Image carrierDestroyedVerticalImage;
+	public static Image battleShipDestroyedVerticalImage;
+	public static Image submarineDestroyedVerticalImage;
+	public static Image destroyerDestroyedVerticalImage;
 	
 	public static ImageIcon carrierIcon;
 	public static ImageIcon battleShipIcon;
@@ -69,6 +74,12 @@ public class ImagesData
 			battleShipDestroyedImage = ImageIO.read(new File("res/images/BattleShipDestroyed.png"));
 			submarineDestroyedImage = ImageIO.read(new File("res/images/SubmarineDestroyed.png"));
 			destroyerDestroyedImage = ImageIO.read(new File("res/images/DestroyerDestroyed.png"));
+			cruiserDestroyedVerticalImage = ImageIO.read(new File("res/images/CruiserDestroyedVertical.png"));
+			carrierDestroyedVerticalImage = ImageIO.read(new File("res/images/CarrierDestroyedVertical.png"));
+			battleShipDestroyedVerticalImage = ImageIO.read(new File("res/images/BattleShipDestroyedVertical.png"));
+			submarineDestroyedVerticalImage = ImageIO.read(new File("res/images/SubmarineDestroyedVertical.png"));
+			destroyerDestroyedVerticalImage = ImageIO.read(new File("res/images/DestroyerDestroyedVertical.png"));
+			
 			
 			carrierIcon = new ImageIcon(carrierImage);
 			battleShipIcon = new ImageIcon(battleShipImage);
