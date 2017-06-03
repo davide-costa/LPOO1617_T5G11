@@ -17,12 +17,14 @@ public class DraggableShip extends DraggableJLabel
 {
 	private String direction;
 	private ImageIcon imageIcon;
+	private ShipPlacementPanel shipPlacementPanel;
 	
 	public DraggableShip(ImageIcon image, ShipPlacementPanel shipPlacementPanel, Point initLocation) 
 	{
 		super(image);
 		this.imageIcon = image;
 		this.direction = "horizontal";
+		this.shipPlacementPanel = shipPlacementPanel;
 		
 		this.addMouseMotionListener(new MouseMotionListener()
 		{
@@ -66,10 +68,7 @@ public class DraggableShip extends DraggableJLabel
 			{
 				if(SwingUtilities.isRightMouseButton(event))
 				{
-					toggleDirection();
-					DraggableShip.this.imageIcon = shipPlacementPanel.getRotatedImage(DraggableShip.this.imageIcon);
-					Point middlePoint = DraggableShip.this.getMiddlePoint();
-					rotate(middlePoint);
+					rotate();
 				}
 				else if(SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.pickUpShip(DraggableShip.this);
@@ -78,7 +77,9 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mouseReleased(MouseEvent event)
 			{
-				if(SwingUtilities.isLeftMouseButton(event))
+				if (SwingUtilities.isRightMouseButton(event))
+					return;
+				if (SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.tryDropShip(event, initLocation);
 			}
 		});
@@ -105,14 +106,15 @@ public class DraggableShip extends DraggableJLabel
 			direction = "vertical";
 	}
 	
-	protected void rotate(Point middlePoint) 
-	{ 
+	protected void rotate() 
+	{
+		toggleDirection();
+		imageIcon = shipPlacementPanel.getRotatedImage(imageIcon);
 		int newWidth = this.getSize().height;
 		int newHeight = this.getSize().width;
 		
-		this.setSize(newWidth, newHeight);
-		((Graphics2D)this.getGraphics()).rotate(Math.PI / 2, middlePoint.getX(), middlePoint.getY());
-		((Graphics2D)this.getGraphics()).drawImage(imageIcon.getImage(), this.getX(), this.getY(), newWidth, newHeight, null);
+		setSize(newWidth, newHeight);
+		setIcon(imageIcon);
 	}
 
 }
