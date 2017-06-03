@@ -107,7 +107,7 @@ public class GameGui extends BattleShipGui implements Observer
 					if(SwingUtilities.isLeftMouseButton(event))
 					{
 						Coords screenShootCoords = new Coords(event.getPoint());
-						Coords boardShootCoords = allyBoardCoordsToScreenCoords(screenShootCoords);
+						Coords boardShootCoords = opponentScreenCoordsToBoardCoords(screenShootCoords);
 						try 
 						{	
 							game.shootOpponent(boardShootCoords);
@@ -332,6 +332,14 @@ public class GameGui extends BattleShipGui implements Observer
 	{
 		int xCoord = boardXStartPos + boardcoords.GetX() * cellSize; 
 		int yCoord = boardYStartPos + boardcoords.GetY() * cellSize; 
+	
+		return new Coords(xCoord, yCoord);
+	}
+	
+	private Coords opponentScreenCoordsToBoardCoords(Coords screenCoords)
+	{
+		int xCoord = (screenCoords.GetX() - opponentBoardXStartPos) / cellSize; 
+		int yCoord = (screenCoords.GetY() - opponentBoardYStartPos) / cellSize; 
 	
 		return new Coords(xCoord, yCoord);
 	}
