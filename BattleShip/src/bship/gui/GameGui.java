@@ -200,7 +200,7 @@ public class GameGui extends BattleShipGui implements Observer
 	{
 		if (ship.getDirection().equals("horizontal"))
 			return aliveShipsHorizontalImages.get(ship.getName());
-		else if (ship.getDirection().equals("horizontal"))
+		else if (ship.getDirection().equals("vertical"))
 			return aliveShipsVerticalImages.get(ship.getName());
 		else
 			throw new IllegalArgumentException();
@@ -249,7 +249,12 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private Image getDestroyedShipImage(Ship ship) 
 	{
-		return destroyedShipsHorizontalImages.get(ship.getName());
+		if (ship.getDirection().equals("horizontal"))
+			return destroyedShipsHorizontalImages.get(ship.getName());
+		else if (ship.getDirection().equals("vertical"))
+			return destroyedShipsVerticalImages.get(ship.getName());
+		else
+			throw new IllegalArgumentException();
 	}
 
 	private void drawCellDestroyed(Coords screenCoords, Graphics graphics) 
