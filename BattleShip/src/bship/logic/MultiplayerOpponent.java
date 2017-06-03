@@ -44,7 +44,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	@Override
 	public void shoot(Coords coords) throws IOException
 	{
-		BattleShipData data = new GameShootData(coords);
+		BattleShipData data = new GameShootData(coords.GetX(), coords.GetY());
 		clientSocket.sendBattleShipData(data);
 	}
 
@@ -54,7 +54,8 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		BattleShipData gameData = (BattleShipData)object;
 		if (gameData instanceof GameShootData)
 		{
-			Coords shootCoords = (Coords) ((GameShootData) gameData).getCoords();
+			GameShootData shootData = (GameShootData) gameData;
+			Coords shootCoords = new Coords(shootData.getX(), shootData.getY());
 			game.shootAlly(shootCoords);
 			lastShootCoords = shootCoords;
 			
