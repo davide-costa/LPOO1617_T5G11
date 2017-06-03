@@ -207,7 +207,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		shipRotatedImage.put(ImagesData.carrierIcon, ImagesData.carrierVerticalIcon);
 		shipRotatedImage.put(ImagesData.submarineIcon, ImagesData.submarineVerticalIcon);
 		shipRotatedImage.put(ImagesData.destroyerIcon, ImagesData.destroyerVerticalIcon);
-		shipRotatedImage.put(ImagesData.battleShipVerticalIcon, ImagesData.battleShipVerticalIcon);
+		shipRotatedImage.put(ImagesData.battleShipVerticalIcon, ImagesData.battleShipIcon);
 		shipRotatedImage.put(ImagesData.cruiserVerticalIcon, ImagesData.cruiserIcon);
 		shipRotatedImage.put(ImagesData.carrierVerticalIcon, ImagesData.carrierIcon);
 		shipRotatedImage.put(ImagesData.submarineVerticalIcon, ImagesData.submarineIcon);
