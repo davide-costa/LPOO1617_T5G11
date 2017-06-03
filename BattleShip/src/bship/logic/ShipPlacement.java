@@ -106,21 +106,7 @@ public abstract class ShipPlacement
 		ship.setDirection(direction);
 		ship.fillCoordsByInitCoord(initCoord);
 		
-		if(!isShipDropValid(ship))
-		{
-			ship.clearCoords();
-			return false;
-		}
-		
-		ArrayList<Coords> shipCoords = ship.getCoords();
-		for(Coords currCoords: shipCoords)
-		{
-			map.setCellState(currCoords, new AllyCellState(ship));
-		}
-		Collections.sort(ship.getCoords());
-		
-		shipIsAlreadyPlaced.put(shipName, true);
-		return true;
+		return dropShip(ship);
 	}
 	
 	public boolean dropShip(Ship ship)
