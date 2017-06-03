@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +16,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import bship.logic.CellState;
 import bship.logic.Coords;
@@ -25,7 +28,7 @@ import bship.logic.Ship;
 import bship.logic.ShipPlacement;
 import bship.logic.SingleplayerOpponent;
 
-public class GameGui extends BattleShipGui implements Observer
+public class GameGui extends BattleShipGui implements Observer, MouseListener
 {
 	private JPanel gamePanel;
 	private JLabel allyGameArea;
@@ -285,4 +288,34 @@ public class GameGui extends BattleShipGui implements Observer
 	{
 		repaint();
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent event) 
+	{
+		if(SwingUtilities.isLeftMouseButton(event))
+		{
+			Coords screenShootCoords = new Coords(event.getPoint());
+			Coords boardShootCoords = allyBoardCoordsToScreenCoords(screenShootCoords);
+			try 
+			{	
+				game.shootOpponent(boardShootCoords);
+			} 
+			catch (IOException e) 
+			{
+				BattleShipExceptionHandler.handleBattleShipException();
+			}
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent event) {}
+
+	@Override
+	public void mouseExited(MouseEvent event) {}
+
+	@Override
+	public void mousePressed(MouseEvent event) {}
+
+	@Override
+	public void mouseReleased(MouseEvent event) {}
 }
