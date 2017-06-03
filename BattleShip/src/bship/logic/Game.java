@@ -151,7 +151,7 @@ public class Game
 	{
 		if (getOpponentCellState(coords).isDiscovered())
 			return;
-		
+		System.out.println("shootOpponent");
 		opponent.shoot(coords);
 	}
 	

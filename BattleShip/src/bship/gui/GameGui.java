@@ -97,6 +97,8 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 //		gamePanel.setVisible(true);
 //		gamePanel.addKeyListener(this);
 //		gamePanel.requestFocusInWindow();
+		
+		gamePanel.addMouseListener(this);
 	}
 
 	private void fillAliveShipsHorizontalImages() 
