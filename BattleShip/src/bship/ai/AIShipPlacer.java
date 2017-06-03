@@ -14,8 +14,8 @@ public class AIShipPlacer
 	static private HashMap<Integer, String> generatedDirection = new HashMap<Integer, String>();
 	static
 	{
-		generatedDirection.put(0, "Vertical");
-		generatedDirection.put(1, "Horizontal");
+		generatedDirection.put(0, "vertical");
+		generatedDirection.put(1, "horizontal");
 	}
 	
 	public static void PlaceShipsInMap(ShipPlacement shipPlacement, ArrayList<Ship> ships, GameMap map)
