@@ -115,7 +115,46 @@ public abstract class ShipPlacement
 		shipIsAlreadyPlaced.put(shipName, true);
 		return true;
 	}
-
+	
+	public boolean dropShip(Ship ship)
+	{
+		String shipName = getShipName(ship);
+		if (shipName == null)
+			throw new IllegalArgumentException();
+		
+		if(!isShipDropValid(ship))
+		{
+			ship.clearCoords();
+			return false;
+		}
+		
+		ArrayList<Coords> shipCoords = ship.getCoords();
+		for(Coords currCoords: shipCoords)
+		{
+			map.setCellState(currCoords, new AllyCellState(ship));
+		}
+		Collections.sort(ship.getCoords());
+		
+		shipIsAlreadyPlaced.put(shipName, true);
+		return true;
+	}
+	
+	public String getShipName(Ship ship)
+	{
+		String shipName = null;
+		
+		Iterator it = shipsByName.entrySet().iterator();
+		
+		while (it.hasNext())
+		{
+			Map.Entry pair = (Map.Entry) it.next();
+			if (pair.getValue() == ship)
+				shipName = (String) pair.getKey();
+		}
+		
+		return shipName;
+	}
+	
 	public boolean verifyAllShipsArePlaced() 
 	{
 		Iterator it = shipIsAlreadyPlaced.entrySet().iterator();

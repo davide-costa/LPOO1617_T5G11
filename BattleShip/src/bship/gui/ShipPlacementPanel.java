@@ -140,7 +140,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				AIShipPlacer.PlaceShipsInMap(shipPlacement, shipPlacement.getPlacedShips(), shipPlacement.getMap());
+				AIShipPlacer.PlaceShipsInMap(shipPlacement, shipPlacement.getMap());
 			}
 		});
 		

@@ -18,15 +18,19 @@ public class AIShipPlacer
 		generatedDirection.put(1, "horizontal");
 	}
 	
-	public static void PlaceShipsInMap(ShipPlacement shipPlacement, ArrayList<Ship> ships, GameMap map)
+	public static void PlaceShipsInMap(ShipPlacement shipPlacement, GameMap map)
 	{
+		ArrayList<Ship> ships = shipPlacement.getPlacedShips();
 		for(Ship ship : ships)
 		{
 			do
 			{
+				System.out.println(ship.getName());
+				if (ship.getName() == "Cruiser")
+					System.out.println(ship.getName());
 				GenerateShipPosition(ship, map);
 			}
-			while(!shipPlacement.dropShip(ship.getInitCoords(), ship.getName(), ship.getDirection()));
+			while(!shipPlacement.dropShip(ship));
 
 		}
 	}
@@ -54,20 +58,18 @@ public class AIShipPlacer
 		Coords currCoords = new Coords(xCoord, yCoord);
 		for(int i = 0; i < ship.getSize(); i++)
 		{
-			System.out.println(i);
 			Coords coords = new Coords(currCoords);
 			ship.addCoord(coords);
 			currCoords.incrementX(xInc);
 			currCoords.incrementY(yInc);
-			System.out.println(i);
 		}
 		
 		for(int i = 0; i < ship.getCoords().size();i++)
 		{
-			System.out.println(ship.getCoords().get(i).GetX() + "  " + ship.getCoords().get(i).GetY());
+			//System.out.println(ship.getCoords().get(i).GetX() + "  " + ship.getCoords().get(i).GetY());
 		}
 		
-		System.out.println("saiu do for");
+		
 			
 	}
 }
