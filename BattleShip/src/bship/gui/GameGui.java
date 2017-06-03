@@ -154,7 +154,7 @@ public class GameGui extends BattleShipGui implements Observer
 				Coords screenCoords = allyBoardCoordsToScreenCoords(coords);
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(screenCoords, graphics);
-				else if(!cell.hasShipDestroyed())
+				else if(cell.isDiscovered() && !cell.hasShipDestroyed())
 					drawCellDestroyed(screenCoords, graphics);
 				//draw X on cells of ships that are destroyed (but not fully destroyed)
 			}
