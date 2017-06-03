@@ -28,7 +28,7 @@ import bship.logic.Ship;
 import bship.logic.ShipPlacement;
 import bship.logic.SingleplayerOpponent;
 
-public class GameGui extends BattleShipGui implements Observer, MouseListener
+public class GameGui extends BattleShipGui implements Observer
 {
 	private JPanel gamePanel;
 	private JLabel allyGameArea;
@@ -98,7 +98,51 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 //		gamePanel.addKeyListener(this);
 //		gamePanel.requestFocusInWindow();
 		
-		gamePanel.addMouseListener(this);
+		this.addMouseListener(new MouseListener()
+		{
+				
+				@Override
+				public void mouseClicked(MouseEvent event) 
+				{
+					if(SwingUtilities.isLeftMouseButton(event))
+					{
+						Coords screenShootCoords = new Coords(event.getPoint());
+						Coords boardShootCoords = allyBoardCoordsToScreenCoords(screenShootCoords);
+						try 
+						{	
+							game.shootOpponent(boardShootCoords);
+						} 
+						catch (IOException e) 
+						{
+							BattleShipExceptionHandler.handleBattleShipException();
+						}
+					}
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+		});
 	}
 
 	private void fillAliveShipsHorizontalImages() 
@@ -297,34 +341,4 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 	{
 		repaint();
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent event) 
-	{
-		if(SwingUtilities.isLeftMouseButton(event))
-		{
-			Coords screenShootCoords = new Coords(event.getPoint());
-			Coords boardShootCoords = allyBoardCoordsToScreenCoords(screenShootCoords);
-			try 
-			{	
-				game.shootOpponent(boardShootCoords);
-			} 
-			catch (IOException e) 
-			{
-				BattleShipExceptionHandler.handleBattleShipException();
-			}
-		}
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent event) {}
-
-	@Override
-	public void mouseExited(MouseEvent event) {}
-
-	@Override
-	public void mousePressed(MouseEvent event) {}
-
-	@Override
-	public void mouseReleased(MouseEvent event) {}
 }
