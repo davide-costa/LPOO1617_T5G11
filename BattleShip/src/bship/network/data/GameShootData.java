@@ -1,9 +1,5 @@
 package bship.network.data;
 
-import java.awt.Point;
-
-import bship.logic.Coords;
-
 public class GameShootData extends GameData
 {
 	private int x;
