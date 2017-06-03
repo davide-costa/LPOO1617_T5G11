@@ -28,7 +28,7 @@ public class Game
 		this.opponentMap = new DefaultMap(true);
 		this.opponent = opponent;
 		this.gui = gui;
-		FillShipNameToResultMap();
+		//FillShipNameToResultMap();
 		InitializeOpponentGameMap();
 	}
 	

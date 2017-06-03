@@ -192,14 +192,14 @@ public class GameGui extends BattleShipGui implements Observer
 				Coords coords = new Coords(j, i);
 				Coords screenCoords = opponentBoardCoordsToScreenCoords(coords);
 				CellState cell = map.getCellState(coords);
-				System.out.println(cell);
+			
 				if(cell == null)
 					return;
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(screenCoords, graphics);
 				else
 					if(cell.isDiscoveredAndShip())
-						if (cell.getShip() == null); //draw ships that have been hit but are still not totally discovered
+						if (cell.getShip() == null) //draw ships that have been hit but are still not totally discovered
 							drawCellDestroyed(screenCoords, graphics);
 			}
 	}
