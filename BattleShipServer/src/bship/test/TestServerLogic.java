@@ -381,21 +381,17 @@ public class TestServerLogic
 	{
 		//This is not actually a string but since it is an Object inside the GameShootData class, we use a String to test it because it works with any Object if it works with a String
 		//The client currently doesn't send a String inside the class GameShootData but it could send anything without having to modify the server code (maintainable code)
-		String shootCoords1;
-		String shootCoords2;
 		GameShootData shootData1;
 		GameShootData shootData2;
 		GameResultData resultData1;
 		GameResultData resultData2;
 		//Assert shoot coords arrive correctly
-		shootCoords1 = new String("3, 5");
-		shootData1 = new GameShootData(shootCoords1);
+		shootData1 = new GameShootData(3,5);
 		socket1Output.writeObject(shootData1);
 		shootData2 = (GameShootData) socket2Input.readObject();
 		assertNotNull(shootData2);
-		shootCoords2 = (String) shootData2.getCoords();
-		assertNotNull(shootCoords2);
-		assertEquals(shootCoords1, shootCoords2);
+		assertEquals(shootData2.getX(), shootData1.getX());
+		assertEquals(shootData2.getY(), shootData1.getY());
 		AssertPlayersAreInGame();
 
 		// Assert game results arrive correctly
