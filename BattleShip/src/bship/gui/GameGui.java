@@ -182,7 +182,7 @@ public class GameGui extends BattleShipGui implements Observer
 	private void paintOpponentGameArea(Graphics graphics) 
 	{
 		GameMap map = game.getOpponentMap();
-		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, allyBoardXStartPos, null);
+		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, opponentBoardYStartPos, null);
 		
 		drawOpponentFullyDestroyedShips(graphics);
 		
