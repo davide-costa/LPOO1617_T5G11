@@ -28,6 +28,11 @@ public abstract class ShipPlacement
 	{
 		return map;
 	}
+	
+	public Ship getShipName(String shipName)
+	{
+		return shipsByName.get(shipName);
+	}
 
 	private void fillShipsHashMaps() 
 	{

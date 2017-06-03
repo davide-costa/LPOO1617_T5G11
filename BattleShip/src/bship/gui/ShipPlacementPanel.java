@@ -2,6 +2,7 @@ package bship.gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,8 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,7 +52,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	private DraggableShip labelCruiser1;
 	private DraggableShip labelCruiser2;
 	private DraggableShip labelDestroyer;
-	private HashMap<DraggableShip, String> ships;
+	private HashMap<DraggableShip, String> draggableShipName;
 	private HashMap<ImageIcon, ImageIcon> shipRotatedImage;
 	public final static int boardXStartPos = 400;
 	public final static int boardYStartPos = 240;
@@ -141,6 +144,7 @@ public class ShipPlacementPanel extends BattleShipGui
 			public void actionPerformed(ActionEvent arg0)
 			{
 				AIShipPlacer.PlaceShipsInMap(shipPlacement, shipPlacement.getMap());
+				ShipPlacementPanel.this.refreshMapGraphics();
 			}
 		});
 		
@@ -166,15 +170,32 @@ public class ShipPlacementPanel extends BattleShipGui
 		battleShipPlacementPanel.requestFocusInWindow();
 	}
 	
+	private void refreshMapGraphics()
+	{
+		Iterator it = draggableShipName.entrySet().iterator();
+		
+		while (it.hasNext())
+		{
+			Map.Entry pair = (Map.Entry) it.next();
+			DraggableShip draggableShip = (DraggableShip) pair.getKey();
+			String shipName = (String) pair.getValue();
+			Ship ship = shipPlacement.getShipName(shipName);
+			int xCoord = boardXStartPos + ship.getInitCoords().GetX() * cellSize;
+			int yCoord = boardYStartPos + ship.getInitCoords().GetY() * cellSize;
+			
+			draggableShip.setLocation(xCoord, yCoord);
+		}
+	}
+
 	private void FillShips() 
 	{
-		ships = new HashMap<DraggableShip, String>();
-		ships.put(labelBattleShip, "BattleShip");
-		ships.put(labelCarrier, "Carrier");
-		ships.put(labelCruiser1, "Cruiser1");
-		ships.put(labelCruiser2, "Cruiser2");
-		ships.put(labelDestroyer, "Destroyer");
-		ships.put(labelSubmarine, "Submarine");
+		draggableShipName = new HashMap<DraggableShip, String>();
+		draggableShipName.put(labelBattleShip, "BattleShip");
+		draggableShipName.put(labelCarrier, "Carrier");
+		draggableShipName.put(labelCruiser1, "Cruiser1");
+		draggableShipName.put(labelCruiser2, "Cruiser2");
+		draggableShipName.put(labelDestroyer, "Destroyer");
+		draggableShipName.put(labelSubmarine, "Submarine");
 	}
 	
 
@@ -217,7 +238,7 @@ public class ShipPlacementPanel extends BattleShipGui
 
 	public void pickUpShip(DraggableShip ship)
 	{
-		shipPlacement.pickUpShip(ships.get(ship));
+		shipPlacement.pickUpShip(draggableShipName.get(ship));
 	}
 	
 	protected void tryDropShip(MouseEvent event, Point initLocation) 
@@ -232,7 +253,7 @@ public class ShipPlacementPanel extends BattleShipGui
 			boardDropLocation.x /= cellSize;
 			boardDropLocation.y /= cellSize;
 			
-			if(shipPlacement.dropShip(new Coords(boardDropLocation), ships.get(shipJLabel), shipJLabel.getDirection()))
+			if(shipPlacement.dropShip(new Coords(boardDropLocation), draggableShipName.get(shipJLabel), shipJLabel.getDirection()))
 			{
 				MapToBoardReferencial(screenDropLocation);
 				AdjustDropPosition(screenDropLocation);
