@@ -100,7 +100,6 @@ public class GameGui extends BattleShipGui implements Observer
 		
 		this.addMouseListener(new MouseListener()
 		{
-				
 				@Override
 				public void mouseClicked(MouseEvent event) 
 				{
@@ -120,28 +119,16 @@ public class GameGui extends BattleShipGui implements Observer
 				}
 
 				@Override
-				public void mouseEntered(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseEntered(MouseEvent event) {}
 
 				@Override
-				public void mouseExited(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseExited(MouseEvent event) {}
 
 				@Override
-				public void mousePressed(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mousePressed(MouseEvent event) {}
 
 				@Override
-				public void mouseReleased(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseReleased(MouseEvent event) {}
 		});
 	}
 
