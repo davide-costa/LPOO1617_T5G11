@@ -103,12 +103,12 @@ public class GameGui extends BattleShipGui implements Observer
 	
 	private void fillOpponentShipsImages() 
 	{
-		aliveShipsImages = new HashMap<String, Image>();
-		aliveShipsImages.put("Cruiser", ImagesData.cruiserDestroyedImage);
-		aliveShipsImages.put("Carrier", ImagesData.carrierDestroyedImage);
-		aliveShipsImages.put("BattleShip", ImagesData.battleShipDestroyedImage);
-		aliveShipsImages.put("Submarine", ImagesData.submarineDestroyedImage);
-		aliveShipsImages.put("Destroyer", ImagesData.destroyerDestroyedImage);
+		destroyedShipsImages = new HashMap<String, Image>();
+		destroyedShipsImages.put("Cruiser", ImagesData.cruiserDestroyedImage);
+		destroyedShipsImages.put("Carrier", ImagesData.carrierDestroyedImage);
+		destroyedShipsImages.put("BattleShip", ImagesData.battleShipDestroyedImage);
+		destroyedShipsImages.put("Submarine", ImagesData.submarineDestroyedImage);
+		destroyedShipsImages.put("Destroyer", ImagesData.destroyerDestroyedImage);
 	}
 
 	@Override
