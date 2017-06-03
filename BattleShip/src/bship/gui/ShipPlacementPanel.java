@@ -179,12 +179,19 @@ public class ShipPlacementPanel extends BattleShipGui
 			Map.Entry pair = (Map.Entry) it.next();
 			DraggableShip draggableShip = (DraggableShip) pair.getKey();
 			String shipName = (String) pair.getValue();
-			Ship ship = shipPlacement.getShipName(shipName);
-			int xCoord = boardXStartPos + ship.getInitCoords().GetX() * cellSize;
-			int yCoord = boardYStartPos + ship.getInitCoords().GetY() * cellSize;
-			
-			draggableShip.setLocation(xCoord, yCoord);
+			drawShip(shipName, draggableShip);
 		}
+	}
+	
+	private void drawShip(String shipName, DraggableShip draggableShip)
+	{
+		Ship ship = shipPlacement.getShipName(shipName);
+		if(draggableShip.getDirection().equals("vertical"))
+			draggableShip.rotate();
+		
+		int xCoord = boardXStartPos + ship.getInitCoords().GetX() * cellSize;
+		int yCoord = boardYStartPos + ship.getInitCoords().GetY() * cellSize;
+		draggableShip.setLocation(xCoord, yCoord);
 	}
 
 	private void FillShips() 
