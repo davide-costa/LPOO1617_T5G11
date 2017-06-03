@@ -41,6 +41,7 @@ public class GameGui extends BattleShipGui implements Observer
 	private HashMap<String, Image> aliveShipsVerticalImages;
 	private HashMap<String, Image> destroyedShipsVerticalImages;
 	public final static int cellSize = 60;
+	public final static int boardSize = 600;
 	public final static int allyBoardXStartPos = 210;
 	public final static int allyBoardYStartPos = 250;
 	public final static int opponentBoardXStartPos = 1110;
@@ -106,9 +107,9 @@ public class GameGui extends BattleShipGui implements Observer
 				{
 					if(SwingUtilities.isLeftMouseButton(event))
 					{
-						Point screenShootPoint = event.getPoint();
-						if(areCoordsInOpponentMapRange(screenShootPoint))
-							shootOpponent(new Coords(screenShootPoint));
+						Coords screenShootCoords = new Coords(event.getPoint());
+						if(areCoordsInOpponentMapRange(screenShootCoords))
+							shootOpponent(screenShootCoords);
 					}
 				}
 
@@ -140,9 +141,17 @@ public class GameGui extends BattleShipGui implements Observer
 
 	}
 	
-	private boolean areCoordsInOpponentMapRange(Point screenShootPoint) 
+	private boolean areCoordsInOpponentMapRange(Coords screenShootCoords) 
 	{
-		return opponentGameArea.contains(screenShootPoint);
+		int xCoord = screenShootCoords.GetX();
+		int yCoord = screenShootCoords.GetY();
+		
+		if(xCoord < opponentBoardXStartPos || xCoord > opponentBoardXStartPos + boardSize)
+			return false;
+		if(yCoord < opponentBoardYStartPos || yCoord > opponentBoardYStartPos + boardSize)
+			return false;
+		
+		return true;
 	}
 	
 	private void fillAliveShipsHorizontalImages() 
@@ -347,6 +356,7 @@ public class GameGui extends BattleShipGui implements Observer
 	@Override
 	public void update(Observable gameMap, Object object) 
 	{
+		System.out.println("mapa atualizado");
 		repaint();
 	}
 }
