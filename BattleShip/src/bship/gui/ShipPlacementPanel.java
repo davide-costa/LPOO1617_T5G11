@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import bship.ai.AIShipPlacer;
 import bship.logic.BattleShip;
 import bship.logic.Carrier;
 import bship.logic.Coords;
@@ -110,7 +111,7 @@ public class ShipPlacementPanel extends BattleShipGui
 		
 		btnReady = new JButton("Ready");
 		btnReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		btnReady.setBounds(963, 908, 150, 35);
+		btnReady.setBounds(1646, 785, 150, 35);
 		battleShipPlacementPanel.add(btnReady);
 		btnReady.addActionListener(new ActionListener()
 		{
@@ -134,6 +135,16 @@ public class ShipPlacementPanel extends BattleShipGui
 			}
 		});
 		
+		JButton btnPlaceShipsAutomatically = new JButton("Place Ships Automatically");
+		btnPlaceShipsAutomatically.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				AIShipPlacer.PlaceShipsInMap(shipPlacement, shipPlacement.getPlacedShips(), shipPlacement.getMap());
+			}
+		});
+		
+		
 		lblOpponentReady = new JLabel("Opponent Ready");
 		lblOpponentReady.setForeground(Color.RED);
 		lblOpponentReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
@@ -144,6 +155,10 @@ public class ShipPlacementPanel extends BattleShipGui
 		gameMapArea = new JLabel(ImagesData.boardIcon);
 		gameMapArea.setBounds(400, 240, 600, 600);
 		battleShipPlacementPanel.add(gameMapArea);
+		
+		btnPlaceShipsAutomatically.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnPlaceShipsAutomatically.setBounds(1100, 880, 265, 35);
+		battleShipPlacementPanel.add(btnPlaceShipsAutomatically);
 		
 		lastPanel.setVisible(false);
 		battleShipPlacementPanel.setVisible(true);
