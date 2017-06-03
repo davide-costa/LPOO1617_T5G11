@@ -3,6 +3,7 @@ package bship.gui;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -105,9 +106,9 @@ public class GameGui extends BattleShipGui implements Observer
 				{
 					if(SwingUtilities.isLeftMouseButton(event))
 					{
-						Coords screenShootCoords = new Coords(event.getPoint());
-						if(areCoordsInOpponentMapRange(screenShootCoords))
-							shootOpponent(screenShootCoords);
+						Point screenShootPoint = event.getPoint();
+						if(areCoordsInOpponentMapRange(screenShootPoint))
+							shootOpponent(new Coords(screenShootPoint));
 					}
 				}
 
@@ -139,9 +140,9 @@ public class GameGui extends BattleShipGui implements Observer
 
 	}
 	
-	private boolean areCoordsInOpponentMapRange(Coords screenCoords) 
+	private boolean areCoordsInOpponentMapRange(Point screenShootPoint) 
 	{
-		return opponentGameArea.contains(screenCoords.GetX(), screenCoords.GetY());
+		return opponentGameArea.contains(screenShootPoint);
 	}
 	
 	private void fillAliveShipsHorizontalImages() 
