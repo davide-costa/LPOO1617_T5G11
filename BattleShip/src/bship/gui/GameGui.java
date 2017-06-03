@@ -53,6 +53,8 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 		allyShips = shipPlacement.getPlacedShips();
 		fillAliveShipsHorizontalImages();
 		fillDestroyedShipsHorizontalImages();
+		fillAliveShipsVerticalImages();
+		filldestroyedShipsVerticalImages();
 		
 		
 		Opponent opponent = null;
@@ -119,22 +121,22 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 	
 	public void fillAliveShipsVerticalImages()
 	{
-		aliveShipsHorizontalImages = new HashMap<String, Image>();
-		aliveShipsHorizontalImages.put("Cruiser", ImagesData.cruiserVerticalImage);
-		aliveShipsHorizontalImages.put("Carrier", ImagesData.carrierVerticalImage);
-		aliveShipsHorizontalImages.put("BattleShip", ImagesData.battleShipVerticalImage);
-		aliveShipsHorizontalImages.put("Submarine", ImagesData.submarineVerticalImage);
-		aliveShipsHorizontalImages.put("Destroyer", ImagesData.destroyerVerticalImage);
+		aliveShipsVerticalImages = new HashMap<String, Image>();
+		aliveShipsVerticalImages.put("Cruiser", ImagesData.cruiserVerticalImage);
+		aliveShipsVerticalImages.put("Carrier", ImagesData.carrierVerticalImage);
+		aliveShipsVerticalImages.put("BattleShip", ImagesData.battleShipVerticalImage);
+		aliveShipsVerticalImages.put("Submarine", ImagesData.submarineVerticalImage);
+		aliveShipsVerticalImages.put("Destroyer", ImagesData.destroyerVerticalImage);
 	}
 	
 	public void filldestroyedShipsVerticalImages()
 	{
-		destroyedShipsHorizontalImages = new HashMap<String, Image>();
-		destroyedShipsHorizontalImages.put("Cruiser", ImagesData.cruiserDestroyedVerticalImage);
-		destroyedShipsHorizontalImages.put("Carrier", ImagesData.carrierDestroyedVerticalImage);
-		destroyedShipsHorizontalImages.put("BattleShip", ImagesData.battleShipDestroyedVerticalImage);
-		destroyedShipsHorizontalImages.put("Submarine", ImagesData.submarineDestroyedVerticalImage);
-		destroyedShipsHorizontalImages.put("Destroyer", ImagesData.destroyerDestroyedVerticalImage);
+		destroyedShipsVerticalImages = new HashMap<String, Image>();
+		destroyedShipsVerticalImages.put("Cruiser", ImagesData.cruiserDestroyedVerticalImage);
+		destroyedShipsVerticalImages.put("Carrier", ImagesData.carrierDestroyedVerticalImage);
+		destroyedShipsVerticalImages.put("BattleShip", ImagesData.battleShipDestroyedVerticalImage);
+		destroyedShipsVerticalImages.put("Submarine", ImagesData.submarineDestroyedVerticalImage);
+		destroyedShipsVerticalImages.put("Destroyer", ImagesData.destroyerDestroyedVerticalImage);
 	}
 
 	@Override
@@ -203,7 +205,7 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 	{
 		if (ship.getDirection().equals("horizontal"))
 			return aliveShipsHorizontalImages.get(ship.getName());
-		else if (ship.getDirection().equals("horizontal"))
+		else if (ship.getDirection().equals("vertical"))
 			return aliveShipsVerticalImages.get(ship.getName());
 		else
 			throw new IllegalArgumentException();
@@ -252,7 +254,12 @@ public class GameGui extends BattleShipGui implements Observer, MouseListener
 
 	private Image getDestroyedShipImage(Ship ship) 
 	{
-		return destroyedShipsHorizontalImages.get(ship.getName());
+		if (ship.getDirection().equals("horizontal"))
+			return destroyedShipsHorizontalImages.get(ship.getName());
+		else if (ship.getDirection().equals("vertical"))
+			return destroyedShipsVerticalImages.get(ship.getName());
+		else
+			throw new IllegalArgumentException();
 	}
 
 	private void drawCellDestroyed(Coords screenCoords, Graphics graphics) 
