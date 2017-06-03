@@ -104,8 +104,6 @@ public abstract class ShipPlacement
 		pickUpShip(shipName);
 	}
 	
-	//--------
-	
 	public boolean dropShip(Coords initCoord, String shipName, String direction)
 	{
 		Ship ship = shipsByName.get(shipName);
