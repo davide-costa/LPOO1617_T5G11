@@ -21,6 +21,8 @@ public class AIShipPlacer
 	public static void PlaceShipsInMap(ShipPlacement shipPlacement, GameMap map)
 	{
 		ArrayList<Ship> ships = shipPlacement.getPlacedShips();
+		for (Ship ship : ships)
+			shipPlacement.pickUpShip(ship);
 		for(Ship ship : ships)
 		{
 			do

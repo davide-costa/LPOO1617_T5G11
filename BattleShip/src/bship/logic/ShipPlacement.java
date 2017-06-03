@@ -98,6 +98,12 @@ public abstract class ShipPlacement
 		}
 	}
 	
+	public void pickUpShip(Ship ship)
+	{
+		String shipName = getShipName(ship);
+		pickUpShip(shipName);
+	}
+	
 	//--------
 	
 	public boolean dropShip(Coords initCoord, String shipName, String direction)
