@@ -27,11 +27,12 @@ public class TestMultiplayerOpponent
 		ClientSocketTests clientSocket = new ClientSocketTests();
 		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
 		Coords shootCoords = new Coords(3, 5);
-		GameShootData correctData = new GameShootData(shootCoords);
+		GameShootData correctData = new GameShootData(3, 5);
 		opponent.shoot(shootCoords);
 		assertTrue(clientSocket.getLastBattleShipDataSent() instanceof GameShootData);
 		GameShootData receivedData =  (GameShootData)clientSocket.getLastBattleShipDataSent();
-		assertEquals(correctData.getCoords(), receivedData.getCoords());
+		assertEquals(correctData.getX(), receivedData.getX());
+		assertEquals(correctData.getY(), receivedData.getY());
 	}
 	
 	@Test
@@ -46,7 +47,7 @@ public class TestMultiplayerOpponent
 		GameResultData sentData;
 		
 		shootCoords = new Coords(3, 5);
-		shootData = new GameShootData(shootCoords);
+		shootData = new GameShootData(3, 5);
 		result = GameResult.HIT;
 		game.setCurrResult(result);
 		game.setEndOfGame(false);
@@ -58,7 +59,7 @@ public class TestMultiplayerOpponent
 		assertEquals(false, sentData.isEndOfGame());
 		
 		shootCoords = new Coords(1, 7);
-		shootData = new GameShootData(shootCoords);
+		shootData = new GameShootData(1, 7);
 		result = GameResult.WATER;
 		game.setCurrResult(result);
 		game.setEndOfGame(true);
