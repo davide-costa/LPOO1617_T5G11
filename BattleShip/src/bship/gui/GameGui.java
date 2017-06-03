@@ -150,7 +150,7 @@ public class GameGui extends BattleShipGui implements Observer
 				Coords coords = new Coords(j, i);
 				CellState cell = map.getCellState(coords);
 				if(cell == null)
-					return;
+					continue;
 				Coords screenCoords = allyBoardCoordsToScreenCoords(coords);
 				if(cell.isDiscoveredAndWater())
 					drawDiscoveredWaterCell(screenCoords, graphics);
