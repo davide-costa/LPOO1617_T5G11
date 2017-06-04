@@ -290,6 +290,9 @@ public class Game
 		
 		coords.incrementX(xInc);
 		coords.incrementY(yInc);
+		if(!opponentMap.areCoordsInMapRange(coords))
+			return;
+		
 		while (getOpponentCellState(coords).hasShip())
 		{
 			ship.setDirection(direction);
