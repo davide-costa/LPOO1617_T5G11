@@ -91,7 +91,7 @@ public abstract class ShipPlacement
 			Ship ship = shipsByName.get(shipName);
 			for(Coords currCoords: ship.getCoords())
 			{
-				map.setCellState(currCoords, null);
+				map.setCellState(currCoords, new AllyCellState(null));
 			}
 			ship.clearCoords();
 			shipIsAlreadyPlaced.put(shipName, false);
