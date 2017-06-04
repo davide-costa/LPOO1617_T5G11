@@ -82,7 +82,7 @@ public class BattleShipServerLogin extends BattleShipGui
 				{
 					username = usernameField.getText();
 					password = passwordField.getPassword().toString();
-					if(username.isEmpty() || password.isEmpty())
+					if(username.isEmpty() || passwordField.getPassword().length == 0)
 						return;
 					login.requestLogin(BattleShipServerLogin.this, username, password);
 				} 
