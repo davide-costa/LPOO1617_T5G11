@@ -202,8 +202,13 @@ public class Game
 	
 	public void setCellStatesAsDiscovered(ArrayList<CellState> statesArray, int offset)
 	{
+		
 		for (int i = offset; i < statesArray.size(); i++)
-			statesArray.get(i).setDiscovered(true);
+			{
+				System.out.println(statesArray);
+				System.out.println(statesArray.get(i));
+				statesArray.get(i).setDiscovered(true);
+			}
 	}
 	
 	public void handleResultData(Coords lastShootCoords, GameResult result)
@@ -292,7 +297,8 @@ public class Game
 		coords.incrementY(yInc);
 		if(!opponentMap.areCoordsInMapRange(coords))
 			return;
-		
+		System.out.println(coords.GetX());
+		System.out.println(coords.GetY());
 		while (getOpponentCellState(coords).hasShip())
 		{
 			ship.setDirection(direction);
