@@ -208,6 +208,7 @@ public class GameGui extends BattleShipGui implements Observer
 		graphics.drawImage(ImagesData.boardImage, allyBoardXStartPos, allyBoardYStartPos, null);
 		
 		drawAliveAllyShips(graphics);
+		drawAllyFullyDestroyedShips(graphics);
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
@@ -223,6 +224,20 @@ public class GameGui extends BattleShipGui implements Observer
 					drawCellDestroyed(screenCoords, graphics);
 				//draw X on cells of ships that are destroyed (but not fully destroyed)
 			}
+	}
+
+	private void drawAllyFullyDestroyedShips(Graphics graphics) 
+	{
+		for(Ship ship: allyShips)
+		{
+			if(ship.isDestroyed())
+			{
+				Coords screenCoords = allyBoardCoordsToScreenCoords(ship.getInitCoords());
+
+				Image shipImage = getDestroyedShipImage(ship);
+				graphics.drawImage(shipImage, screenCoords.GetX(), screenCoords.GetY(),	shipImage.getWidth(null), shipImage.getHeight(null), null);
+			}
+		}
 	}
 
 	private void drawAliveAllyShips(Graphics graphics) 
@@ -275,9 +290,9 @@ public class GameGui extends BattleShipGui implements Observer
 
 	private void drawOpponentFullyDestroyedShips(Graphics graphics) 
 	{
-		ArrayList<Ship> fullyDestroyedShips = game.getOpponentShips();
+		ArrayList<Ship> opponentShips = game.getOpponentShips();
 		
-		for(Ship ship: fullyDestroyedShips)
+		for(Ship ship: opponentShips)
 		{
 			if(ship.isDestroyed())
 			{
