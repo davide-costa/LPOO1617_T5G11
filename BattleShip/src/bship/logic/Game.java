@@ -297,14 +297,15 @@ public class Game
 		coords.incrementY(yInc);
 		if(!opponentMap.areCoordsInMapRange(coords))
 			return;
-		System.out.println(coords.GetX());
-		System.out.println(coords.GetY());
+		
 		while (getOpponentCellState(coords).hasShip())
 		{
 			ship.setDirection(direction);
 			ship.addCoord(new Coords(coords));
 			coords.incrementX(xInc);
 			coords.incrementY(yInc);
+			if(!opponentMap.areCoordsInMapRange(coords))
+				return;
 		}
 	}
 }
