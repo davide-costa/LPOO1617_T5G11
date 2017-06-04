@@ -168,11 +168,14 @@ public class Game
 		state.setDiscovered(true);
 		
 		Ship ship = state.getShip();
+		if (ship == null)
+			return;
 		ship.shoot();
 		
 		if(!ship.isDestroyed())
 			return;
 		
+		//TODO meter numa func
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		coordsArray.addAll(ship.getCoords());
 		coordsArray.addAll(getSurroundingCoordsOfShip(ship));
