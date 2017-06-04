@@ -68,6 +68,8 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		else
 			throw new IllegalArgumentException();
 		
+		if (state != null)
+			state.refreshObserver(this);
 		setChanged();
 		notifyObservers();
 	}
