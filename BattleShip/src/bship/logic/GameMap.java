@@ -17,7 +17,10 @@ public abstract class GameMap extends Observable implements Serializable
 		if (isOpponent)
 			map = new OpponentCellState[sizeX][sizeY];
 		else
+		{
 			map = new AllyCellState[sizeX][sizeY];
+			fill(new AllyCellState(null));
+		}
 	}
 	
 	public void fill(CellState cell)

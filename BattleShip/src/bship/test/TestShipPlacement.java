@@ -112,8 +112,8 @@ public class TestShipPlacement
 		Ship shipToBePlaced = new Destroyer();
 		assertFalse(shipPlacement.dropShip(new Coords(3,0), "Destroyer", "horizontal"));
 		assertTrue(shipToBePlaced.getCoords().isEmpty());
-		assertNull(map.getCellState(new Coords(3,0)));
-		assertNull(map.getCellState(new Coords(4,0)));
+		assertNull(map.getCellState(new Coords(3,0)).getShip());
+		assertNull(map.getCellState(new Coords(4,0)).getShip());
 		assertFalse(shipPlacement.isShipsAlreadyPlaced(shipToPlaceName));
 		
 		//drop in an allowed place
