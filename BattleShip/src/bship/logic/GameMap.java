@@ -3,8 +3,9 @@ package bship.logic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-public abstract class GameMap extends Observable implements Serializable
+public abstract class GameMap extends Observable implements Serializable, Observer
 {
 	protected int sizeX;
 	protected int sizeY;
@@ -29,7 +30,9 @@ public abstract class GameMap extends Observable implements Serializable
 		{
 			for (int x = 0; x < sizeY; x++)
 			{
-				setCellState(new Coords(x, y), cell.getCopy());
+				CellState newCell = cell.getCopy();
+				newCell.refreshObserver(this);
+				setCellState(new Coords(x, y), newCell);
 			}
 		}
 	}
@@ -120,5 +123,12 @@ public abstract class GameMap extends Observable implements Serializable
 				return false;
 		
 		return true;
+	}
+	
+	@Override
+	public void update(Observable cell, Object unsued)
+	{
+		setChanged();
+		notifyObservers();
 	}
 }

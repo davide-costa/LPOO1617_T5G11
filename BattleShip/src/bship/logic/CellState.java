@@ -1,14 +1,19 @@
 package bship.logic;
 
-public abstract class CellState
+import java.util.Observable;
+import java.util.Observer;
+
+public abstract class CellState extends Observable
 {
 	protected boolean discovered;
 	protected Ship ship;
+	private Observer currObserver;
 	
 	public CellState(Ship ship)
 	{
 		this.setShip(ship);
 		this.discovered = false;
+		currObserver = null;
 	}
 	
 	public abstract CellState getCopy();
@@ -21,6 +26,7 @@ public abstract class CellState
 	public void setDiscovered(boolean discovered)
 	{
 		this.discovered = discovered;
+		notifyObserver();
 	}
 
 	public Ship getShip()
@@ -31,6 +37,7 @@ public abstract class CellState
 	public void setShip(Ship ship)
 	{
 		this.ship = ship;
+		notifyObserver();
 	}
 	
 	public abstract boolean hasShip();
@@ -43,6 +50,23 @@ public abstract class CellState
 	}
 	
 	public abstract boolean hasShipDestroyed();
+	
+	public void refreshObserver(Observer newObserver)
+	{
+		if (currObserver != null)
+			deleteObserver(currObserver);
+		currObserver = newObserver;
+		addObserver(newObserver);
+	}
+	
+	private void notifyObserver()
+	{
+		if (currObserver != null)
+		{
+			setChanged();
+			notifyObservers();
+		}
+	}
 	
 	@Override
 	public boolean equals(Object obj) 
