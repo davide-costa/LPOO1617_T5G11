@@ -71,8 +71,8 @@ public class GameGui extends BattleShipGui implements Observer
 		}
 		game = new Game(shipPlacement.getMap(), opponent, this);
 		opponent.setGame(game);
-		
-
+		game.getAllyMap().addObserver(this);
+		game.getOpponentMap().addObserver(this);
 		
 		
 		lastPanel.setVisible(false);
