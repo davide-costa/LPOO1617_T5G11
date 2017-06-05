@@ -23,8 +23,7 @@ public class AIOpponent
 	private enum Direction {UP, DOWN, RIGHT, LEFT};
 	private ArrayList<Direction> mainDirections;
 	private ArrayList<Direction> secondaryDirections;
-	private 
-	private static int lastRandomHitCoords;
+	//private static int lastRandomHitCoords;
 //	private static boolean upChecked;
 //	private static boolean downChecked;
 //	private static boolean rightChecked;
@@ -77,7 +76,7 @@ public class AIOpponent
 		
 	}
 	
-	public void PlaceShips(SinglePlayerShipPlacement shipPlacement, ArrayList<Ship> ships)
+	public void PlaceShips(ShipPlacement shipPlacement, ArrayList<Ship> ships)
 	{
 		for(Ship ship: ships)
 		{
@@ -85,7 +84,7 @@ public class AIOpponent
 			{
 				GenerateShipPosition(ship);
 			}
-			while(!shipPlacement.DropShip(ship));
+			while(!shipPlacement.dropShip(ship));
 
 		}
 	}
@@ -158,7 +157,7 @@ public class AIOpponent
 	
 	public Coords generateAIShootCoords()
 	{
-		
+		/*
 		switch(mainState)
 		{
 			case Horizontal:
@@ -178,7 +177,7 @@ public class AIOpponent
 					case Down:
 						break;
 				}
-		}
+		}*/
 		Coords shootCoords = new Coords(0,0);
 
 		int maxXCoord = map.getMapXSize() - 1;

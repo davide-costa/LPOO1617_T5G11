@@ -14,31 +14,42 @@ import com.restfb.types.User;
 public class FacebookLogin 
 {
 	private static final Version version = Version.VERSION_2_9;
-	String domain = "http://google.com";
-	String appId = "1286325254748169";
-	String accessToken;
-	String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domain + "&scope=user_about_me,"
+	private String domain = "http://google.com";
+	private String appId = "1286325254748169";
+	private String accessToken;
+	private String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domain + "&scope=user_about_me,"
 		+ "publish_actions";
-
+	private WebDriver chromeURL;
+	private FacebookClient fbClient;
 	
 	public FacebookLogin()
 	{
+		openChromeURL();
+		getFacebookClient();
+	}
+
+	private void openChromeURL() 
+	{
 		System.setProperty("webdirver.chrome.driver", "chromedriver.exe");
+		chromeURL = new ChromeDriver();
+		chromeURL.get(authUrl);
 
-		WebDriver driver = new ChromeDriver();
-		driver.get(authUrl);
-
+	}
+	
+	private void getFacebookClient() 
+	{
 		while (true)
 		{
-			if (!driver.getCurrentUrl().contains("facebook.com"))
+			if (!chromeURL.getCurrentUrl().contains("facebook.com"))
 			{
-				String url = driver.getCurrentUrl();
+				String url = chromeURL.getCurrentUrl();
 				accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
 
-				driver.quit();
+				chromeURL.quit();
 
-				FacebookClient fbClient = new DefaultFacebookClient(accessToken, version);
-				
+				fbClient = new DefaultFacebookClient(accessToken, version);
+				/*
+				//TODO: TIRAR ISTO
 				//Post
 				try
 				{
@@ -48,14 +59,28 @@ public class FacebookLogin
 				{
 					BattleShipExceptionHandler.handleBattleShipException();
 				}
+		
 				
 				//Get user info
 				User user = (User)fbClient.fetchObject("me", User.class);
 				System.out.println(user.getName());
 				System.out.println(user.getId());
-				System.out.println(user.getBirthday());
+				System.out.println(user.getBirthday());*/
 				return;
 			}
 		}
+	}
+	
+	public void post(String message)
+	{
+		try
+		{
+			fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", message));
+		}
+		catch (FacebookException e)
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
+		}
+
 	}
 }

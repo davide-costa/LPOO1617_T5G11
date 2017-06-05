@@ -34,7 +34,9 @@ public class ImagesData
 	public static Image battleShipDestroyedVerticalImage;
 	public static Image submarineDestroyedVerticalImage;
 	public static Image destroyerDestroyedVerticalImage;
-	public static Image endOfGameImage;
+	public static Image gameDefeatImage;
+	public static Image gameVictoryImage;
+	public static Image facebookShareImage;
 	
 	public static ImageIcon carrierIcon;
 	public static ImageIcon battleShipIcon;
@@ -50,6 +52,7 @@ public class ImagesData
 	public static ImageIcon submarineVerticalIcon;
 	public static ImageIcon cruiserVerticalIcon;
 	public static ImageIcon destroyerVerticalIcon;
+	public static ImageIcon facebookShareIcon;
 
 	
 	public static void loadImages()
@@ -80,8 +83,9 @@ public class ImagesData
 			battleShipDestroyedVerticalImage = ImageIO.read(new File("res/images/BattleShipDestroyedVertical.png"));
 			submarineDestroyedVerticalImage = ImageIO.read(new File("res/images/SubmarineDestroyedVertical.png"));
 			destroyerDestroyedVerticalImage = ImageIO.read(new File("res/images/DestroyerDestroyedVertical.png"));
-			endOfGameImage = ImageIO.read(new File("res/images/EndOfGame.jpg"));
-			
+			gameDefeatImage = ImageIO.read(new File("res/images/GameDefeat.jpg"));
+			gameVictoryImage = ImageIO.read(new File("res/images/GameVictory.png"));
+			facebookShareImage = ImageIO.read(new File("res/images/FacebookShareButton.png"));
 			
 			carrierIcon = new ImageIcon(carrierImage);
 			battleShipIcon = new ImageIcon(battleShipImage);
@@ -95,6 +99,7 @@ public class ImagesData
 			destroyerVerticalIcon = new ImageIcon(destroyerVerticalImage);
 			menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
 			boardIcon = new ImageIcon(boardImage);
+			facebookShareIcon = new ImageIcon(facebookShareImage);
 		} 
 		catch (IOException e) 
 		{

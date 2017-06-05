@@ -29,7 +29,7 @@ public class GuiMainAnterior
 				System.out.println("Hostname of local machine: " + localMachine.getHostName());
 				GuiMainAnterior window = new GuiMainAnterior();
 				window.frame.setVisible(true);
-				MenuPanel menu = new MenuPanel(frame);
+				//MenuPanel menu = new MenuPanel(frame);
 			}
 		});
 	}

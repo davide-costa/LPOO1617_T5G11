@@ -4,9 +4,12 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ import bship.logic.SingleplayerOpponent;
 public class GameGui extends BattleShipGui implements Observer
 {
 	private JPanel gamePanel;
+	private JLabel facebookLogin;
 	private Game game;
 	private ArrayList<Ship> allyShips;
 	private HashMap<String, Image> aliveShipsHorizontalImages;
@@ -47,7 +51,6 @@ public class GameGui extends BattleShipGui implements Observer
 	public final static int allyBoardYStartPos = 250;
 	public final static int opponentBoardXStartPos = 1110;
 	public final static int opponentBoardYStartPos = 250;
-	static int first_time = 1;
 	
 	
 	public GameGui(JFrame frame, JPanel shipPlacementPanel, ShipPlacement shipPlacement, boolean isSinglePlayer)
@@ -78,7 +81,7 @@ public class GameGui extends BattleShipGui implements Observer
 		opponent.setGame(game);
 		game.getAllyMap().addObserver(this);
 		game.getOpponentMap().addObserver(this);
-		
+			
 		
 		lastPanel.setVisible(false);
 		this.setVisible(true);
@@ -221,13 +224,54 @@ public class GameGui extends BattleShipGui implements Observer
 		try
 		{
 			Thread.sleep(5000);
+			graphics.drawImage(ImagesData.gameDefeatImage, 0, 0, null);
+			Thread.sleep(5000);
 		}
-		catch (InterruptedException e)
-		{
-			
-		}
-		graphics.drawImage(ImagesData.endOfGameImage, 0, 0, null);
+		catch (InterruptedException e){}
+	}
+	
+	public void declareGameVictory()
+	{
+		Graphics graphics = this.getGraphics();
+		graphics.drawImage(ImagesData.gameVictoryImage, 0, 0, null);
+		createFacebookShareButton();
 		
+		try
+		{
+			Thread.sleep(5000);
+		}
+		catch (InterruptedException e){}
+	}
+
+	private void createFacebookShareButton() 
+	{
+		facebookLogin = new JLabel(ImagesData.facebookShareIcon);
+		facebookLogin.setBounds(1287, 835, 503, 196);
+		this.add(facebookLogin);
+		facebookLogin.setVisible(true);
+		facebookLogin.validate();
+		facebookLogin.addMouseListener(new MouseListener() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent event) {}
+
+			@Override
+			public void mouseEntered(MouseEvent event) {}
+
+			@Override
+			public void mouseExited(MouseEvent event) {}
+
+			@Override
+			public void mousePressed(MouseEvent event) 
+			{
+				String victoryMessage = "I win battleship! :)";
+				FacebookLogin fbLogin = new FacebookLogin();
+				fbLogin.post(victoryMessage);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent event) {}
+		});
 	}
 
 	private void paintAllyGameArea(Graphics graphics) 

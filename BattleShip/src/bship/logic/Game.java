@@ -331,4 +331,9 @@ public class Game
 	{
 		gui.declareGameDefeat(winnerGameMap);
 	}
+	
+	public void declareVictory()
+	{
+		gui.declareGameVictory();
+	}
 }
