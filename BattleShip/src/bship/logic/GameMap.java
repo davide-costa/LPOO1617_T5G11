@@ -7,6 +7,10 @@ import java.util.Observer;
 
 public abstract class GameMap extends Observable implements Serializable, Observer
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5027329701106832930L;
 	protected int sizeX;
 	protected int sizeY;
 	protected CellState map[][];

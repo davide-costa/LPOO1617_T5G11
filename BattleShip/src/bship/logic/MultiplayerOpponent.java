@@ -85,7 +85,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			if(!resultData.isEndOfGame())
 				return;
 			System.out.println("isEndOfGame");
-			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMap()); 
+			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMapImage()); 
 	
 			try 
 			{

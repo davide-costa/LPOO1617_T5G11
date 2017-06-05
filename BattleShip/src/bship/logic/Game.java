@@ -321,4 +321,9 @@ public class Game
 				return;
 		}
 	}
+
+	public Object getAllyMapImage()
+	{
+		return gui.getAllyMapImage();
+	}
 }

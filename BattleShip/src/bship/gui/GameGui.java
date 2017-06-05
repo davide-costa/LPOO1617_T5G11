@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +45,7 @@ public class GameGui extends BattleShipGui implements Observer
 	public final static int allyBoardYStartPos = 250;
 	public final static int opponentBoardXStartPos = 1110;
 	public final static int opponentBoardYStartPos = 250;
+	static int first_time = 1;
 	
 	
 	public GameGui(JFrame frame, JPanel shipPlacementPanel, ShipPlacement shipPlacement, boolean isSinglePlayer)
@@ -107,6 +109,8 @@ public class GameGui extends BattleShipGui implements Observer
 				@Override
 				public void mouseReleased(MouseEvent event) {}
 		});
+		
+		
 	}
 	
 	protected void shootOpponent(Coords screenShootCoords) 
@@ -195,11 +199,20 @@ public class GameGui extends BattleShipGui implements Observer
 	@Override
 	protected void paintComponent(Graphics graphics) 
 	{
-		System.out.println("paint compponent called");
+		
+		
 		super.paintComponent(graphics);
 		
 		paintAllyGameArea(graphics);
 		paintOpponentGameArea(graphics);
+		
+		if (game.isEndOfGame())
+			finalizeGame();
+	}
+
+	private void finalizeGame()
+	{
+
 	}
 
 	private void paintAllyGameArea(Graphics graphics) 
@@ -269,6 +282,9 @@ public class GameGui extends BattleShipGui implements Observer
 		graphics.drawImage(ImagesData.boardImage, opponentBoardXStartPos, opponentBoardYStartPos, null);
 		
 		drawOpponentFullyDestroyedShips(graphics);
+		
+		if (game.isEndOfGame())
+			return;
 		
 		for(int i = 0; i < map.getMapYSize(); i++)
 			for(int j = 0; j < map.getMapXSize(); j++)
@@ -352,8 +368,16 @@ public class GameGui extends BattleShipGui implements Observer
 	
 	@Override
 	public void update(Observable gameMap, Object object) 
-	{
-		System.out.println("mapa atualizado");
+	{	    
 		repaint();
+	}
+
+	public Image getAllyMapImage()
+	{
+		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		this.paint(image.getGraphics());
+		image = image.getSubimage(allyBoardXStartPos, allyBoardYStartPos, boardSize, boardSize);
+		
+		return image;
 	}
 }
