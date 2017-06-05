@@ -143,7 +143,7 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		currObserver = newObserver;
 	}
 	
-	public void notifyObservers()
+	public void notifyObserver()
 	{
 		setChanged();
 		notifyObservers();

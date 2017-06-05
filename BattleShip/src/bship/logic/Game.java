@@ -72,7 +72,7 @@ public class Game
 	{
 		this.map = allyGameMap;
 		opponentMap.refreshObserver(gui);
-		opponentMap.notifyObservers();
+		opponentMap.notifyObserver();
 	}
 
 	public GameMap getOpponentMap()
@@ -84,7 +84,7 @@ public class Game
 	{
 		this.opponentMap = opponentGameMap;
 		opponentMap.refreshObserver(gui);
-		opponentMap.notifyObservers();
+		opponentMap.notifyObserver();
 	}
 	
 	
