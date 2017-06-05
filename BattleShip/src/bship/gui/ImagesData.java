@@ -84,8 +84,8 @@ public class ImagesData
 			submarineDestroyedVerticalImage = ImageIO.read(new File("res/images/SubmarineDestroyedVertical.png"));
 			destroyerDestroyedVerticalImage = ImageIO.read(new File("res/images/DestroyerDestroyedVertical.png"));
 			gameDefeatImage = ImageIO.read(new File("res/images/GameDefeat.jpg"));
-			gameVictoryImage = ImageIO.read(new File("res/images/GameVictory.jpg"));
-			facebookShareImage = ImageIO.read(new File("res/images/FacebookShareButton.jpg"));
+			gameVictoryImage = ImageIO.read(new File("res/images/GameVictory.png"));
+			facebookShareImage = ImageIO.read(new File("res/images/FacebookShareButton.png"));
 			
 			carrierIcon = new ImageIcon(carrierImage);
 			battleShipIcon = new ImageIcon(battleShipImage);
