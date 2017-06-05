@@ -2,8 +2,13 @@ package bship.logic;
 
 import java.util.ArrayList;
 
-public class Submarine extends Ship 
+public class Submarine extends Ship
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1197241785301391714L;
+
 	public Submarine()
 	{
 		super(3, "Submarine");
