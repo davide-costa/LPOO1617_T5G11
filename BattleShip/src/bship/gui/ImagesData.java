@@ -52,6 +52,7 @@ public class ImagesData
 	public static ImageIcon submarineVerticalIcon;
 	public static ImageIcon cruiserVerticalIcon;
 	public static ImageIcon destroyerVerticalIcon;
+	public static ImageIcon gameVictoryIcon;
 	public static ImageIcon facebookShareIcon;
 
 	
@@ -99,6 +100,7 @@ public class ImagesData
 			destroyerVerticalIcon = new ImageIcon(destroyerVerticalImage);
 			menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
 			boardIcon = new ImageIcon(boardImage);
+			gameVictoryIcon = new ImageIcon(gameVictoryImage);
 			facebookShareIcon = new ImageIcon(facebookShareImage);
 		} 
 		catch (IOException e) 
