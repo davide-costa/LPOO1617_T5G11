@@ -62,7 +62,8 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			
 			GameResult result = game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
-			
+			if(endOfGame)
+				System.out.println("endOfGame");
 			BattleShipData resultData = new GameResultData(result, endOfGame);
 			
 			try 
@@ -100,6 +101,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		}
 		else if (gameData instanceof EndOfGameData)
 		{
+			System.out.println("EndOfGameData");
 			EndOfGameData resultData = (EndOfGameData) gameData;
 			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
 			game.setOpponentMap(winnerGameMap);
