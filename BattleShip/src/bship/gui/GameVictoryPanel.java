@@ -46,6 +46,7 @@ public class GameVictoryPanel extends BattleShipGui
 			public void mouseReleased(MouseEvent event) {}
 		});
 		
+		frame.getContentPane().add(this);
 		lastPanel.setVisible(false);
 		this.setVisible(true);
 	}
