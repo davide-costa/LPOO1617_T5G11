@@ -265,8 +265,17 @@ public class Game
 		getCellStatesOfCoords(false, coordsArray, statesArray);
 		setCellStatesAsDiscovered(statesArray, 0);
 		opponentShips.add(destroyedShip);
+		setShipOfAllCells(destroyedShip);
 		
 		return cell;
+	}
+
+	private void setShipOfAllCells(Ship ship)
+	{
+		for (Coords coord : ship.getCoords())
+		{
+			getOpponentCellState(coord).setShip(ship);
+		}
 	}
 
 	private void discoverCoordsOfSankShip(Ship ship)
