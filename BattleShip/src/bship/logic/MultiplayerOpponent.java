@@ -94,7 +94,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			catch (IOException e) 
 			{
 				//TODO mudar isto para usar nova classe de testes
-				System.exit(0);
+				//System.exit(0);
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
