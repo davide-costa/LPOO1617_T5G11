@@ -423,6 +423,7 @@ public class TestServerLogic
 		socket1Output.writeObject(endData1);
 		endData2 = (EndOfGameData) socket2Input.readObject();
 		assertNotNull(endData2);
+		assertTrue(endData2 instanceof EndOfGameData);
 		winnerGameMap2 = (String) endData2.getWinnerGameMap();
 		assertNotNull(winnerGameMap2);
 		assertEquals(winnerGameMap1, winnerGameMap2);
