@@ -22,7 +22,7 @@ public class Game
 	
 	public Game(GameMap allyMap, Opponent opponent, GameGui gui)
 	{
-		this.aliveShips = 5;
+		this.aliveShips = 6;
 		this.map = allyMap;
 		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
@@ -34,7 +34,7 @@ public class Game
 	
 	public Game(Opponent opponent, GameGui gui)
 	{
-		this.aliveShips = 5;
+		this.aliveShips = 6;
 		this.map = new DefaultMap(false);
 		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
