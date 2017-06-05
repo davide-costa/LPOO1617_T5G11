@@ -143,7 +143,10 @@ public class Client extends Observable implements Runnable {
 				this.notifyObservers(data);
 			}
 		}
-		catch (IOException | ClassNotFoundException ioe) {}
+		catch (IOException | ClassNotFoundException ioe)
+		{
+			ioe.printStackTrace();
+		}
 		finally { connected = false; }
 	}
 
