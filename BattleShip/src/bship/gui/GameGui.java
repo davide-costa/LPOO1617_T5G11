@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -213,6 +214,7 @@ public class GameGui extends BattleShipGui implements Observer
 	public void declareGameDefeat(Object winnerGameMap)
 	{
 		endOfGame = true;
+		
 		Image winnerGameMapImage = (Image)winnerGameMap;
 		Graphics graphics = this.getGraphics();
 		graphics.drawImage(winnerGameMapImage, opponentBoardXStartPos, opponentBoardYStartPos, boardSize, boardSize, null);
@@ -385,12 +387,13 @@ public class GameGui extends BattleShipGui implements Observer
 		repaint();
 	}
 
-	public Image getAllyMapImage()
+	public ImageIcon getAllyMapImage()
 	{
 		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
 		this.paint(image.getGraphics());
 		image = image.getSubimage(allyBoardXStartPos, allyBoardYStartPos, boardSize, boardSize);
 		
-		return image;
+		ImageIcon imageIcon = new ImageIcon(image);
+		return imageIcon;
 	}
 }
