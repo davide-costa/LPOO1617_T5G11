@@ -71,6 +71,8 @@ public class Game
 	public void setAllyMap(GameMap allyGameMap)
 	{
 		this.map = allyGameMap;
+		opponentMap.refreshObserver(gui);
+		opponentMap.notifyObservers();
 	}
 
 	public GameMap getOpponentMap()
@@ -81,6 +83,8 @@ public class Game
 	public void setOpponentMap(GameMap opponentGameMap)
 	{
 		this.opponentMap = opponentGameMap;
+		opponentMap.refreshObserver(gui);
+		opponentMap.notifyObservers();
 	}
 	
 	

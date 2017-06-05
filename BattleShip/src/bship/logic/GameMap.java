@@ -10,6 +10,7 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 	protected int sizeX;
 	protected int sizeY;
 	protected CellState map[][];
+	Observer currObserver;
 	
 	public GameMap(boolean isOpponent, int sizeX, int sizeY)
 	{
@@ -129,6 +130,20 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 	
 	@Override
 	public void update(Observable cell, Object unsued)
+	{
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void refreshObserver(Observer newObserver)
+	{
+		if (currObserver != null)
+			deleteObserver(currObserver);
+		addObserver(newObserver);
+		currObserver = newObserver;
+	}
+	
+	public void notifyObservers()
 	{
 		setChanged();
 		notifyObservers();
