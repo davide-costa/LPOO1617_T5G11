@@ -47,7 +47,7 @@ public class Game
 	private void FillShipNameToResultMap() 
 	{
 		shipNameToGameResult.put("Carrier", GameResult.SINK_CARRIER);
-		shipNameToGameResult.put("Battleship", GameResult.SINK_BATTLESHIP);
+		shipNameToGameResult.put("BattleShip", GameResult.SINK_BATTLESHIP);
 		shipNameToGameResult.put("Cruiser", GameResult.SINK_CRUISER);
 		shipNameToGameResult.put("Submarine", GameResult.SINK_SUBMARINE);
 		shipNameToGameResult.put("Destroyer", GameResult.SINK_DESTROYER);
