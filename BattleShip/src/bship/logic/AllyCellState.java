@@ -1,7 +1,14 @@
 package bship.logic;
 
-public class AllyCellState extends CellState
+import java.io.Serializable;
+
+public class AllyCellState extends CellState implements Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7632021326436969715L;
 
 	public AllyCellState(Ship ship)
 	{
