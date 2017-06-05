@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import bship.gui.BattleShipExceptionHandler;
 import bship.network.data.BattleShipData;
 import bship.network.data.EndOfGameData;
 import bship.network.data.GameResultData;
@@ -62,18 +63,21 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			
 			GameResult result = game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
-			if(endOfGame)
-				System.out.println("endOfGame");
+			
 			BattleShipData resultData = new GameResultData(result, endOfGame);
 			
 			try 
 			{
 				this.clientSocket.sendBattleShipData(resultData);
+				if(endOfGame)
+				{
+					BattleShipData endOfGameData = new EndOfGameData(game.getAllyMap());
+					this.clientSocket.sendBattleShipData(endOfGameData);
+				}
 			} 
 			catch (IOException e) 
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				BattleShipExceptionHandler.handleBattleShipException();
 			}
 		}
 		else if (gameData instanceof GameResultData)
