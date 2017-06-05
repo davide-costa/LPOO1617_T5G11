@@ -233,9 +233,9 @@ public class GameGui extends BattleShipGui implements Observer
 	public void declareGameVictory()
 	{
 		Graphics graphics = this.getGraphics();
-		graphics.drawImage(ImagesData.gameVictoryImage, 0, 0, null);
 		createFacebookShareButton();
-		
+		graphics.drawImage(ImagesData.gameVictoryImage, 0, 0, null);
+		//graphics.drawImage(ImagesData.facebookShareImage, 1287, 835, null);
 		try
 		{
 			Thread.sleep(5000);
@@ -248,6 +248,7 @@ public class GameGui extends BattleShipGui implements Observer
 		facebookLogin = new JLabel(ImagesData.facebookShareIcon);
 		facebookLogin.setBounds(1287, 835, 503, 196);
 		this.add(facebookLogin);
+		frame.getContentPane().add(facebookLogin);
 		facebookLogin.setVisible(true);
 		facebookLogin.validate();
 		facebookLogin.addMouseListener(new MouseListener() 
@@ -272,6 +273,7 @@ public class GameGui extends BattleShipGui implements Observer
 			@Override
 			public void mouseReleased(MouseEvent event) {}
 		});
+	
 	}
 
 	private void paintAllyGameArea(Graphics graphics) 
