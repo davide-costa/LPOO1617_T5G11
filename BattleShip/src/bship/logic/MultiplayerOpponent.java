@@ -104,17 +104,6 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
 			game.setOpponentMap(winnerGameMap);
 		}
-		//TODO meter estes dois no ShipPlacementIntermediate (quando existir)
-		else if (gameData instanceof ReadyForGameData)
-		{
-			//avisar que o opponet ta ready
-			
-		}
-		else if (gameData instanceof StartGameData)
-		{
-			//iniciar o jogo...so o servidor é que manda este tipo de Data, os clients apenas a recebem, nunca enviam
-			
-		}
 		else if (gameData instanceof PlayerDisconnectedData)
 		{
 			//game.OpponentDisconnected();
