@@ -54,6 +54,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	public void update(Observable clientSocket, Object object)
 	{
 		BattleShipData gameData = (BattleShipData)object;
+		System.out.println("received data: " + gameData.getClass());
 		if (gameData instanceof GameShootData)
 		{
 			GameShootData shootData = (GameShootData) gameData;
