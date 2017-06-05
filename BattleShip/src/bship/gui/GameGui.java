@@ -213,7 +213,8 @@ public class GameGui extends BattleShipGui implements Observer
 	public void declareGameDefeat(Object winnerGameMap)
 	{
 		endOfGame = true;
-		Image winnerGameMapImage = (Image)winnerGameMap;
+		ImageIcon winnerGameMapImageIcon = (ImageIcon)winnerGameMap;
+		Image winnerGameMapImage = new Image(winnerGameMapImageIcon);
 		Graphics graphics = this.getGraphics();
 		graphics.drawImage(winnerGameMapImage, opponentBoardXStartPos, opponentBoardYStartPos, boardSize, boardSize, null);
 		try
