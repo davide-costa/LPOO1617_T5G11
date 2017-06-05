@@ -1,8 +1,9 @@
 package bship.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Ship
+public abstract class Ship implements Serializable
 {
 	protected int size;
 	protected int health;
