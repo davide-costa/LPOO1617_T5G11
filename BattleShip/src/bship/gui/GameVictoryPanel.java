@@ -16,6 +16,7 @@ public class GameVictoryPanel extends BattleShipGui
 	{
 		this.lastPanel = lastPanel;
 		this.setBounds(0, 0, 1920, 1080);
+		setLayout(null);
 		
 		JLabel backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
 		backgroundLabel.setBounds(0, 0, 1920, 1080);
