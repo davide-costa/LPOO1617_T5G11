@@ -326,4 +326,9 @@ public class Game
 	{
 		return gui.getAllyMapImage();
 	}
+
+	public void declareDefeat(Object winnerGameMap)
+	{
+		gui.declareGameDefeat(winnerGameMap);
+	}
 }

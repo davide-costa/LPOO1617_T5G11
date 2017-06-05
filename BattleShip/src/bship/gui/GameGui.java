@@ -39,6 +39,7 @@ public class GameGui extends BattleShipGui implements Observer
 	private HashMap<String, Image> destroyedShipsHorizontalImages;
 	private HashMap<String, Image> aliveShipsVerticalImages;
 	private HashMap<String, Image> destroyedShipsVerticalImages;
+	private boolean endOfGame;
 	public final static int cellSize = 60;
 	public final static int boardSize = 600;
 	public final static int allyBoardXStartPos = 210;
@@ -53,6 +54,7 @@ public class GameGui extends BattleShipGui implements Observer
 		this.frame = frame;
 		this.lastPanel = shipPlacementPanel;
 		allyShips = shipPlacement.getPlacedShips();
+		endOfGame = false;
 		fillAliveShipsHorizontalImages();
 		fillDestroyedShipsHorizontalImages();
 		fillAliveShipsVerticalImages();
@@ -199,20 +201,31 @@ public class GameGui extends BattleShipGui implements Observer
 	@Override
 	protected void paintComponent(Graphics graphics) 
 	{
-		
+		if (endOfGame)
+			return;
 		
 		super.paintComponent(graphics);
 		
 		paintAllyGameArea(graphics);
 		paintOpponentGameArea(graphics);
-		
-		if (game.isEndOfGame())
-			finalizeGame();
 	}
 
-	private void finalizeGame()
+	public void declareGameDefeat(Object winnerGameMap)
 	{
-
+		endOfGame = true;
+		Image winnerGameMapImage = (Image)winnerGameMap;
+		Graphics graphics = this.getGraphics();
+		graphics.drawImage(winnerGameMapImage, opponentBoardXStartPos, opponentBoardYStartPos, boardSize, boardSize, null);
+		try
+		{
+			Thread.sleep(5000);
+		}
+		catch (InterruptedException e)
+		{
+			
+		}
+		graphics.drawImage(ImagesData.endOfGameImage, 0, 0, null);
+		
 	}
 
 	private void paintAllyGameArea(Graphics graphics) 

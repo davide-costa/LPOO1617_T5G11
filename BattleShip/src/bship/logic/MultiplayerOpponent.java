@@ -100,8 +100,8 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		{
 			System.out.println("EndOfGameData");
 			EndOfGameData resultData = (EndOfGameData) gameData;
-			GameMap winnerGameMap = (GameMap) resultData.getWinnerGameMap();
-			game.setOpponentMap(winnerGameMap);
+			Object winnerGameMap = resultData.getWinnerGameMap();
+			game.declareDefeat(winnerGameMap);
 		}
 		else if (gameData instanceof PlayerDisconnectedData)
 		{
