@@ -249,6 +249,7 @@ public class GameGui extends BattleShipGui implements Observer
 		facebookLogin.setBounds(1287, 835, 503, 196);
 		this.add(facebookLogin);
 		facebookLogin.setVisible(true);
+		facebookLogin.validate();
 		facebookLogin.addMouseListener(new MouseListener() 
 		{
 			@Override

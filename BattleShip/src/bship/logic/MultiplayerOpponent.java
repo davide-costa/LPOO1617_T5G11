@@ -54,19 +54,16 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	public void update(Observable clientSocket, Object object)
 	{
 		BattleShipData gameData = (BattleShipData)object;
-		System.out.println("received data: " + gameData.getClass());
 		if (gameData instanceof GameShootData)
 		{
 			GameShootData shootData = (GameShootData) gameData;
 			Coords shootCoords = new Coords(shootData.getX(), shootData.getY());
-			System.out.println(shootCoords);
 			game.shootAlly(shootCoords);
 			
 			GameResult result = game.getPlayEffects(shootCoords);
 			boolean endOfGame = game.isEndOfGame();
 			
 			BattleShipData resultData = new GameResultData(result, endOfGame);
-			
 			try 
 			{
 				this.clientSocket.sendBattleShipData(resultData);
@@ -79,14 +76,12 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		else if (gameData instanceof GameResultData)
 		{
 			GameResultData resultData = (GameResultData) gameData;
-			System.out.println(lastShootCoords);
 			game.handleResultData(lastShootCoords, resultData.getResult());
-			System.out.println(lastShootCoords);
 			if(!resultData.isEndOfGame())
 				return;
-			System.out.println("isEndOfGame");
+			
+			game.declareVictory();
 			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMapImage()); 
-	
 			try 
 			{
 				this.clientSocket.sendBattleShipData(endOfGameData);
@@ -98,7 +93,6 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		}
 		else if (gameData instanceof EndOfGameData)
 		{
-			System.out.println("EndOfGameData");
 			EndOfGameData resultData = (EndOfGameData) gameData;
 			Object winnerGameMap = resultData.getWinnerGameMap();
 			game.declareDefeat(winnerGameMap);
