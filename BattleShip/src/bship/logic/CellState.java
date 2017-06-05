@@ -1,10 +1,15 @@
 package bship.logic;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class CellState extends Observable
+public abstract class CellState extends Observable implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 198033874357001837L;
 	protected boolean discovered;
 	protected Ship ship;
 	private Observer currObserver;
