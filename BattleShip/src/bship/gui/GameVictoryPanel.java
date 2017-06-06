@@ -18,10 +18,7 @@ public class GameVictoryPanel extends BattleShipGui
 		this.setBounds(0, 0, 1920, 1080);
 		setLayout(null);
 		
-		JLabel backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
-		backgroundLabel.setBounds(0, 0, 1920, 1080);
-		add(backgroundLabel);
-		
+	
 		JLabel facebookLogin = new JLabel(ImagesData.facebookShareIcon);
 		facebookLogin.setBounds(1287, 835, 503, 196);
 		add(facebookLogin);
@@ -47,6 +44,10 @@ public class GameVictoryPanel extends BattleShipGui
 			@Override
 			public void mouseReleased(MouseEvent event) {}
 		});
+		
+		JLabel backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
+		backgroundLabel.setBounds(0, 0, 1920, 1080);
+		add(backgroundLabel);
 		
 		frame.getContentPane().add(this);
 		lastPanel.setVisible(false);
