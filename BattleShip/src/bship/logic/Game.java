@@ -12,7 +12,7 @@ import bship.network.data.GameResultData.GameResult;
 public class Game
 {
 	private boolean allyTurn;
-	private GameMap map;
+	protected GameMap map;
 	protected GameMap opponentMap;
 	private Opponent opponent;
 	private int aliveShips;
@@ -28,6 +28,20 @@ public class Game
 		this.aliveShips = 1;//TODO: Tirar isto
 		this.allyTurn = CurrGameData.allyHasInitTurn;
 		this.map = allyMap;
+		opponentShips = new ArrayList<Ship>();
+		this.opponentMap = new DefaultMap(true);
+		this.opponent = opponent;
+		this.gui = gui;
+		FillShipNameToResultMap();
+		InitializeOpponentGameMap();
+	}
+	
+	public Game(Opponent opponent, GameGui gui)
+	{
+		this.aliveShips = numShips;
+		this.aliveShips = 1;//TODO: Tirar isto
+		this.allyTurn = CurrGameData.allyHasInitTurn;
+		this.map = new DefaultMap(false);
 		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
 		this.opponent = opponent;
