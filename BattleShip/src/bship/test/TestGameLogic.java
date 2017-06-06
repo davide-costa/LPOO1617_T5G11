@@ -22,7 +22,7 @@ public class TestGameLogic
 	@Test
 	public void testGetSorroundingCoordsOfShip()
 	{
-		Game game = new Game(null, null);
+		Game game = new GameTests();
 		
 		testVerticalLeftBottomShip(game);
 		testVerticalRightUpShip(game);
@@ -96,7 +96,7 @@ public class TestGameLogic
 	public void testShootAllyMapLogic()
 	{	
 		//Test shoot in water
-		Game game = new Game(null, null);
+		Game game = new GameTests();
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
@@ -143,7 +143,7 @@ public class TestGameLogic
 	public void testShootAllyShipLogic()
 	{
 		//Test shoot in water
-		Game game = new Game(null, null);
+		Game game = new GameTests();
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
@@ -180,7 +180,7 @@ public class TestGameLogic
 	@Test
 	public void testGetPlayEffects()
 	{
-		Game game = new Game(null, null);
+		Game game = new GameTests();
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setAllyMap(map);
 		
@@ -213,7 +213,7 @@ public class TestGameLogic
 	@Test
 	public void testHandleOpponentSankShip()
 	{
-		Game game = new Game(null, null);
+		Game game = new GameTests();
 		GameMapTests map = new GameMapTests(false, 10, 10);
 		game.setOpponentMap(map);
 		
