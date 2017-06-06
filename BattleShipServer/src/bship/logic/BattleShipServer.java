@@ -78,6 +78,11 @@ public class BattleShipServer
 		return inGamePlayers;
 	}
 	
+	public void addInGamePlayer(Player player) 
+	{
+		inGamePlayers.add(player);
+	}	
+	
 	public ArrayList<Player> getOnlinePlayers() 
 	{
 		ArrayList<Player> onlinePlayers = new ArrayList<Player>();
@@ -261,5 +266,5 @@ public class BattleShipServer
 		PlayerState player2State = player2.getState();
 		
 		return (player1State instanceof ReadyForGame) && (player2State instanceof ReadyForGame);
-	}	
+	}
 }
