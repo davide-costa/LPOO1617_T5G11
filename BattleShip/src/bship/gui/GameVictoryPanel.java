@@ -18,7 +18,6 @@ public class GameVictoryPanel extends BattleShipGui
 		this.setBounds(0, 0, 1920, 1080);
 		setLayout(null);
 		
-	
 		JLabel facebookLogin = new JLabel(ImagesData.facebookShareIcon);
 		facebookLogin.setBounds(1287, 835, 503, 196);
 		add(facebookLogin);
@@ -39,6 +38,7 @@ public class GameVictoryPanel extends BattleShipGui
 				String victoryMessage = "I win battleship! :)";
 				FacebookLogin fbLogin = new FacebookLogin();
 				fbLogin.post(victoryMessage);
+				GameVictoryPanel.this.requestFocusInWindow(true);
 			}
 
 			@Override
@@ -52,6 +52,7 @@ public class GameVictoryPanel extends BattleShipGui
 		frame.getContentPane().add(this);
 		lastPanel.setVisible(false);
 		this.setVisible(true);
+		this.requestFocusInWindow(true);
 	}
 	
 	@Override
@@ -65,15 +66,9 @@ public class GameVictoryPanel extends BattleShipGui
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent arg0) {}
 
 }
