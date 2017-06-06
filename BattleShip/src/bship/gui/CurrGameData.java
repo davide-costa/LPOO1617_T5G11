@@ -26,7 +26,7 @@ public class CurrGameData
 		CurrGameData.opponentName = opponentName;
 	}
 
-	public void setAllyHasInitTurn(boolean allyHasInitTurn)
+	public static void setAllyHasInitTurn(boolean allyHasInitTurn)
 	{
 		this.allyHasInitTurn = allyHasInitTurn;
 	}
