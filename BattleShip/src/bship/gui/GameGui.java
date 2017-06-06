@@ -116,7 +116,7 @@ public class GameGui extends BattleShipGui implements Observer
 				public void mouseReleased(MouseEvent event) {}
 		});
 		
-		
+		addKeyListener(this);
 	}
 	
 	protected void shootOpponent(Coords screenShootCoords) 

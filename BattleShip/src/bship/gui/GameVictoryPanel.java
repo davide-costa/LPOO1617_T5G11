@@ -52,12 +52,14 @@ public class GameVictoryPanel extends BattleShipGui
 		frame.getContentPane().add(this);
 		lastPanel.setVisible(false);
 		this.setVisible(true);
+		addKeyListener(this);
 		this.requestFocusInWindow(true);
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent event)
 	{
+		System.out.println("keyPressed");
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
 		{
 			intermediate.closeConnection();
