@@ -214,27 +214,6 @@ public class GameGui extends BattleShipGui implements Observer
 		paintOpponentGameArea(graphics);
 	}
 
-	public void declareGameDefeat(Object winnerGameMap)
-	{
-		endOfGame = true;
-		ImageIcon winnerGameMapImageIcon = (ImageIcon)winnerGameMap;
-		Image winnerGameMapImage = winnerGameMapImageIcon.getImage();
-		Graphics graphics = this.getGraphics();
-		graphics.drawImage(winnerGameMapImage, opponentBoardXStartPos, opponentBoardYStartPos, boardSize, boardSize, null);
-		try
-		{
-			Thread.sleep(5000);
-			graphics.drawImage(ImagesData.gameDefeatImage, 0, 0, null);
-			Thread.sleep(5000);
-		}
-		catch (InterruptedException e){}
-	}
-	
-	public void declareGameVictory()
-	{
-		new GameVictoryPanel(frame, this);
-	}
-
 	private void paintAllyGameArea(Graphics graphics) 
 	{
 		GameMap map = game.getAllyMap();
@@ -400,5 +379,26 @@ public class GameGui extends BattleShipGui implements Observer
 		
 		ImageIcon imageIcon = new ImageIcon(image);
 		return imageIcon;
+	}
+
+	public void declareGameDefeat(Object winnerGameMap)
+	{
+		endOfGame = true;
+		ImageIcon winnerGameMapImageIcon = (ImageIcon)winnerGameMap;
+		Image winnerGameMapImage = winnerGameMapImageIcon.getImage();
+		Graphics graphics = this.getGraphics();
+		graphics.drawImage(winnerGameMapImage, opponentBoardXStartPos, opponentBoardYStartPos, boardSize, boardSize, null);
+		try
+		{
+			Thread.sleep(5000);
+			graphics.drawImage(ImagesData.gameDefeatImage, 0, 0, null);
+			Thread.sleep(5000);
+		}
+		catch (InterruptedException e){}
+	}
+	
+	public void declareGameVictory()
+	{
+		new GameVictoryPanel(frame, this);
 	}
 }
