@@ -3,25 +3,12 @@ package bship.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Image;
 
-import java.awt.Rectangle;
 import java.awt.Font;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import javax.swing.JLabel;
 
 
@@ -30,7 +17,6 @@ public class Menu extends BattleShipGui
 	private JPanel menuPanel;
 	private JButton btnMultiplayer;
 	private JButton btnSingleplayer;
-	private	JButton btnFacebookLogin;
 	private	JButton btnExit;
 	private JLabel background;
 
@@ -73,17 +59,6 @@ public class Menu extends BattleShipGui
 		});
 		btnExit.setBounds(701, 524, 459, 70);
 		menuPanel.add(btnExit);
-		
-		btnFacebookLogin = new JButton("Facebook Login");
-		btnFacebookLogin.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				new FacebookLogin();
-			}
-		});
-		btnFacebookLogin.setBounds(192, 917, 123, 57);
-		menuPanel.add(btnFacebookLogin);
 		
 		background = new JLabel(ImagesData.menuBackgroundIcon);
 		background.setBounds(0, 0, 1920, 1080);
