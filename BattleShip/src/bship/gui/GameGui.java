@@ -36,8 +36,6 @@ import bship.logic.SingleplayerOpponent;
 
 public class GameGui extends BattleShipGui implements Observer
 {
-	private JPanel gamePanel;
-	private JLabel facebookLogin;
 	private Game game;
 	private ArrayList<Ship> allyShips;
 	private HashMap<String, Image> aliveShipsHorizontalImages;
@@ -190,7 +188,7 @@ public class GameGui extends BattleShipGui implements Observer
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-			new Menu(this.frame, this.gamePanel);
+			new Menu(this.frame, this);
 	}
 
 	@Override
@@ -389,7 +387,6 @@ public class GameGui extends BattleShipGui implements Observer
 		{
 			Thread.sleep(5000);
 			graphics.drawImage(ImagesData.gameDefeatImage, 0, 0, null);
-			Thread.sleep(5000);
 		}
 		catch (InterruptedException e){}
 	}
