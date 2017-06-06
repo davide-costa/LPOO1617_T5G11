@@ -110,7 +110,11 @@ public class Client extends Observable implements Runnable {
 	public void sendBattleShipData(BattleShipData data) throws IOException
 	{
 		if (connected)
-			socket_output.writeObject(data);	
+		{
+			DataSender sender = new DataSender(data, socket_output);
+			Thread t = new Thread(sender);
+			t.start();
+		}
 	}
 
 	public void disconnect() 
