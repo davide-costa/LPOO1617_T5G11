@@ -189,7 +189,10 @@ public class GameGui extends BattleShipGui implements Observer
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
+		{
+			setBounds(0, 0, 0, 0);
 			new Menu(this.frame, this);
+		}
 	}
 
 	@Override
@@ -383,6 +386,8 @@ public class GameGui extends BattleShipGui implements Observer
 		ImageIcon winnerGameMapImageIcon = (ImageIcon)winnerGameMap;
 		Image winnerGameMapImage = winnerGameMapImageIcon.getImage();
 		Graphics graphics = this.getGraphics();
+		if (graphics == null)
+			return;
 		graphics.drawImage(winnerGameMapImage, opponentBoardXStartPos, opponentBoardYStartPos, boardSize, boardSize, null);
 		try
 		{

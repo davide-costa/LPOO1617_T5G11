@@ -40,6 +40,10 @@ public class Menu extends BattleShipGui
 		this.lastPanel = lastPanel;
 		menuPanel = new JPanel();
 		menuPanel.setBounds(0, 0, 1920, 1080);
+		if(lastPanel != null)
+		{
+			lastPanel.setVisible(false);
+		}
 		frame.getContentPane().add(menuPanel);
 		menuPanel.setLayout(null);
 		
@@ -85,8 +89,6 @@ public class Menu extends BattleShipGui
 		background.setBounds(0, 0, 1920, 1080);
 		menuPanel.add(background);
 	
-		if(lastPanel != null)
-			lastPanel.setVisible(false);
 		menuPanel.setVisible(true);
 		menuPanel.addKeyListener(this);
 		menuPanel.requestFocusInWindow();
