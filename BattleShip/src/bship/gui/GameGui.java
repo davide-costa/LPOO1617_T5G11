@@ -99,6 +99,7 @@ public class GameGui extends BattleShipGui implements Observer
 						if(areCoordsInOpponentMapRange(screenShootCoords))
 							shootOpponent(screenShootCoords);
 					}
+					GameGui.this.requestFocusInWindow();
 				}
 
 				@Override
