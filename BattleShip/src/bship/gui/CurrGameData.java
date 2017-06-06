@@ -4,7 +4,7 @@ public class CurrGameData
 {
 	private static String allyName;
 	private static String opponentName;
-	public boolean allyHasInitTurn;
+	public static boolean allyHasInitTurn;
 
 	public static String getAllyName()
 	{
