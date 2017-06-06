@@ -59,12 +59,8 @@ public class GameVictoryPanel extends BattleShipGui
 	@Override
 	public void keyPressed(KeyEvent event)
 	{
-		System.out.println("keyPressed");
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-		{
-			intermediate.closeConnection();
 			new Menu(this.frame, this);
-		}
 	}
 
 	@Override
