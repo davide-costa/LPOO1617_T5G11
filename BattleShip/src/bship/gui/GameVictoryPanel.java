@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import bship.logic.ShipPlacement;
 
 public class GameVictoryPanel extends BattleShipGui 
-{
+{	
 	public GameVictoryPanel(JFrame frame, JPanel lastPanel)
 	{
 		this.frame = frame;
@@ -36,7 +36,7 @@ public class GameVictoryPanel extends BattleShipGui
 			@Override
 			public void mousePressed(MouseEvent event) 
 			{
-				String victoryMessage = "I win battleship! :)";
+				String victoryMessage = "I " + CurrGameData.getAllyName() + " win battleship against " + CurrGameData.getOppoentName() + "! :)";
 				FacebookLogin fbLogin = new FacebookLogin();
 				fbLogin.post(victoryMessage);
 				GameVictoryPanel.this.requestFocusInWindow(true);
