@@ -11,7 +11,6 @@ import bship.network.data.GameResultData.GameResult;
 
 public class Game
 {
-	private static Game gameInstance = null;
 	private boolean allyTurn;
 	private GameMap map;
 	protected GameMap opponentMap;
