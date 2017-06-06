@@ -162,7 +162,11 @@ public class Lobby extends BattleShipGui
 	{
 		waitingForResponse.setEnabled(false);
 		if(wasAccepted)
+		{
+			CurrGameData.setAllyName(username);
+			CurrGameData.setOpponentName(invitedPlayerUsername);
 			new ShipPlacementPanel(this.frame, this.lobbyPanel, false);
+		}
 		else
 			InviteRejectedMessage();
 	}

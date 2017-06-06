@@ -2,17 +2,17 @@ package bship.gui;
 
 public class CurrGameData
 {
-	private static String playerName;
+	private static String allyName;
 	private static String opponentName;
 	
-	public static String getPlayerName()
+	public static String getAllyName()
 	{
-		return playerName;
+		return allyName;
 	}
 	
-	public static void setPlayerName(String playerName)
+	public static void setAllyName(String playerName)
 	{
-		CurrGameData.playerName = playerName;
+		CurrGameData.allyName = playerName;
 	}
 	
 	public static String getOpponentName()
