@@ -65,6 +65,7 @@ public class Lobby extends BattleShipGui
 					public void mouseClicked(MouseEvent event) 
 					{
 						invitePlayer(inLobbyPlayersList.getSelectedValue());
+						Lobby.this.requestFocusInWindow();
 					}
 
 					@Override

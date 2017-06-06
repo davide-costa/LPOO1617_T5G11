@@ -135,6 +135,7 @@ public class ShipPlacementPanel extends BattleShipGui
 				{
 					BattleShipExceptionHandler.handleBattleShipException();
 				}
+				ShipPlacementPanel.this.requestFocusInWindow();
 			}
 		});
 		
@@ -145,6 +146,7 @@ public class ShipPlacementPanel extends BattleShipGui
 			{
 				AIShipPlacer.PlaceShipsInMap(shipPlacement, shipPlacement.getMap());
 				ShipPlacementPanel.this.refreshMapGraphics();
+				ShipPlacementPanel.this.requestFocusInWindow();
 			}
 		});
 		

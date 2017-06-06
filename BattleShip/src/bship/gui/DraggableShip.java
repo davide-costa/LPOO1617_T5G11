@@ -25,44 +25,18 @@ public class DraggableShip extends DraggableJLabel
 		this.imageIcon = image;
 		this.direction = "horizontal";
 		this.shipPlacementPanel = shipPlacementPanel;
-		
-		this.addMouseMotionListener(new MouseMotionListener()
+
+		this.addMouseListener(new MouseListener()
 		{
+			@Override
+			public void mouseClicked(MouseEvent event) {}
 
 			@Override
-			public void mouseDragged(MouseEvent event) 
-			{
-				
-			}
+			public void mouseEntered(MouseEvent event) {}
 
 			@Override
-			public void mouseMoved(MouseEvent event) 
-			{
-				
-			}
-	
+			public void mouseExited(MouseEvent event) {}
 			
-		});
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent event)
-			{
-		
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent event)
-			{
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent event)
-			{
-				
-			}
-
 			@Override
 			public void mousePressed(MouseEvent event)
 			{
@@ -72,6 +46,7 @@ public class DraggableShip extends DraggableJLabel
 				}
 				else if(SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.pickUpShip(DraggableShip.this);
+				DraggableShip.this.requestFocusInWindow();
 			}
 
 			@Override
@@ -81,6 +56,7 @@ public class DraggableShip extends DraggableJLabel
 					return;
 				if (SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.tryDropShip(event, initLocation);
+				DraggableShip.this.requestFocusInWindow();
 			}
 		});
 	}
