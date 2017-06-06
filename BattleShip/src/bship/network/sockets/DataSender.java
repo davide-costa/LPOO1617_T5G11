@@ -10,11 +10,13 @@ public class DataSender implements Runnable
 {
 	private BattleShipData dataToSend;
 	private ObjectOutputStream output;
+	private boolean closeSocketAtTheEnd;
 	
-	public DataSender(BattleShipData dataToSend, ObjectOutputStream output)
+	public DataSender(BattleShipData dataToSend, ObjectOutputStream output, boolean closeSocketAtTheEnd)
 	{
 		this.dataToSend = dataToSend;
 		this.output = output;
+		this.closeSocketAtTheEnd = closeSocketAtTheEnd;
 	}
 	
 	@Override
@@ -23,6 +25,8 @@ public class DataSender implements Runnable
 		try
 		{
 			output.writeObject(dataToSend);
+			if (closeSocketAtTheEnd)
+				Client.cleanInstance();
 		}
 		catch (IOException e)
 		{

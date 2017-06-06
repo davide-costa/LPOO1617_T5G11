@@ -109,9 +109,14 @@ public class Client extends Observable implements Runnable {
 
 	public void sendBattleShipData(BattleShipData data) throws IOException
 	{
+		sendBattleShipData(data, false);
+	}
+	
+	public void sendBattleShipData(BattleShipData data, boolean closeSocketAtTheEnd) throws IOException
+	{
 		if (connected)
 		{
-			DataSender sender = new DataSender(data, socket_output);
+			DataSender sender = new DataSender(data, socket_output, closeSocketAtTheEnd);
 			Thread t = new Thread(sender);
 			t.start();
 		}
@@ -121,7 +126,9 @@ public class Client extends Observable implements Runnable {
 	{
 		if (socket != null && connected)
 		{
-			try {
+			try
+			{
+				socket.shutdownOutput();
 				socket.close();
 			}
 			catch (IOException ioe) 

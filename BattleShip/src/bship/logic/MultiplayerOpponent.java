@@ -83,7 +83,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMapImage()); 
 			try 
 			{
-				this.clientSocket.sendBattleShipData(endOfGameData);
+				this.clientSocket.sendBattleShipData(endOfGameData, true);
 			} 
 			catch (IOException e) 
 			{
