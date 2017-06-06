@@ -36,7 +36,7 @@ public class GameVictoryPanel extends BattleShipGui
 			@Override
 			public void mousePressed(MouseEvent event) 
 			{
-				String victoryMessage = "I " + CurrGameData.getAllyName() + " win battleship against " + CurrGameData.getOppoentName() + "! :)";
+				String victoryMessage = "I " + CurrGameData.getAllyName() + " win battleship against " + CurrGameData.getOpponentName() + "! :)";
 				FacebookLogin fbLogin = new FacebookLogin();
 				fbLogin.post(victoryMessage);
 				GameVictoryPanel.this.requestFocusInWindow(true);
