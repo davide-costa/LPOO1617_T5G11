@@ -11,7 +11,7 @@ import bship.network.data.GameResultData.GameResult;
 
 public class Game
 {
-	private boolean allyTurn;
+	protected boolean allyTurn;
 	protected GameMap map;
 	protected GameMap opponentMap;
 	private Opponent opponent;
