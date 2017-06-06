@@ -80,7 +80,6 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			if(!resultData.isEndOfGame())
 				return;
 			
-			game.declareVictory();
 			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMapImage()); 
 			try 
 			{
@@ -90,6 +89,8 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			{
 				BattleShipExceptionHandler.handleBattleShipException();
 			}
+
+			game.declareVictory();
 		}
 		else if (gameData instanceof EndOfGameData)
 		{
