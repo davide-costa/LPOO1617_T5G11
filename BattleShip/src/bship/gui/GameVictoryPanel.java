@@ -14,6 +14,7 @@ public class GameVictoryPanel extends BattleShipGui
 {
 	public GameVictoryPanel(JFrame frame, JPanel lastPanel)
 	{
+		this.frame = frame;
 		this.lastPanel = lastPanel;
 		this.setBounds(0, 0, 1920, 1080);
 		setLayout(null);
