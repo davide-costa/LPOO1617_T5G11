@@ -137,6 +137,7 @@ public class Lobby extends BattleShipGui
 		{
 			new ShipPlacementPanel(this.frame, this.lobbyPanel, false);
 			response = true;
+			CurrGameData.setAllyHasInitTurn(false);
 		}
 		else
 			response = false;
@@ -163,6 +164,7 @@ public class Lobby extends BattleShipGui
 		waitingForResponse.setEnabled(false);
 		if(wasAccepted)
 		{
+			CurrGameData.setAllyHasInitTurn(true);
 			CurrGameData.setAllyName(username);
 			CurrGameData.setOpponentName(invitedPlayerUsername);
 			new ShipPlacementPanel(this.frame, this.lobbyPanel, false);

@@ -28,7 +28,7 @@ public class CurrGameData
 
 	public static void setAllyHasInitTurn(boolean allyHasInitTurn)
 	{
-		this.allyHasInitTurn = allyHasInitTurn;
+		CurrGameData.allyHasInitTurn = allyHasInitTurn;
 	}
 	
 }

@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import bship.gui.CurrGameData;
 import bship.gui.GameGui;
 import bship.network.data.GameResultData.GameResult;
 
 public class Game
 {
 	private static Game gameInstance = null;
+	private boolean allyTurn;
 	private GameMap map;
 	protected GameMap opponentMap;
 	private Opponent opponent;
@@ -19,10 +21,13 @@ public class Game
 	private GameGui gui;
 	final HashMap<String, GameResult> shipNameToGameResult = new HashMap<String, GameResult>();
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
+	final int numShips = 6;
 	
 	public Game(GameMap allyMap, Opponent opponent, GameGui gui)
 	{
-		this.aliveShips = 1;
+		this.aliveShips = numShips;
+		this.aliveShips = 1;//TODO: Tirar isto
+		this.allyTurn = CurrGameData.allyHasInitTurn;
 		this.map = allyMap;
 		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
@@ -34,7 +39,9 @@ public class Game
 	
 	public Game(Opponent opponent, GameGui gui)
 	{
-		this.aliveShips = 1;
+		this.aliveShips = numShips;
+		this.aliveShips = 1;//TODO: Tirar isto
+		this.allyTurn = CurrGameData.allyHasInitTurn;
 		this.map = new DefaultMap(false);
 		opponentShips = new ArrayList<Ship>();
 		this.opponentMap = new DefaultMap(true);
@@ -154,17 +161,24 @@ public class Game
 	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
 	public void shootOpponent(Coords coords) throws IOException
 	{
+		if(!allyTurn)
+			return;
+		allyTurn = false;
+		
 		if (getOpponentCellState(coords).isDiscovered())
 			return;
-		System.out.println("shootOpponent");
+
 		opponent.shoot(coords);
 	}
 	
 	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
 	public void shootAlly(Coords shootCoords)
 	{
-		CellState state = getAllyCellState(shootCoords);
+		if(allyTurn)
+			return;
+		allyTurn = true;
 		
+		CellState state = getAllyCellState(shootCoords);
 		if (state.isDiscovered())
 			return;
 		
