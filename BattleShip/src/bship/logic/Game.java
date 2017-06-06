@@ -163,7 +163,6 @@ public class Game
 	{
 		if(!allyTurn)
 			return;
-		allyTurn = false;
 		
 		if (getOpponentCellState(coords).isDiscovered())
 			return;
@@ -176,7 +175,6 @@ public class Game
 	{
 		if(allyTurn)
 			return;
-		allyTurn = true;
 		
 		CellState state = getAllyCellState(shootCoords);
 		if (state.isDiscovered())
@@ -208,8 +206,12 @@ public class Game
 	{
 		CellState cell = getAllyCellState(shootCoords);
 		if (!cell.hasShip())
+		{
+			allyTurn = true;
 			return GameResult.WATER;
+		}
 	
+		allyTurn = false;
 		Ship ship = cell.getShip();
 		if(ship.isDestroyed())
 			return shipNameToGameResult.get(ship.getName());
@@ -234,11 +236,21 @@ public class Game
 		CellState cell;
 		
 		if(result == GameResult.WATER)
+		{
 			cell = new OpponentCellState(null, false, true);
+			allyTurn = false;
+		}
 		else if(result == GameResult.HIT)
+		{
 			cell = new OpponentCellState(null, true, true);
+			allyTurn = true;
+		}
 		else
+		{
 			cell = handleOpponentSankShip(lastShootCoords, result);
+			allyTurn = true;
+		}
+		
 		
 		setOpponentCellState(lastShootCoords, cell);
 	}
