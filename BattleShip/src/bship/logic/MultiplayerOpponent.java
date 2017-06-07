@@ -100,8 +100,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		}
 		else if (gameData instanceof PlayerDisconnectedData)
 		{
-			//game.OpponentDisconnected();
-			//avisar que o opponet desconectou-se
+			game.opponentQuit();
 		}
 	}
 

@@ -361,4 +361,9 @@ public class Game
 	{
 		gui.declareGameVictory();
 	}
+
+	public void opponentQuit() 
+	{
+		gui.opponentQuit();
+	}
 }

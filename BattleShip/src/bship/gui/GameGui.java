@@ -21,6 +21,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -184,15 +185,20 @@ public class GameGui extends BattleShipGui implements Observer
 		destroyedShipsVerticalImages.put("Submarine", ImagesData.submarineDestroyedVerticalImage);
 		destroyedShipsVerticalImages.put("Destroyer", ImagesData.destroyerDestroyedVerticalImage);
 	}
+	
+	private void backToMenu()
+	{
+		//TODO: fechar coneection para mandar o servidor mandar player disconected data
+		// se por acaso isso for muito complicado temos semrpe a hipotese de mandar Player disconected data para o server e ele reenvia, mas nao foi a estartegio inicial
+		setBounds(0, 0, 0, 0);
+		new Menu(this.frame, this);
+	}
 
 	@Override
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-		{
-			setBounds(0, 0, 0, 0);
-			new Menu(this.frame, this);
-		}
+			backToMenu();
 	}
 
 	@Override
@@ -400,5 +406,12 @@ public class GameGui extends BattleShipGui implements Observer
 	public void declareGameVictory()
 	{
 		new GameVictoryPanel(frame, this);
+	}
+
+	public void opponentQuit() 
+	{
+		String message = "Opponent quit. Game Over!";
+		JOptionPane.showMessageDialog(null, message, "Opponent Quit", JOptionPane.INFORMATION_MESSAGE);
+		backToMenu();
 	}
 }
