@@ -168,6 +168,8 @@ public class BattleShipServer
 		if(battleshipPlayers.containsKey(username))
 		{
 			newPlayer = battleshipPlayers.get(username);
+			System.out.println("newPlayer.getPassword(): " + newPlayer.getPassword());
+			System.out.println("newPlayer.getState() instanceof Offline: " + (newPlayer.getState() instanceof Offline));
 			if(!password.equals(newPlayer.getPassword()) || !(newPlayer.getState() instanceof Offline))
 			{
 				response.setAsNotSuceeded();
