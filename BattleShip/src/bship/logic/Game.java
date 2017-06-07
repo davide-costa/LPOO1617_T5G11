@@ -93,6 +93,10 @@ public class Game
 		opponentMap.notifyObserver();
 	}
 	
+	public Opponent getOpponent() 
+	{
+		return opponent;
+	}
 	
 	public CellState getAllyCellState(Coords coords)
 	{

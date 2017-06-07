@@ -106,4 +106,9 @@ public class GameTests extends Game
 	{
 		this.winnerMapImage = allyMapImage;
 	}
+	
+	public void opponentQuit() 
+	{
+		return;
+	}
 }

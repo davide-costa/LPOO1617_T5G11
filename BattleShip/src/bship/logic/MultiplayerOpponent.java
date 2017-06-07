@@ -104,4 +104,8 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		}
 	}
 
+	public void closeConection() 
+	{
+		clientSocket.disconnect();
+	}
 }

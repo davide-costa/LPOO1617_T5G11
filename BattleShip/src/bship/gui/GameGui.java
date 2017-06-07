@@ -198,7 +198,11 @@ public class GameGui extends BattleShipGui implements Observer
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
+		{
+			if(!game.isEndOfGame())
+				((MultiplayerOpponent)(game.getOpponent())).closeConection();
 			backToMenu();
+		}
 	}
 
 	@Override
