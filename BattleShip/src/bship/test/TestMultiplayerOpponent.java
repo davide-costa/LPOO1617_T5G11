@@ -80,6 +80,7 @@ public class TestMultiplayerOpponent
 		GameResultData resultData;
 		GameResult result;
 		EndOfGameData sentData;
+		String mapImage = new String("map image");
 		
 		result = GameResult.HIT;
 		resultData = new GameResultData(result, false);
@@ -93,6 +94,7 @@ public class TestMultiplayerOpponent
 		result = GameResult.HIT;
 		resultData = new GameResultData(result, true);
 		game.setEndOfGame(true);
+		game.setAllyMapImage(mapImage);
 		clientSocket.simulateReceptionOfData(resultData);
 		
 		assertEquals(result, game.getCurrResult());
@@ -109,11 +111,11 @@ public class TestMultiplayerOpponent
 		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
 		EndOfGameData endData;
 		
-		GameMap map = new DefaultMap(true);
+		String map = new String("map image");
 		endData = new EndOfGameData(map);
 		game.setOpponentMap(null);
 		clientSocket.simulateReceptionOfData(endData);
-		assertNotNull(game.getOpponentMap());
+		assertEquals(map, game.getWinnerMapImage());
 	}
 	
 	@Test

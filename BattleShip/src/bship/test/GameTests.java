@@ -10,7 +10,10 @@ public class GameTests extends Game
 	private Coords lastReceivedCoords;
 	private GameResult currResult;
 	private boolean endOfGame;
-	
+	Object allyMapImage;
+
+	Object winnerMapImage;
+
 	public GameTests()
 	{
 		super(null, null, null);
@@ -71,5 +74,36 @@ public class GameTests extends Game
 	public GameMap getOpponentMap()
 	{
 		return opponentMap;
+	}
+	
+	public void declareDefeat(Object winnerGameMap)
+	{
+		winnerMapImage = winnerGameMap;
+		return;
+	}
+	
+	public void declareVictory()
+	{
+		return;
+	}
+	
+	public Object getAllyMapImage()
+	{
+		return allyMapImage;
+	}
+	
+	public void setAllyMapImage(Object allyMapImage)
+	{
+		this.allyMapImage = allyMapImage;
+	}
+	
+	public Object getWinnerMapImage()
+	{
+		return winnerMapImage;
+	}
+
+	public void setWinnerMapImage(Object allyMapImage)
+	{
+		this.winnerMapImage = allyMapImage;
 	}
 }

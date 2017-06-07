@@ -26,6 +26,11 @@ public class ClientSocketTests extends Client
 		lastBattleShipDataSent = data;
 	}
 	
+	public void sendBattleShipData(BattleShipData data, boolean unused)
+	{
+		sendBattleShipData(data);
+	}
+	
 	public BattleShipData getLastBattleShipDataSent()
 	{
 		return lastBattleShipDataSent;
