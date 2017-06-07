@@ -11,8 +11,6 @@ import bship.network.data.GameResultData;
 import bship.network.data.GameResultData.GameResult;
 import bship.network.data.GameShootData;
 import bship.network.data.PlayerDisconnectedData;
-import bship.network.data.ReadyForGameData;
-import bship.network.data.StartGameData;
 import bship.network.sockets.Client;
 
 public class MultiplayerOpponent extends Opponent implements Observer

@@ -3,25 +3,19 @@ package bship.gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import bship.network.data.LoginResponseData;
 import bship.network.sockets.BattleShipServerLoginIntermediate;
-import bship.network.sockets.Client;
 import bship.network.sockets.SocketIntermediate;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -136,9 +130,12 @@ public class BattleShipServerLogin extends BattleShipGui
 		JOptionPane.showMessageDialog(null, message, "New account created", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void LoginResponse(LoginResponseData response) 
+	public void loginResponse(LoginResponseData response) 
 	{
 		System.out.println("LoginResponse");
+		System.out.println("response.isSucceeded: " + response.isSucceeded());
+		System.out.println("response.newAcoountCreated(): " + response.newAcoountCreated());
+		
 		if (response.isSucceeded()) 
 		{
 			if (response.newAcoountCreated())
