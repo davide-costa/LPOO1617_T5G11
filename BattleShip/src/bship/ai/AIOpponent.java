@@ -70,72 +70,18 @@ public class AIOpponent
 		fillGeneratedDirection();
 		initializeAllCellsToWater();
 		SinglePlayerShipPlacement shipPlacement = new SinglePlayerShipPlacement(map);
-		PlaceShips(shipPlacement, ships);
+		AIShipPlacer.placeShipsInMap(shipPlacement);
 		this.game = game;
-		game.setAllyMap(map);
-		
+		game.setAllyMap(map);	
 	}
 	
-	public void PlaceShips(ShipPlacement shipPlacement, ArrayList<Ship> ships)
-	{
-		for(Ship ship: ships)
-		{
-			do
-			{
-				GenerateShipPosition(ship);
-			}
-			while(!shipPlacement.dropShip(ship));
-
-		}
-	}
-
-	private void GenerateShipPosition(Ship ship) 
-	{	
-		int xCoord = ThreadLocalRandom.current().nextInt(0, map.getMapXSize() - 1 + 1);
-		int yCoord = ThreadLocalRandom.current().nextInt(0, map.getMapYSize() - 1 + 1);
-		int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
-		String direction = generatedDirection.get(randomNum);
-	
-		int xInc, yInc;
-		if(direction.equals("Vertical"))
-		{
-			xInc = 0;
-			yInc = 1;
-		}
-		else
-		{
-			xInc = 1;
-			yInc = 0;
-		}
-		
-		Coords currCoords = new Coords(xCoord, yCoord);
-		for(int i = 0; i < ship.getSize(); i++)
-		{
-			System.out.println(i);
-			Coords coords = new Coords(currCoords);
-			ship.addCoord(coords);
-			currCoords.incrementX(xInc);
-			currCoords.incrementY(yInc);
-			System.out.println(i);
-		}
-		
-		for(int i = 0; i < ship.getCoords().size();i++)
-		{
-			System.out.println(ship.getCoords().get(i).GetX() + "  " + ship.getCoords().get(i).GetY());
-		}
-		
-		System.out.println("saiu do for");
-			
-	}
-	
-	//precisa do mapa para saber as coords que ja foram descobertas...
 	public Coords generateRandomShootCoords()
 	{
-		Coords shootCoords = new Coords(0,0);
-		
 		int maxXCoord = map.getMapXSize() - 1;
 		int maxYCoord = map.getMapYSize() - 1;
+		Coords shootCoords = new Coords(0,0);
 		Random rand = new Random();
+		
 		do
 		{
 			shootCoords.SetX(rand.nextInt(maxXCoord));
@@ -149,7 +95,8 @@ public class AIOpponent
 
 	private boolean shootCoordsValid(Coords shootCoords) 
 	{
-		if(map.getCellState(shootCoords).isDiscovered())
+		GameMap opponentMap = game.getOpponentMap();
+		if(opponentMap.getCellState(shootCoords).isDiscovered())
 			return false;
 		
 		return true;
