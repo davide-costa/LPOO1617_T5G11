@@ -1,15 +1,11 @@
 package bship.logic;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
-
-import bship.gui.ImagesData;
 
 public abstract class ShipPlacement 
 {
@@ -167,6 +163,21 @@ public abstract class ShipPlacement
 	}
 	
 	public ArrayList<Ship> getPlacedShips()
+	{
+		ArrayList<Ship> ships = new ArrayList<Ship>();
+		Iterator it = shipIsAlreadyPlaced.entrySet().iterator();
+		
+		while (it.hasNext())
+		{
+			Map.Entry pair = (Map.Entry) it.next();
+			if((Boolean)pair.getValue() == true)
+				ships.add(shipsByName.get(pair.getKey()));
+		}
+		
+		return ships;
+	}
+	
+	public ArrayList<Ship> getShipsToPlace()
 	{
 		ArrayList<Ship> ships = new ArrayList<Ship>();
 		Iterator it = shipsByName.entrySet().iterator();

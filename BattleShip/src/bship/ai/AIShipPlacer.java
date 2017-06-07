@@ -18,26 +18,28 @@ public class AIShipPlacer
 		generatedDirection.put(1, "horizontal");
 	}
 	
-	public static void PlaceShipsInMap(ShipPlacement shipPlacement, GameMap map)
+	public static void removePlacedShipsOfMap(ShipPlacement shipPlacement)
 	{
-		ArrayList<Ship> ships = shipPlacement.getPlacedShips();
-		for (Ship ship : ships)
+		ArrayList<Ship> placedShips = shipPlacement.getPlacedShips();
+		for (Ship ship : placedShips)
 			shipPlacement.pickUpShip(ship);
-		for(Ship ship : ships)
+	}
+	
+	public static void placeShipsInMap(ShipPlacement shipPlacement)
+	{
+		ArrayList<Ship> shipsToPlace = shipPlacement.getShipsToPlace();
+		
+		for(Ship ship : shipsToPlace)
 		{
 			do
 			{
-				System.out.println(ship.getName());
-				if (ship.getName() == "Cruiser")
-					System.out.println(ship.getName());
-				GenerateShipPosition(ship, map);
+				generateShipPosition(ship, shipPlacement.getMap());
 			}
 			while(!shipPlacement.dropShip(ship));
-
 		}
 	}
 	
-	private static void GenerateShipPosition(Ship ship, GameMap map) 
+	private static void generateShipPosition(Ship ship, GameMap map) 
 	{	
 		int xCoord = ThreadLocalRandom.current().nextInt(0, map.getMapXSize() - 1 + 1);
 		int yCoord = ThreadLocalRandom.current().nextInt(0, map.getMapYSize() - 1 + 1);
@@ -64,14 +66,6 @@ public class AIShipPlacer
 			ship.addCoord(coords);
 			currCoords.incrementX(xInc);
 			currCoords.incrementY(yInc);
-		}
-		
-		for(int i = 0; i < ship.getCoords().size();i++)
-		{
-			//System.out.println(ship.getCoords().get(i).GetX() + "  " + ship.getCoords().get(i).GetY());
-		}
-		
-		
-			
+		}		
 	}
 }

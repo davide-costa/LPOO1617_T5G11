@@ -2,15 +2,12 @@ package bship.gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,18 +20,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import bship.ai.AIShipPlacer;
-import bship.logic.BattleShip;
-import bship.logic.Carrier;
 import bship.logic.Coords;
-import bship.logic.Cruiser;
 import bship.logic.DefaultMap;
-import bship.logic.Destroyer;
-import bship.logic.GameMap;
 import bship.logic.MultiplayerShipPlacement;
 import bship.logic.Ship;
 import bship.logic.ShipPlacement;
 import bship.logic.SinglePlayerShipPlacement;
-import bship.logic.Submarine;
 import bship.network.sockets.ShipPlacementIntermediate;
 import java.awt.Color;
 
@@ -140,15 +131,19 @@ public class ShipPlacementPanel extends BattleShipGui
 		});
 		
 		JButton btnPlaceShipsAutomatically = new JButton("Place Ships Automatically");
+		btnPlaceShipsAutomatically.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnPlaceShipsAutomatically.setBounds(1100, 880, 265, 35);
 		btnPlaceShipsAutomatically.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				AIShipPlacer.PlaceShipsInMap(shipPlacement, shipPlacement.getMap());
+				AIShipPlacer.removePlacedShipsOfMap(shipPlacement);
+				AIShipPlacer.placeShipsInMap(shipPlacement);
 				ShipPlacementPanel.this.refreshMapGraphics();
 				ShipPlacementPanel.this.requestFocusInWindow();
 			}
 		});
+		battleShipPlacementPanel.add(btnPlaceShipsAutomatically);
 		
 		
 		lblOpponentReady = new JLabel("Opponent Ready");
@@ -161,10 +156,6 @@ public class ShipPlacementPanel extends BattleShipGui
 		gameMapArea = new JLabel(ImagesData.boardIcon);
 		gameMapArea.setBounds(400, 240, 600, 600);
 		battleShipPlacementPanel.add(gameMapArea);
-		
-		btnPlaceShipsAutomatically.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		btnPlaceShipsAutomatically.setBounds(1100, 880, 265, 35);
-		battleShipPlacementPanel.add(btnPlaceShipsAutomatically);
 		
 		lastPanel.setVisible(false);
 		battleShipPlacementPanel.setVisible(true);
@@ -295,21 +286,6 @@ public class ShipPlacementPanel extends BattleShipGui
 
 	private void AdjustDropPosition(Point position)
 	{
-//		//get the drop position relative to the cell where it was dropped
-//		Point cellPosition = new Point(position.x % cellSize, position.y % cellSize);
-//		
-//		int halfCellSize = cellSize / 2;
-//		if (cellPosition.x > halfCellSize)
-//		{
-//			int nextCellStartPos = position.x / cellSize + cellSize;
-//			position.x = nextCellStartPos;
-//		}
-//		if (cellPosition.y > halfCellSize)
-//		{
-//			int nextCellStartPos = position.y / cellSize + cellSize;
-//			position.y = nextCellStartPos;
-//		}
-		
 		position.x = Math.round((float)position.x / cellSize) * cellSize;
 		position.y = Math.round((float)position.y / cellSize) * cellSize;
 	}
