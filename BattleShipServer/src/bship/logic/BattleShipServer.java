@@ -35,7 +35,7 @@ public class BattleShipServer
 	
 	public static void main(String argv[])
 	{
-		BattleShipServer battleShipServer = new BattleShipServer();
+		new BattleShipServer();
 	}
 	
 	public BattleShipServer()
