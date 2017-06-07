@@ -6,14 +6,10 @@ public class LoginResponseData extends LoginData
 	 * 
 	 */
 	private static final long serialVersionUID = -2708819194232353251L;
-	boolean succeeded;
-	boolean newAccountCreated;
+	private boolean succeeded;
+	private boolean newAccountCreated;
 	
-	public LoginResponseData(boolean succeeded)
-	{
-		this.succeeded = succeeded;
-		this.newAccountCreated = false;
-	}
+	public LoginResponseData() {}
 	
 	public boolean isSucceeded()
 	{
@@ -23,6 +19,21 @@ public class LoginResponseData extends LoginData
 	public void setAccountAsNew()
 	{
 		newAccountCreated = true;
+	}
+	
+	public void setAccountAsNotNew()
+	{
+		newAccountCreated = false;
+	}
+	
+	public void setAsSuceeded()
+	{
+		succeeded = true;
+	}
+	
+	public void setAsNotSuceeded()
+	{
+		succeeded = false;
 	}
 	
 	public boolean newAcoountCreated() 
