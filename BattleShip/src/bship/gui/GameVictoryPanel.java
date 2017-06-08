@@ -1,5 +1,7 @@
 package bship.gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,6 +14,10 @@ import bship.logic.ShipPlacement;
 
 public class GameVictoryPanel extends BattleShipGui 
 {	
+	private JLabel facebookLogin;
+	private JLabel backgroundLabel;
+	private JLabel postInfoLabel;
+	
 	public GameVictoryPanel(JFrame frame, JPanel lastPanel)
 	{
 		this.frame = frame;
@@ -19,7 +25,7 @@ public class GameVictoryPanel extends BattleShipGui
 		this.setBounds(0, 0, 1920, 1080);
 		setLayout(null);
 		
-		JLabel facebookLogin = new JLabel(ImagesData.facebookShareIcon);
+		facebookLogin = new JLabel(ImagesData.facebookShareIcon);
 		facebookLogin.setBounds(1287, 835, 503, 196);
 		add(facebookLogin);
 		facebookLogin.addMouseListener(new MouseListener() 
@@ -36,9 +42,11 @@ public class GameVictoryPanel extends BattleShipGui
 			@Override
 			public void mousePressed(MouseEvent event) 
 			{
+				GameVictoryPanel.this.remove(facebookLogin);
 				String victoryMessage = "I " + CurrGameData.getAllyName() + " win battleship against " + CurrGameData.getOpponentName() + "! :)";
 				FacebookLogin fbLogin = new FacebookLogin();
 				fbLogin.post(victoryMessage);
+				displayPostInfoMessage(fbLogin.getUsername());
 				GameVictoryPanel.this.requestFocusInWindow(true);
 			}
 
@@ -46,7 +54,13 @@ public class GameVictoryPanel extends BattleShipGui
 			public void mouseReleased(MouseEvent event) {}
 		});
 		
-		JLabel backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
+		postInfoLabel = new JLabel("");
+		postInfoLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
+		postInfoLabel.setForeground(Color.WHITE);
+		postInfoLabel.setBounds(1287, 835, 600, 100);
+		add(postInfoLabel);
+		
+		backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
 		backgroundLabel.setBounds(0, 0, 1920, 1080);
 		add(backgroundLabel);
 		
@@ -57,6 +71,13 @@ public class GameVictoryPanel extends BattleShipGui
 		this.requestFocusInWindow(true);
 	}
 	
+	protected void displayPostInfoMessage(String facebookUsername) 
+	{
+		String message = "The victory has been posted as " + facebookUsername + "!";
+		postInfoLabel.setText(message);
+		repaint();
+	}
+
 	@Override
 	public void keyPressed(KeyEvent event)
 	{

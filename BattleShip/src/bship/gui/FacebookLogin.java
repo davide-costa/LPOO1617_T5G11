@@ -67,7 +67,7 @@ public class FacebookLogin
 		}
 	}
 	
-	public String getUserName()
+	public String getUsername()
 	{
 		return user.getName();
 	}
