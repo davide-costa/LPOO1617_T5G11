@@ -55,57 +55,65 @@ public class ImagesData
 	public static ImageIcon gameVictoryIcon;
 	public static ImageIcon facebookShareIcon;
 
-	
-	public static void loadImages()
+	static
 	{
 		try 
 		{
-			carrierImage = ImageIO.read(new File("res/images/Carrier.png"));
-			battleShipImage = ImageIO.read(new File("res/images/BattleShip.png"));
-			submarineImage = ImageIO.read(new File("res/images/Submarine.png"));
-			cruiserImage = ImageIO.read(new File("res/images/Cruiser.png"));
-			destroyerImage = ImageIO.read(new File("res/images/Destroyer.png"));
-			carrierVerticalImage = ImageIO.read(new File("res/images/CarrierVertical.png"));
-			battleShipVerticalImage = ImageIO.read(new File("res/images/BattleShipVertical.png"));
-			submarineVerticalImage = ImageIO.read(new File("res/images/SubmarineVertical.png"));
-			cruiserVerticalImage = ImageIO.read(new File("res/images/CruiserVertical.png"));
-			destroyerVerticalImage = ImageIO.read(new File("res/images/DestroyerVertical.png"));
-			menuBackgroundImage = ImageIO.read(new File("res/images/menuBackground.jpg"));
-			boardImage = ImageIO.read(new File("res/images/board.png"));
-			destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
-			discoveredWaterCellImage = ImageIO.read(new File("res/images/discoveredWaterCellImage.png"));
-			cruiserDestroyedImage = ImageIO.read(new File("res/images/CruiserDestroyed.png"));
-			carrierDestroyedImage = ImageIO.read(new File("res/images/CarrierDestroyed.png"));
-			battleShipDestroyedImage = ImageIO.read(new File("res/images/BattleShipDestroyed.png"));
-			submarineDestroyedImage = ImageIO.read(new File("res/images/SubmarineDestroyed.png"));
-			destroyerDestroyedImage = ImageIO.read(new File("res/images/DestroyerDestroyed.png"));
-			cruiserDestroyedVerticalImage = ImageIO.read(new File("res/images/CruiserDestroyedVertical.png"));
-			carrierDestroyedVerticalImage = ImageIO.read(new File("res/images/CarrierDestroyedVertical.png"));
-			battleShipDestroyedVerticalImage = ImageIO.read(new File("res/images/BattleShipDestroyedVertical.png"));
-			submarineDestroyedVerticalImage = ImageIO.read(new File("res/images/SubmarineDestroyedVertical.png"));
-			destroyerDestroyedVerticalImage = ImageIO.read(new File("res/images/DestroyerDestroyedVertical.png"));
-			gameDefeatImage = ImageIO.read(new File("res/images/GameDefeat.jpg"));
-			gameVictoryImage = ImageIO.read(new File("res/images/GameVictory.png"));
-			facebookShareImage = ImageIO.read(new File("res/images/FacebookShareButton.png"));
-			
-			carrierIcon = new ImageIcon(carrierImage);
-			battleShipIcon = new ImageIcon(battleShipImage);
-			submarineIcon = new ImageIcon(submarineImage);
-			cruiserIcon = new ImageIcon(cruiserImage);
-			destroyerIcon = new ImageIcon(destroyerImage);
-			carrierVerticalIcon = new ImageIcon(carrierVerticalImage);
-			battleShipVerticalIcon = new ImageIcon(battleShipVerticalImage);
-			submarineVerticalIcon = new ImageIcon(submarineVerticalImage);
-			cruiserVerticalIcon = new ImageIcon(cruiserVerticalImage);
-			destroyerVerticalIcon = new ImageIcon(destroyerVerticalImage);
-			menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
-			boardIcon = new ImageIcon(boardImage);
-			gameVictoryIcon = new ImageIcon(gameVictoryImage);
-			facebookShareIcon = new ImageIcon(facebookShareImage);
+			loadImages();
+			makeIcons();
 		} 
 		catch (IOException e) 
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
+	}
+
+	private static void loadImages() throws IOException
+	{
+		carrierImage = ImageIO.read(new File("res/images/Carrier.png"));
+		battleShipImage = ImageIO.read(new File("res/images/BattleShip.png"));
+		submarineImage = ImageIO.read(new File("res/images/Submarine.png"));
+		cruiserImage = ImageIO.read(new File("res/images/Cruiser.png"));
+		destroyerImage = ImageIO.read(new File("res/images/Destroyer.png"));
+		carrierVerticalImage = ImageIO.read(new File("res/images/CarrierVertical.png"));
+		battleShipVerticalImage = ImageIO.read(new File("res/images/BattleShipVertical.png"));
+		submarineVerticalImage = ImageIO.read(new File("res/images/SubmarineVertical.png"));
+		cruiserVerticalImage = ImageIO.read(new File("res/images/CruiserVertical.png"));
+		destroyerVerticalImage = ImageIO.read(new File("res/images/DestroyerVertical.png"));
+		menuBackgroundImage = ImageIO.read(new File("res/images/menuBackground.jpg"));
+		boardImage = ImageIO.read(new File("res/images/board.png"));
+		destroyedCellImage = ImageIO.read(new File("res/images/destroyedCellImage.png"));
+		discoveredWaterCellImage = ImageIO.read(new File("res/images/discoveredWaterCellImage.png"));
+		cruiserDestroyedImage = ImageIO.read(new File("res/images/CruiserDestroyed.png"));
+		carrierDestroyedImage = ImageIO.read(new File("res/images/CarrierDestroyed.png"));
+		battleShipDestroyedImage = ImageIO.read(new File("res/images/BattleShipDestroyed.png"));
+		submarineDestroyedImage = ImageIO.read(new File("res/images/SubmarineDestroyed.png"));
+		destroyerDestroyedImage = ImageIO.read(new File("res/images/DestroyerDestroyed.png"));
+		cruiserDestroyedVerticalImage = ImageIO.read(new File("res/images/CruiserDestroyedVertical.png"));
+		carrierDestroyedVerticalImage = ImageIO.read(new File("res/images/CarrierDestroyedVertical.png"));
+		battleShipDestroyedVerticalImage = ImageIO.read(new File("res/images/BattleShipDestroyedVertical.png"));
+		submarineDestroyedVerticalImage = ImageIO.read(new File("res/images/SubmarineDestroyedVertical.png"));
+		destroyerDestroyedVerticalImage = ImageIO.read(new File("res/images/DestroyerDestroyedVertical.png"));
+		gameDefeatImage = ImageIO.read(new File("res/images/GameDefeat.jpg"));
+		gameVictoryImage = ImageIO.read(new File("res/images/GameVictory.png"));
+		facebookShareImage = ImageIO.read(new File("res/images/FacebookShareButton.png"));
+	}
+
+	private static void makeIcons()
+	{
+		carrierIcon = new ImageIcon(carrierImage);
+		battleShipIcon = new ImageIcon(battleShipImage);
+		submarineIcon = new ImageIcon(submarineImage);
+		cruiserIcon = new ImageIcon(cruiserImage);
+		destroyerIcon = new ImageIcon(destroyerImage);
+		carrierVerticalIcon = new ImageIcon(carrierVerticalImage);
+		battleShipVerticalIcon = new ImageIcon(battleShipVerticalImage);
+		submarineVerticalIcon = new ImageIcon(submarineVerticalImage);
+		cruiserVerticalIcon = new ImageIcon(cruiserVerticalImage);
+		destroyerVerticalIcon = new ImageIcon(destroyerVerticalImage);
+		menuBackgroundIcon = new ImageIcon(menuBackgroundImage);
+		boardIcon = new ImageIcon(boardImage);
+		gameVictoryIcon = new ImageIcon(gameVictoryImage);
+		facebookShareIcon = new ImageIcon(facebookShareImage);
 	}
 }
