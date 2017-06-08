@@ -21,6 +21,7 @@ public class FacebookLogin
 		+ "publish_actions";
 	private WebDriver chromeURL;
 	private FacebookClient fbClient;
+	private User user;
 	
 	public FacebookLogin()
 	{
@@ -44,28 +45,11 @@ public class FacebookLogin
 			{
 				String url = chromeURL.getCurrentUrl();
 				accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
-
 				chromeURL.quit();
 
 				fbClient = new DefaultFacebookClient(accessToken, version);
-				/*
-				//TODO: TIRAR ISTO
-				//Post
-				try
-				{
-					fbClient.publish("me/feed", FacebookType.class, Parameter.with("message", "Test post4"));
-				}
-				catch (FacebookException e)
-				{
-					BattleShipExceptionHandler.handleBattleShipException();
-				}
-		
+				user = (User)fbClient.fetchObject("me", User.class);
 				
-				//Get user info
-				User user = (User)fbClient.fetchObject("me", User.class);
-				System.out.println(user.getName());
-				System.out.println(user.getId());
-				System.out.println(user.getBirthday());*/
 				return;
 			}
 		}
@@ -81,6 +65,10 @@ public class FacebookLogin
 		{
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
-
+	}
+	
+	public String getUserName()
+	{
+		return user.getName();
 	}
 }
