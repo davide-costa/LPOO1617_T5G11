@@ -253,8 +253,7 @@ public class Game
 			cell = handleOpponentSankShip(lastShootCoords, result);
 			allyTurn = true;
 		}
-		
-		
+			
 		setOpponentCellState(lastShootCoords, cell);
 	}
 
