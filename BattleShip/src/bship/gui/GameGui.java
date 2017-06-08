@@ -188,8 +188,6 @@ public class GameGui extends BattleShipGui implements Observer
 	
 	private void backToMenu()
 	{
-		//TODO: fechar coneection para mandar o servidor mandar player disconected data
-		// se por acaso isso for muito complicado temos semrpe a hipotese de mandar Player disconected data para o server e ele reenvia, mas nao foi a estartegio inicial
 		setBounds(0, 0, 0, 0);
 		new Menu(this.frame, this);
 	}

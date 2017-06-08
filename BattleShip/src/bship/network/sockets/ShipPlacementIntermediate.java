@@ -1,4 +1,4 @@
-package bship.network.sockets;
+ package bship.network.sockets;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -9,6 +9,7 @@ import bship.gui.ShipPlacementPanel;
 import bship.network.data.LobbyData;
 import bship.network.data.LobbyInfoData;
 import bship.network.data.LobbyInvitedData;
+import bship.network.data.PlayerDisconnectedData;
 import bship.network.data.ReadyForGameData;
 import bship.network.data.ShipPlacementData;
 import bship.network.data.StartGameData;
@@ -28,17 +29,17 @@ public class ShipPlacementIntermediate extends SocketIntermediate implements Obs
 	@Override
 	public void update(Observable clientSocket, Object object) 
 	{
-		if (!(object instanceof ShipPlacementData))
-			return;
-		
 		if (object instanceof ReadyForGameData)
 		{
 			gui.opponentIsReady();
 		}
 		else if (object instanceof StartGameData)
 		{
-			System.out.println("StartGameData");
 			gui.startGame();
+		}
+		else if(object instanceof PlayerDisconnectedData)
+		{
+			gui.opponentQuit();
 		}
 		
 	}

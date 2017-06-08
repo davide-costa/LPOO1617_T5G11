@@ -224,10 +224,7 @@ public class ShipPlacementPanel extends BattleShipGui
 	public void keyPressed(KeyEvent event) 
 	{
 		if(event.getKeyCode() == KeyEvent.VK_ESCAPE)
-		{
-			intermediate.closeConnection();
-			new Menu(this.frame, this.battleShipPlacementPanel);
-		}
+			backToMenu();
 	}
 
 	@Override
@@ -312,5 +309,18 @@ public class ShipPlacementPanel extends BattleShipGui
 	public void startGame()
 	{
 		new GameGui(frame, battleShipPlacementPanel, shipPlacement, isSinglePlayer);
+	}
+
+	public void opponentQuit() 
+	{
+		String message = "Opponent quit. Game Over!";
+		JOptionPane.showMessageDialog(null, message, "Opponent Quit", JOptionPane.INFORMATION_MESSAGE);
+		backToMenu();
+	}
+
+	private void backToMenu() 
+	{
+		intermediate.closeConnection();
+		new Menu(this.frame, this.battleShipPlacementPanel);
 	}
 }
