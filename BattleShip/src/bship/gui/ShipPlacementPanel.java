@@ -65,19 +65,43 @@ public class ShipPlacementPanel extends BattleShipGui
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 		
+		createShipPlacement();
+		fillShipRotatedImage();
+		createShipPlacementPanel();
+		createShipLabels();
+		FillShips();
+		createButtonReady();
+		createButtonPlaceShipsAutomatically();		
+		createLabelOpponentReady();
+		
+		gameMapArea = new JLabel(ImagesData.boardIcon);
+		gameMapArea.setBounds(400, 240, 600, 600);
+		battleShipPlacementPanel.add(gameMapArea);
+		
+		lastPanel.setVisible(false);
+		battleShipPlacementPanel.setVisible(true);
+		battleShipPlacementPanel.addKeyListener(this);
+		battleShipPlacementPanel.requestFocusInWindow();
+	}
+	
+	private void createShipPlacement()
+	{
 		if(isSinglePlayer)
 			shipPlacement = new SinglePlayerShipPlacement(new DefaultMap(false));
 		else
 			shipPlacement = new MultiplayerShipPlacement(new DefaultMap(false));
-			
-		fillShipRotatedImage();
-		
+	}
+	
+	private void createShipPlacementPanel()
+	{
 		battleShipPlacementPanel = new JPanel();
 		battleShipPlacementPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(battleShipPlacementPanel);
 		battleShipPlacementPanel.setLayout(null);
-		
+	}
 	
+	private void createShipLabels()
+	{
 		labelDestroyer = new DraggableShip(ImagesData.destroyerIcon, this, new Point(1100, 240));
 		labelDestroyer.setBounds(1100, 240, 120, 60);
 		battleShipPlacementPanel.add(labelDestroyer);
@@ -101,8 +125,10 @@ public class ShipPlacementPanel extends BattleShipGui
 		labelCarrier = new DraggableShip(ImagesData.carrierIcon, this, new Point(1100, 760));
 		labelCarrier.setBounds(1100, 760, 300, 60);
 		battleShipPlacementPanel.add(labelCarrier);
-		FillShips();
-		
+	}
+	
+	private void createButtonReady()
+	{
 		btnReady = new JButton("Ready");
 		btnReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		btnReady.setBounds(1646, 785, 150, 35);
@@ -129,7 +155,20 @@ public class ShipPlacementPanel extends BattleShipGui
 				ShipPlacementPanel.this.requestFocusInWindow();
 			}
 		});
-		
+	}
+	
+	private void createLabelOpponentReady()
+	{
+		lblOpponentReady = new JLabel("Opponent Ready");
+		lblOpponentReady.setForeground(Color.RED);
+		lblOpponentReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+		lblOpponentReady.setBounds(1610, 376, 230, 35);
+		battleShipPlacementPanel.add(lblOpponentReady);
+		lblOpponentReady.setVisible(false);
+	}
+	
+	void createButtonPlaceShipsAutomatically()
+	{
 		JButton btnPlaceShipsAutomatically = new JButton("Place Ships Automatically");
 		btnPlaceShipsAutomatically.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		btnPlaceShipsAutomatically.setBounds(1100, 880, 265, 35);
@@ -144,23 +183,6 @@ public class ShipPlacementPanel extends BattleShipGui
 			}
 		});
 		battleShipPlacementPanel.add(btnPlaceShipsAutomatically);
-		
-		
-		lblOpponentReady = new JLabel("Opponent Ready");
-		lblOpponentReady.setForeground(Color.RED);
-		lblOpponentReady.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
-		lblOpponentReady.setBounds(1610, 376, 230, 35);
-		battleShipPlacementPanel.add(lblOpponentReady);
-		lblOpponentReady.setVisible(false);
-		
-		gameMapArea = new JLabel(ImagesData.boardIcon);
-		gameMapArea.setBounds(400, 240, 600, 600);
-		battleShipPlacementPanel.add(gameMapArea);
-		
-		lastPanel.setVisible(false);
-		battleShipPlacementPanel.setVisible(true);
-		battleShipPlacementPanel.addKeyListener(this);
-		battleShipPlacementPanel.requestFocusInWindow();
 	}
 	
 	private void refreshMapGraphics()
