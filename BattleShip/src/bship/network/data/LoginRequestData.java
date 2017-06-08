@@ -11,8 +11,8 @@ public class LoginRequestData extends LoginData
 	
 	public LoginRequestData(String username, String password)
 	{
-		this.username = username;
-		this.password = password;
+		this.username = new String(username);
+		this.password = new String(password);
 	}
 	
 	public String getUsername() 

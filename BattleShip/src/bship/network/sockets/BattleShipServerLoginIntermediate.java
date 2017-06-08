@@ -21,7 +21,6 @@ public class BattleShipServerLoginIntermediate extends SocketIntermediate implem
 		clientSocket.refreshObserver(this);
 		BattleShipData loginRequest = new LoginRequestData(username, password);
 		clientSocket.sendBattleShipData(loginRequest);
-		System.out.println("SEND REQUEST TO LOGIN");
 	}
 
 	@Override
@@ -29,9 +28,8 @@ public class BattleShipServerLoginIntermediate extends SocketIntermediate implem
 	{
 		if (!(object instanceof LoginResponseData))
 			return;
-		
+
 		LoginResponseData response = (LoginResponseData)object;
-		if(response.isSucceeded())
-			gui.loginResponse(response);
+		gui.loginResponse(response);
 	}
 }
