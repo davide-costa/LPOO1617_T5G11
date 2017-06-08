@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import bship.logic.ShipPlacement;
-
 public class GameVictoryPanel extends BattleShipGui 
 {	
 	private JLabel facebookLogin;
@@ -25,6 +23,35 @@ public class GameVictoryPanel extends BattleShipGui
 		this.setBounds(0, 0, 1920, 1080);
 		setLayout(null);
 		
+		createFacebookLogin();
+		createPostInfoLabel();
+		createbackgroundLabel();
+		
+		frame.getContentPane().add(this);
+		lastPanel.setVisible(false);
+		this.setVisible(true);
+		addKeyListener(this);
+		this.requestFocusInWindow(true);
+	}
+	
+	private void createPostInfoLabel() 
+	{
+		postInfoLabel = new JLabel("");
+		postInfoLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
+		postInfoLabel.setForeground(Color.WHITE);
+		postInfoLabel.setBounds(1287, 835, 600, 100);
+		add(postInfoLabel);
+	}
+
+	private void createbackgroundLabel() 
+	{
+		backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
+		backgroundLabel.setBounds(0, 0, 1920, 1080);
+		add(backgroundLabel);
+	}
+
+	private void createFacebookLogin() 
+	{
 		facebookLogin = new JLabel(ImagesData.facebookShareIcon);
 		facebookLogin.setBounds(1287, 835, 503, 196);
 		add(facebookLogin);
@@ -54,24 +81,9 @@ public class GameVictoryPanel extends BattleShipGui
 			public void mouseReleased(MouseEvent event) {}
 		});
 		
-		postInfoLabel = new JLabel("");
-		postInfoLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
-		postInfoLabel.setForeground(Color.WHITE);
-		postInfoLabel.setBounds(1287, 835, 600, 100);
-		add(postInfoLabel);
-		
-		backgroundLabel = new JLabel(ImagesData.gameVictoryIcon);
-		backgroundLabel.setBounds(0, 0, 1920, 1080);
-		add(backgroundLabel);
-		
-		frame.getContentPane().add(this);
-		lastPanel.setVisible(false);
-		this.setVisible(true);
-		addKeyListener(this);
-		this.requestFocusInWindow(true);
 	}
-	
-	protected void displayPostInfoMessage(String facebookUsername) 
+
+	private void displayPostInfoMessage(String facebookUsername) 
 	{
 		String message = "The victory has been posted as " + facebookUsername + "!";
 		postInfoLabel.setText(message);
