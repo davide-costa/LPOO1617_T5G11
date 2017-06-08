@@ -11,8 +11,8 @@ public class GuiMain
 	{
 		try 
 		{
-			initialize();
 			ImagesData.loadImages();
+			initialize();
 			new Menu(frame, null);
 		} 
 		catch (Exception e)
@@ -23,7 +23,7 @@ public class GuiMain
 
 	private static void initialize() 
 	{
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setBounds(0, 0, 1920, 1080);
