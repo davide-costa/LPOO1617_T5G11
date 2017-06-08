@@ -24,20 +24,38 @@ public class Menu extends BattleShipGui
 	{
 		this.frame = frame;
 		this.lastPanel = lastPanel;
+		if(lastPanel != null)
+			lastPanel.setVisible(false);
+		
+		createmenuPanel();
+		createbtnSingleplayer();
+		createbtnMultiplayer();
+		createbtnExit();
+		createbackground();
+
+		menuPanel.setVisible(true);
+		menuPanel.addKeyListener(this);
+		menuPanel.requestFocusInWindow();
+	}
+
+	private void createmenuPanel() 
+	{
 		menuPanel = new JPanel();
 		menuPanel.setBounds(0, 0, 1920, 1080);
-		if(lastPanel != null)
-		{
-			lastPanel.setVisible(false);
-		}
 		frame.getContentPane().add(menuPanel);
 		menuPanel.setLayout(null);
-		
+	}
+
+	private void createbtnSingleplayer() 
+	{
 		btnSingleplayer = new JButton("SinglePlayer");
 		btnSingleplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		btnSingleplayer.setBounds(701, 236, 459, 70);
 		menuPanel.add(btnSingleplayer);
-		
+	}
+
+	private void createbtnMultiplayer() 
+	{
 		btnMultiplayer = new JButton("MultiPlayer");
 		btnMultiplayer.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		btnMultiplayer.addActionListener(new ActionListener() {
@@ -48,7 +66,10 @@ public class Menu extends BattleShipGui
 		});
 		btnMultiplayer.setBounds(701, 382, 459, 70);
 		menuPanel.add(btnMultiplayer);
-		
+	}
+
+	private void createbtnExit() 
+	{
 		btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		btnExit.addActionListener(new ActionListener() {
@@ -59,14 +80,13 @@ public class Menu extends BattleShipGui
 		});
 		btnExit.setBounds(701, 524, 459, 70);
 		menuPanel.add(btnExit);
-		
+	}
+
+	private void createbackground() 
+	{
 		background = new JLabel(ImagesData.menuBackgroundIcon);
 		background.setBounds(0, 0, 1920, 1080);
 		menuPanel.add(background);
-	
-		menuPanel.setVisible(true);
-		menuPanel.addKeyListener(this);
-		menuPanel.requestFocusInWindow();
 	}
 
 	@Override
