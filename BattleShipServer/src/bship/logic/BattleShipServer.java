@@ -153,7 +153,7 @@ public class BattleShipServer
 	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
 		LoginRequestData login = (LoginRequestData) data;
-		LoginResponseData response = new LoginResponseData();;
+		LoginResponseData response = new LoginResponseData();
 		String username = login.getUsername();
 		String password = login.getPassword();
 		
@@ -168,8 +168,7 @@ public class BattleShipServer
 		if(battleshipPlayers.containsKey(username))
 		{
 			newPlayer = battleshipPlayers.get(username);
-			System.out.println("newPlayer.getPassword(): " + newPlayer.getPassword());
-			System.out.println("newPlayer.getState() instanceof Offline: " + (newPlayer.getState() instanceof Offline));
+
 			if(!password.equals(newPlayer.getPassword()) || !(newPlayer.getState() instanceof Offline))
 			{
 				response.setAsNotSuceeded();
@@ -181,6 +180,7 @@ public class BattleShipServer
 		{
 			newPlayer = new Player(this, username, password);
 			battleshipPlayers.put(username, newPlayer);
+			response.setAccountAsNew();
 		}
 		
 		newPlayer.setThread(thread);
@@ -189,7 +189,6 @@ public class BattleShipServer
 		
 		newPlayer.setState(new InLobby(newPlayer));
 		response.setAsSuceeded();
-		response.setAccountAsNew();
 
 		newPlayer.sendData(response);
 		sendOnlinePlayersInfoToAllPlayers();
