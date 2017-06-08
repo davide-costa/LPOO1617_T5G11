@@ -1,17 +1,13 @@
 package bship.gui;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
-
-import bship.logic.Coords;
 
 public class DraggableShip extends DraggableJLabel
 {
@@ -25,7 +21,11 @@ public class DraggableShip extends DraggableJLabel
 		this.imageIcon = image;
 		this.direction = "horizontal";
 		this.shipPlacementPanel = shipPlacementPanel;
-
+		addMouseListener(initLocation);
+	}
+	
+	private void addMouseListener(Point initLocation)
+	{
 		this.addMouseListener(new MouseListener()
 		{
 			@Override
@@ -60,14 +60,6 @@ public class DraggableShip extends DraggableJLabel
 			}
 		});
 	}
-	
-	protected Point getMiddlePoint() 
-	{
-		Rectangle bounds = this.getBounds();
-		Point middlePoint = new Point((int)bounds.getCenterX(), (int)bounds.getCenterY());
-
-		return middlePoint;
-	}
 
 	public String getDirection()
 	{
@@ -98,5 +90,4 @@ public class DraggableShip extends DraggableJLabel
 		if (direction == "vertical")
 			rotate();
 	}
-
 }
