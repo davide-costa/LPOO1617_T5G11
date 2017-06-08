@@ -42,17 +42,38 @@ public class Lobby extends BattleShipGui
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 		
+		createLobbyPanel();
+		createOnlinePlayersLabel();
+		createInLobbyPlayersList();
+		
+		background = new JLabel(ImagesData.menuBackgroundIcon);
+		background.setBounds(0, 0, 1920, 1080);
+		lobbyPanel.add(background);
+
+		lastPanel.setVisible(false);
+		lobbyPanel.setVisible(true);
+		lobbyPanel.addKeyListener(this);
+		lobbyPanel.requestFocusInWindow();
+	}
+	
+	void createLobbyPanel()
+	{
 		lobbyPanel = new JPanel();
 		lobbyPanel.setBounds(0, 0, 1920, 1080);
 		frame.getContentPane().add(lobbyPanel);
 		lobbyPanel.setLayout(null);
-		
+	}
+	
+	void createOnlinePlayersLabel()
+	{
 		txtOnlinePlayers = new JLabel("Online Players");
 		txtOnlinePlayers.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
 		txtOnlinePlayers.setBounds(870, 100, 180, 50);
 		lobbyPanel.add(txtOnlinePlayers);
-		
-		
+	}
+	
+	void createInLobbyPlayersList()
+	{
 		model = new DefaultListModel<String>();
 		inLobbyPlayersList = new JList<String>(model);
 		inLobbyPlayersList.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -81,18 +102,8 @@ public class Lobby extends BattleShipGui
 					public void mouseReleased(MouseEvent event) {}
 
 				});
-		
-		background = new JLabel(ImagesData.menuBackgroundIcon);
-		background.setBounds(0, 0, 1920, 1080);
-		lobbyPanel.add(background);
-
-		lastPanel.setVisible(false);
-		lobbyPanel.setVisible(true);
-		lobbyPanel.addKeyListener(this);
-		lobbyPanel.requestFocusInWindow();
 	}
 	
-
 	@Override
 	public void keyPressed(KeyEvent event) 
 	{
