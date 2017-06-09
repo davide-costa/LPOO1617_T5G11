@@ -7,7 +7,6 @@ public class GameResultData extends GameData
 	private boolean endOfGame;
 	private GameResult result;
 	
-	
 	public GameResultData(GameResult result, boolean endOfGame)
 	{
 		this.result = result;

@@ -2,9 +2,6 @@ package bship.network.data;
 
 public class LoginResponseData extends LoginData
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2708819194232353251L;
 	private boolean succeeded;
 	private boolean newAccountCreated;

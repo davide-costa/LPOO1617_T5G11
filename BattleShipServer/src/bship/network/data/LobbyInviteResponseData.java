@@ -3,6 +3,7 @@ package bship.network.data;
 
 public class LobbyInviteResponseData extends LobbyData
 {
+	private static final long serialVersionUID = 7815873134067172265L;
 	public enum InviteResponse {ACCEPTED, REJECTED, UNSUCESSFUL};
 	private InviteResponse response;
 	
@@ -20,6 +21,4 @@ public class LobbyInviteResponseData extends LobbyData
 	{
 		return response == InviteResponse.ACCEPTED;
 	}
-	
-	
 }

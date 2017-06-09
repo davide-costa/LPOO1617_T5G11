@@ -2,9 +2,6 @@ package bship.network.data;
 
 public class GameShootData extends GameData
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5229487827874000072L;
 	private int x;
 	private int y;
