@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class BattleShip extends Ship 
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3176693110082996869L;
 
 	public BattleShip()
@@ -25,5 +22,4 @@ public class BattleShip extends Ship
 		Ship newShip = new BattleShip(coords, direction);
 		return newShip;
 	}
-
 }

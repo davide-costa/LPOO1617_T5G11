@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Destroyer extends Ship
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3576946065291967481L;
 
 	public Destroyer()
@@ -25,5 +22,4 @@ public class Destroyer extends Ship
 		Ship newShip = new Cruiser(coords, direction);
 		return newShip;
 	}
-
 }

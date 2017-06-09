@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Carrier extends Ship
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8011015906999712011L;
 
 	public Carrier()
@@ -25,5 +22,4 @@ public class Carrier extends Ship
 		Ship newShip = new Carrier(coords, direction);
 		return newShip;
 	}
-
 }

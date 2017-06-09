@@ -18,7 +18,6 @@ public class MultiplayerOpponent extends Opponent implements Observer
 	private Client clientSocket;
 	private Coords lastShootCoords;
 	
-
 	public MultiplayerOpponent(Game game) throws IOException
 	{
 		super(game);
@@ -55,21 +54,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		if (gameData instanceof GameShootData)
 		{
 			GameShootData shootData = (GameShootData) gameData;
-			Coords shootCoords = new Coords(shootData.getX(), shootData.getY());
-			game.shootAlly(shootCoords);
-			
-			GameResult result = game.getPlayEffects(shootCoords);
-			boolean endOfGame = game.isEndOfGame();
-			
-			BattleShipData resultData = new GameResultData(result, endOfGame);
-			try 
-			{
-				this.clientSocket.sendBattleShipData(resultData);
-			} 
-			catch (IOException e) 
-			{
-				BattleShipExceptionHandler.handleBattleShipException();
-			}
+			handleGameShootData(shootData);
 		}
 		else if (gameData instanceof GameResultData)
 		{
@@ -78,17 +63,7 @@ public class MultiplayerOpponent extends Opponent implements Observer
 			if(!resultData.isEndOfGame())
 				return;
 			
-			BattleShipData endOfGameData = new EndOfGameData(game.getAllyMapImage()); 
-			try 
-			{
-				this.clientSocket.sendBattleShipData(endOfGameData, true);
-			} 
-			catch (IOException e) 
-			{
-				BattleShipExceptionHandler.handleBattleShipException();
-			}
-
-			game.declareVictory();
+			handleGameDefeat();
 		}
 		else if (gameData instanceof EndOfGameData)
 		{
@@ -99,6 +74,40 @@ public class MultiplayerOpponent extends Opponent implements Observer
 		else if (gameData instanceof PlayerDisconnectedData)
 		{
 			game.opponentQuit();
+		}
+	}
+
+	private void handleGameDefeat() 
+	{
+		BattleShipData endOfGameData = new EndOfGameData(game.getAllyMapImage()); 
+		try 
+		{
+			this.clientSocket.sendBattleShipData(endOfGameData, true);
+		} 
+		catch (IOException e) 
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
+		}
+
+		game.declareVictory();
+	}
+
+	private void handleGameShootData(GameShootData shootData) 
+	{
+		Coords shootCoords = new Coords(shootData.getX(), shootData.getY());
+		game.shootAlly(shootCoords);
+		
+		GameResult result = game.getPlayEffects(shootCoords);
+		boolean endOfGame = game.isEndOfGame();
+		
+		BattleShipData resultData = new GameResultData(result, endOfGame);
+		try 
+		{
+			this.clientSocket.sendBattleShipData(resultData);
+		} 
+		catch (IOException e) 
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
 		}
 	}
 

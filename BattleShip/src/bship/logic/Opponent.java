@@ -1,9 +1,6 @@
 package bship.logic;
 
-
 import java.io.IOException;
-
-
 
 public abstract class Opponent
 {

@@ -1,4 +1,5 @@
 package bship.logic;
+
 public class DefaultMap extends GameMap
 {
 	public DefaultMap(boolean isOpponent)

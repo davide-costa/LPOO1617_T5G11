@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Submarine extends Ship
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1197241785301391714L;
 
 	public Submarine()

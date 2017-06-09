@@ -4,10 +4,6 @@ import java.io.Serializable;
 
 public class AllyCellState extends CellState implements Serializable
 {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7632021326436969715L;
 
 	public AllyCellState(Ship ship)
@@ -47,8 +43,7 @@ public class AllyCellState extends CellState implements Serializable
 		Ship ship = null;
 		if(this.ship != null)
 			ship = this.ship.getCopy();
-		CellState cell = new AllyCellState(ship, discovered);
-		return cell;
+		
+		return new AllyCellState(ship, discovered);
 	}
-
 }

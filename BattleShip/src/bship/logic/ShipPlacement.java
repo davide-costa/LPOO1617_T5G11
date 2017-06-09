@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.Map.Entry;
 
 
 public abstract class ShipPlacement 
@@ -12,7 +12,6 @@ public abstract class ShipPlacement
 	private GameMap map;
 	private HashMap<String, Ship> shipsByName = new HashMap<String, Ship>();
 	private HashMap<String, Boolean> shipIsAlreadyPlaced = new HashMap<String, Boolean>();
-	
 	
 	public ShipPlacement(GameMap map)
 	{
@@ -136,11 +135,11 @@ public abstract class ShipPlacement
 	{
 		String shipName = null;
 		
-		Iterator it = shipsByName.entrySet().iterator();
+		Iterator<Entry<String, Ship>> it = shipsByName.entrySet().iterator();
 		
 		while (it.hasNext())
 		{
-			Map.Entry pair = (Map.Entry) it.next();
+			Entry<String, Ship> pair = it.next();
 			if (pair.getValue() == ship)
 				shipName = (String) pair.getKey();
 		}
@@ -150,11 +149,11 @@ public abstract class ShipPlacement
 	
 	public boolean verifyAllShipsArePlaced() 
 	{
-		Iterator it = shipIsAlreadyPlaced.entrySet().iterator();
+		Iterator<Entry<String, Boolean>> it = shipIsAlreadyPlaced.entrySet().iterator();
 		
 		while (it.hasNext())
 		{
-			Map.Entry pair = (Map.Entry) it.next();
+			Entry<String, Boolean> pair = it.next();
 			if (pair.getValue().equals(false))
 				return false;
 		}
@@ -165,11 +164,11 @@ public abstract class ShipPlacement
 	public ArrayList<Ship> getPlacedShips()
 	{
 		ArrayList<Ship> ships = new ArrayList<Ship>();
-		Iterator it = shipIsAlreadyPlaced.entrySet().iterator();
+		Iterator<Entry<String, Boolean>> it = shipIsAlreadyPlaced.entrySet().iterator();
 		
 		while (it.hasNext())
 		{
-			Map.Entry pair = (Map.Entry) it.next();
+			Entry<String, Boolean> pair = it.next();
 			if((Boolean)pair.getValue() == true)
 				ships.add(shipsByName.get(pair.getKey()));
 		}
@@ -180,11 +179,11 @@ public abstract class ShipPlacement
 	public ArrayList<Ship> getShipsToPlace()
 	{
 		ArrayList<Ship> ships = new ArrayList<Ship>();
-		Iterator it = shipsByName.entrySet().iterator();
+		Iterator<Entry<String, Ship>> it = shipsByName.entrySet().iterator();
 		
 		while (it.hasNext())
 		{
-			Map.Entry pair = (Map.Entry) it.next();
+			Entry<String, Ship> pair = it.next();
 			ships.add((Ship) pair.getValue());
 		}
 		

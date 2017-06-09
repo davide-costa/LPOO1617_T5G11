@@ -6,9 +6,6 @@ import java.util.Observer;
 
 public abstract class CellState extends Observable implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 198033874357001837L;
 	protected boolean discovered;
 	protected Ship ship;
@@ -95,5 +92,4 @@ public abstract class CellState extends Observable implements Serializable
 		
 		return true;
 	}
-	
 }

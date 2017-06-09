@@ -17,13 +17,11 @@ public class OpponentCellState extends CellState
 		this.discovered = discovered;
 	}
 
-
 	public boolean hasShip() 
 	{
 		return hasShip;
 	}
 
-	
 	public boolean isDiscoveredAndShip()
 	{
 		return hasShip && discovered;
@@ -44,6 +42,4 @@ public class OpponentCellState extends CellState
 		CellState cell = new OpponentCellState(ship, hasShip, discovered);
 		return cell;
 	}
-
-
 }

@@ -7,9 +7,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Coords implements Serializable, Comparable<Coords>
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8723525205856284319L;
 	private int x;
 	private int y;
