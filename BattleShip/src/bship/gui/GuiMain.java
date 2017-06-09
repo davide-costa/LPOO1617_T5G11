@@ -11,6 +11,7 @@ public class GuiMain
 	{
 		try 
 		{
+			ImagesData.loadData();
 			initialize();
 			new Menu(frame, null);
 		} 

@@ -55,7 +55,7 @@ public class ImagesData
 	public static ImageIcon gameVictoryIcon;
 	public static ImageIcon facebookShareIcon;
 
-	static
+	public static void loadData()
 	{
 		try 
 		{
@@ -67,7 +67,7 @@ public class ImagesData
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 	}
-
+	
 	private static void loadImages() throws IOException
 	{
 		carrierImage = ImageIO.read(new File("res/images/Carrier.png"));
