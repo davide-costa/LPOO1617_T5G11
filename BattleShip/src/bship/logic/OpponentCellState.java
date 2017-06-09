@@ -2,6 +2,7 @@ package bship.logic;
 
 public class OpponentCellState extends CellState 
 {
+	private static final long serialVersionUID = -6291420642209311158L;
 	private boolean hasShip;
 	
 	public OpponentCellState(Ship ship, boolean hasShip) 

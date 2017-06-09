@@ -116,7 +116,6 @@ public class TestGameLogic
 		map.setCellState(cruiserCoords3, cell3);
 		
 		CellState cell;
-		int shipInitHealth = cruiser.getHealth();
 		game.shootAlly(cruiserCoords1);
 		cell = map.getCellState(cruiserCoords1);
 		assertNotNull(cell);

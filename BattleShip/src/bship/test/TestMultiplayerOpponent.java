@@ -7,16 +7,13 @@ import java.io.IOException;
 import org.junit.Test;
 
 import bship.logic.Coords;
-import bship.logic.DefaultMap;
 import bship.logic.Game;
-import bship.logic.GameMap;
 import bship.logic.MultiplayerOpponent;
 import bship.network.data.GameShootData;
 import bship.network.data.PlayerDisconnectedData;
 import bship.network.data.EndOfGameData;
 import bship.network.data.GameResultData;
 import bship.network.data.GameResultData.GameResult;
-import bship.network.sockets.Client;
 
 public class TestMultiplayerOpponent
 {
@@ -40,7 +37,6 @@ public class TestMultiplayerOpponent
 	{
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
 		Coords shootCoords; 
 		GameShootData shootData;
 		GameResult result;
@@ -76,7 +72,6 @@ public class TestMultiplayerOpponent
 	{
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
 		GameResultData resultData;
 		GameResult result;
 		EndOfGameData sentData;
@@ -108,7 +103,6 @@ public class TestMultiplayerOpponent
 	{
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
 		EndOfGameData endData;
 		
 		String map = new String("map image");
@@ -121,9 +115,7 @@ public class TestMultiplayerOpponent
 	@Test
 	public void TestUpdatePlayerDisconnected() throws IOException
 	{
-		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
 		PlayerDisconnectedData data = new PlayerDisconnectedData(); 
 
 		clientSocket.simulateReceptionOfData(data);

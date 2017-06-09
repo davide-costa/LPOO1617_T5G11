@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -187,11 +188,11 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	private void refreshMapGraphics()
 	{
-		Iterator it = draggableShipName.entrySet().iterator();
+		Iterator<Entry<DraggableShip, String>> it = draggableShipName.entrySet().iterator();
 		
 		while (it.hasNext())
 		{
-			Map.Entry pair = (Map.Entry) it.next();
+			Entry<DraggableShip, String> pair = it.next();
 			DraggableShip draggableShip = (DraggableShip) pair.getKey();
 			String shipName = (String) pair.getValue();
 			drawShip(shipName, draggableShip);
