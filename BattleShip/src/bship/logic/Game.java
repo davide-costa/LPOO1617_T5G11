@@ -195,17 +195,17 @@ public class Game
 			return;
 		aliveShips--;
 		
-		updateCellsOfSankShip(ship, true);	
+		updateCellsOfSankShip(ship, true, ship.getSize() - 1);	
 	}
 
-	private void updateCellsOfSankShip(Ship ship, boolean isAlly) 
+	private void updateCellsOfSankShip(Ship ship, boolean isAlly, int lowerBound) 
 	{
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		coordsArray.addAll(ship.getCoords());
 		coordsArray.addAll(getSurroundingCoordsOfShip(ship));
 		ArrayList<CellState> statesArray = new ArrayList<CellState>();
 		getCellStatesOfCoords(isAlly, coordsArray, statesArray);
-		setCellStatesAsDiscovered(statesArray, ship.getSize() - 1);
+		setCellStatesAsDiscovered(statesArray, lowerBound);
 	}
 	
 	
@@ -289,7 +289,7 @@ public class Game
 		discoverCoordsOfSankShip(destroyedShip);
 		Collections.sort(destroyedShip.getCoords());
 
-		updateCellsOfSankShip(destroyedShip, false);
+		updateCellsOfSankShip(destroyedShip, false, 0);
 		opponentShips.add(destroyedShip);
 		setShipOfAllCells(destroyedShip);
 		
