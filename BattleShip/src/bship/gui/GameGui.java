@@ -63,7 +63,24 @@ public class GameGui extends BattleShipGui implements Observer
 		fillAliveShipsVerticalImages();
 		filldestroyedShipsVerticalImages();
 		
+		createOpponentAndGame(shipPlacement, isSinglePlayer);
+			
+		lastPanel.setVisible(false);
+		this.setVisible(true);
+		setBounds(0, 0, 1920, 1080);
+		this.setLayout(new FlowLayout());
+		frame.getContentPane().add(this);
+
 		
+		createMouseListenerForShots();
+		
+		addKeyListener(this);
+	}
+
+	
+
+	private void createOpponentAndGame(ShipPlacement shipPlacement, boolean isSinglePlayer)
+	{
 		Opponent opponent = null;
 		try 
 		{
@@ -80,15 +97,24 @@ public class GameGui extends BattleShipGui implements Observer
 		opponent.setGame(game);
 		game.getAllyMap().addObserver(this);
 		game.getOpponentMap().addObserver(this);
-			
-		
-		lastPanel.setVisible(false);
-		this.setVisible(true);
-		setBounds(0, 0, 1920, 1080);
-		this.setLayout(new FlowLayout());
-		frame.getContentPane().add(this);
+	}
+	
+	protected void shootOpponent(Coords screenShootCoords) 
+	{
+		Coords boardShootCoords = opponentScreenCoordsToBoardCoords(screenShootCoords);
+		try 
+		{	
+			game.shootOpponent(boardShootCoords);
+		} 
+		catch (IOException e) 
+		{
+			BattleShipExceptionHandler.handleBattleShipException();
+		}
 
-		
+	}
+	
+	private void createMouseListenerForShots()
+	{
 		this.addMouseListener(new MouseListener()
 		{
 				@Override
@@ -115,22 +141,6 @@ public class GameGui extends BattleShipGui implements Observer
 				@Override
 				public void mouseReleased(MouseEvent event) {}
 		});
-		
-		addKeyListener(this);
-	}
-	
-	protected void shootOpponent(Coords screenShootCoords) 
-	{
-		Coords boardShootCoords = opponentScreenCoordsToBoardCoords(screenShootCoords);
-		try 
-		{	
-			game.shootOpponent(boardShootCoords);
-		} 
-		catch (IOException e) 
-		{
-			BattleShipExceptionHandler.handleBattleShipException();
-		}
-
 	}
 	
 	private boolean areCoordsInOpponentMapRange(Coords screenShootCoords) 
