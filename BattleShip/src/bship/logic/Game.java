@@ -193,15 +193,19 @@ public class Game
 		
 		if(!ship.isDestroyed())
 			return;
+		aliveShips--;
 		
-		//TODO meter numa func
+		updateCellsOfSankShip(ship, true);	
+	}
+
+	private void updateCellsOfSankShip(Ship ship, boolean isAlly) 
+	{
 		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
 		coordsArray.addAll(ship.getCoords());
 		coordsArray.addAll(getSurroundingCoordsOfShip(ship));
 		ArrayList<CellState> statesArray = new ArrayList<CellState>();
-		getCellStatesOfCoords(true, coordsArray, statesArray);
+		getCellStatesOfCoords(isAlly, coordsArray, statesArray);
 		setCellStatesAsDiscovered(statesArray, ship.getSize() - 1);
-		aliveShips--;
 	}
 	
 	
@@ -223,15 +227,10 @@ public class Game
 	}
 	
 	
-	public void setCellStatesAsDiscovered(ArrayList<CellState> statesArray, int offset)
+	public void setCellStatesAsDiscovered(ArrayList<CellState> statesArray, int lowerBound)
 	{
-		
-		for (int i = offset; i < statesArray.size(); i++)
-			{
-				System.out.println(statesArray);
-				System.out.println(statesArray.get(i));
+		for (int i = lowerBound; i < statesArray.size(); i++)
 				statesArray.get(i).setDiscovered(true);
-			}
 	}
 	
 	public void handleResultData(Coords lastShootCoords, GameResult result)
@@ -290,12 +289,7 @@ public class Game
 		discoverCoordsOfSankShip(destroyedShip);
 		Collections.sort(destroyedShip.getCoords());
 
-		ArrayList<Coords> coordsArray = new ArrayList<Coords>();
-		coordsArray.addAll(destroyedShip.getCoords());
-		coordsArray.addAll(getSurroundingCoordsOfShip(destroyedShip));
-		ArrayList<CellState> statesArray = new ArrayList<CellState>();
-		getCellStatesOfCoords(false, coordsArray, statesArray);
-		setCellStatesAsDiscovered(statesArray, 0);
+		updateCellsOfSankShip(destroyedShip, false);
 		opponentShips.add(destroyedShip);
 		setShipOfAllCells(destroyedShip);
 		
