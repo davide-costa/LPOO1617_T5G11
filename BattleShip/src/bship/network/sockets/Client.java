@@ -1,10 +1,7 @@
-//Client.java
-//© Usman Saleem, 2002 and Beyond.
-//usman_saleem@yahoo.com
-
 package bship.network.sockets;
 
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,11 +12,10 @@ import java.util.Observer;
 
 import bship.network.data.BattleShipData;
 import bship.network.data.GameData;
-import bship.network.data.LobbyInfoData;
 
 
-public class Client extends Observable implements Runnable {
-
+public class Client extends Observable implements Runnable 
+{
 	/**
 	* Uses to connect to the server
 	*/
@@ -45,13 +41,11 @@ public class Client extends Observable implements Runnable {
 	*/
 	private int port = 5555; //default port
 
-							 /**
-							 * Host Name or IP address in String form
-							 */
+	/**
+	* Host Name or IP address in String form
+	*/
 	private String hostName;
-	
 	private static Client instance;
-	
 	private Observer currObserver;
 	
 	public static Client getInstance() throws IOException
@@ -61,19 +55,19 @@ public class Client extends Observable implements Runnable {
 		
 		return instance;
 	}
-
-	public Client() throws IOException
-	{
-		connected = false;
-		connect("dservers.ddns.net", 5555);
-		currObserver = null;
-	}
 	
 	public static void cleanInstance() 
 	{
 		if(instance != null)
 			instance.disconnect();
 		instance = null;
+	}
+
+	public Client() throws IOException
+	{
+		connected = false;
+		connect("dservers.ddns.net", 5555);
+		currObserver = null;
 	}
 	
 	//Constructor used for tests
@@ -90,21 +84,35 @@ public class Client extends Observable implements Runnable {
 		addObserver(observer);
 	}
 	
-	public void connect(String hostName, int port) throws IOException {
+	public void connect(String hostName, int port) throws IOException 
+	{
 		if (!connected)
 		{
-			this.hostName = hostName;
-			this.port = port;
-			socket = new Socket(hostName, port);
-			//get I/O from socket
-			this.socket_output = new ObjectOutputStream(socket.getOutputStream());
-			this.socket_input = new ObjectInputStream(socket.getInputStream());
+			createSocket(hostName, port);
+			getIOFromSocket(socket);
 
 			connected = true;
-			//initiate reading from server...
-			Thread t = new Thread(this);
-			t.start(); //will call run method of this class
+			initiateThreadForServerReading();
 		}
+	}
+
+	private void createSocket(String hostName, int port) throws UnknownHostException, IOException
+	{
+		this.hostName = hostName;
+		this.port = port;
+		socket = new Socket(hostName, port);
+	}
+	
+	private void getIOFromSocket(Socket socket) throws IOException 
+	{
+		this.socket_output = new ObjectOutputStream(socket.getOutputStream());
+		this.socket_input = new ObjectInputStream(socket.getInputStream());
+	}
+	
+	private void initiateThreadForServerReading() 
+	{
+		Thread t = new Thread(this);
+		t.start();
 	}
 
 	public void sendBattleShipData(BattleShipData data) throws IOException
@@ -148,13 +156,11 @@ public class Client extends Observable implements Runnable {
 		try {
 			while (connected && (data = (BattleShipData)socket_input.readObject()) != null)
 			{
-				//notify observers//
 				this.setChanged();
-				//notify+send out recieved msg to Observers
 				this.notifyObservers(data);
 			}
 		}
-		catch (IOException | ClassNotFoundException ioe){}
+		catch (IOException | ClassNotFoundException ioe) {}
 		finally { connected = false; }
 	}
 
@@ -163,8 +169,8 @@ public class Client extends Observable implements Runnable {
 		return connected;
 	}
 
-
-	public int getPort() {
+	public int getPort() 
+	{
 		return port;
 	}
 
@@ -181,21 +187,5 @@ public class Client extends Observable implements Runnable {
 	public void setHostName(String hostName) 
 	{
 		this.hostName = hostName;
-	}
-
-	//testing Client//
-	public static void main(String[] argv)throws IOException
-	{
-		String msg = "";
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		Client c = new Client();
-		while (!msg.equalsIgnoreCase("quit"))
-		{
-			msg = br.readLine();
-			BattleShipData data = new GameData();
-			c.sendBattleShipData(data);
-		}
-		c.disconnect();
-	}
+	}	
 }

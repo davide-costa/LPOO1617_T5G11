@@ -33,5 +33,4 @@ public class DataSender implements Runnable
 			BattleShipExceptionHandler.handleBattleShipException();
 		}
 	}
-
 }

@@ -4,14 +4,9 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import bship.gui.Lobby;
 import bship.gui.ShipPlacementPanel;
-import bship.network.data.LobbyData;
-import bship.network.data.LobbyInfoData;
-import bship.network.data.LobbyInvitedData;
 import bship.network.data.PlayerDisconnectedData;
 import bship.network.data.ReadyForGameData;
-import bship.network.data.ShipPlacementData;
 import bship.network.data.StartGameData;
 
 public class ShipPlacementIntermediate extends SocketIntermediate implements Observer
@@ -49,5 +44,4 @@ public class ShipPlacementIntermediate extends SocketIntermediate implements Obs
 		ReadyForGameData data = new ReadyForGameData();
 		socket.sendBattleShipData(data);
 	}
-
 }
