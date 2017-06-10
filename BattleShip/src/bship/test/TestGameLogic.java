@@ -12,7 +12,10 @@ import bship.logic.Carrier;
 import bship.logic.CellState;
 import bship.logic.Coords;
 import bship.logic.Cruiser;
+import bship.logic.DefaultMap;
+import bship.logic.Destroyer;
 import bship.logic.Game;
+import bship.logic.GameMap;
 import bship.logic.OpponentCellState;
 import bship.logic.Ship;
 import bship.network.data.GameResultData.GameResult;
@@ -208,6 +211,36 @@ public class TestGameLogic
 		assertEquals(GameResult.SINK_CRUISER, game.getPlayEffects(cruiserCoords3));	
 	}
 	
+	@Test
+	public void testHandleResultData()
+	{
+		Game game = new GameLogicTests();
+		GameMap map = new DefaultMap(true);
+		game.setOpponentMap(map);	 
+		
+		//Test Water
+		Coords shootCoords = new Coords(0,0);
+		game.handleResultData(shootCoords, GameResult.WATER);
+		assertEquals(game.getOpponentMap().getCellState(shootCoords), new OpponentCellState(null, false, true));
+		
+		//set a destroyer in the map
+		Coords destroyerCoord1 = new Coords(1,0);
+		Coords destroyerCoord2 = new Coords(2,0);
+		ArrayList<Coords> destroyerCoords = new ArrayList<Coords>();
+		destroyerCoords.add(destroyerCoord1);
+		destroyerCoords.add(destroyerCoord2);
+		Ship destroyer = new Destroyer();
+		destroyer.setCoords(destroyerCoords);
+		map.setCellState(destroyerCoord1, new OpponentCellState(destroyer, true, false));
+		map.setCellState(destroyerCoord2, new OpponentCellState(destroyer, true, false));
+			
+		game.handleResultData(destroyerCoord1, GameResult.HIT);
+		assertEquals(game.getOpponentMap().getCellState(destroyerCoord1), new OpponentCellState(null, true, true));
+	 	game.getOpponentMap().fill(new OpponentCellState(null, false));
+		game.handleResultData(destroyerCoord2, GameResult.SINK_DESTROYER); 
+		
+		assertEquals(game.getOpponentMap().getCellState(destroyerCoord2), new OpponentCellState(, true, true));
+	}
 	
 	@Test
 	public void testHandleOpponentSankShip()
