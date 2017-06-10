@@ -27,7 +27,7 @@ import bship.network.sockets.Server;
 
 public class BattleShipServer
 {
-	private final String battleShipPlayersFileName = "bshipPlayers.bship";
+	protected  String battleShipPlayersFileName = "bshipPlayers.bship";
 	private Server server;
 	private ArrayList<Player> inLobbyPlayers;
 	private ArrayList<Player> inGamePlayers;
