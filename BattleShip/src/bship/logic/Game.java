@@ -231,19 +231,19 @@ public class Game
 		
 		if(result == GameResult.WATER)
 		{
-			cell = new OpponentCellState(null, false, true);
+			cell = new OpponentCellState(null, false, true); 
 			allyTurn = false;
 		}
 		else if(result == GameResult.HIT)
 		{
 			cell = new OpponentCellState(null, true, true);
 			allyTurn = true;
-		}
+		} 
 		else
 		{
 			cell = handleOpponentSankShip(lastShootCoords, result);
 			allyTurn = true;
-		}
+		} 
 			
 		setOpponentCellState(lastShootCoords, cell);
 	}
@@ -318,7 +318,7 @@ public class Game
 	
 	private void tryOpponentShipHeadingDirection(Ship ship, Coords initCoords, String direction, int xInc, int yInc)
 	{
-		Coords coords = new Coords(initCoords);
+		Coords coords = new Coords(initCoords); 
 		
 		coords.incrementX(xInc);
 		coords.incrementY(yInc);
