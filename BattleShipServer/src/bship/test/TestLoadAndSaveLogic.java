@@ -12,7 +12,7 @@ import bship.logic.Player;
 public class TestLoadAndSaveLogic
 {
 	@Test
-	public void TestSaveAndLoadFromFile()
+	public void TestSaveAndLoadFromFile() throws InterruptedException
 	{
 		BattleShipServerTests server = new BattleShipServerTests();
 		Player player = new Player(server, "battleship", "lpoo");
@@ -23,9 +23,13 @@ public class TestLoadAndSaveLogic
 		HashMap<String, Player> players = server.getBattleshipPlayers();
 		assertNotNull(players);
 		assertEquals(1, players.size());
-		assertEquals(player.getUsername(), players.get(0).getUsername());
-		assertEquals(player.getPassword(), players.get(0).getPassword());
+		Player playerInServer = players.get("battleship");
+		assertNotNull(playerInServer);
+		assertEquals(player.getUsername(), playerInServer.getUsername());
+		assertEquals(player.getPassword(), playerInServer.getPassword());
 		
+		Thread.sleep(200);
+		server.stopServer();
 		
 	}
 }
