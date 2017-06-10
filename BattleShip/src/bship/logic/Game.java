@@ -22,6 +22,12 @@ public class Game
 	final HashMap<GameResult, Ship> gameResultToShip = new HashMap<GameResult, Ship>();	
 	final int numShips = 6;
 	
+	/**  
+	 * Constructor of game class for the Gui interface. It is also used for testing but is called from the subclass on the Tests package.
+     * @param allyMap The map of the ally player to start with. It is a GameMap class type.
+	 * @param opponent An intermediate class responsible for handling all the communication with the opponent player.
+	 * @param gui The Graphical User Interface operating this Game class. It commands the game class based on input from user. The Game class also informs the Gui when the opponent of the changes in game that are not under this gui's control, i. e., when the opponent informs the results of a play or when he shoots this player.
+	 */ 
 	public Game(GameMap allyMap, Opponent opponent, GameGui gui)
 	{
 		this.aliveShips = numShips;
