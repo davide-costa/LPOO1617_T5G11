@@ -75,8 +75,11 @@ public class Game
 	public void setOpponentMap(GameMap opponentGameMap)
 	{
 		this.opponentMap = opponentGameMap;
-		opponentMap.refreshObserver(gui);
-		opponentMap.notifyObserver();
+		if(gui != null)
+		{
+			opponentMap.refreshObserver(gui);
+			opponentMap.notifyObserver();
+		}
 	}
 	
 	public Opponent getOpponent() 

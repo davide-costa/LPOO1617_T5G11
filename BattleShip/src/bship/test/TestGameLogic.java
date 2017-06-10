@@ -2,12 +2,15 @@ package bship.test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import org.junit.Test;
 
+import bship.gui.GameGui;
 import bship.logic.AllyCellState;
+import bship.logic.BattleShip;
 import bship.logic.Carrier;
 import bship.logic.CellState;
 import bship.logic.Coords;
@@ -16,8 +19,11 @@ import bship.logic.DefaultMap;
 import bship.logic.Destroyer;
 import bship.logic.Game;
 import bship.logic.GameMap;
+import bship.logic.MultiplayerOpponent;
+import bship.logic.Opponent;
 import bship.logic.OpponentCellState;
 import bship.logic.Ship;
+import bship.logic.Submarine;
 import bship.network.data.GameResultData.GameResult;
 
 public class TestGameLogic
@@ -80,7 +86,79 @@ public class TestGameLogic
 		Collections.sort(correct_coords);
 		
 		assertEquals(correct_coords, returned_coords);
-	}	
+	}
+	
+	@Test
+	public void testSetAndGetAllyMap()
+	{
+		Game game = new GameLogicTests();
+		GameMap allyMap = new DefaultMap(false);
+		game.setAllyMap(allyMap);
+		assertEquals(game.getAllyMap(), allyMap);
+	}
+	
+	@Test
+	public void testGetOpponent()
+	{
+		Opponent opponent = null;
+		try 
+		{
+			opponent = new MultiplayerOpponent();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		Game game = new Game(null, opponent, null);
+		assertEquals(game.getOpponent(), opponent);
+	}
+	
+	@Test
+	public void testGetAndSetOpponentShips()
+	{
+		Opponent opponent = null;
+		try 
+		{
+			opponent = new MultiplayerOpponent();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		Game game = new Game(null, opponent, null);
+		opponent.setGame(game);
+		
+		assertTrue(game.getOpponentShips().isEmpty());
+	}
+	
+	@Test
+	public void testSetOpponentMap()
+	{
+		Opponent opponent = null;
+		try 
+		{
+			opponent = new MultiplayerOpponent();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		Game game = new Game(null, opponent, null);
+		GameMap opponentMap = new DefaultMap(true);
+		game.setOpponentMap(opponentMap);
+		assertEquals(game.getOpponentMap(), opponentMap);
+	}
+	
+	@Test
+	public void testSetAllyCellState()
+	{
+		GameMap allyMap = new DefaultMap(false);
+		Game game = new Game(allyMap, null, null);
+		Coords coords = new Coords(0,0);
+		CellState state = new AllyCellState(null);
+		game.setAllyCellState(coords, state);
+		assertEquals(game.getAllyCellState(coords), state);
+	}
 	
 	@Test
 	public void testCellStateConstructor()
@@ -238,8 +316,11 @@ public class TestGameLogic
 		assertEquals(game.getOpponentMap().getCellState(destroyerCoord1), new OpponentCellState(null, true, true));
 	 	game.getOpponentMap().fill(new OpponentCellState(null, false));
 		game.handleResultData(destroyerCoord2, GameResult.SINK_DESTROYER); 
-		
-		assertEquals(game.getOpponentMap().getCellState(destroyerCoord2), new OpponentCellState(, true, true));
+		assertTrue(game.getOpponentMap().getCellState(destroyerCoord2).hasShip());
+		assertTrue(game.getOpponentMap().getCellState(destroyerCoord2).isDiscovered());
+		assertTrue(game.getOpponentMap().getCellState(destroyerCoord2).isDiscoveredAndShip());
+		assertTrue(game.getOpponentMap().getCellState(destroyerCoord2).getShip().isDestroyed());
+		assertTrue(game.getOpponentMap().getCellState(destroyerCoord2).getShip() instanceof Destroyer);
 	}
 	
 	@Test
