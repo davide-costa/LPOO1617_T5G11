@@ -37,7 +37,7 @@ public class TestMultiplayerOpponent
 	{
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		new MultiplayerOpponent(game, clientSocket);
 		Coords shootCoords; 
 		GameShootData shootData;
 		GameResult result;
@@ -73,7 +73,7 @@ public class TestMultiplayerOpponent
 	{
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		new MultiplayerOpponent(game, clientSocket);
 		GameResultData resultData;
 		GameResult result;
 		EndOfGameData sentData;
@@ -105,7 +105,7 @@ public class TestMultiplayerOpponent
 	{
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		new MultiplayerOpponent(game, clientSocket);
 		EndOfGameData endData;
 		
 		String map = new String("map image");
@@ -121,7 +121,7 @@ public class TestMultiplayerOpponent
 		GameTests game = new GameTests();
 		ClientSocketTests clientSocket = new ClientSocketTests();
 		PlayerDisconnectedData data = new PlayerDisconnectedData(); 
-		MultiplayerOpponent opponent = new MultiplayerOpponent(game, clientSocket);
+		new MultiplayerOpponent(game, clientSocket);
 
 		clientSocket.simulateReceptionOfData(data);
 	}
