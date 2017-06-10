@@ -36,20 +36,6 @@ public class Game
 		InitializeOpponentGameMap();
 	}
 	
-	public Game(Opponent opponent, GameGui gui)
-	{
-		this.aliveShips = numShips;
-		this.aliveShips = 1;//TODO: Tirar isto
-		this.allyTurn = CurrGameData.allyHasInitTurn;
-		this.map = new DefaultMap(false);
-		opponentShips = new ArrayList<Ship>();
-		this.opponentMap = new DefaultMap(true);
-		this.opponent = opponent;
-		this.gui = gui;
-		FillShipNameToResultMap();
-		InitializeOpponentGameMap();
-	}
-	
 	private void FillShipNameToResultMap() 
 	{
 		shipNameToGameResult.put("Carrier", GameResult.SINK_CARRIER);
