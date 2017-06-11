@@ -77,6 +77,7 @@ Caso seja criada uma conta, é apresentada a mensagem na imagem seguinte:
 ![new account created](https://user-images.githubusercontent.com/25772485/27014021-b14a76c8-4ee7-11e7-858d-a12dec9a1a53.png)
 
 Se for criada uma nova conta ou a password estiver correta, o login é bem sucedido e o utilizador é levado para o Lobby, descrito a seguir.
+	
 	Lobby Screen
 ![lobby with no players](https://user-images.githubusercontent.com/25772485/27013787-b0f84fc4-4ee2-11e7-889f-4e84e63dcfdb.png)
 
