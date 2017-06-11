@@ -19,7 +19,7 @@ public class Destroyer extends Ship
 	@Override
 	public Ship getCopy()
 	{
-		Ship newShip = new Cruiser(coords, direction);
+		Ship newShip = new Destroyer(coords, direction);
 		return newShip;
 	}
 }

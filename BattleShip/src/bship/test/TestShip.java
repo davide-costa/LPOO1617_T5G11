@@ -133,4 +133,52 @@ public class TestShip
 		ship.fillCoordsByInitCoord(new Coords(0,0));
 		assertEquals(submarineCoords, ship.getCoords());
 	}
+	
+	@Test
+	public void testDestroyerGetCopy()
+	{
+		Ship ship = new Destroyer();
+		Ship copy = ship.getCopy();
+		assertEquals(ship, copy);
+		assertFalse(ship == copy);
+	}
+	
+	@Test
+	public void testSubmarineGetCopy()
+	{
+		Ship ship = new Submarine();
+		Ship copy = ship.getCopy();
+		assertEquals(ship, copy);
+		assertFalse(ship == copy);
+	}
+	
+	@Test
+	public void testCruiserGetCopy()
+	{
+		Ship ship = new Cruiser();
+		Ship copy = ship.getCopy();
+		assertEquals(ship, copy);
+		assertFalse(ship == copy);
+	}
+	@Test
+	public void testBattleShipGetCopy()
+	{
+		Ship ship = new BattleShip();
+		Ship copy = ship.getCopy();
+		assertEquals(ship, copy);
+		assertFalse(ship == copy);
+	}
+	
+	@Test
+	public void testCarrierGetCopy()
+	{
+		Ship ship = new Carrier();
+		Ship copy = ship;
+		assertTrue(ship == copy);
+		
+		copy = ship.getCopy();
+		assertEquals(ship, copy);
+		assertFalse(ship == copy);
+	
+	}	
 }
