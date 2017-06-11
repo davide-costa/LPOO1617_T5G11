@@ -3,9 +3,19 @@ Final Project Delivery
 
 Setup/Installation procedure
 
+BattleShip:
 Para correr o projeto (modo development) com o eclipse basta fazer clone do branch do repositório e correr a função main da classe GuiMain.
 
-Para correr o jogo (modo release) usando o jar é necessário ter uma pasta com as imagens necessárias ao jogo.
+Para correr o jogo (modo release) usando o jar é necessário ter na mesma pasta do jar, uma pasta res com a pasta imagens dentro (contém as imagens necessárias ao jogo. É necessário ter na mesma pasta do jar também o executavel chromedriver.exe.
+O google chrome deve estar instalado no computador que corre o jogo e deve ter a pasta de instalaçao na localização default.
+
+
+BattleShipServer:
+Para correr o projeto (modo development) com o eclipse basta fazer clone do branch do repositório e correr a função main da classe BattleShipServer.
+
+Para correr o servidor (modo release) usando o jar é necessário ter na mesma pasta do jar o ficheiro bshipPlayers.bship que contém a informacão das contas a criadas no servidor. Este ficheiro deve existir sempre, mesmo quando ainda nao existem contas.
+
+
 
 Design Patterns
 
