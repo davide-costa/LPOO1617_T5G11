@@ -22,9 +22,8 @@ public class Coords implements Serializable, Comparable<Coords>
 		this.y = y;
 	}
 	/**  
-	 * Constructor of Coords class. Creates a new instance of Coords from another instance of Coords. Creates a new separate copy, no aliasing will ocurr because they are not the same object.
-     * @param x The x (i. e. the abcissa) coord of the point.
-	 * @param y The y (i. e. the ordinate) coord of the point.
+	 * Copy constructor of Coords class. Creates a new instance of Coords from another instance of Coords. Creates a new separate copy, no aliasing will ocurr because they are not the same object.
+     * @param coords The instance of coords to be copied.
 	 */ 
 	public Coords(Coords coords)
 	{
@@ -33,8 +32,7 @@ public class Coords implements Serializable, Comparable<Coords>
 	}
 	/**  
 	 * Constructor of Coords class. Creates a new instance of Coords from an instance of Point.
-     * @param x The x (i. e. the abcissa) coord of the point.
-	 * @param y The y (i. e. the ordinate) coord of the point.
+     * @param point The point that will fill the coords.
 	 */ 
 	public Coords(Point point)
 	{

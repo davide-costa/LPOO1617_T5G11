@@ -82,7 +82,7 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 	/**
 	 * Sets the state of a cell in the given coords with the given symbol.
 	 * @param coords the coords of the cell we want to get the state.
-	 * @param symbol the symbol we want to set in the given coords.
+	 * @param state the state we want to set in the given coords.
 	 */
 	public void setCellState(Coords coords, CellState state)
 	{
@@ -167,7 +167,7 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 	/**
 	 * Called when one of the cells of the map has been altered. And then informs his observers (gui, in this case) that the map has changed.
 	 * @param cell the cell that has been changed.
-	 * @param unsued unused paramenter that cames with override method body..
+	 * @param unused paramenter that cames with override method body..
 	 */
 	@Override
 	public void update(Observable cell, Object unused)

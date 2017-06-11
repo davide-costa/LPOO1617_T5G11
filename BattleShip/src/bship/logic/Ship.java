@@ -95,7 +95,7 @@ public abstract class Ship implements Serializable
 	
 	/**
 	 * Sets the coords of the Ship, i. e., the ArrayList of coords where it is placed on the map to be equal to the ArrayList of coords it receives as parameter.
-	 * @param direction The Ship's new facing direction.
+	 * @param coords The Ship's new ArrayList of coords.
 	 */
 	public void setCoords(ArrayList<Coords> coords)
 	{

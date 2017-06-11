@@ -61,7 +61,7 @@ public abstract class CellState extends Observable implements Serializable
 
 	/**  
 	 * Setter of a cell ship.
-     * @param The ship to be set in the cell.
+     * @param ship to be set in the cell.
 	 */ 
 	public void setShip(Ship ship)
 	{
@@ -98,7 +98,7 @@ public abstract class CellState extends Observable implements Serializable
 	
 	/**  
 	 * Refreshes the observes of the cell, i.e. deletes the old observer if exists and add the new observer.
-     * @param The newObserver to be set.
+     * @param newObserver to be set.
 	 */ 
 	public void refreshObserver(Observer newObserver)
 	{
