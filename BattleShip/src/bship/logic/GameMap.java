@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Represents a map in a BattleShip game. During a game, two instances are used on each side: one to represent the ally map and the other to represent the opponent map. Also implements methods to help dealing with all the necessary logic regarding the map.
+ */
 public abstract class GameMap extends Observable implements Serializable, Observer
 {
 	private static final long serialVersionUID = 5027329701106832930L;
