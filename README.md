@@ -34,6 +34,7 @@ Major difficulties along the way
 A principal e inicial dificuldade neste trabalho foi, como seria esperado, fazer a parte do Multiplayer do jogo. Esta parte está bastante elaborada pois conta com uma aplicação java dedicada unicamente a esta parte: Um Servidor. Utilizámos um padrão de implementação de arquitetura Server/Client. No entanto, foi necessário perceber cuidadosamente cada uma das linhas de código do padrão para o adptar às nossas necessidades. O código é bastante complexo, dado que utiliza também multithreading, criando uma nova thread para cada client que se liga para ficar à escuta por dados enviados por esse client.
 Também foi necessário algum esforço na parte do client side para fazer o "coupling" entre as várias classes q implementam a lógica de comunicação de modo a obter um código "maintainable".
 No entanto a interface Seraializable, facilitou a troca de informação entre o client e o servidor.
+Como o grupo investiu bastante tempo nesta parte, não houve tempo para completar o desenvolvimento do SinglePlayer. No entanto, foi iniciado e o código está preparado e devidamente "coupeled" para receber essa nova funcionalidade.
 
 Lessons learned
 Aprendemos que a interface Serializable do java e as Object Streams são bastante úteis para tudo o que seja transmitir informação: desde gravar dados em ficheiros até enviar dados pela internet. Utilizando estas funcionalidade da linguagem java, conseguímos implementar a comunicação entre o cliente e o servidor de forma simples e legível.
@@ -46,7 +47,13 @@ Consideramos que a distribuição de trabalho por ambos os membros do grupo foi 
 
 
 
+User manual
 
+
+	Main Menu
+![main menu](https://user-images.githubusercontent.com/25772485/27013714-56bd2b66-4ee1-11e7-8405-44e3eb5949e9.png)
+
+Este é o Menu principal. O jogador pode escollher o modo de jogo: SingelPlayer
 
 
 
