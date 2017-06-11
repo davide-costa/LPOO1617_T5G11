@@ -3,6 +3,10 @@ package bship.logic;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+/**
+ * Represents a Ship. Stores all the information necessary to represent a Ship in the game. Implements all the logic necessary to operate over a Ship during a game.
+ */
 public abstract class Ship implements Serializable
 {
 	protected int size;
