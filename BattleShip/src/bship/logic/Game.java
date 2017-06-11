@@ -34,7 +34,6 @@ public class Game
 	public Game(GameMap allyMap, Opponent opponent, GameGui gui)
 	{
 		this.aliveShips = numShips;
-		this.aliveShips = 1;//TODO: Tirar isto
 		this.allyTurn = CurrGameData.allyHasInitTurn;
 		this.map = allyMap;
 		opponentShips = new ArrayList<Ship>();

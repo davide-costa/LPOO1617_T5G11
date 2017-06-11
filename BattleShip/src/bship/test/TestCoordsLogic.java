@@ -133,19 +133,6 @@ public class TestCoordsLogic
 		TestWithZeroCoords(coordsArray, returned, correct);
 		TestWithOneCoord(coordsArray, returned, correct);
 		TestWithTwoCoords(coordsArray, returned, correct);
-		
-		//TODO
-//		//Debugging
-//		for (Coords coord : correct)
-//		{
-//			System.out.println(coord.GetX() + " " + coord.GetY());
-//		}
-//		System.out.println("");
-//		System.out.println("");
-//		for (Coords coord : returned)
-//		{
-//			System.out.println(coord.GetX() + " " + coord.GetY());
-//		}
 	}
 	
 	private void TestWithZeroCoords(ArrayList<Coords> coordsArray, ArrayList<Coords> returned, ArrayList<Coords> correct)
