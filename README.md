@@ -33,6 +33,10 @@ Other relevant decisions
 Major difficulties along the way
 A principal e inicial dificuldade neste trabalho foi, como seria esperado, fazer a parte do Multiplayer do jogo. Esta parte está bastante elaborada pois conta com uma aplicação java dedicada unicamente a esta parte: Um Servidor. Utilizámos um padrão de implementação de arquitetura Server/Client. No entanto, foi necessário perceber cuidadosamente cada uma das linhas de código do padrão para o adptar às nossas necessidades. O código é bastante complexo, dado que utiliza também multithreading, criando uma nova thread para cada client que se liga para ficar à escuta por dados enviados por esse client.
 Também foi necessário algum esforço na parte do client side para fazer o "coupling" entre as várias classes q implementam a lógica de comunicação de modo a obter um código "maintainable".
+No entanto a interface Seraializable, facilitou a troca de informação entre o client e o servidor.
+
+Lessons learned
+Aprendemos que a interface Serializable do java e as Object Streams são bastante úteis para tudo o que seja transmitir informação: desde gravar dados em ficheiros até enviar dados pela internet. Utilizando estas funcionalidade da linguagem java, conseguímos implementar a comunicação entre o cliente e o servidor de forma simples e legível.
 
 
 Work distribution amongst team members
