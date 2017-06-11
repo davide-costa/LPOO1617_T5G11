@@ -38,7 +38,7 @@ Todas as imagens do jogo são desta forma carregadas no inicio do programa para 
 Major difficulties along the way
 
 A principal e inicial dificuldade neste trabalho foi, como seria esperado, fazer a parte do Multiplayer do jogo. Esta parte está bastante elaborada pois conta com uma aplicação java dedicada unicamente a esta parte: Um Servidor. Utilizámos um padrão de implementação de arquitetura Server/Client. No entanto, foi necessário perceber cuidadosamente cada uma das linhas de código do padrão para o adptar às nossas necessidades. O código é bastante complexo, dado que utiliza também multithreading, criando uma nova thread para cada client que se liga para ficar à escuta por dados enviados por esse client.
-Também foi necessário algum esforço na parte do client side para fazer o "coupling" entre as várias classes q implementam a lógica de comunicação de modo a obter um código "maintainable".
+Também foi necessário algum esforço na parte do client side para fazer o "coupling" entre as várias classes que implementam a lógica de comunicação de modo a obter um código "maintainable".
 No entanto a interface Seraializable, facilitou a troca de informação entre o client e o servidor.
 Como o grupo investiu bastante tempo nesta parte, não houve tempo para completar o desenvolvimento do SinglePlayer. No entanto, foi iniciado e o código está preparado e devidamente "coupeled" para receber essa nova funcionalidade.
 
@@ -48,7 +48,7 @@ Aprendemos que a interface Serializable do java e as Object Streams são bastant
 
 Overall time spent developing
 
-Cada membro do grupo gastou, aproximadamente, 125 horas a desenvolver este projeto.
+Cada membro do grupo gastou, aproximadamente, 100 horas a desenvolver este projeto.
 
 Work distribution amongst team members
 
@@ -72,11 +72,11 @@ O modo Multiplayer leva o jogador para um ecrã de login, no qual se deve autent
 Este é a screen de login. O jogador deve introduzir as suas credenciais de login para se autenticar no servidor.
 Se o Username ainda não existir, é criada uma nova conta.
 Se este já existir, a password é verificada e, se não corresponder à password correta (validada pelo servidor), é mostrada uma mensagem a informar tal.
-Se for criada uma nova conta ou a password estiver correta, o login é bem sucedido e o utilizador é levado para o Lobby, descrito a seguir.
 Caso seja criada uma conta, é apresentada a mensagem na imagem seguinte:
 
 ![new account created](https://user-images.githubusercontent.com/25772485/27014021-b14a76c8-4ee7-11e7-858d-a12dec9a1a53.png)
 
+Se for criada uma nova conta ou a password estiver correta, o login é bem sucedido e o utilizador é levado para o Lobby, descrito a seguir.
 	Lobby Screen
 ![lobby with no players](https://user-images.githubusercontent.com/25772485/27013787-b0f84fc4-4ee2-11e7-889f-4e84e63dcfdb.png)
 
