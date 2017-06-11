@@ -102,10 +102,12 @@ Está disponível a funcionalidade de colocar os barcos automaticamente no mapa,
 Quando estiver pronto para jogar, deve clicar no botão "Ready". Isto irá informar o servidor que se encarrega de informar o adversário.
 Quando o adversário estiver pronto, é apresentado um label que diz "Opponent Ready", como se apresenta na imagem seguinte:
 
+	Ship Placement with Opponent Ready
 ![shipplacement with opponent ready](https://user-images.githubusercontent.com/25772485/27013836-7c25075a-4ee3-11e7-9b77-539d7237ceaf.png)
 
 Quando ambos os jogadores estiverem prontos, são colocados no jogo. A aplicação de ambos irá mudar para a screen de Game, como se apresenta a seguir.
 
+	Beggining of a Game
 ![beggining of a game](https://user-images.githubusercontent.com/25772485/27013933-5542150e-4ee5-11e7-9bbc-c0a8dff5c2e8.png)
 
 Esta é a screen de Game, ou seja, que ambos os jogadores vêm. No exemplo é mostrado o estado de um jogo que acaba de começar com o mapa do aliado sem qualquer tiro assim como do adversário. O deste último encontra-se também oculto e vai sendo revelado pelo outro jogador (através do servidor) à medida que os disparos vão acontecendo.
@@ -117,6 +119,7 @@ Os barcos quando sao destruídos têm as suas imagens alteradas quando são comp
 Quando o jogo acaba um jogador é derrotado (Defeat) e outro é vitorioso (Victory).
 Ambos os jogadores são devidamente informados em cada uma destas situações. A seguir são apresentadas as imagens que caracterizam cada um destes casos:
 
+	Victory Screen
 ![victory screen](https://user-images.githubusercontent.com/25772485/27014045-5dcaf54e-4ee8-11e7-827a-d46457befb73.png)
 Esta é a screen de vitoria.
 
@@ -124,15 +127,18 @@ Apresenta-se no canto inferior direito um botão para o jogador poder partilhar 
 É aberta uma janela do navegador Chrome para efetuar o login e, depois, a partilha no Facebook da sua vitória.
 Depois de partilhar a sua vitória no Facebook, quando voltar ao jogo, ser-lhe-á apresentada a seguinte imagem:
 
+	Victory Screen after Posting on Facebook
 ![victory screen after posting on facebook](https://user-images.githubusercontent.com/25772485/27014044-5dc8e24a-4ee8-11e7-924d-840096165a4d.png)
 
 No caso de derrota, é apresentada a seguinte screen ao jogador derrotado:
 ![defeat screen](https://user-images.githubusercontent.com/25772485/27014080-44d1ec40-4ee9-11e7-9b13-e909aa1255f7.png)
 
 
+	Exit Screen
+![exit screen](https://user-images.githubusercontent.com/25772485/27014085-6f07d57e-4ee9-11e7-91cc-d6a7908872dc.png)
 
 Esta screen é apresentada quando o jogador clica no botão "Exit" do Menu Principal. Permite confirmar se realmente pretende sair do programa ou não.
-![exit screen](https://user-images.githubusercontent.com/25772485/27014085-6f07d57e-4ee9-11e7-91cc-d6a7908872dc.png)
+
 
 
 UML Diagrams
