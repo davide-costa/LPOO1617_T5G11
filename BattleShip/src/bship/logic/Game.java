@@ -95,8 +95,8 @@ public class Game
 	}
 	
 	/**  
-	 * Setter for the opponent game map.
-     * @param allyGameMap The new GameMap class to set the opponent map equal to.
+	 * Setter for the opponent game map. Also refreshes the GameMap's observer to the current Gui (of this game) to ensure it monitors all the changes in the map to be able to draw accordingly.
+     * @param opponentGameMap The new Opponent class to set the current opponent of this game equal to.
 	 */ 
 	public void setOpponentMap(GameMap opponentGameMap)
 	{
@@ -108,31 +108,59 @@ public class Game
 		}
 	}
 	
+	/**  
+	 * Getter for the Opponent of this Game class. Opponent is an intermediate class responsible for handling all the communication with the opponent player.
+     * @return The current opponent of this Game class.
+	 */ 
 	public Opponent getOpponent() 
 	{
 		return opponent;
 	}
 	
+	/**  
+	 * Returns the cell state (class CellState) respecting to some coords in the ally game map.
+	 * @param coords The coords of the cell to retrieve.
+     * @return The current cell state (class CellState) respecting to the coords received as parameter.
+	 */ 
 	public CellState getAllyCellState(Coords coords)
 	{
 		return map.getCellState(coords);
 	}
 	
+	/**  
+	 * Sets the cell state (class CellState) respecting to some coords in the ally game map.
+	 * @param coords The coords of the cell to be set.
+     * @return The new cell state (class CellState) to set the cell respecting to coords equal to.
+	 */ 
 	public void setAllyCellState(Coords coords, CellState state)
 	{
 		map.setCellState(coords, state);
 	}
 	
+	/**  
+	 * Returns the cell state (class CellState) respecting to some coords in the opponent game map.
+	 * @param coords The coords of the cell to retrieve.
+     * @return The current cell state (class CellState) respecting to the coords received as parameter.
+	 */ 
 	public CellState getOpponentCellState(Coords coords)
 	{
 		return opponentMap.getCellState(coords);
 	}
 	
+	/**  
+	 * Sets the cell state (class CellState) respecting to some coords in the opponent game map.
+	 * @param coords The coords of the cell to be set.
+     * @return The new cell state (class CellState) to set the cell respecting to coords equal to.
+	 */ 
 	public void setOpponentCellState(Coords coords, CellState state)
 	{
 		opponentMap.setCellState(coords, state);
 	}
 	
+	/**  
+	 * Tells if the game has ended.
+     * @return A boolean value indicating wether the game has ended or not.
+	 */ 
 	public boolean isEndOfGame()
 	{
 		return aliveShips == 0;
