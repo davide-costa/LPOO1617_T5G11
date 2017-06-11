@@ -187,6 +187,10 @@ public class Game
 	
 	}
 	
+	/**  
+	 * Returns and ArrayList of Coords that represent the coords around a ship. If the ship has size 2, it will have 10 surrounding coords.
+     * @return An ArrayList containing the surrounding coords of a Ship.
+	 */ 
 	public ArrayList<Coords> getSurroundingCoordsOfShip(Ship ship) 
 	{
 		ArrayList<Coords> shipCoords = ship.getCoords();
@@ -204,6 +208,10 @@ public class Game
 		return surroundingCoords;
 	}
 	
+	/**  
+	 * This method is called by GUI or the AI Opponent to shoot the opponent and informs Opponent class of the shot. It is called when the user clicks on the opponent map to shoot it or when the AI Opponent class makes a shot. Receives the coords (in board coords notation) respecting to the cell where the ally shot. It performs validation so that it doesn't inform the opponent if the cell is already discovered.
+     * @param coords The coords where the ally shot.
+	 */ 
 	//this method is called by GUI to shoot the opponent and informs Opponent of the shot
 	public void shootOpponent(Coords coords) throws IOException
 	{
@@ -216,7 +224,10 @@ public class Game
 		opponent.shoot(coords);
 	}
 	
-	//this method is called by Opponent class when the opponent shoots this player and informs the effects to Opponent class. The GUI is notified by observing that the map changed
+	/**  
+	 * This method is called by Opponent class to shoot the ally. Receives the coords (in board coords notation) respecting to the cell where the ally shot. The GUI is notified of the shot through Observer. It is observing the GameMap and is notified when it changes.
+     * @param coords The coords where the opponent shot. (and where to shoot the ally)
+	 */ 
 	public void shootAlly(Coords shootCoords)
 	{
 		if(allyTurn)
@@ -251,7 +262,11 @@ public class Game
 		setCellStatesAsDiscovered(statesArray, lowerBound);
 	}
 	
-	
+	/**  
+	 * This method informs the results of the last shot in the ally map, i. e., if the shot landed on water, ship (and eventually revealed it). It should be called after calling shootAlly method. The result is returned on a GameResult Data type.
+     * @param coords The coords where the opponent shot and of which to retrieve the result.
+	 * @return The result of the last play in the form of a GameResult data type. The possible values are WATER, HIT, SINK_CARRIER, SINK_BATTLESHIP, SINK_DESTROYER, SINK_SUBMARINE or SINK_CRUISER. The symbolic values are self-explanatory.
+	 */ 
 	public GameResult getPlayEffects(Coords shootCoords)
 	{
 		CellState cell = getAllyCellState(shootCoords);
