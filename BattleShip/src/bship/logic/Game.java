@@ -324,7 +324,7 @@ public class Game
      * @param lastShootCoords The coords where the ally shot and of which to handle the result received from the opponent.
 	 * @param result The result (computed by the opponent) of the last shot by the ally.
 	 */ 
-	private CellState handleOpponentSankShip(Coords lastShootCoords, GameResult result) 
+	public CellState handleOpponentSankShip(Coords lastShootCoords, GameResult result) 
 	{
 		Ship destroyedShip;
 		switch(result)
