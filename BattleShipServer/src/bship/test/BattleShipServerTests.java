@@ -20,7 +20,7 @@ public class BattleShipServerTests extends BattleShipServer
 		battleShipPlayersFileName += "test";
 	}
 	
-	public void saveBattleShipPlayersFromFile()
+	public void saveBattleShipPlayersToFile()
 	{
 		return;
 	}
@@ -32,7 +32,7 @@ public class BattleShipServerTests extends BattleShipServer
 	
 	public void forceSaveBattleShipPlayersFromFile()
 	{
-		super.saveBattleShipPlayersFromFile();
+		super.saveBattleShipPlayersToFile();
 	}
 	
 	public void forceLoadBattleShipPlayersFromFile()

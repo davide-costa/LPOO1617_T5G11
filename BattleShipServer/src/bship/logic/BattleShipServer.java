@@ -126,7 +126,7 @@ public class BattleShipServer
 	/*
 	 * Saves all battleship registered players to a file
 	 */
-	protected void saveBattleShipPlayersFromFile()
+	protected void saveBattleShipPlayersToFile()
 	{
 		try
 		{
@@ -224,7 +224,7 @@ public class BattleShipServer
 
 		newPlayer.sendData(response);
 		sendOnlinePlayersInfoToAllPlayers();
-		saveBattleShipPlayersFromFile();
+		saveBattleShipPlayersToFile();
 		return true;
 	}
 	
