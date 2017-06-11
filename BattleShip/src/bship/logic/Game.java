@@ -285,12 +285,17 @@ public class Game
 	}
 	
 	
-	public void setCellStatesAsDiscovered(ArrayList<CellState> statesArray, int lowerBound)
+	private void setCellStatesAsDiscovered(ArrayList<CellState> statesArray, int lowerBound)
 	{
 		for (int i = lowerBound; i < statesArray.size(); i++)
 				statesArray.get(i).setDiscovered(true);
 	}
 	
+	/**  
+	 * This method is called when the opponent informs the results of the last shot. It should be called by the Opponent class when the ally makes a shot (by calling shootOpponent method of this Game class) and when the Game class of the opponent has computed the results of the shot and sent them to this Opponent class. Which in turn will inform this Game class of the results of the shot. It performs the necessary updates to the opponent map. The gui (if applicable) if informed by Observer. It is observing the GameMap class.
+     * @param lastShootCoords The coords where the ally shot and of which to handle the result received from the opponent.
+	 * @param result The result (computed by the opponent) of the last shot by the ally.
+	 */ 
 	public void handleResultData(Coords lastShootCoords, GameResult result)
 	{
 		CellState cell;
@@ -314,8 +319,12 @@ public class Game
 		setOpponentCellState(lastShootCoords, cell);
 	}
 
-
-	public CellState handleOpponentSankShip(Coords lastShootCoords, GameResult result) 
+	/**  
+	 * This method is an auxiliar method to the handleResultData method. And is called when the last shot of the ally has resulted in the full destruction of an enemy ship. It should reveal the entire ship and the surround cells. It is also called by the unit tests package, for unit testing purposes (testing only this method instead of the whole handleResultData logic at once).
+     * @param lastShootCoords The coords where the ally shot and of which to handle the result received from the opponent.
+	 * @param result The result (computed by the opponent) of the last shot by the ally.
+	 */ 
+	private CellState handleOpponentSankShip(Coords lastShootCoords, GameResult result) 
 	{
 		Ship destroyedShip;
 		switch(result)
