@@ -156,7 +156,7 @@ public class BattleShipServer
 	/*
 	 * Loads all battleship registered players from a file
 	 */
-	public void loadBattleShipPlayersFromFile()
+	protected void loadBattleShipPlayersFromFile()
 	{
 		try
 		{
@@ -182,6 +182,15 @@ public class BattleShipServer
 		}
 	}
 	
+	/*
+	 * This method is called whenever the sockets class receive a new connection. It is called to inform the server that it needs to prepare the necessary resources to deal with that player and validate its login.
+	 * If the login is valid, the player will be placed in the lobby.
+	 * Receives as parameters the necessary information to communicate with the player and also to validate its login.
+	 * Returns informing if the login was succeeded.
+	 * @param thread The ClientThread class associated with the player. This class implements all sockets logic and is necessary for the server to communicate with the player that just connected.
+	 * @param data A BattleShipData class representing the data that the player sent to the server. It should be of type LoginRequestData because the first communication between the player and the server should be a request to login.
+	 * @return A boolean value indicating whether the login was succeeded or not.
+	 */
 	public boolean newPlayerConnected(ClientThread thread, BattleShipData data)
 	{
 		LoginRequestData login = (LoginRequestData) data;
