@@ -74,6 +74,9 @@ Este é a screen de login. O jogador deve introduzir as suas credenciais de logi
 Se o Username ainda não existir, é criada uma nova conta.
 Se este já existir, a password é verificada e, se não corresponder à password correta (validada pelo servidor), é mostrada uma mensagem a informar tal.
 Se for criada uma nova conta ou a password estiver correta, o login é bem sucedido e o utilizador é levado para o Lobby, descrito a seguir.
+Caso seja criada uma conta, é apresentada a mensagem na imagem seguinte:
+
+![new account created](https://user-images.githubusercontent.com/25772485/27014021-b14a76c8-4ee7-11e7-858d-a12dec9a1a53.png)
 
 	Lobby Screen
 ![lobby with no players](https://user-images.githubusercontent.com/25772485/27013787-b0f84fc4-4ee2-11e7-889f-4e84e63dcfdb.png)
@@ -103,10 +106,33 @@ Quando o adversário estiver pronto, é apresentado um label que diz "Opponent R
 
 Quando ambos os jogadores estiverem prontos, são colocados no jogo. A aplicação de ambos irá mudar para a screen de Game, como se apresenta a seguir.
 
+![beggining of a game](https://user-images.githubusercontent.com/25772485/27013933-5542150e-4ee5-11e7-9bbc-c0a8dff5c2e8.png)
+
+Esta é a screen de Game, ou seja, que ambos os jogadores vêm. No exemplo é mostrado o estado de um jogo que acaba de começar com o mapa do aliado sem qualquer tiro assim como do adversário. O deste último encontra-se também oculto e vai sendo revelado pelo outro jogador (através do servidor) à medida que os disparos vão acontecendo.
+Para disparar no mapa do adversário, o utilizador deve clicar com o botão esquerdo do rato em cima da célula sobre a qual pretende disparar.
+Os barcos que são atingidos vão sendo marcados com X. As células com água que vão sendo atingidas (e, portanto, reveladas) são marcadas com uma textura de água a ferver.
+Os barcos quando sao destruídos têm as suas imagens alteradas quando são completamente destruídos, ficando uma textura de explosão.
+
+
+Quando o jogo acaba um jogador é derrotado (Defeat) e outro é vitorioso (Victory).
+Ambos os jogadores são devidamente informados em cada uma destas situações. A seguir são apresentadas as imagens que caracterizam cada um destes casos:
+
+![victory screen](https://user-images.githubusercontent.com/25772485/27014045-5dcaf54e-4ee8-11e7-827a-d46457befb73.png)
+Esta é a screen de vitoria.
+
+Apresenta-se no canto inferior direito um botão para o jogador poder partilhar a sua vitória no Facebook.
+É aberta uma janela do navegador Chrome para efetuar o login e, depois, a partilha no Facebook da sua vitória.
+Depois de partilhar a sua vitória no Facebook, quando voltar ao jogo, ser-lhe-á apresentada a seguinte imagem:
+
+![victory screen after posting on facebook](https://user-images.githubusercontent.com/25772485/27014044-5dc8e24a-4ee8-11e7-924d-840096165a4d.png)
+
+No caso de derrota, é apresentada a seguinte screen ao jogador derrotado:
+![defeat screen](https://user-images.githubusercontent.com/25772485/27014080-44d1ec40-4ee9-11e7-9b13-e909aa1255f7.png)
 
 
 
-
+Esta screen é apresentada quando o jogador clica no botão "Exit" do Menu Principal. Permite confirmar se realmente pretende sair do programa ou não.
+![exit screen](https://user-images.githubusercontent.com/25772485/27014085-6f07d57e-4ee9-11e7-91cc-d6a7908872dc.png)
 
 Final Project Intermediate Check-Point
 
