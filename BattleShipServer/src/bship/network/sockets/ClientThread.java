@@ -1,7 +1,3 @@
-//ClientThread.java
-//© Usman Saleem, 2002 and Beyond
-//usman_saleem@yahoo.com
-
 package bship.network.sockets;
 
 import java.net.Socket;
@@ -24,8 +20,8 @@ public class ClientThread extends Observable implements Runnable
 	private ObjectOutputStream socket_output;
 
 	/** Socket object representing client connection */
-
 	private Socket socket;
+	
 	private BattleShipServer battleShipServer;
 	private boolean running;
 	private Player player;
@@ -34,13 +30,13 @@ public class ClientThread extends Observable implements Runnable
 		this.socket = socket;
 		this.battleShipServer = battleShipServer;
 		running = false;
-		//get I/O from socket
+		
 		try
 		{
 			socket_input = new ObjectInputStream(socket.getInputStream());
 
 			socket_output = new ObjectOutputStream(socket.getOutputStream());
-			running = true; //set status
+			running = true;
 		}
 		catch (IOException ioe)
 		{
@@ -58,10 +54,6 @@ public class ClientThread extends Observable implements Runnable
 		this.player = player;
 	}
 
-	/**
-	*Stops clients connection
-	*/
-
 	public void stopClient()
 	{
 		try
@@ -73,14 +65,7 @@ public class ClientThread extends Observable implements Runnable
 
 	public void run() 
 	{
-		BattleShipData data; //will hold message sent from client
-
-							 //socket_output.println("Welcome to Java based Server");
-
-
-							 //start listening message from client//
-
-
+		BattleShipData data;
 		try
 		{
 			boolean loginSucceeded;
@@ -95,11 +80,7 @@ public class ClientThread extends Observable implements Runnable
 
 			while ((data = (BattleShipData)socket_input.readObject()) != null && running)
 			{
-				//provide your server's logic here//
 				player.HandleReceivedData(data);
-				
-				//right now it is acting as an ECHO server//
-				//socket_output.writeObject(data); //response to client//
 			}
 			running = false;
 		}
@@ -107,13 +88,9 @@ public class ClientThread extends Observable implements Runnable
 		{
 			running = false;
 		}
-		catch (ClassNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		catch (ClassNotFoundException e) {}
 
-		//it's time to close the socket
+
 		try
 		{
 			this.socket.close();
@@ -121,9 +98,9 @@ public class ClientThread extends Observable implements Runnable
 		}
 		catch (IOException ioe) {}
 
-		//notify the observers for cleanup etc.
-		this.setChanged();              //inherit from Observable
-		this.notifyObservers(this);     //inherit from Observable
+		
+		this.setChanged();             
+		this.notifyObservers(this);    
 	}
 
 	public void sendData(BattleShipData data)
@@ -137,10 +114,6 @@ public class ClientThread extends Observable implements Runnable
 			if (e.getMessage() != "Socket closed")
 				e.printStackTrace();
 		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		catch (IOException e) {}
 	}
 }

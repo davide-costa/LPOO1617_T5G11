@@ -12,9 +12,5 @@ public class ReadyForGame extends PlayerState
 	}
 
 	@Override
-	void HandleReceivedData(BattleShipData data) throws IOException 
-	{
-		// TODO Auto-generated method stub
-	}
-
+	void HandleReceivedData(BattleShipData data) throws IOException {}
 }
