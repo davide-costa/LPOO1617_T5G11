@@ -113,7 +113,7 @@ Quando ambos os jogadores estiverem prontos, são colocados no jogo. A aplicaç�
 Esta é a screen de Game, ou seja, que ambos os jogadores vêm. No exemplo é mostrado o estado de um jogo que acaba de começar com o mapa do aliado sem qualquer tiro assim como do adversário. O deste último encontra-se também oculto e vai sendo revelado pelo outro jogador (através do servidor) à medida que os disparos vão acontecendo.
 Para disparar no mapa do adversário, o utilizador deve clicar com o botão esquerdo do rato em cima da célula sobre a qual pretende disparar.
 Os barcos que são atingidos vão sendo marcados com X. As células com água que vão sendo atingidas (e, portanto, reveladas) são marcadas com uma textura de água a ferver.
-Os barcos quando sao destruídos têm as suas imagens alteradas quando são completamente destruídos, ficando uma textura de explosão.
+Os barcos, quando são completamente destruídos têm as suas imagens alteradas, ficando uma textura de explosão.
 
 
 Quando o jogo acaba um jogador é derrotado (Defeat) e outro é vitorioso (Victory).
