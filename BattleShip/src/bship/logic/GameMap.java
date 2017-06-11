@@ -141,6 +141,7 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 	
 	/**
 	 * Refreshes the observer of this class. Which means removes the current observer (if it exists) and adds the Observer it receives as parameter as new observer.
+	 * @param newObserver The new Observer of this GameMap class.
 	 */
 	public void refreshObserver(Observer newObserver)
 	{
