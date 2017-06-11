@@ -13,6 +13,12 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 	protected CellState map[][];
 	Observer currObserver;
 	
+	/**  
+	 * Constructor of GameMap. Called as super for the the subclasses like DefaultMap.
+     * @param isOpponent A boolean that indicate if the map will be for opponent or ally use.
+	 * @param sizeX The x size of the map being created.
+	 * @param sizeY The x size of the map being created.
+	 */ 
 	public GameMap(boolean isOpponent, int sizeX, int sizeY)
 	{
 		this.sizeX = sizeX;
@@ -26,6 +32,10 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		}
 	}
 	
+	/**  
+	 * Responsible for filling the map with a given cell state, but creating copies of the given cell, for no aliasing.
+     * @param cell The cell which state will be filled in all map.
+	 */
 	public void fill(CellState cell)
 	{
 		for (int y = 0; y < sizeX; y++)
@@ -39,16 +49,28 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		}
 	}
 	
+	/**  
+	 * Getter for the map.
+     * @return The map.
+	 */ 
 	public CellState[][] getMap()
 	{
 		return map;
 	}
 	
+	/**  
+	 * Getter for the map x size.
+     * @return The map x size.
+	 */ 
 	public int getMapXSize()
 	{
 		return sizeX;
 	}
 	
+	/**  
+	 * Getter for the map y size.
+     * @return The map y size.
+	 */
 	public int getMapYSize()
 	{
 		return sizeY;
@@ -107,6 +129,11 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		return map[xCoord][yCoord];
 	}
 	
+	/**
+	 * Verifies if the given coords are in map range.
+	 * @param coords the coords to test.
+	 * @return true if in map range. False otherwise.
+	 */
 	public boolean areCoordsInMapRange(Coords coords)
 	{
 		int currCoordsX = coords.GetX();
@@ -120,6 +147,11 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		return true;
 	}
 	
+	/**
+	 * Verifies if the given list of coords are in map range.
+	 * @param coords the list of coords to test.
+	 * @return true if all in map range. False otherwise.
+	 */
 	public boolean areListOfCoordsInMapRange(ArrayList<Coords> coords)
 	{
 		for(Coords currCoords: coords)
@@ -129,8 +161,13 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		return true;
 	}
 	
+	/**
+	 * Called when one of the cells of the map has been altered. And then informs his observers (gui, in this case) that the map has changed.
+	 * @param cell the cell that has been changed.
+	 * @param unsued unused paramenter that cames with override method body..
+	 */
 	@Override
-	public void update(Observable cell, Object unsued)
+	public void update(Observable cell, Object unused)
 	{
 		setChanged();
 		notifyObservers();
