@@ -139,6 +139,9 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		notifyObservers();
 	}
 	
+	/**
+	 * Refreshes the observer of this class. Which means removes the current observer (if it exists) and adds the Observer it receives as parameter as new observer.
+	 */
 	public void refreshObserver(Observer newObserver)
 	{
 		if (currObserver != null)
@@ -147,6 +150,10 @@ public abstract class GameMap extends Observable implements Serializable, Observ
 		currObserver = newObserver;
 	}
 	
+	/**
+	 * Forces the notification of its observer. Is called whenever the gui needs to be notified that the map has changed without actually making changes to its fields.
+	 * For example, when the GameMap changes to a new one during a game, this method is called to inform the Gui that the map needs to be repainted.
+	 */
 	public void notifyObserver()
 	{
 		setChanged();
