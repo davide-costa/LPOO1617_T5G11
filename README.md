@@ -134,6 +134,37 @@ No caso de derrota, é apresentada a seguinte screen ao jogador derrotado:
 Esta screen é apresentada quando o jogador clica no botão "Exit" do Menu Principal. Permite confirmar se realmente pretende sair do programa ou não.
 ![exit screen](https://user-images.githubusercontent.com/25772485/27014085-6f07d57e-4ee9-11e7-91cc-d6a7908872dc.png)
 
+
+UML Diagrams
+
+Client Side
+
+![ai](https://user-images.githubusercontent.com/25772485/27014110-e96160ec-4ee9-11e7-89d9-c5d79f5ebe79.png)
+
+![data](https://user-images.githubusercontent.com/25772485/27014109-e95e6eaa-4ee9-11e7-8ff6-04c6d9a0163c.png)
+
+![gui](https://user-images.githubusercontent.com/25772485/27014111-e97b072c-4ee9-11e7-9041-01d66caf33e7.png)
+
+![logic](https://user-images.githubusercontent.com/25772485/27014112-e97db4ae-4ee9-11e7-83fb-31e103ceff4f.png)
+
+![sockets](https://user-images.githubusercontent.com/25772485/27014113-e9864056-4ee9-11e7-808f-6c6a7fbec955.png)
+
+![test](https://user-images.githubusercontent.com/25772485/27014114-e989b56a-4ee9-11e7-860f-a281a9c4e1f2.png)
+
+
+Server Side
+
+![data](https://user-images.githubusercontent.com/25772485/27014118-fb52e604-4ee9-11e7-9f93-7752cf6d872f.png)
+
+![logic](https://user-images.githubusercontent.com/25772485/27014119-fb6ed076-4ee9-11e7-9406-bf27d63b16fe.png)
+
+![sockets](https://user-images.githubusercontent.com/25772485/27014120-fb7ef5c8-4ee9-11e7-8849-c74c0db4cd68.png)
+
+![test](https://user-images.githubusercontent.com/25772485/27014121-fb8056fc-4ee9-11e7-9ffe-57104addd447.png)
+
+
+
+
 Final Project Intermediate Check-Point
 
 
