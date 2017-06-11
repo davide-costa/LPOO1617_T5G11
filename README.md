@@ -74,6 +74,26 @@ A seguinte imagem mostra o Lobby com 1 jogador online:
 ![lobby with a player online](https://user-images.githubusercontent.com/25772485/27013786-b0f7f560-4ee2-11e7-8e82-c7adb7916363.png)
 
 
+Para convidar um jogador para um jogo, deve clicar-se como botão esquerdo do rato em cima do jogador que se pretende convidar.
+Na aplicação do jogador do outro lado (que recebe o convite) irá aprecer um ConfirmDialog a informar que foi convidade. Tendo a opção para aceitar e rejeitar o convite.
+Caso seja rejeitado, o outro jogador é informado de tal.
+Caso seja aceite, ambos os jogadores são colocados em Ship Placement.
+A screen de Ship Placement apresenta-se a seguir:
+
+	Ship Placement
+![shipplacement](https://user-images.githubusercontent.com/25772485/27013835-7c20ac50-4ee3-11e7-98b3-ecce8e81ad8a.png)
+
+Esta é a screen de Ship Placement. Aqui os jogadores podem colocar os barcos no mapa. Os barcos aparecem na área ao lado direito, como se apresenta na imagem acima.
+Para colocar um barco no mapa, o joagador deve clicar com o botão esquerdo do rato em cima do barco em que quer pegar. Para pousar o barco, deve arrastá-lo até ao sítio pretendido (arrastando o rato até esse mesmo sítio) e largar o botão esquerdo para pousar. Tal ação é devidamente validada, sendo impossível colocar barcos fora do alcance do mapa, em cima de outros ou nas redondezas (surrounding coords) de outros barcos. Se o jogador pretender rodar o barco, enquanto está com ele "pegado", ou seja, depois de pegar nele, deve clicar com o botão direito para rodar o barco. Depois, para pousar o barco, deve proceder da forma anteriormente indicada: largar o botão esquerdo do rato.
+Está disponível a funcionalidade de colocar os barcos automaticamente no mapa, clicando no botão "Place Ships Automatically".
+Quando estiver pronto para jogar, deve clicar no botão "Ready". Isto irá informar o servidor que se encarrega de informar o adversário.
+Quando o adversário estiver pronto, é apresentado um label que diz "Opponent Ready", como se apresenta na imagem seguinte:
+
+![shipplacement with opponent ready](https://user-images.githubusercontent.com/25772485/27013836-7c25075a-4ee3-11e7-9b77-539d7237ceaf.png)
+
+Quando ambos os jogadores estiverem prontos, são colocados no jogo. A aplicação de ambos irá mudar para a screen de Game, como se apresenta a seguir.
+
+
 
 
 
