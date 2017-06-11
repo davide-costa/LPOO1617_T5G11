@@ -9,6 +9,9 @@ import bship.gui.CurrGameData;
 import bship.gui.GameGui;
 import bship.network.data.GameResultData.GameResult;
 
+/**
+ * Implements all the logic of a BattleShip game. Is used by the Gui and the AIOpponent classes.
+*/
 public class Game
 {
 	protected boolean allyTurn;
