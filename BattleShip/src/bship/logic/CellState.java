@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+/**  
+ * Represents a cell state form the game map. Has information if the cell has a ship and if is discovered.
+ */ 
 public abstract class CellState extends Observable implements Serializable
 {
 	private static final long serialVersionUID = 198033874357001837L;
