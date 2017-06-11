@@ -182,6 +182,11 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
+	/**  
+	 * Getter of the a ship name.
+	 * @param ship The ship that it's trying to get name.
+     * @return String name of the given ship.
+	 */ 
 	public String getShipName(Ship ship)
 	{
 		String shipName = null;
@@ -198,6 +203,10 @@ public abstract class ShipPlacement
 		return shipName;
 	}
 	
+	/**  
+	 * Verify all ships are placed in the map.
+     * @return true if all placed. False otherwise.
+	 */ 
 	public boolean verifyAllShipsArePlaced() 
 	{
 		Iterator<Entry<String, Boolean>> it = shipIsAlreadyPlaced.entrySet().iterator();
@@ -212,6 +221,10 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
+	/**  
+	 * Getter of the ships already in the map.
+     * @return list of the ships already placed. An empty list if none.
+	 */ 
 	public ArrayList<Ship> getPlacedShips()
 	{
 		ArrayList<Ship> ships = new ArrayList<Ship>();
@@ -227,6 +240,10 @@ public abstract class ShipPlacement
 		return ships;
 	}
 	
+	/**  
+	 * Getter of the ships not placed yet in the map.
+     * @return list of the ships not placed yet. An empty list if all placed.
+	 */ 
 	public ArrayList<Ship> getShipsToPlace()
 	{
 		ArrayList<Ship> ships = new ArrayList<Ship>();

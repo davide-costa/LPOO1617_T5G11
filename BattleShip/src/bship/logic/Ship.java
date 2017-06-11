@@ -142,11 +142,18 @@ public abstract class Ship implements Serializable
 		coords.add(coord);
 	}
 
+	/**  
+	 * Make ship coords empty.
+	 */
 	public void clearCoords() 
 	{
 		coords.clear();	
 	}
 	
+	/**  
+	 * Fills the ship coords given the init coord and knowing the direction of the ship
+	 * @param initCoord The ship init coord.
+	 */
 	public void fillCoordsByInitCoord(Coords initCoord)
 	{
 		int xInc = 0, yInc = 0;
@@ -170,6 +177,11 @@ public abstract class Ship implements Serializable
 		}
 	}
 	
+	/**  
+	 * Checks if the this ship is equal to the ship passed by argument.
+	 * @param obj The ship against the this will be compared.
+	 * @return true if equals. False  otherwise.
+	 */ 
 	@Override
 	public boolean equals(Object obj) 
 	{
