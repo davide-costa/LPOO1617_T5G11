@@ -87,7 +87,7 @@ A seguinte imagem mostra o Lobby com 1 jogador online:
 ![lobby with a player online](https://user-images.githubusercontent.com/25772485/27013786-b0f7f560-4ee2-11e7-8e82-c7adb7916363.png)
 
 
-Para convidar um jogador para um jogo, deve clicar-se como botão esquerdo do rato em cima do jogador que se pretende convidar.
+Para convidar um jogador para um jogo, deve clicar-se com o botão esquerdo do rato em cima do jogador que se pretende convidar.
 Na aplicação do jogador do outro lado (que recebe o convite) irá aprecer um ConfirmDialog a informar que foi convidade. Tendo a opção para aceitar e rejeitar o convite.
 Caso seja rejeitado, o outro jogador é informado de tal.
 Caso seja aceite, ambos os jogadores são colocados em Ship Placement.
