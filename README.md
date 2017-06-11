@@ -88,7 +88,7 @@ A seguinte imagem mostra o Lobby com 1 jogador online:
 
 
 Para convidar um jogador para um jogo, deve clicar-se com o botão esquerdo do rato em cima do jogador que se pretende convidar.
-Na aplicação do jogador do outro lado (que recebe o convite) irá aprecer um ConfirmDialog a informar que foi convidade. Tendo a opção para aceitar e rejeitar o convite.
+Na aplicação do jogador do outro lado (que recebe o convite) irá aprecer um ConfirmDialog a informar que foi convidado. Tendo a opção para aceitar e rejeitar o convite.
 Caso seja rejeitado, o outro jogador é informado de tal.
 Caso seja aceite, ambos os jogadores são colocados em Ship Placement.
 A screen de Ship Placement apresenta-se a seguir:
