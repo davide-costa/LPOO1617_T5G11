@@ -40,4 +40,10 @@ public class BattleShipServerTests extends BattleShipServer
 		super.loadBattleShipPlayersFromFile();
 	}
 	
+	public String getBattleShipPlayersFileName()
+	{
+		return battleShipPlayersFileName;
+	}
+
+	
 }
