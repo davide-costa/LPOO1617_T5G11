@@ -56,16 +56,28 @@ public class Game
 		opponentMap.fill(new OpponentCellState(null, false));
 	}
 	
+	/**  
+	 * Getter for the OpponentShips ArrayList that contains all the Ships of the enemy opponent as they are revealed (when fully destroyed).
+     * @return Returns the ArrayList of enemy ships.
+	 */ 
 	public ArrayList<Ship> getOpponentShips()
 	{
 		return opponentShips;
 	}
 	
+	/**  
+	 * Getter for the ally game map.
+     * @return The current ally game map.
+	 */ 
 	public GameMap getAllyMap()
 	{
 		return map;
 	}
 	
+	/**  
+	 * Setter for the ally game map.
+     * @param allyGameMap The new GameMap class to set the ally map equal to.
+	 */ 
 	public void setAllyMap(GameMap allyGameMap)
 	{
 		this.map = allyGameMap;
@@ -73,11 +85,19 @@ public class Game
 		opponentMap.notifyObserver();
 	}
 
+	/**  
+	 * Getter for the opponent game map.
+     * @return The current opponent game map.
+	 */ 
 	public GameMap getOpponentMap()
 	{
 		return opponentMap;
 	}
 	
+	/**  
+	 * Setter for the opponent game map.
+     * @param allyGameMap The new GameMap class to set the opponent map equal to.
+	 */ 
 	public void setOpponentMap(GameMap opponentGameMap)
 	{
 		this.opponentMap = opponentGameMap;
