@@ -60,15 +60,17 @@ public class Client extends Observable implements Runnable
 		instance = null;
 	}
 
-	public Client() throws IOException
+	private Client() throws IOException
 	{
 		connected = false;
 		connect("dservers.ddns.net", 5555);
 		currObserver = null;
 	}
 	
-	//Constructor used for tests
-	public Client(int unused)
+	/**
+	 * Constructor used for tests
+	 */
+	protected Client(int unused)
 	{
 		connected = true;
 	}
