@@ -1,5 +1,6 @@
 package bship.gui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -11,7 +12,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import bship.network.sockets.LobbyIntermediate;
 import javax.swing.JList;
@@ -68,6 +68,7 @@ public class Lobby extends BattleShipGui
 	{
 		txtOnlinePlayers = new JLabel("Online Players");
 		txtOnlinePlayers.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
+		txtOnlinePlayers.setForeground(Color.WHITE);
 		txtOnlinePlayers.setBounds(870, 100, 180, 50);
 		lobbyPanel.add(txtOnlinePlayers);
 	}

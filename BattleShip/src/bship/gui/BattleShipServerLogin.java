@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -83,6 +84,7 @@ public class BattleShipServerLogin extends BattleShipGui
 	{
 		lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsername.setBounds(685, 425, 250, 50);
 		battleShipServerLoginPanel.add(lblUsername);
@@ -93,6 +95,7 @@ public class BattleShipServerLogin extends BattleShipGui
 		lblPassword = new JLabel("Password");
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setBounds(685, 525, 250, 50);
 		battleShipServerLoginPanel.add(lblPassword);
 	}
