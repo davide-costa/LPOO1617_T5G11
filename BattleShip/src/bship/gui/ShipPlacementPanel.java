@@ -24,7 +24,6 @@ import bship.ai.AIShipPlacer;
 import bship.logic.Coords;
 import bship.logic.DefaultMap;
 import bship.logic.MultiplayerShipPlacement;
-import bship.logic.Ship;
 import bship.logic.ShipPlacement;
 import bship.logic.SinglePlayerShipPlacement;
 import bship.network.sockets.ShipPlacementIntermediate;
@@ -201,12 +200,14 @@ public class ShipPlacementPanel extends BattleShipGui
 	
 	private void drawShip(String shipName, DraggableShip draggableShip)
 	{
-		Ship ship = shipPlacement.getShipName(shipName);
-		if(!draggableShip.getDirection().equals(ship.getDirection()))
+		String direction = shipPlacement.getShipDirection(shipName);
+		Coords initCoords = shipPlacement.getShipInitCoords(shipName);
+		
+		if(!draggableShip.getDirection().equals(direction))
 			draggableShip.rotate();
 		
-		int xCoord = boardXStartPos + ship.getInitCoords().GetX() * cellSize;
-		int yCoord = boardYStartPos + ship.getInitCoords().GetY() * cellSize;
+		int xCoord = boardXStartPos + initCoords.GetX() * cellSize;
+		int yCoord = boardYStartPos + initCoords.GetY() * cellSize;
 		draggableShip.setLocation(xCoord, yCoord);
 	}
 

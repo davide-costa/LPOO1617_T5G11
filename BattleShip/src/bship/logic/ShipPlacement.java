@@ -24,9 +24,19 @@ public abstract class ShipPlacement
 		return map;
 	}
 	
-	public Ship getShipName(String shipName)
+	private Ship getShipByName(String shipName)
 	{
 		return shipsByName.get(shipName);
+	}
+	
+	public String getShipDirection(String shipName)
+	{
+		return getShipByName(shipName).getDirection();
+	}
+
+	public Coords getShipInitCoords(String shipName)
+	{
+		return getShipByName(shipName).getInitCoords();
 	}
 
 	private void fillShipsHashMaps() 
