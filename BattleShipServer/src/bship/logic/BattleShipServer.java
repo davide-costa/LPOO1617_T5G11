@@ -271,7 +271,6 @@ public class BattleShipServer
 	public void playerDisconnected(ClientThread thread)
 	{
 		Player player = thread.getPlayer();
-		
 		//In case the player failed to log in, the thread will terminate but no PLayer has been assign to it
 		if(player == null)
 			return;
@@ -286,6 +285,8 @@ public class BattleShipServer
 			sendOnlinePlayersInfoToAllPlayers();
 		else
 			player.getOpponent().sendData(new PlayerDisconnectedData());
+		
+		player.setOpponent(null);
 	}
 	
 	/**  
@@ -306,12 +307,9 @@ public class BattleShipServer
 	{
 		Player inviterPlayer = battleshipPlayers.get(inviterPlayerName);
 		Player invitedPlayer = battleshipPlayers.get(invitedPlayerName);
-
 		
 		if (invitedPlayer == null)
-		{
 			return false;
-		}
 		
 		if(invitedPlayer.isBusy())
 			return false;
