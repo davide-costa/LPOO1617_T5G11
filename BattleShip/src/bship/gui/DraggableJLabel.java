@@ -7,6 +7,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public class DraggableJLabel extends JLabel
 {
@@ -35,13 +36,15 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mousePressed(MouseEvent event)
 			{
-				initClick = new Point(event.getX(), event.getY());
+				if (SwingUtilities.isLeftMouseButton(event))
+					initClick = new Point(event.getX(), event.getY());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent event)
 			{
-				initClick = null;
+				if (SwingUtilities.isLeftMouseButton(event))
+					initClick = null;
 			}
 		});
 	}
@@ -53,6 +56,9 @@ public class DraggableJLabel extends JLabel
 			@Override
 			public void mouseDragged(MouseEvent event)
 			{
+				if (!SwingUtilities.isLeftMouseButton(event))
+					return;
+				
 				Point mouseLocation = new Point(event.getX(), event.getY());
 				if (initClick == null)
 				{
