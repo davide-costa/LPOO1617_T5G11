@@ -11,6 +11,10 @@ public abstract class CellState extends Observable implements Serializable
 	protected Ship ship;
 	private Observer currObserver;
 	
+	/**  
+	 * Constructor of CellState class.
+     * @param ship The ship in that cell. null if none.
+	 */ 
 	public CellState(Ship ship)
 	{
 		this.setShip(ship);
@@ -18,41 +22,81 @@ public abstract class CellState extends Observable implements Serializable
 		currObserver = null;
 	}
 	
+	/**  
+	 * Getter of a copy of the cell.
+     * @return A copy if the cell state.
+	 */ 
 	public abstract CellState getCopy();
 	
+	/**  
+	 * Checks if the cell is discovered.
+     * @return true if discovered. False otherwise.
+	 */ 
 	public boolean isDiscovered()
 	{
 		return discovered;
 	}
 
+	/**  
+	 * Setter of a cell discoverness.
+     * @param discovered a boolean indicating if the cell is discovered or not.
+	 */ 
 	public void setDiscovered(boolean discovered)
 	{
 		this.discovered = discovered;
 		notifyObserver();
 	}
 
+	/**  
+	 * Getter of the ship in the cell.
+     * @return The ship in the cell. null if none.
+	 */ 
 	public Ship getShip()
 	{
 		return ship;
 	}
 
+	/**  
+	 * Setter of a cell ship.
+     * @param The ship to be set in the cell.
+	 */ 
 	public void setShip(Ship ship)
 	{
 		this.ship = ship;
 		notifyObserver();
 	}
 	
+	/**  
+	 * Checks if the cell has ship.
+     * @return true has ship. False otherwise.
+	 */ 
 	public abstract boolean hasShip();
 	
+	/**  
+	 * Checks if the cell has ship and is discovered.
+     * @return true if has ship and is discovered. False otherwise.
+	 */ 
 	public abstract boolean isDiscoveredAndShip();
 	
+	/**  
+	 * Checks if the cell has no ship and is discovered.
+     * @return true if has no ship and is discovered. False otherwise.
+	 */ 
 	public boolean isDiscoveredAndWater()
 	{
 		return isDiscovered() && !hasShip();
 	}
 	
+	/**  
+	 * Checks if the cell has a ship destroyed.
+     * @return true if has a ship destroyed. False otherwise.
+	 */ 
 	public abstract boolean hasShipDestroyed();
 	
+	/**  
+	 * Refreshes the observes of the cell, i.e. deletes the old observer if exists and add the new observer.
+     * @param The newObserver to be set.
+	 */ 
 	public void refreshObserver(Observer newObserver)
 	{
 		if (currObserver != null)
@@ -61,6 +105,9 @@ public abstract class CellState extends Observable implements Serializable
 		addObserver(newObserver);
 	}
 	
+	/**  
+	 * Notify the observers that the cell has been changed.
+	 */ 
 	private void notifyObserver()
 	{
 		if (currObserver != null)
@@ -70,6 +117,11 @@ public abstract class CellState extends Observable implements Serializable
 		}
 	}
 	
+	/**  
+	 * Checks if the this cell is equal to the cell passed by argument.
+	 * @param obj The cell state against the this will be compared.
+	 * @return true if equals. False  otherwise.
+	 */ 
 	@Override
 	public boolean equals(Object obj) 
 	{
