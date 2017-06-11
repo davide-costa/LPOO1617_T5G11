@@ -166,7 +166,7 @@ public class Game
 		return aliveShips == 0;
 	}
 	
-	public void getCellStatesOfCoords(boolean isAlly, ArrayList<Coords> coords, ArrayList<CellState> states)
+	private void getCellStatesOfCoords(boolean isAlly, ArrayList<Coords> coords, ArrayList<CellState> states)
 	{
 		states.clear();
 		
