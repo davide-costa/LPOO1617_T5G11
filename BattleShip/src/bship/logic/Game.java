@@ -299,6 +299,10 @@ public class Game
 		}
 	}
 
+	/**  
+	 * Tries to find the sank ship coords. It tries all 4 possible directions, to find out which one is correct, ad find out the given ship coords.
+     * @param ship the ship that it's trying to discover the coords
+     */
 	private void discoverCoordsOfSankShip(Ship ship)
 	{
 		Coords coords = ship.getCoords().get(0);
@@ -318,7 +322,14 @@ public class Game
 		//Try top coord
 		tryOpponentShipHeadingDirection(ship, coords, "vertical", 0, 1);
 	}
-	
+	/**  
+	 * Tries to find the ship coords given a certain direction and some init coords. The method will increment x and y by xInc and yInc respectively, and verifie if that is a valid coord, that is if is not of board range and if it has the ship we are looking for.
+     * @param ship the ship that it's trying to discover the coords
+     * @param initCoords the coords where start the discover.
+     * @param direction the direction of the ship, vertical or horizontal.
+     * @param xInc the increment in X at each iteration of the discover.
+     * @param yInc the increment in Y at each iteration of the discover.
+     */
 	private void tryOpponentShipHeadingDirection(Ship ship, Coords initCoords, String direction, int xInc, int yInc)
 	{
 		Coords coords = new Coords(initCoords); 
@@ -338,22 +349,31 @@ public class Game
 				return;
 		}
 	}
-
+	/**  
+	 * Calls gui and return an image of the ally map, currently displayed in the screen.
+     * @return the ally map image as an Object
+     */
 	public Object getAllyMapImage()
 	{
 		return gui.getAllyMapImage();
 	}
-
+	/**  
+	 * Responsable for informing the gui that the game has over and the ally loses.
+     */
 	public void declareDefeat(Object winnerGameMap)
 	{
 		gui.declareGameDefeat(winnerGameMap);
 	}
-	
+	/**  
+	 * Responsable for informing the gui that the game has over and the ally wins.
+     */
 	public void declareVictory()
 	{
 		gui.declareGameVictory();
 	}
-
+	/**  
+	 * Responsable for informing the gui that the opponent quit the game.
+     */ 
 	public void opponentQuit() 
 	{
 		gui.opponentQuit();
