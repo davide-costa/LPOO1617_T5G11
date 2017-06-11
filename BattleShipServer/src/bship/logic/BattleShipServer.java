@@ -19,6 +19,9 @@ import bship.network.data.PlayerDisconnectedData;
 import bship.network.sockets.ClientThread;
 import bship.network.sockets.Server;
 
+/**
+ * Represents a the BattleShipServer. It is the system class that implements all the server general logic. It is the commander of the server and stores all the information necessary when the server is running. Contains the a main method that should be run to start the server.
+ */
 public class BattleShipServer
 {
 	protected  String battleShipPlayersFileName = "bshipPlayers.bship";
@@ -27,11 +30,17 @@ public class BattleShipServer
 	private ArrayList<Player> inGamePlayers;
 	protected HashMap<String, Player> battleshipPlayers;
 	
+	/*
+	 * Main method. Should be called to start the server.
+	 */
 	public static void main(String argv[])
 	{
 		new BattleShipServer();
 	}
 	
+	/*
+	 * BattleShipServer constructor. It is called to create by the main method to start the server.
+	 */
 	public BattleShipServer()
 	{
 		server = new Server(this);
@@ -41,6 +50,9 @@ public class BattleShipServer
 		inGamePlayers = new ArrayList<Player>();
 	}
 	
+	/*
+	 * Returns an ArrayList containing all players that are currently in lobby in the server, i. e., the players that are waiting for players to invite them or waiting to be invited to a game. A player is placed in lobby immediately after it successfully logs in to the server or when a game ends.
+	 */
 	public ArrayList<Player> getInLobbyPlayers()
 	{
 		return getInLobbyPlayersSynchronized();
@@ -53,6 +65,10 @@ public class BattleShipServer
 		return playersInLobby;
 	}
 	
+	/*
+	 * Is called to inform that a certain player has left from the lobby because the server needs to know when a player leaves from lobby. Receives the Player who left from lobby as parameter.
+	 * @param player The player who left from lobby.
+	 */
 	public synchronized void playerLeftFromLobby(Player player)
 	{
 		inLobbyPlayers.remove(player);
@@ -67,16 +83,28 @@ public class BattleShipServer
 		return playerNames;
 	}
 	
+	/*
+	 * A getter method for the in game players. Returns and ArrayList containing all the players that are in game. It is used only by the tests package for validating that the information is well represented inside this class.
+	 * @return An ArrayList containing all the players that are currently in game.
+	 */
 	public ArrayList<Player> getInGamePlayers()
 	{
 		return inGamePlayers;
 	}
 	
+	/*
+	 * Informs that a player has entered in a game. Is called by mathods of this package to inform so.
+	 * @param player The player that has entered in game.
+	 */
 	public void addInGamePlayer(Player player) 
 	{
 		inGamePlayers.add(player);
 	}	
 	
+	/*
+	 * Returns an ArrayList containing wall the players that are currently online on the server. A player is online if it is in lobby, in ship placement or in game, i. e., if he is not offline.
+	 * @return An ArrayList containing the players that are currently online on the server.
+	 */
 	public ArrayList<Player> getOnlinePlayers() 
 	{
 		ArrayList<Player> onlinePlayers = new ArrayList<Player>();
@@ -86,12 +114,19 @@ public class BattleShipServer
 		return onlinePlayers;
 	}
 
+	/*
+	 * Getter for all the BattleShip players, i. e., the ones that are registered on the server, despite of being online or offline.
+	 * @return The HashMap containing all the registered players in the server.
+	 */
 	public HashMap<String, Player> getBattleshipPlayers()
 	{
 		return battleshipPlayers;
 	}
 	
-	public void saveBattleShipPlayersFromFile()
+	/*
+	 * Saves all battleship registered players to a file
+	 */
+	protected void saveBattleShipPlayersToFile()
 	{
 		try
 		{
@@ -118,6 +153,9 @@ public class BattleShipServer
 		}
 	}
 	
+	/*
+	 * Loads all battleship registered players from a file
+	 */
 	public void loadBattleShipPlayersFromFile()
 	{
 		try
@@ -186,7 +224,7 @@ public class BattleShipServer
 
 		newPlayer.sendData(response);
 		sendOnlinePlayersInfoToAllPlayers();
-		saveBattleShipPlayersFromFile();
+		saveBattleShipPlayersToFile();
 		return true;
 	}
 	
