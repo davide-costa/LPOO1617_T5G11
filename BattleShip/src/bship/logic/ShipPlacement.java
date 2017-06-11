@@ -13,17 +13,29 @@ public abstract class ShipPlacement
 	private HashMap<String, Ship> shipsByName = new HashMap<String, Ship>();
 	private HashMap<String, Boolean> shipIsAlreadyPlaced = new HashMap<String, Boolean>();
 	
+	/**  
+	 * Constructor of ShipPlacement class given the game map.
+     * @param map The map where the ships will be placed.
+	 */ 
 	public ShipPlacement(GameMap map)
 	{
 		this.map = map;
 		fillShipsHashMaps();
 	}
 
+	/**  
+	 * Getter of the map where the ships are being placed.
+     * @return map The map where the ships are being placed.
+	 */ 
 	public GameMap getMap()
 	{
 		return map;
 	}
 	
+	/**  
+	 * Getter of the ship, given the shipName.
+     * @return ship The ship with that name.
+	 */ 
 	public Ship getShipName(String shipName)
 	{
 		return shipsByName.get(shipName);
@@ -52,11 +64,21 @@ public abstract class ShipPlacement
 		}		
 	}
 	
+	/**  
+	 * Checks if a ship is already placed.
+	 * @param shipName The name of the ship to check.
+     * @return true if ship already placed. False otherwise.
+	 */ 
 	public boolean isShipsAlreadyPlaced(String shipName)
 	{
 		return shipIsAlreadyPlaced.get(shipName);
 	}
 
+	/**  
+	 * Checks if a ship drop is valid. Verifies if all coords of the ship and the surrounding coords of were it's trying to place the ship are empty. 
+	 * @param ship The ship that's trying to place.
+     * @return true if valid. False otherwise.
+	 */ 
 	public boolean isShipDropValid(Ship ship)
 	{
 		ArrayList<Coords> shipCoords = ship.getCoords();
@@ -79,6 +101,10 @@ public abstract class ShipPlacement
 		return true;
 	}
 	
+	/**  
+	 * Pick up the ship with that name.
+	 * @param shipName The ship name that's trying to pick.
+	 */ 
 	public void pickUpShip(String shipName)
 	{
 		if (shipIsAlreadyPlaced.get(shipName))
@@ -93,12 +119,23 @@ public abstract class ShipPlacement
 		}
 	}
 	
+	/**  
+	 * Pick up the given ship.
+	 * @param ship The ship that's trying to pick.
+	 */ 
 	public void pickUpShip(Ship ship)
 	{
 		String shipName = getShipName(ship);
 		pickUpShip(shipName);
 	}
 	
+	/**  
+	 * Tries to drop ship. Verifies if all coords of the ship and the surrounding coords of were it's trying to place the ship are empty. 
+	 * @param initCoord The init coords of the ship that it's trying to drop.
+	 * @param shipName The name of the ship that it's trying to drop.
+	 * @param direction The direction of the ship that it's trying to drop.
+     * @return true if dropped. False otherwise.
+	 */ 
 	public boolean dropShip(Coords initCoord, String shipName, String direction)
 	{
 		Ship ship = shipsByName.get(shipName);
@@ -108,6 +145,11 @@ public abstract class ShipPlacement
 		return dropShip(ship);
 	}
 	
+	/**  
+	 * Tries to drop ship. Verifies if all coords of the ship and the surrounding coords of were it's trying to place the ship are empty. 
+	 * @param ship The ship that it's trying to drop.
+     * @return true if dropped. False otherwise.
+	 */ 
 	public boolean dropShip(Ship ship)
 	{
 		String shipName = getShipName(ship);
