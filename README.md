@@ -131,6 +131,8 @@ Depois de partilhar a sua vitória no Facebook, quando voltar ao jogo, ser-lhe-�
 ![victory screen after posting on facebook](https://user-images.githubusercontent.com/25772485/27014044-5dc8e24a-4ee8-11e7-924d-840096165a4d.png)
 
 No caso de derrota, é apresentada a seguinte screen ao jogador derrotado:
+
+	Defeat Screen
 ![defeat screen](https://user-images.githubusercontent.com/25772485/27014080-44d1ec40-4ee9-11e7-9b13-e909aa1255f7.png)
 
 
