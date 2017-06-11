@@ -237,6 +237,10 @@ public class BattleShipServer
 		return true;
 	}
 	
+	/**  
+	 * Responsible for sending the names of all players in lobby to a player.
+	 * @param player the player to which the info should be sent.
+	 */
 	public void sendOnlinePlayersInfoToPlayer(Player player)
 	{
 		ArrayList<String> inLobbyPlayersNames = getInLobbyPlayersNames();
@@ -245,6 +249,10 @@ public class BattleShipServer
 		player.sendData(namesData);
 	}
 	
+	
+	/**  
+	 * Responsible for sending the names of all players in lobby all players on the lobby.
+	 */
 	public void sendOnlinePlayersInfoToAllPlayers()
 	{
 		ArrayList<String> inLobbyPlayersNames = getInLobbyPlayersNames();
@@ -254,6 +262,10 @@ public class BattleShipServer
 			currPlayer.sendData(namesData);
 	}
 	
+	/**  
+	 * Responsible for handle a player disconnected, changing the player state to Offline and handling the effects of that player in other players (in case they are in game together)
+	 * @param thread the thread that is communicating with the player that disconnected.
+	 */ 
 	public void playerDisconnected(ClientThread thread)
 	{
 		Player player = thread.getPlayer();
@@ -274,11 +286,20 @@ public class BattleShipServer
 			player.getOpponent().sendData(new PlayerDisconnectedData());
 	}
 	
+	/**  
+	 * Responsible for stop the server.
+	 */ 
 	public void stopServer()
 	{
 		server.stopServer();
 	}
 
+	/**  
+	 * Responsable for invite a player, checking if the invited player is not busy.
+     * @param inviterPlayerName the name of the player that has made the invitation.
+     * @param invitedPlayerName the name of the player that has been invited.
+     * @return true if invited. False otherwise.
+	 */ 
 	public boolean invitePlayer(String inviterPlayerName, String invitedPlayerName) 
 	{
 		Player inviterPlayer = battleshipPlayers.get(inviterPlayerName);
@@ -300,6 +321,12 @@ public class BattleShipServer
 		return true;
 	}
 	
+	/**  
+	 * Checks if the game can be initiated by checking if both players are in state ReadyForGame.
+     * @param player1 One of the players that are in InShipPlacement.
+     * @param player2 The other player that are in InShipPlacement.
+     * @return true if can be initiated. False otherwise.
+	 */ 
 	public boolean canGameBeInitiated(Player player1, Player player2)
 	{
 		PlayerState player1State = player1.getState();
