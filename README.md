@@ -35,24 +35,23 @@ Cada célula do mapa de jogo (classe GameMap) tem um estado (classe CellState). 
 As imagens dos barcos (classe Ship) e da água (representa uma célula que não contém nenhum barco) utilizadas no jogo, quando repetidas causam um custo excessivo de desempenho e uso de memória. Dessa forma, imagens mesmo que usadas varias vezes, apenas são carregadas para memória uma vez.
 Todas as imagens do jogo são desta forma carregadas no inicio do programa para a classe ImagesData. Esta classe contém como atributos, publicos, as imagens do BattleShip devidamente carregadas, que depois podem ser acedidas de qualquer sitio no programa.
 
-
-
-Other relevant decisions
-//TODO
-
 Major difficulties along the way
+
 A principal e inicial dificuldade neste trabalho foi, como seria esperado, fazer a parte do Multiplayer do jogo. Esta parte está bastante elaborada pois conta com uma aplicação java dedicada unicamente a esta parte: Um Servidor. Utilizámos um padrão de implementação de arquitetura Server/Client. No entanto, foi necessário perceber cuidadosamente cada uma das linhas de código do padrão para o adptar às nossas necessidades. O código é bastante complexo, dado que utiliza também multithreading, criando uma nova thread para cada client que se liga para ficar à escuta por dados enviados por esse client.
 Também foi necessário algum esforço na parte do client side para fazer o "coupling" entre as várias classes q implementam a lógica de comunicação de modo a obter um código "maintainable".
 No entanto a interface Seraializable, facilitou a troca de informação entre o client e o servidor.
 Como o grupo investiu bastante tempo nesta parte, não houve tempo para completar o desenvolvimento do SinglePlayer. No entanto, foi iniciado e o código está preparado e devidamente "coupeled" para receber essa nova funcionalidade.
 
 Lessons learned
+
 Aprendemos que a interface Serializable do java e as Object Streams são bastante úteis para tudo o que seja transmitir informação: desde gravar dados em ficheiros até enviar dados pela internet. Utilizando estas funcionalidade da linguagem java, conseguímos implementar a comunicação entre o cliente e o servidor de forma simples e legível.
 
 Overall time spent developing
+
 Cada membro do grupo gastou, aproximadamente, 125 horas a desenvolver este projeto.
 
 Work distribution amongst team members
+
 Consideramos que a distribuição de trabalho por ambos os membros do grupo foi uniforme. Tendo, assim, cada membro do grupo realizado uma carga de trabalho de 50%.
 
 
