@@ -40,10 +40,8 @@ public class DraggableShip extends DraggableJLabel
 			@Override
 			public void mousePressed(MouseEvent event)
 			{
-				if(SwingUtilities.isRightMouseButton(event))
-				{
+				if(SwingUtilities.isRightMouseButton(event) && SwingUtilities.isLeftMouseButton(event))
 					rotate();
-				}
 				else if(SwingUtilities.isLeftMouseButton(event))
 					shipPlacementPanel.pickUpShip(DraggableShip.this);
 				DraggableShip.this.requestFocusInWindow();
