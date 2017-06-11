@@ -2,16 +2,13 @@ package bship.network.sockets;
 
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Observable;
 import java.util.Observer;
 
 import bship.network.data.BattleShipData;
-import bship.network.data.GameData;
 
 
 public class Client extends Observable implements Runnable 
