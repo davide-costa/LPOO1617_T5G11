@@ -32,6 +32,7 @@ public class BattleShipServer
 	
 	/**
 	 * Main method. Should be called to start the server.
+	 * @param argv arguments to main function (unused).
 	 */
 	public static void main(String argv[])
 	{
@@ -52,6 +53,7 @@ public class BattleShipServer
 	
 	/**
 	 * Returns an ArrayList containing all players that are currently in lobby in the server, i. e., the players that are waiting for players to invite them or waiting to be invited to a game. A player is placed in lobby immediately after it successfully logs in to the server or when a game ends.
+	 * @return an ArrayList containing all players that are currently in lobby in the server
 	 */
 	public ArrayList<Player> getInLobbyPlayers()
 	{
