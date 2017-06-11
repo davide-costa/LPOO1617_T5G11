@@ -1,3 +1,45 @@
+Final Project Delivery
+
+
+Setup/Installation procedure
+
+Para correr o projeto (modo development) com o eclipse basta fazer clone do branch do repositório e correr a função main da classe GuiMain.
+
+Para correr o jogo (modo release) usando o jar é necessário ter uma pasta com as imagens necessárias ao jogo.
+
+Design Patterns
+
+	Singleton
+A classe Client, da package sockets, no client-side, utiliza o deisgn pattern Singleton pois apenas faz sentido existir uma instância da classe que implementa a lógica de comunicação de sockets. Por outro lado, torna-se vantajoso poder aceder a essa classe de qualquer parte do código pois é necessária em várias classes que agem como intermediários entre outras partes do código e a comuniucação nos sockets. Desta forma nao é necessário a essas outras partes guardar uma instância da classe Client, não necessitando de a conhecer, aumentando assim o encapsulamento. Apenas é conhecida pelos intermediários que podem vários obter a sua instância.
+
+
+	Strategy
+No modo singleplayer, a classe AIOpponent é reponsável por computar jogadas seguindo duas estratégias. Inicialmente as jogadas são aleatórias, no entanto, quando é atingido um barco, a estratégia muda e a inteligência artificial vai produzir uma nova jogada atacando uma das celulas adjacentes. (esta funcionalidade nao foi, no entanto, totalmente implementada).
+
+
+	Observer
+Cada célula do mapa de jogo (classe GameMap) tem um estado (classe CellState). Pode estar revelada (ao adversário) ou oculta, isto é indicado por um boleano existente na classe CellState. A GUI observa o GameMap, que por sua vez observa cada uma das suas celulas (classe CellState). O GameMap é notificado quando uma celula é alterada e por sua vez notifica a GUI. Desta forma, a GUI é atualizada quando houver uma alteraçao à informação da célula (mudança de estado da classe CellState).
+
+
+	Flyweight
+As imagens dos barcos (classe Ship) e da água (representa uma célula que não contém nenhum barco) utilizadas no jogo, quando repetidas causam um custo excessivo de desempenho e uso de memória. Dessa forma, imagens mesmo que usadas varias vezes, apenas são carregadas para memória uma vez.
+Todas as imagens do jogo são desta forma carregadas no inicio do programa para a classe ImagesData. Esta classe contém como atributos, publicos, as imagens do BattleShip devidamente carregadas, que depois podem ser acedidas de qualquer sitio no programa.
+
+
+
+Other relevant decisions
+
+
+Major difficulties along the way
+A principal e inicial dificuldade neste trabalho foi, como seria esperado, fazer a parte do Multiplayer do jogo. Esta parte está bastante elaborada pois conta com uma aplicação java dedicada unicamente a esta parte: Um Servidor. Utilizámos um padrão de implementação de arquitetura Server/Client. No entanto, foi necessário perceber cuidadosamente cada uma das linhas de código do padrão para o adptar às nossas necessidades. O código é bastante complexo, dado que utiliza também multithreading, criando uma nova thread para cada client que se liga para ficar à escuta por dados enviados por esse client.
+Também foi necessário algum esforço na parte do client side para fazer o "coupling" entre as várias classes q implementam a lógica de comunicação de modo a obter um código "maintainable".
+
+
+Work distribution amongst team members
+Consideramos que a distribuição de trabalho por ambos os membros do grupo foi uniforme. Tendo, assim, cada membro do grupo realizado uma carga de trabalho de 50%.
+
+
+
 Final Project Intermediate Check-Point
 
 
