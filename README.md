@@ -53,7 +53,28 @@ User manual
 	Main Menu
 ![main menu](https://user-images.githubusercontent.com/25772485/27013714-56bd2b66-4ee1-11e7-8405-44e3eb5949e9.png)
 
-Este é o Menu principal. O jogador pode escollher o modo de jogo: SingelPlayer
+Este é o Menu principal. O jogador pode escollher o modo de jogo: SinglePlayer ou MultiPlayer.
+O modo SinglePlayer não está concluído, portanto o botão não se encontra ativo.
+O modo Multiplayer leva o jogador para um ecrã de login, no qual se deve autenticar com as suas credencias, no nosso servidor.
+
+	Login Screen
+![login](https://user-images.githubusercontent.com/25772485/27013754-343ce972-4ee2-11e7-8a7f-97e6768f3c68.png)
+
+Este é a screen de login. O jogador deve introduzir as suas credenciais de login para se autenticar no servidor.
+Se o Username ainda não existir, é criada uma nova conta.
+Se este já existir, a password é verificada e, se não corresponder à password correta (validada pelo servidor), é mostrada uma mensagem a informar tal.
+Se for criada uma nova conta ou a password estiver correta, o login é bem sucedido e o utilizador é levado para o Lobby, descrito a seguir.
+
+	Lobby Screen
+![lobby with no players](https://user-images.githubusercontent.com/25772485/27013787-b0f84fc4-4ee2-11e7-889f-4e84e63dcfdb.png)
+
+Esta é a screen de Lobby. Aqui aparecem todos os jogadores que estão atualmente no Lobby, no servidor. A lista de jogadores no lobby é fornecida pela servidor. Neste caso, não existem jogadores online, portanto a lista está vazia.
+
+A seguinte imagem mostra o Lobby com 1 jogador online:
+![lobby with a player online](https://user-images.githubusercontent.com/25772485/27013786-b0f7f560-4ee2-11e7-8e82-c7adb7916363.png)
+
+
+
 
 
 
