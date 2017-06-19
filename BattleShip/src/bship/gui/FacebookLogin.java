@@ -15,7 +15,7 @@ public class FacebookLogin
 {
 	private static final Version version = Version.VERSION_2_9;
 	private String domain = "http://google.com";
-	private String appId = "1286325254748169";
+	private String appId = "114835875790958";
 	private String accessToken;
 	private String authUrl = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appId + "&redirect_uri=" + domain + "&scope=user_about_me,"
 		+ "publish_actions";
